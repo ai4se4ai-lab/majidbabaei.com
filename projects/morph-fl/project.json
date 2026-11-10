@@ -1,0 +1,29 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "submitted-jss",
+      "date": "2026-10-29",
+      "type": "paper",
+      "title": "Submitted · JSS",
+      "notes": "**Does Forgetting Help? Studying Context Reset Policies in LLM Fault Localization.**\n\nM. Babaei. MORPH-FL.",
+      "links": []
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-10-19",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/MORPH-FL",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}

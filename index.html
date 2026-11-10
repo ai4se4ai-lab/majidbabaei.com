@@ -1,1678 +1,506 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Google tag (gtag.js), carried over from the previous site -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-1YH193FZ7V');
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>
+<title>Majid Babaei, Ph.D. — Software Engineering × AI</title>
+<meta name="description" content="Majid Babaei is a tenure-track Assistant Professor in the School of Computing at the University of the Fraser Valley, working where model-driven engineering, software engineering, and AI meet.">
+<meta name="author" content="Majid Babaei">
+<link rel="canonical" href="https://majidbabaei.com/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Majid Babaei, Ph.D.">
+<meta property="og:description" content="Making AI-assisted software engineering reliable and its results checkable.">
+<meta property="og:url" content="https://majidbabaei.com/">
+<meta property="og:image" content="https://majidbabaei.com/assets/img/portrait.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1520" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="favicon.ico">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Majid Babaei","honorificSuffix":"Ph.D.","jobTitle":"Assistant Professor (Tenure-Track)","email":"mailto:majid.babaei@ufv.ca","url":"https://majidbabaei.com/","image":"https://majidbabaei.com/assets/img/portrait.jpg",
+"worksFor":{"@type":"CollegeOrUniversity","name":"University of the Fraser Valley","department":"School of Computing"},
+"alumniOf":[{"@type":"CollegeOrUniversity","name":"Queen's University"},{"@type":"CollegeOrUniversity","name":"Technische Universität Chemnitz"},{"@type":"CollegeOrUniversity","name":"Shahrood University of Technology"}],
+"knowsAbout":["Model-Driven Engineering","Software Engineering","Artificial Intelligence","Software Testing","Agentic AI Systems"],
+"sameAs":["https://ai4se4ai-lab.github.io/","https://github.com/ai4se4ai-lab","https://www.linkedin.com/in/majid-babaei-ph-d-20382874/"]}
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
-<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
-<title>R3iSE</title>
-<link rel="shortcut icon" href="favicon.ico">
-  
-<!-- Google Font-->
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,100,400italic,500,500italic,700,900,900italic,700italic%7COswald:400,300,700' rel='stylesheet' type='text/css'>
-<!-- Design Style -->
-<link rel="stylesheet" type="text/css" href="css/scroll.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
-<link rel="stylesheet" type="text/css" href="css/treeView.css" />
-<link rel="stylesheet" type="text/css" href="css/myStyle.css" />
-<link rel="stylesheet" type="text/css" href="css/news.css" />
-
-<!-- <link rel="stylesheet" type="text/css" href="css/animation.css" /> -->
-<!-- <link rel="stylesheet" type="text/css" href="css/animation_intro.css" /> -->
-<!-- Icon -->
-<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
-<!-- Portfolio Thumbnail / Slider -->
-<link rel="stylesheet" type="text/css" href="css/portfolio.css" />
-<link rel="stylesheet" type="text/css" href="css/carousel.css">
-<!-- Responsive -->
-<link rel="stylesheet" type="text/css" href="css/responsive.css" />
-<!-- Pie Chart / Skills -->
-<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
-<!-- Send Email -->
-<script type="text/javascript" src="js/sendemail.js"></script>
-<!-- Progressbar / Skills-->
-<script type="text/javascript" src="js/progressbar.js"></script>
-<script type="text/javascript" src="js/news.js"></script>
-<!-- Portfolio-->
-<script src="js/modernizr.custom.js"></script>
 </head>
 <body>
-<div id="container" class="container"> 
-  <!-- Left Menu / Logo-->
-  <aside class="menu" id="menu">
-    <div class="logo"> 
-      <!-- Logo image--> 
-      <!-- <img src="images/home/mcgilllog.png" width="100" height="100" alt=""/> -->
-      <img src="images/home/logo7-nobg.png" width="140" height="140" alt=""/> 
-       
-      <!-- Logo name--> 
-      <span>R3iSE - Majid Babaei's Lab</span></div>
-    <!-- Mobile Navigation--> 
-    <a href="#menu1" class="menu-link"></a> 
-    <!-- Left Navigation-->
-    <nav id="menu1" role="navigation"> 
-      <a href="#chapterintroduction"><span id="link_introduction" class="active">Home</span></a> 
-      <a href="#chapterPI"><span id="link_PI">About PI</span></a> 
-      <a href="#chapterNews"><span id="link_News">News</span></a> 
-      <a href="#chapterourteam"><span id="link_ourteam">Our Team</span></a>
-      <a href="#chapterservice"><span id="link_service">Services</span></a>
-      <a href="#chapterourapproach"><span id="link_ourapproach">Approach</span></a>
-      <a href="#chapterprojects"><span id="link_projects">Projects</span></a>
-      <a href="#chapterteaching"><span id="link_teaching">Teaching</span></a> 
-      <a href="#chaptermyteam"><span id="link_myteam">Industry</span></a>
-      <!-- <a href="#chaptercontact"><span id="link_contact">Contact</span></a> -->
-      <a href="https://majidbabaei.com/Ri3SE.blog/notes/"><span id="link_blog">Blog</span></a></nav>
-      <!-- <a href="https://majidbabaei.blogspot.com/"><span id="link_blog">Blog</span></a></nav> -->
-      <!-- <a href="ECSE437.html"><span id="link_blog">ECSE437</span></a></nav> -->
-    <br><br>  
-    <!-- <div class="social"> <a href="https://www.facebook.com" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a> <a href="https://twitter.com" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> <a href="https://plus.google.com" target="_blank" class="google-plus"><i class="fa fa-google-plus"></i></a> </div> -->
-    <!-- <div class="copyright"> © Majid Babaei.<br> -->
-      <!-- All Rights Reserved. </div> -->
-  </aside>
-  <!-- Go to top link for mobile device --> 
-  <a href="#menu" class="totop-link">Go to the top</a>
-  <div class="content-scroller">
-    <div class="content-wrapper"> 
-      
-      <!-- Introduction -->
-      <article class="content introduction noscroll longInfo" id="chapterintroduction">
-        <div class="inner">
-          <h2><span>Welcome to <a href= "mailto: R3iSE@ACM.ORG"> R3iSE</a>!</span></h2>
-          <!-- <span class="title"><b>We are passionate about:</b></span></br> -->
-          <span class="title">
-            <b>Here, we are passionate about:</b></br>
-            Driving Innovation,</br>
-            Embracing Emerging Technologies</br> 
-            Empowering Individuals.</br>             
-          </span>
-        </br>
-        <span class="title" style="font-size: medium; font-family:'Courier New', Courier, monospace; color:aliceblue">
-          If you share the same passion, contact us at <a href= "mailto: R3iSE@ACM.ORG"> R3iSE@acm.org</a>. Let’s create something extraordinary together!
-        </span>
-          <!-- <span class="title">Someone who is fortunate enough to be learning from ...amazing professors, creative engineers, self-disciplined athletes, and caring persons.</span><br> -->
-          <!-- <span class="title">Still in progress to become an inspiring professor, skilled engineer, fearless rider, and above all a kind human being! </span>  -->
-            
-          <!-- <span class="title">Keeping this in mind, we advance AI to empower human, and secure AI for reliability and explainability. Our research portfolio bridges the area of machine learning, data mining, artificial intelligence and cybersecurity. We mainly focus on the following four dimensions</span> -->
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Majid Babaei — home">
+      <span class="brand-mark">m<span>b</span>.</span>
+      <span class="brand-text"><b>Majid Babaei</b>Software Eng. × AI</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#research">Agenda</a>
+      <a href="#publications">Publications</a>
+      <a href="news/">News</a>
+      <a href="projects/">Projects</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#students">Students</a>
+      <a href="#service">Service</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-btn theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="cv-btn" href="assets/Majid_Babaei_CV.pdf" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4v11m0 0 4.5-4.5M12 15l-4.5-4.5M5 20h14"/></svg><span class="label">CV</span>
+      </a>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap hero-grid" id="hero-grid">
+    <div class="hero-name">
+      <p class="kicker rise"><span class="dot" aria-hidden="true"></span>Assistant Professor (Tenure-Track) · University of the Fraser Valley</p>
+      <h1 class="rise">Majid <em>Babaei</em><span class="phd">PH.D.</span></h1>
+    </div>
+    <div class="hero-text">
+      <p class="thesis rise">I build the <mark>abstractions</mark> that connect people and agentic AI, so agents answer to human concerns and people can see how agents collaborate to reach their objectives.</p>
+      <p class="hero-lede rise">I work where model-driven engineering, software engineering, and AI meet. My research has appeared at ICSE and MODELS and in <i>Software and Systems Modeling</i>, received an ACM SIGSOFT Distinguished Paper Award, and comes with open research software. I teach software engineering and programming, co-advise students, and serve as Chair of Industry Partnerships in UFV's School of Computing.</p>
+      <div class="hero-actions rise">
+        <a class="btn btn-solid" href="#research">Explore the research agenda
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14m0 0-5-5m5 5-5 5"/></svg></a>
+        <a class="btn btn-ghost" href="assets/Majid_Babaei_CV.pdf" target="_blank" rel="noopener">Curriculum vitae (PDF)</a>
+      </div>
+      <div class="affil rise">
+        <span><strong>School of Computing</strong>, UFV</span>
+        <span><strong>Associate Member</strong>, ECE, McGill</span>
+        <span><strong>Lead</strong>, <a href="https://ai4se4ai-lab.github.io/">AI4SE4AI Lab</a></span>
+      </div>
+    </div>
+    <div class="portrait-col rise">
+      <div class="portrait-wrap">
+        <div class="portrait-ring" aria-hidden="true"></div>
+        <figure class="portrait">
+          <picture>
+            <source srcset="assets/img/portrait.webp" type="image/webp">
+            <img src="assets/img/portrait.jpg" width="900" height="953" alt="Portrait of Majid Babaei" fetchpriority="high">
+          </picture>
+        </figure>
+        <div class="award-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0V4Zm0 2H4a3 3 0 0 0 3 4m10-4h3a3 3 0 0 1-3 4"/></svg>
+          <span>ACM SIGSOFT Distinguished Paper<small>MODELS 2021</small></span>
         </div>
-        <div id="owl-demo" class="owl-carousel">
-          <!-- <canvas id="scene"></canvas> -->
-          <!-- <div class="particle-network-animation"></div> -->
-          <div class="item"><img src="./images/home/home-bg2.png" alt="" /></div>
-          <!-- <div class="item"><img src="http://placehold.it/804x990" alt="" /></div>
-          <div class="item"><img src="http://placehold.it/804x990" alt="" /></div> -->
+      </div>
+      <div class="ledger" aria-label="Research at a glance">
+        <div><strong data-count="published">16</strong><span>Published &amp; accepted</span></div>
+        <div><strong data-count="submitted">13</strong><span>In review &amp; ongoing</span></div>
+        <div><strong data-count="projects">16</strong><span>Open research artifacts</span></div>
+        <div><strong>9</strong><span>UFV course sections</span></div>
+      </div>
+    </div>
+    <aside class="newsroom rise" id="newsroom" aria-labelledby="nr-h">
+      <button class="nr-rail" id="nr-open" type="button" aria-expanded="false" aria-controls="nr-panel">
+        <span class="nr-live" aria-hidden="true"></span>
+        <span class="nr-rail-label">Newsroom</span>
+        <span class="nr-rail-latest" id="nr-latest"></span>
+        <span class="nr-count" id="nr-count"></span>
+        <svg class="nr-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+      </button>
+      <div class="nr-panel" id="nr-panel">
+        <div class="nr-head">
+          <div><p class="nr-k"><span class="nr-live" aria-hidden="true"></span>Newsroom</p><h2 id="nr-h">Latest progress</h2></div>
+          <button class="nr-close" id="nr-close" type="button" aria-label="Collapse the newsroom" aria-controls="nr-panel" aria-expanded="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
         </div>
+        <ol class="nr-list" id="nr-list"><li><a href="news/">Browse all news &amp; notes</a></li></ol>
+        <a class="nr-all" href="news/">All news &amp; notes <span id="nr-total"></span><span aria-hidden="true">→</span></a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= RESEARCH ================= -->
+<section class="section" id="research">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="num">§ 01 — Research agenda</span><h2>Closing the loop between <em>humans</em> and <em>agentic AI</em></h2></div>
+      <p>Agentic AI systems plan, delegate, and collaborate, yet they rarely see the higher-level concerns people care about, and people rarely see how agent teams reach their objectives. My research builds abstractions in both directions. Building this loop <b>efficiently</b> and <b>effectively</b> is, I believe, what is missing.</p>
+    </div>
+
+    <figure class="loop reveal" id="loop" aria-labelledby="loop-cap">
+      <div class="loop-top"><span>agenda.statechart</span><span>2 states · 2 transitions · 1 loop</span></div>
+      <svg class="loop-h" viewBox="0 0 1000 430" role="img" aria-labelledby="loop-cap">
+        <defs>
+          <marker id="ar-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-o"/></marker>
+          <marker id="ar-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-t"/></marker>
+        </defs>
+        <g class="tr-g" data-t="down">
+          <path id="p-down" class="arc arc-o" d="M262 168 C 390 40, 610 40, 738 168" marker-end="url(#ar-o)"/>
+          <rect class="lbl" x="342" y="40" width="316" height="62" rx="12"/>
+          <text class="lbl-t lbl-o" x="500" y="66" text-anchor="middle">① MDE abstractions <tspan class="lbl-p">for agents</tspan></text>
+          <text class="lbl-m" x="500" y="88" text-anchor="middle">concerns [modeled] / specify · verify</text>
+          <circle class="token tok-o" r="6"><animateMotion dur="4.2s" repeatCount="indefinite"><mpath href="#p-down"/></animateMotion></circle>
+        </g>
+        <g class="tr-g" data-t="up">
+          <path id="p-up" class="arc arc-t" d="M738 262 C 610 390, 390 390, 262 262" marker-end="url(#ar-t)"/>
+          <rect class="lbl" x="322" y="328" width="356" height="62" rx="12"/>
+          <text class="lbl-t lbl-tl" x="500" y="354" text-anchor="middle">② Abstractions of collaboration <tspan class="lbl-p">for people</tspan></text>
+          <text class="lbl-m" x="500" y="376" text-anchor="middle">behavior [abstracted] / trace · explain</text>
+          <circle class="token tok-t" r="6"><animateMotion dur="4.2s" begin="-2.1s" repeatCount="indefinite"><mpath href="#p-up"/></animateMotion></circle>
+        </g>
+        <g class="st">
+          <rect x="30" y="140" width="232" height="150" rx="75"/>
+          <text class="st-n" x="146" y="210" text-anchor="middle">Human</text>
+          <text class="st-m" x="146" y="238" text-anchor="middle">intent · concerns · oversight</text>
+        </g>
+        <g class="st">
+          <rect x="738" y="140" width="232" height="150" rx="75"/>
+          <text class="st-n" x="854" y="210" text-anchor="middle">Agentic AI</text>
+          <text class="st-m" x="854" y="238" text-anchor="middle">agents · teams · tools</text>
+        </g>
+        <text class="mid-n" x="500" y="212" text-anchor="middle">the missing loop</text>
+        <text class="mid-m" x="500" y="240" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
+      </svg>
+      <svg class="loop-v" viewBox="0 0 400 600" aria-hidden="true">
+        <defs>
+          <marker id="vr-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-o"/></marker>
+          <marker id="vr-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-t"/></marker>
+        </defs>
+        <path id="v-down" class="arc arc-o" d="M300 118 C 392 220, 392 380, 300 482" marker-end="url(#vr-o)"/>
+        <path id="v-up" class="arc arc-t" d="M100 482 C 8 380, 8 220, 100 118" marker-end="url(#vr-t)"/>
+        <circle class="token tok-o" r="6"><animateMotion dur="4.2s" repeatCount="indefinite"><mpath href="#v-down"/></animateMotion></circle>
+        <circle class="token tok-t" r="6"><animateMotion dur="4.2s" begin="-2.1s" repeatCount="indefinite"><mpath href="#v-up"/></animateMotion></circle>
+        <g class="st"><rect x="95" y="16" width="210" height="104" rx="52"/><text class="st-n" x="200" y="68" text-anchor="middle">Human</text><text class="st-m" x="200" y="94" text-anchor="middle">intent · concerns</text></g>
+        <g class="st"><rect x="95" y="480" width="210" height="104" rx="52"/><text class="st-n" x="200" y="532" text-anchor="middle">Agentic AI</text><text class="st-m" x="200" y="558" text-anchor="middle">agents · teams</text></g>
+        <text class="lbl-t lbl-o" x="200" y="196" text-anchor="middle">① MDE abstractions</text>
+        <text class="lbl-m" x="200" y="218" text-anchor="middle">for agents ↓</text>
+        <text class="mid-n" x="200" y="300" text-anchor="middle">the missing loop</text>
+        <text class="mid-m" x="200" y="326" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
+        <text class="lbl-t lbl-tl" x="200" y="396" text-anchor="middle">② Abstractions of collaboration</text>
+        <text class="lbl-m" x="200" y="418" text-anchor="middle">↑ for people</text>
+      </svg>
+      <figcaption id="loop-cap" class="visually-hidden">Two states, Human and Agentic AI. MDE abstractions carry human concerns to agents; abstractions of agent collaboration carry behavior back to people. Building this loop efficiently and effectively is the missing piece.</figcaption>
+    </figure>
+
+    <div class="transitions">
+      <article class="tr reveal" data-t="down" style="--c:var(--orange)">
+        <div class="tr-top"><span>01 · Human → AI</span><span>abstractions for agents</span></div>
+        <h3>Connecting agents to higher-level concerns</h3>
+        <p class="body">Safety, correctness, intent, and organizational constraints usually reach an agent as informal prose. I use model-driven engineering (models, contracts, and model transformations) so that agentic systems can be specified against these concerns and checked for them.</p>
+        <div class="milestones"><a class="chip" data-find="SkillSpec">SkillSpec · ICSE 2027</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a></div>
       </article>
-    
+      <article class="tr reveal" data-t="up" style="--c:var(--teal)">
+        <div class="tr-top"><span>02 · AI → Human</span><span>abstractions for people</span></div>
+        <h3>Showing people how agents collaborate</h3>
+        <p class="body">Transcripts, tool logs, and traces are abundant but unreadable at scale. I build abstractions (slices, typed hand-offs, provenance, and knowledge graphs) that explain how agent teams collaborate, where they break, and why an objective was or was not achieved.</p>
+        <div class="milestones"><a class="chip" data-find="Agent Slicing">Agent Slicing</a><a class="chip" data-find="AgentM2M">AgentM2M</a><a class="chip" data-find="Bad Habits Die Hard">Heartness</a><a class="chip" data-find="TAAF">TAAF · ICSE 2026</a></div>
+      </article>
+      <article class="tr tr-loop reveal" data-t="loop" style="--c:var(--navy)">
+        <div class="tr-top"><span>03 · The loop</span><span>what is missing</span></div>
+        <h3>Effective and efficient, together</h3>
+        <p class="body">Specifications without visibility cannot tell us whether they were honored; visibility without specifications gives us nothing to check against. The loop must be <b>effective</b>, with abstractions at the level people reason about yet precise enough to check. It must also be <b>efficient</b> enough to repeat whenever a team, prompt, or model changes.</p>
+        <a class="tr-read" href="news/closing-the-loop/">Read the full agenda <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
 
+    <div class="foundations reveal">
+      <h3 class="sub-h"><span>Foundations · how the agenda grew</span><span>MDE → SE × AI → AI × MDE</span></h3>
+      <div class="found-grid">
+        <div class="found" style="--c:var(--navy)"><span class="f-k">01 · Model behavior</span><p>Behavioral models to isolate interactions, replay executions, and regression-test distributed real-time systems.</p>
+          <div class="milestones"><a class="chip" data-find="MReplayer">MReplayer · 2020</a><a class="chip" data-find="MRegTest">MRegTest · 2021</a><a class="chip" data-find="RATEN">RATEN · 2026</a></div></div>
+        <div class="found" style="--c:var(--teal)"><span class="f-k">02 · Software evidence</span><p>Knowledge graphs, semantic analysis, and LLMs that turn traces, changes, and repositories into decisions developers can check.</p>
+          <div class="milestones"><a class="chip" data-find="TAAF">TAAF · 2026</a><a class="chip" data-find="SIKG">SIKG · 2026</a><a class="chip" data-find="RapidPay">RapidPay · to appear</a></div></div>
+        <div class="found" style="--c:var(--orange)"><span class="f-k">03 · Agentic systems</span><p>Formalization and model checking for safe coordination, composition defects, and guardrail guarantees in agent teams.</p>
+          <div class="milestones"><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="Agent Slicing">Agent Slicing</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a></div></div>
+      </div>
+    </div>
+    <p class="principles reveal"><span>Explicit assumptions</span><span>Traceable evidence</span><span>Checkable guarantees</span></p>
 
-<!-- ======================================================================= -->
-<!-- =================[About Me]============================== -->
-<!-- ======================================================================= -->
-<article class="content gray-bg" id="chapterPI">
-  <!-- http://www.corelangs.com/css/box/image-shadow.html -->
-  <img  src="./images/home/photo.jpg"  
-  height= "30" width= "190" alt="" id="myPicStyle"/>  
-  
-  <div class="inner">
-    <h2>Principal Investigator</h2>
-    <div class="title-divider"></div>
-    <div class="about-con">
-      <ul>
-        <li><b>Name</b>: Majid Babaei</li>
-        <li><b>Email</b>: <a href="mailto:majid.babaei@ufv.ca">majid.babaei@ufv.ca</a></li>
-        <li><b>Degree</b>: Ph.D. in Computing from <a href="https://www.cs.queensu.ca/">Queen's University</a></br>(With a focus on <a href="https://flux.cs.queensu.ca/mase/">Software Engineering</a>)</li>
-        <li><b>Academic Level</b>: Assistant Professor</li>
-        <li>
-            - Assistant Professor at SoC, UFV (Since Aug. 2025)</br>
-            - Assistant Professor at SCS, McGill University (2023-2025)</br>
-            - Associate Member of ECE, McGill University (Since Nov. 2024)</br>
-            - ACM Professional Member (Since Dec. 2024)
-        </li>
-        <li><b>Meeting</b>: By appointment (<a href="https://mcgill.zoom.us/j/4526229940">ZOOM</a>)</li>
-        <!-- <li><b>Phone</b>: (123) - 456-7890</li> -->
-        <!-- <li><b>Date of birth</b>: 11 Sep. 1988</li> -->
-        <li><b>Address</b>:<address> 
-                     University of Fraser Valley,</br>
-                     School of Computing,</br> 
-                     Abbotsford - Building C - Room ABC-2454</br> 
-                    </address></li>
-        <!-- <li><b>Address</b>:<address> 
-                     McGill University,</br>
-                     School of Continuing Studies,</br> 
-                     680 Sherbrooke St W 13th Floor, RM#1323</br> 
-                     Montréal, QC, Canada H3A 2M7.</br>
-                    </address></li> -->
-        <!-- <li>Nationality: United States</li> -->
-      </ul>
-      <i style="font-size:11px; text-align:center">- My Queens<a href="https://research.cs.queensu.ca/home/babaei/"> website</a> is not active anymore!</i>
+    <div class="artifacts" id="software">
+      <h3 class="sub-h"><span>Research software &amp; artifacts</span><span id="art-count"></span></h3>
+      <div class="toolbar">
+        <div class="seg" id="art-filter" role="group" aria-label="Filter artifacts by theme">
+          <button type="button" data-theme="All" aria-pressed="true">All</button>
+          <button type="button" data-theme="Agents" aria-pressed="false">Agentic systems</button>
+          <button type="button" data-theme="Analysis" aria-pressed="false">Analysis &amp; testing</button>
+          <button type="button" data-theme="Infrastructure" aria-pressed="false">Infrastructure</button>
+        </div>
+      </div>
+      <div class="art-grid collapsed" id="art-grid"><noscript><p>Enable JavaScript to browse the artifacts, or see the <a href="assets/Majid_Babaei_CV.pdf">CV</a>.</p></noscript></div>
+      <button type="button" class="more-btn" id="art-more" aria-controls="art-grid">Show all artifacts</button>
+      <a class="lab-link lab-link-alt" href="projects/">
+        <div><strong>Projects &amp; memories</strong><br><span>Release history for every project (papers, posters, code) and a gallery of the moments behind them.</span></div>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="lab-link" href="https://ai4se4ai-lab.github.io/">
+        <div><strong>AI4SE4AI Lab</strong><br><span>Interactive research map, every repository, and lab projects.</span></div>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
     </div>
   </div>
+</section>
 
+<!-- ================= PUBLICATIONS ================= -->
+<section class="section" id="publications">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="num">§ 02 — Publications</span><h2>Papers &amp; <em>manuscripts</em></h2></div>
+      <p>Refereed journal articles and conference papers, with abstracts, artifacts, and BibTeX. Submitted and in-progress work is listed separately and is not counted as published.</p>
+    </div>
+    <div class="award-banner reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0V4Zm0 2H4a3 3 0 0 0 3 4m10-4h3a3 3 0 0 1-3 4"/></svg>
+      <div><strong>ACM SIGSOFT Distinguished Paper Award</strong><p>Efficient replay-based regression testing for distributed reactive systems in the context of model-driven development (with J. Dingel). MODELS 2020 also earned Artifacts Available &amp; Evaluated–Reusable badges.</p></div>
+      <span class="mono">MODELS 2021</span>
+    </div>
+    <div class="toolbar">
+      <div class="seg" role="tablist" aria-label="Publication status" id="pub-tabs">
+        <button type="button" role="tab" aria-selected="true" aria-controls="pub-list" data-kind="published">Published &amp; accepted <span class="n" data-count="published"></span></button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="pub-list" data-kind="submitted">Under review &amp; ongoing <span class="n" data-count="submitted"></span></button>
+      </div>
+      <label class="search"><span class="visually-hidden">Search publications</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="pub-search" type="search" placeholder="Search title, venue, co-author…" autocomplete="off">
+      </label>
+    </div>
+    <ol class="pub-list" id="pub-list" role="tabpanel" aria-live="polite"><noscript><li>Enable JavaScript to browse publications, or read the full list in the <a href="assets/Majid_Babaei_CV.pdf">CV (PDF)</a>.</li></noscript></ol>
+    <p class="pub-note">Statuses mirror the <a href="assets/Majid_Babaei_CV.pdf">curriculum vitae</a>. Abstract summaries are paraphrases; follow the source link for the original.</p>
+  </div>
+</section>
 
-      <!-- <div class="text ellipsis"> -->
-        <span class="text-concat">
-      <div class="col-10 margin-left30 longInfo">
-        <h3>Research Interests</h3>
-        <p>
-          My research interests encompass a range of activities related to the design, development, debugging, and testing of large-scale software systems. I am particularly focused on Model-Driven Engineering (MDE) and the integration of artificial intelligence in software engineering (AI4SE). My research aims to explore and address challenges in various application areas, enhancing the efficiency and effectiveness of software development processes. Alos, I am eager to contribute to innovative solutions that leverage MDE and AI to improve software quality and productivity across different domains.
-        </p>
-        
-        <h3>Are you interested to work with me?</h3>
-        <p>
-          If you are a student considering completing a Bachelor's or Master's degree or even capston project and you have an interest in any of the topics mentioned above, I encourage you to reach out to me. In your email, please make sure that you include information about: 
-        </p>
-        <ul>
-          <li> YOUR DEGREE </li>
-          <li> PROPOSED PROJECT</li>
-          <li> HOW MUCH TIME YOU CAN DEDICATE TO IT</li>
-          <li> YOUR DEADLINE TO COMPLETE (if you have any!)</li>
+<!-- ================= TEACHING ================= -->
+<section class="section" id="teaching">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="num">§ 03 — Teaching</span><h2>Teaching &amp; <em>educational leadership</em></h2></div>
+      <p>Software engineering and programming at UFV, building on courses and program coordination at McGill, Concordia, Queen's, and St. Lawrence College.</p>
+    </div>
+    <div class="teach-grid">
+      <div class="reveal">
+        <div class="stats">
+          <div><strong>9</strong><span>UFV sections</span></div>
+          <div><strong>237</strong><span>Course enrolments</span></div>
+          <div><strong>5</strong><span>Institutions</span></div>
+        </div>
+        <h3 class="sub-h"><span>University of the Fraser Valley</span><span>2025 – present</span></h3>
+        <table class="course-table">
+          <caption class="visually-hidden">UFV courses by term</caption>
+          <thead><tr><th scope="col">Term</th><th scope="col">Course</th><th scope="col">Title</th><th scope="col" style="text-align:right">Students</th></tr></thead>
+          <tbody>
+            <tr class="term-start"><td>Fall 2026<span class="now">NOW</span></td><td class="code">COMP 370</td><td>Software Engineering · 2 sections</td><td class="num">25 + 27</td></tr>
+            <tr><td></td><td class="code">CIS 285</td><td>End User Training and Support</td><td class="num">23</td></tr>
+            <tr><td></td><td class="code">COMP 481</td><td>Functional and Logic Programming</td><td class="num">28</td></tr>
+            <tr><td></td><td class="code">COMP 155</td><td>Object-oriented Programming</td><td class="num">26</td></tr>
+            <tr class="term-start"><td>Winter 2026</td><td class="code">COMP 370</td><td>Software Engineering · 2 sections</td><td class="num">25 + 25</td></tr>
+            <tr class="term-start"><td>Fall 2025</td><td class="code">COMP 370</td><td>Software Engineering</td><td class="num">26</td></tr>
+            <tr><td></td><td class="code">COMP 481</td><td>Functional and Logic Programming</td><td class="num">32</td></tr>
+          </tbody>
+        </table>
+        <p class="pub-note">Enrolments count course seats across completed and current terms, not unique students.</p>
+      </div>
+      <div class="reveal">
+        <h3 class="sub-h"><span>Earlier teaching &amp; coordination</span></h3>
+        <ul class="earlier">
+          <li><span class="inst">McGill · Electrical &amp; Computer Engineering</span><p>ECSE 437, Software Delivery — Fall <a href="pages/courses/ecse437fs22.html">2022</a> and Fall <a href="pages/courses/ecse437fs23.html">2023</a>; software-project instruction with structured peer feedback. <a href="https://ecse437.majidbabaei.com/">Course site ↗</a></p></li>
+          <li><span class="inst">McGill · School of Continuing Studies</span><p>CCCS 300 Programming Techniques 1 (<a href="pages/courses/outlines/W24-CCCS300-764.pdf">W24</a>, <a href="pages/courses/outlines/W25-CCCS300-764.pdf">W25</a>) · CCCS 301 Programming Techniques 2 (<a href="pages/courses/outlines/F23-CCCS301-754.pdf">F23</a>, <a href="pages/courses/outlines/W24-CCCS301-754.pdf">W24</a>, <a href="pages/courses/outlines/W25-CCCS301-754.pdf">W25</a>) · CCCS 330 Database Design (<a href="pages/courses/outlines/S23-CCCS330-764.pdf">S23</a>) · CCCS 610 Digital Thinking for Data Analysis (<a href="pages/courses/outlines/F24-CCCS610-764.pdf">F24</a>).</p></li>
+          <li><span class="inst">Program coordination · McGill SCS</span><p>Academic Program Coordinator for the Certificate in Computers and Information Technology and the Micro-credential in Digital Product Management and Emerging Technologies; curriculum review and program redesign.</p></li>
+          <li><span class="inst">Concordia University</span><p>COMP 218, Fundamentals of Programming (Fall 2021, Winter 2023).</p></li>
+          <li><span class="inst">Queen's University &amp; St. Lawrence College</span><p>ELEC 377, Operating Systems (Fall 2021), plus course-lecturer and TA experience during the Ph.D.; applied AI and machine-learning teaching at St. Lawrence College (2020–2022).</p></li>
         </ul>
-
-        <h3>Short Bio</h3>
-        <p>I was born in Tehran (Shemiran), the capital of Iran, in 1988. I have obtained my Ph.D. in December, 2021, in software Engineering at School of Computing, Queen's University, Canada, under <a href="https://research.cs.queensu.ca/home/dingel/">Prof. Juergen Dingel</a> supervision. <a class="link" href="https://qspace.library.queensu.ca/handle/1974/29842">My Ph.D. thesis</a> was on Regression Testing of Distributed Real-Time Embedded Systems in the Context of Model-Driven Development.</p>
-        <p>Recently, I have joined <a href="https://www.mcgill.ca/continuingstudies/">School of Continuing Studies (SCS)</a>, <a href="https://www.mcgill.ca/">McGill University</a> where I work as an Assistant Professor and Academic Program Coordinator at Technology and Innovation Group. I am also serving as a member of Strategic Planning Committee at SCS where we design/adjust school's long-term vision.</p>  
-        
-        <p>During my Ph.D. studies I have been involved in many industrial and academic projects such as:
-          <ul>
-            <li>
-              2021-2022: <a href="https://www.queensu.ca/studentwellness/workshops/GIS/#/Home">GIS Wellness Resource Map</a> in <a href="https://www.queensu.ca/studentwellness/">Student Wellness Services</a> at Queen's University.
-            </li>
-            <li>
-              2020-2021: <a href="https://dev.queensu.ca/studentwellness/workshops/substance/index.html">Substance Use Wellness Tool (SUWT)</a> in <a href="https://www.queensu.ca/studentwellness/">Student Wellness Services</a> at Queen's University.
-            </li>
-            <li>
-              2020-2022: <a href="https://www.thelamplab.ca/lab-members">Mind Wandering in Online Sessions</a> in the departement of Psychology at Queen's University.
-            </li>
-            <li>
-              2020-2022: Teaching Applied AI and Machine Learning at <a href="https://www.stlawrencecollege.ca/">SLC</a>
-            </li>
-            <li>
-              Fall 2021: Teaching <a href="https://www.ece.queensu.ca/undergraduate/courses/elec-377.html"> ELEC 377: Operating Systems</a> in departement <a href="https://www.ece.queensu.ca/index.html">ECE</a> at Queen's University.
-            </li>
-            <li>
-              Summer 2021: Internship in <a href="https://nrc.canada.ca/en"> National Research Council of Canada (NRC)</a> on a BERT-based APT detection method
-            </li>
-
-          </ul>
-        </p>
-        <p></p>
-        <!-- <p>Recently I have finished my summer internship in Natural Language Processing at National Council of Canada (NRC) under supervision of Dr. Scott Buffett. Since January 2020, I have been teaching Applied Artificial Intelligence in St. Lawrence College. Recently, I have been designated as Operating Systems instructor for Fall 2021 in Queen's University. Also, I have had a collaboration with the Department of Psychology in Queen's University and work on a human cognition project under supervision of Dr. Jeffrey Wammes.</p> -->
-        <p>Before I moved to Canada, I worked for one year in the Internet of Things (IoT) department at <a href="https://www.bosch-engineering.com/">Bosch Engineering Group GmbH</a> in Germany. Meanwhile, I have completed 6-month internship and 6-month master thesis that gave me an exceptional opportunity to explore fundamental concepts of Big Data Analytics, Artificial Neural Networks, and Deep Learning. Before that, I had the opportunity to work for around 2 years as a software developer at <a href="https://www.epak.de/en/"> EPAK GmbH </a> which is a satellite communication company based in Leipzig. During this time, I have implemented some software projects in Python and C/C++ programming languages to provide reliable satellite communication. Moreover, I have implemented a web-based content management system using PHP, MySQL and JavaScript programming languages.</p>
-        <p>I obtained my Bachelor degree (B.Sc.) from <a href="https://shahroodut.ac.ir/en/"> Shahrood University of Technology</a> in Iran, in the field of Software Engineering. After my graduation, I joined Farazpajohan, a software tech startup company in <a href="https://en.sharif.edu/">Sharif University of Technology</a>, where I've started my first professional position and worked for around 3 years. In this company I have been responsible for developing PKI-based Digital Certificate solutions in CentOS Linux environment.</p>
-        
-        <p>I shared my thoughts and experiences in a lovely <a href="https://www.mcgill.ca/continuingstudies/article/interview-majid-babaei">interview</a> with Steven Myers at SCS, McGill University.</p>
-        </span>
-      <!-- </div> -->
-      <a href="https://mcgill-my.sharepoint.com/:b:/g/personal/majid_babaei_mcgill_ca/EUGWMIbAmrpAqfZwczBqZ9sBV6tliBEhpuusvB9BDW8-Zw?e=AVO6o8" class="button">Download resume as PDF format</a> 
-    </div>
-      <!-- <img src="http://placehold.it/150x134" class="signature" alt="" />  -->
-    <!-- </div> -->
-  <!-- </div> -->
-</article>
-
-<!-- ======================================================================= -->
-<!-- ========================[NEWS]===================================== -->
-<!-- ======================================================================= -->
-<article class="content experience white-bg" id="chapterNews">
-  <!-- <div class="responsive"> -->
-    <div class="inner">
-      <h2>NEWS</h2>
-      <div class="title-divider"></div>
-      <h3> "The good news about computers is that they do what you tell them to do. The bad news is that they do what you tell them to do." - Ted Nelson </h3>
-      <p>In the fast-paced world of news, academia can feel like a slow-moving glacier, where the most significant changes often occur beneath the surface. Here you can find the latest news about our group's activities:</p>
-      <!-- <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7237275581933854720" height="1004" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe> -->
-      <!-- #### -->
-      <div class="full-divider"></div></br>
-      <h2 style="text-align: center;">Highlights</h2>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-3">
-            <div id="news-slider" class="owl-carousel">
-
-              <div class="post-slide">
-                <div class="post-img">
-                  <img src="./images/home/Services/SCSMcGillTechTrendsSpeakerSeriesW2025.JPG" alt="PC-ASE'25">
-                  <a href="https://www.mcgill.ca/continuingstudies/events/mcgill-scs-tech-trends-speaker-series" class="over-layer"><i class="fa fa-link"></i></a>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">
-                    <a href="#">Dr. Babaei will organize and moderate the Winter 2025 edition of the Tech Trends Speaker Series happening at McGill Univeristy, School of Continuing Studies (SCS) in March and April 2025.</a>
-                    </a>
-                  </h3>
-                    <p class="post-description">
-                      The Winter 2025 edition of the Tech Trends Speaker Series delves into cutting-edge developments at the intersection of artificial intelligence, cybersecurity, and software engineering. Participants will explore how large language models are transforming software observability and debugging practices, discover AI applications in malware detection and digital forensics, and examine the complex challenges of Android fragmentation in mobile app development. These topics reflect the evolving demands facing today's tech professionals and researchers ...
-                    </p>
-                  <span class="post-date"><i class="fa fa-clock-o"></i>Mar. 07nd, 2025</span>
-                  <a href="https://www.mcgill.ca/continuingstudies/events/mcgill-scs-tech-trends-speaker-series" class="read-more">read more</a>
-                </div>
-              </div>
-
-              <div class="post-slide">
-                <div class="post-img">
-                  <img src="./images/home/Services/PC-ASE'25-INV.png" alt="PC-ASE'25">
-                  <a href="https://conf.researchr.org/home/ase-2025" class="over-layer"><i class="fa fa-link"></i></a>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">
-                    <a href="#">Dr. Babaei has been invided to serve as a Program Committee member of the Tool Demonstration Track for the 40th IEEE/ACM International Conference on Automated Software Engineering, ASE 2025.</a>
-                    </a>
-                  </h3>
-                    <p class="post-description">
-                      The ASE conference is the premier research forum for Automated Software Engineering. Each year, it brings together researchers and practitioners from academia and industry to discuss foundations, techniques, and tools for automating the analysis, design, implementation, testing, and maintenance of large software systems ...
-                    </p>
-                  <span class="post-date"><i class="fa fa-clock-o"></i>Feb. 02nd, 2025</span>
-                  <a href="https://conf.researchr.org/track/ase-2025/ase-2025-tool-demonstration-track" class="read-more">read more</a>
-                </div>
-              </div>  
-
-              <div class="post-slide">
-                <div class="post-img">
-                  <img src="./images/home/Services/sheridan.png" alt="sheridan">
-                  <a href="https://www.sheridancollege.ca/" class="over-layer"><i class="fa fa-link"></i></a>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">
-                    <a href="#">Dr. Babaei serves as a chair of Program Evaluation Committee (PEC) for Sheridan College Institute of Technology and Advanced Learning.
-                    </a>
-                  </h3>
-                    <p class="post-description">
-                      As a subject matter expert, his responsibility is to provide the College with his best judgement on the quality of the program (Honours Bachelor of Computer Science) and the soundness of the College's internal quality assurance (QA) practices ...
-                    </p>
-                  <span class="post-date"><i class="fa fa-clock-o"></i>Nov. 04th, 2024</span>
-                  <a href="./images/home/Services/Honours Bachelor of Computer Science - Site Visit Agenda - Final.pdf" class="read-more">read more</a>
-                </div>
-              </div>  
-
-              <div class="post-slide">
-                <div class="post-img">
-                  <img src="./images/home/Interview/CAUCE_POST.jpg" alt="">
-                  <a href="https://www.linkedin.com/posts/canadianassociationforuniversitycontinuingeducationcauce_professionaldevelopment-collaboration-cauce-activity-7237451918178934784-ZKvj?utm_source=share&utm_medium=member_desktop" class="over-layer"><i class="fa fa-link"></i></a>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">
-                    <a href="#">Dr. Babaei has been featured by Canadian Association for Universities Continuing Education (CAUCE)</a>
-                  </h3>
-                    <p class="post-description">
-                      His background in software engineering has equipped him with a unique prospective serving as a committee member, helping the team to identify root causes and develop effective solutions ...
-                    </p>
-                  <span class="post-date"><i class="fa fa-clock-o"></i>Sept 27th, 2024</span>
-                  <a href="https://www.linkedin.com/posts/canadianassociationforuniversitycontinuingeducationcauce_professionaldevelopment-collaboration-cauce-activity-7237451918178934784-ZKvj?utm_source=share&utm_medium=member_desktop" class="read-more">read more</a>
-                </div>
-              </div>
-              
-              <div class="post-slide">
-                <div class="post-img">
-                  <img src="./images/home/Papers/CASCON24_paper2.png" alt="">
-                  <a href="https://cascon.ca/" class="over-layer"><i class="fa fa-link"></i></a>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">
-                    <a href="#">34th International Conference on Collaborative Advances in Software and COmputiNg (CASCON)</a>
-                  </h3>
-                  <p class="post-description">
-                    Our paper titled <b>MemAdapt: Adaptive Monitoring of Memory Usage through Irregularly Sampled Data</b> was accepted for presentation and to be included in the proceedings of CASCON 2024.</p>
-                  <span class="post-date"><i class="fa fa-clock-o"></i>July 27th, 2024</span>
-                  <a href="https://cascon.ca/" class="read-more">read more</a>
-                </div>
-              </div>
-              
-              <div class="post-slide">
-                <div class="post-img">
-                  <img src="./images/home/Interview/McGill_Interview2.png" alt="">
-                  <a href="https://www.mcgill.ca/continuingstudies/article/interview-majid-babaei" class="over-layer"><i class="fa fa-link"></i></a>
-                </div>
-                <div class="post-content">
-                  <h3 class="post-title">
-                    <a href="#">Behind the Scenes with Dr. Babaei: Teaching and Research at School of Continuing Studies, McGill Univeristy</a>
-                  </h3>
-                  <p class="post-description">We recently had the opportunity to speak with Majid Babaei, one of our new faculty members in the Technology & Innovation domain with expertise in Software Engineering ....</p>
-                  <span class="post-date"><i class="fa fa-clock-o"></i>Aug 21st, 2023</span>
-                  <a href="https://www.mcgill.ca/continuingstudies/article/interview-majid-babaei" class="read-more">read more</a>
-                </div>
-              </div>
-
-              <!-- <div></div> -->
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- #### --> 
-      <div class="full-divider"></div></br>
-      <h2 style="text-align: center;">Invited Talks</h2>
-      <div class="normal">
-      <ol>
-        <li>
-          The 1st OXAI'24, co-located with CASCON'24: 
-          <a href="https://mcgill-my.sharepoint.com/:b:/g/personal/majid_babaei_mcgill_ca/EXowe66iffNOtx-oMqqqbKkB8WmbslnD1DtYce-OpKO1Vg?e=N5x14T">"Enhanced LLMs with KGs: Towards Explainable Performance Analysis in Microservices"</a> 
-        </li>
-        <li>
-          At University of Regina, Saskatchewan, Canada: 
-          <a href="#">"Software Testing in Distributed Systems"</a> 
-        </li>
-        <li>
-          At MacEwan University, Alberta, Canada: 
-          <a href="#">"From Red to Blue: How to Apply Test Driven Development Techniques"</a> 
-        </li>
-        <li>
-          At McGill Univeristy, Quebec, Canada: 
-          <a href="https://www.mcgill.ca/continuingstudies/channels/event/certificate-applied-cybersecurity-information-session-363914">"Cybersecurity matters more than ever:Certificate in Applied Cybersecurity Information Session"</a> 
-        </li>
-        <li>
-          At University of the Fraser Valley, British Columbia, Canada: 
-          <a href="#">"Recursive Thinking with Fibonacci!"</a> 
-        </li>
-      </ol>
-    </div>
-
-
-    </div>
-</article>  
-
-<!-- ======================================================================= -->
-<!-- ========================[OurTeam]===================================== -->
-<!-- ======================================================================= -->
-<article class="content experience gray1-bg" id="chapterourteam">
-  <!-- <div class="responsive"> -->
-    <div class="inner">
-      <h2>Our Team</h2>
-      <div class="title-divider"></div>
-      <h3>"If you can laugh together, you can work together" - Robert Orben</h3>
-      <p>I am extremly grateful for having the opportunity to work with amazing people over years in academia and industry. Here you can find a list of the students who have collaborated in my group:</p>
-
-      <div class="experience-con">
-        
-        <!-- ********* -->
-        <div class="container-sub">
-          <div class="full-divider"></div>
-            <div class="experience-details">
-
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- Zachary Hayden -->
-                  <p class="shortInfo">Ghazal Khodabandeh, MSc. @CS, Brock University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="michael-buchar">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Ghazal Khodabandeh </h5> <h7>[Co-suppervised with <a href="https://brocku.ca/mathematics-science/computer-science/faculty-staff/naser-ezzati-jivan/">Dr. Naser Ezzati-Jivan</a>]</h7>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">MSc. @CS, Brock University</h3>
-                      <p>I am a computer science researcher with a background in machine learning, distributed systems, and network analysis. My work focuses on finding better ways to understand and predict interactions in complex systems. I enjoy exploring new methods to improve performance, scalability, and efficiency. We worked together on a link prediction project, where I used machine learning to analyze patterns and connections in a network. This collaboration helped me refine my research and gain new insights into how predictive models can be used in real-world applications</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/GhazalKhodabandeh.jpg" alt="Ghazal Khodabandeh">
-                        <ul>
-                          <li><a href="https://github.com/ghazalkhb">@ghazalkhb</a></li>
-                          <li><a href="https://ca.linkedin.com/in/ghazal-khodabandeh-9b10011b6">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </section>
-
-              <div class="full-divider"></div>
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- Zachary Hayden -->
-                  <p class="shortInfo">Alireza Ezaz, MSc. @CS, Brock University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="michael-buchar">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Alireza Ezaz </h5> <h7>[Co-suppervised with <a href="https://brocku.ca/mathematics-science/computer-science/faculty-staff/naser-ezzati-jivan/">Dr. Naser Ezzati-Jivan</a>]</h7>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">MSc. @CS, Brock University</h3>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">Senior Data Quality Specialist @Cohere</h3>
-                      <p>I’m a master’s student at Brock University, researching how Knowledge Graphs (KGs) and Large Language Models (LLMs) can push trace data analysis forward. Over the past year, I’ve been at Cohere as a Senior Data Quality Specialist, helping AI get better at coding. A few years back, during COVID, I co-founded SevenTask, a task management web app, which kicked off my passion for startups and AI-driven solutions. Right now, I’m excited to be working with Majid Babaei and diving deeper into AI research. When I’m not building or breaking things with code, I’m probably traveling, gaming, or on a basketball or tennis court.</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/AlirezaEzaz.jpg" alt="Alireza Ezaz">
-                        <ul>
-                          <li><a href="https://github.com/Alireza-Ezaz">@Alireza-Ezaz</a></li>
-                          <li><a href="www.linkedin.com/in/s-alireza-ezaz">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </section>
-              
-              <div class="full-divider"></div>
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- Zachary Hayden -->
-                  <p class="shortInfo">Zachary Hayden, BEng. @ECE, McGill University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="michael-buchar">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Zachary Hayden</h5>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">BEng. @ECE, McGill University</h3>
-                      <p>I have experience working as a data engineer for Boston University Medical Lab for Neurobiology working with high fidelity actigraphy data. I've been a part of McGill's prometheus robotics lab working with Joseph Vybihal, and I'm the former software lead for McGill's Space Club. My favorite programming language is currently Rust, although scala comes as a close second. I make use of GitHub Copilot as an AI tool for assisting with development speed. I'm interested in advancing the DevOps field and connecting it more intuitively to the AI development pipeline.</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/ZacharyHaydenpng.jpeg" alt="Zachary Hayden">
-                        <ul>
-                          <li><a href="https://github.com/zachary0249">@zacharyhayden</a></li>
-                          <li><a href="https://www.linkedin.com/in/zachary-hayden-/">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </section>
-
-              <div class="full-divider"></div>
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- FeliciaSun -->
-                  <p class="shortInfo">Felicia Sun, CS. @ECE, McGill University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="felicia-sun">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Felicia Sun</h5>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">BEng. @CS, McGill University</h3>
-                      <p>Currently, I have the privilege of working with Dr. Babaei on a systematic literature review focusing on AI-augmented test automation techniques within the realm of DevOps. I am also part of Dr. Ruths' Bot or Not project, where we investigate the dynamics between bots and bot detection systems on social media. My favourite programming languages are Java and Python, and I've been able to get hands-on experience with them through my internships and group projects. During my most recent internship, I worked in Java in a team of software engineers to predict cloud computing costs across AWS, Azure, and GCP cloud platforms. Upon graduating from Honours Software Engineering in 2024, I aim to apply my skills and knowledge at tackling substantial real-world challenges in DevOps and software engineering. Beyond tech and academia, I enjoy hanging out with friends, gaming with them, and exploring new sports.</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/feliciasun.png" alt="Felicia Sun">
-                        <ul>
-                          <li><a href="https://github.com/Felicia-Sun ">@feliciasun</a></li>
-                          <li><a href="https://www.linkedin.com/in/felicia-sun-5a8234187/">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </section>
-              
-              <div class="full-divider"></div>
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- Michael Buchar -->
-                  <p class="shortInfo">Michael Buchar, BEng. @ECE, McGill University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="michael-buchar">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Michael Buchar</h5>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">BEng. @ECE, McGill University</h3>
-                      <p>I was born and raised in the Czech Republic with an interest in computer science, education, finance, rocketry, and cycling. I have successfully completed my B.Eng. in Software Engineering at McGill University with a Minor in Aerospace Engineering in 5 long and rewarding years! During my undergraduate studies, I served as a Teaching Assistant for COMP 206 and COMP 202. Currently, I hold the position of Senior Software Developer at RBC, contributing as a full-stack developer proficient in TypeScript, React, Python, and Java helping with automation and implementing cloud platforms. Among all these languages, Python stands out as my favorite. During my Capstone Design Project, I collaborated with Dr. Babaei on an NFT Locker - an innovative decentralized application designed to lock non-fungible tokens. My favorite AI tool at the moment has to be Chat-GPT.</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/MichaelBuchar.png" alt="Michael Buchar">
-                        <ul>
-                          <li><a href="http://github.com/michaelbuchar">@michaelbuchar</a></li>
-                          <li><a href="http://linkedin.com/in/michael-buchar">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                </div>
-              </div>
-              </section>
-
-              <div class="full-divider"></div>
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- Dominic Chan -->
-                  <p class="shortInfo">Dominic Chan, BEng. @ECE, McGill University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="dominic-chan">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Dominic Chan</h5>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">BEng. @ECE, McGill University</h3>
-                      <p>As an Electrical Engineering graduate with interests in software, AI, embedded systems and electronics, I completed my studies at McGill with a Bachelor of Engineering in Electrical Engineering in 2023. During my undergraduate studies, I had the opportunity to work with Dr. Babaei for my Final Year Capstone Design Project. With his dedicated guidance and support, we created an innovative decentralised application to lock NFTs, a web-based application designed to shield users from having their NFTs hacked and stolen especially from phishing links. In the world of software and technology, Python is my preferred and most used programming language, especially due to its simplicity and efficiency for data analysis, as well as its AI and Machine Learning applications. Furthermore, ChatGPT has been a great resource in aiding me during my studies. It is a tremendously useful tool in helping me continuously learn and further my understanding of technical and complex concepts.</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/DominicChan.jpg" alt="Dominic Chan">
-                        <ul>
-                          <!-- <li><a href="http://github.com/michaelbuchar">@michaelbuchar</a></li> -->
-                          <li><a href="http://linkedin.com/in/dominicchan231">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                </div>
-                </div>
-              </section>
-
-              <div class="full-divider"></div>
-              <section class="row">
-                <div class="ourteamGrid">
-                  <!-- Zakaria Bouhemhem -->
-                  <p class="shortInfo">Zakaria Bouhemhem, BEng. @ECE, McGill University</p>
-                  <div class="longInfo">
-                  <section class="ourColleague" id="zakaria-bouhemhem">
-                    <div class="col-2-3">
-                      <h5 style="margin-top: 0;margin-bottom: 0;">Zakaria Bouhemhem</h5>
-                      <h3 style="margin-top: 0;margin-bottom: 0;">BEng. @ECE, McGill University</h3>
-                      <p>I am Zakaria Bouhemhem, currently wrapping up my Computer Engineering degree at McGill University. My favorite programming language is Java, which I've mastered during my coursework and used extensively for various projects. I'm also adept with Eclipse, an IDE that I find intuitive and efficient for my development work. Outside of my academic endeavors, I'm an avid strategy game player and love to immerse myself in the great outdoors, engaging in activities like skiing, snowshoeing, hiking, and running, which provide a refreshing balance to my studies.</p>
-                    </div><aside class="col-1-3">
-                      <div class="ourColleague-info">
-                        <img src="./images/home/OurTeam/ZakariaBouhemhem.jpeg" alt="Zakaria Bouhemhem">
-                        <ul>
-                          <!-- <li><a href="http://github.com/michaelbuchar">@michaelbuchar</a></li> -->
-                          <li><a href="https://www.linkedin.com/in/zakaria-bouhemhem-106708226/">LinkedIn</a></li>
-                        </ul>
-                      </div>
-                    </aside>
-                </div>
-                </div>
-              </section>
-
-            </div>
-          </div>
-
       </div>
     </div>
-<!-- </div> -->
-</article>
+  </div>
+</section>
 
-<!-- ======================================================================= -->
-<!-- ========================[Service]===================================== -->
-<!-- ======================================================================= -->
-<article class="content skills white-bg" id="chapterservice">
-  <div class="inner">
-    <h2>Services</h2>
-    <div class="title-divider"></div>
-      <h3>"Every service we offer is a brick laid on the path to a deeper understanding of the world." - Unknown!</h3>
-      <p>I'm truly grateful for the opportunity to contribute to the scientific community by providing these services. It's a privilege to be a part of the ongoing quest for knowledge and discovery.</p>
-    <!-- <div class="title-divider"></div> -->
-    <div class="full-divider"></div>
-    <p><h5 style="text-align: left;"><b>Organizing Committee (OC)</b></h5>
-    <ul>
-      <li> <a style="color: #1F0FF0;" href="https://conf.researchr.org/home/icse-2025">[ICSE'25]</a> The 47th International Conference on Software Engineering, Proceedings Co-Chair </li>
-      <li> <a style="color: #1F0FF0;" href="https://conf.researchr.org/home/seams-2025">[SEAMS'25]</a> The 20th International Conference on Software Engineering for Adaptive and Self-Managing Systems </li>
-      <li> <a style="color: #1F0FF0;" href="https://conf.researchr.org/home/icse-2025/serp4iot-2025">[SERP4IoT'25]</a> The 7th International Workshop on Software Engineering Research & Practices for the Internet of Things </li>
-    </ul>
-    </p>
-    <div class="full-divider"></div>
-    <p><h5 style="text-align: left;"><b>Program Committee (PC)</b></h5>
+<!-- ================= STUDENTS ================= -->
+<section class="section" id="students">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="num">§ 04 — Students</span><h2>Supervision &amp; <em>advising</em></h2></div>
+      <p>Currently co-supervising, with Abbas Heydarnoori, two graduate students and one undergraduate on AI-powered fault localization and context engineering. With Fatemeh Hendijani Fard, I co-supervise graduate and undergraduate students on collaborative projects, including <i>CodeFaithBench</i>, a benchmark on the faithfulness of LLM code explanations.</p>
+    </div>
+    <h3 class="sub-h reveal"><span>Completed master's theses · co-advised</span><span>Brock University, with Prof. Naser Ezzati-Jivan</span></h3>
+    <div class="people">
+      <article class="person reveal">
+        <img src="assets/img/ghazal.webp" alt="Ghazal Khodabandeh" width="96" height="96" loading="lazy">
+        <div><span class="role">M.Sc. · Jan 2024 – Sep 2025</span><h3>Ghazal Khodabandeh</h3><p><em>Link Prediction on Distributed Systems</em>. Publication: ICPE 2025.</p><p class="now">Now <b>Research Assistant, York University</b></p></div>
+      </article>
+      <article class="person reveal">
+        <img src="assets/img/alireza.webp" alt="Alireza Ezaz" width="96" height="96" loading="lazy">
+        <div><span class="role">M.Sc. · Jan 2024 – Sep 2025</span><h3>Alireza Ezaz</h3><p><em>TAAF: A Trace Abstraction and Analysis Framework Synergizing Knowledge Graphs and LLMs</em>. Publication: ICSE 2026.</p><p class="now">Now <b>Data Quality Specialist, Cohere</b></p></div>
+      </article>
+    </div>
+    <h3 class="sub-h reveal"><span>Undergraduate &amp; project advising</span></h3>
+    <div class="cohorts">
+      <div class="cohort reveal"><span class="when">Brock · Jan 2024 – Apr 2025</span><h4>Bilal Bilal · Yuvraj Sehgal</h4><p>Semantic code coverage using topic models and LLMs; LLM-generated README files from source code.</p></div>
+      <div class="cohort reveal"><span class="when">McGill · Jan – Apr 2024</span><h4>Felicia Sun · Zachary Hayden</h4><p>A review of AI-enabled continuous testing in DevOps; LLMs and technical debt in DevOps.</p>
+        <div class="faces"><img src="assets/img/felicia.webp" alt="Felicia Sun" width="34" height="34" loading="lazy"><img src="assets/img/zachary.webp" alt="Zachary Hayden" width="34" height="34" loading="lazy"></div></div>
+      <div class="cohort reveal"><span class="when">McGill · Sep – Dec 2023</span><h4>Benakmoum Amine · Ammar Ryad · Zakaria Bouhemhem</h4><p>DAPPER, a subscription application (ECSE 458 capstone).</p>
+        <div class="faces"><img src="assets/img/zakaria.webp" alt="Zakaria Bouhemhem" width="34" height="34" loading="lazy"></div>
+        <div class="docs"><a class="chip" href="data/ECSE458/DAPPER/ECSE458N1_DP02_ProjectProposal.pdf">Proposal</a><a class="chip" href="data/ECSE458/DAPPER/Poster.pdf">Poster</a></div></div>
+      <div class="cohort reveal"><span class="when">McGill · Sep – Dec 2022</span><h4>Michael Buchar · Ege Karadibak · Ezra Gomolin · Dominic Chan</h4><p>A decentralized NFT-locking application (ECSE 458 capstone).</p>
+        <div class="faces"><img src="assets/img/michael.webp" alt="Michael Buchar" width="34" height="34" loading="lazy"><img src="assets/img/dominic.webp" alt="Dominic Chan" width="34" height="34" loading="lazy"></div>
+        <div class="docs"><a class="chip" href="data/ECSE458/NFTLOCKER/Final%20Project%20Report.pdf">Final report</a><a class="chip" href="data/ECSE458/NFTLOCKER/Poster.pdf">Poster</a></div></div>
+    </div>
+
+    <div class="callout reveal" id="join">
+      <h3>Interested in working <em>with me?</em></h3>
+      <div>
+        <p>If you are a bachelor's, master's, or capstone student interested in model-driven engineering, software testing, or trustworthy AI systems, I'd like to hear from you. In your email, please include:</p>
+        <ol><li>your degree program and year;</li><li>the project you have in mind (or the topics above that interest you);</li><li>how much time you can dedicate each week;</li><li>any deadline you need to meet.</li></ol>
+        <p>Write to <a href="mailto:majid.babaei@ufv.ca">majid.babaei@ufv.ca</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICE ================= -->
+<section class="section" id="service">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="num">§ 05 — Service</span><h2>Community &amp; <em>partnerships</em></h2></div>
+      <p>Conference organizing and program committees for the software engineering community, institutional committees, and industry partnerships that connect UFV students with practice.</p>
+    </div>
+    <div class="service-grid">
+      <div class="reveal">
+        <h3 class="sub-h"><span>Conference organization</span></h3>
+        <ul class="roles">
+          <li><span class="y">2026</span><span><span class="c">CASCON</span><span class="r">Publicity Co-Chair</span></span><a href="https://conf.researchr.org/committee/cascon-2026/cascon-2026-organizing-committee">Committee ↗</a></li>
+          <li><span class="y">2025</span><span><span class="c">ICSE</span><span class="r">Proceedings Co-Chair</span></span><a href="https://conf.researchr.org/committee/icse-2025/icse-2025-organizing-committee">Committee ↗</a></li>
+          <li><span class="y">2025</span><span><span class="c">SEAMS</span><span class="r">Publicity Co-Chair</span></span><a href="https://conf.researchr.org/committee/seams-2025/seams-2025-organizing-committee">Committee ↗</a></li>
+          <li><span class="y">2025</span><span><span class="c">SERP4IoT</span><span class="r">Publicity Chair</span></span><a href="https://conf.researchr.org/committee/icse-2025/serp4iot-2025-papers-program-committee">Committee ↗</a></li>
+        </ul>
+        <h3 class="sub-h mt"><span>Institutional &amp; professional committees</span></h3>
+        <ul class="roles">
+          <li><span class="y">2025–</span><span><span class="c">Chair of Industry Partnerships</span><span class="r">School of Computing, UFV</span></span></li>
+          <li><span class="y">2023–26</span><span><span class="c">SCS Strategic Planning Committee</span><span class="r">McGill University</span></span></li>
+          <li><span class="y">2023–25</span><span><span class="c">Academic Integrity Guide Working Group</span><span class="r">Revisions to the guide to reporting alleged violations, McGill SCS</span></span></li>
+          <li><span class="y">2023–25</span><span><span class="c">Professional Development Committee</span><span class="r">Canadian Association for University Continuing Education</span></span></li>
+          <li><span class="y">2024</span><span><span class="c">Program Evaluation Committee</span><span class="r">Chair; Honours Bachelor of Computer Science, Sheridan College</span></span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 class="sub-h"><span>Program committees</span></h3>
+        <ul class="roles">
+          <li><span class="y">2026</span><span><span class="c">ASE</span><span class="r">Tools and Datasets</span></span><a href="https://conf.researchr.org/committee/ase-2026/ase-2026-tools-and-data-sets-program-committee">Committee ↗</a></li>
+          <li><span class="y">2026</span><span><span class="c">FSE</span><span class="r">Student Research Competition</span></span><a href="https://conf.researchr.org/committee/fse-2026/fse-2026-student-research-competition-program-committee">Committee ↗</a></li>
+          <li><span class="y">2025</span><span><span class="c">ASE</span><span class="r">Tool Demonstrations</span></span><a href="https://conf.researchr.org/committee/ase-2025/ase-2025-tool-demonstration-track-nier-program-committee">Committee ↗</a></li>
+          <li><span class="y">2025</span><span><span class="c">MODELS</span><span class="r">Workshops</span></span><a href="https://conf.researchr.org/committee/models-2025/models-2025-workshops-program-committee">Committee ↗</a></li>
+          <li><span class="y">2025</span><span><span class="c">ICPE</span><span class="r">Data Challenge</span></span><a href="https://icpe2025.spec.org/">Conference ↗</a></li>
+          <li><span class="y">2024</span><span><span class="c">ASE</span><span class="r">Artifact Evaluation</span></span><a href="https://conf.researchr.org/committee/ase-2024/ase-2024-artifact-evaluation-track-fatemeh-">Committee ↗</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="partner reveal">
+      <div>
+        <h3>Industry partnerships &amp; knowledge mobilization</h3>
+        <p>As Chair of Industry Partnerships (Fall 2025–present), I build relationships that support experiential learning, curriculum relevance, applied research, and professional pathways for UFV computing students.</p>
+      </div>
       <ul>
-        <li> <a style="color: #1F0FF0;" href="https://conf.researchr.org/home/ase-2024">[ASE'24]</a> The 39th IEEE/ACM International Conference on Automated Software Engineering, Demonstrations & Artifact Evaluation Tracks </li>
-        <li> <a style="color: #1F0FF0;" href="https://conf.researchr.org/track/ase-2025/ase-2025-tool-demonstration-track">[ASE'25]</a> The 40th IEEE/ACM International Conference on Automated Software Engineering, Tool Demonstration Track</li>
-        <li> <a style="color: #1F0FF0;" href="https://icpe2025.spec.org/">[ICPE'25]</a> The 16th ACM/SPEC International Conference on Performance Engineering, Data Challenge Track</li>
-        <li> <a style="color: #1F0FF0;" href="https://conf.researchr.org/track/models-2025/models-2025-workshops">[MODELS'25]</a> The 28th IEEE/ACM International Conference on Conference on Model-Driven Engineering Languages and Systems, Workshops Track.</li>
+        <li><b>Tech Panel 2026</b> (Mar 12, 2026) — panel and networking with Zynim, PixelPaddle, Kwixand, and ADAMnetworks, organized with the Computing Student Association.</li>
+        <li><b>Industry events, Fall 2025</b> — a cloud-computing talk by Invero's CEO (a UFV alumnus) and a technical-interview event with Crafty Penguins and UFV career-education partners.</li>
+        <li><b>Curriculum integration</b> — guest practitioners from Intuit Mailchimp and Caseway brought real requirements into COMP 370.</li>
+        <li><b>External Program Advisory Committee</b> — chaired the Nov 27, 2025 meeting on Terms of Reference, systematic industry feedback, alumni engagement, and research–industry bridges.</li>
+        <li><b>Earlier research connections</b> — Aggregate Intelligence (explainable information retrieval, 2022) and Humanitas (robustness analysis, 2022–2023); organizer of the McGill SCS Tech Trends Speaker Series, Winter 2025.</li>
       </ul>
-    </p>
-    <div class="full-divider"></div>
-    <p><h5 style="text-align: left;"><b>Professional Committee (PrC)</b></h5>
-      <ul>
-        <li> <a style="color: #1F0FF0;" href="https://cauce-aepuc.ca/membership/committees.php#top">[CAUCE]</a> Canadian Association for University Continuing Education, Professional Development Committee </li>
-        <li> <a style="color: #1F0FF0;" href="https://www.mcgill.ca/continuingstudies/article/re-imagining-continuing-education-and-lifelong-learning-21st-century-school-continuing-studies">[McGill]</a> School of Continuing Studies at McGill University, Strategic Planning Committee </li>
-
-      </ul>
-    </p>
-
-
-    <!-- 
-      <div class="full-divider"></div>
-      <p><h5 style="text-align: left;"><b>Journals</b></h5>
-      <ul>
-        <li>  </li>
-      </ul>
-    </p> -->
-
-    <!-- <p><h5 style="text-align: left;"><b>Grants, Awards, and Scholarships</b></h5>
-      <ul>
-        <li>  </li>
-      </ul>
-    </p> -->
-
-    <!-- <p><h5 style="text-align: center;"><b>Equity, Diversity, and Inclusion</b></h5>
-      <ul>
-        <li>  </li>
-      </ul>
-    </p> -->
-
-  </div>
-  <!-- https://www.linkedin.com/feed/update/urn:li:activity:7189296415729180674/?origin=SHARED_BY_YOUR_NETWORK -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f5" fill-opacity="1" d="M0,64L17.1,85.3C34.3,107,69,149,103,165.3C137.1,181,171,171,206,192C240,213,274,267,309,277.3C342.9,288,377,256,411,256C445.7,256,480,288,514,266.7C548.6,245,583,171,617,160C651.4,149,686,203,720,234.7C754.3,267,789,277,823,250.7C857.1,224,891,160,926,144C960,128,994,160,1029,165.3C1062.9,171,1097,149,1131,122.7C1165.7,96,1200,64,1234,85.3C1268.6,107,1303,181,1337,202.7C1371.4,224,1406,192,1423,176L1440,160L1440,320L1422.9,320C1405.7,320,1371,320,1337,320C1302.9,320,1269,320,1234,320C1200,320,1166,320,1131,320C1097.1,320,1063,320,1029,320C994.3,320,960,320,926,320C891.4,320,857,320,823,320C788.6,320,754,320,720,320C685.7,320,651,320,617,320C582.9,320,549,320,514,320C480,320,446,320,411,320C377.1,320,343,320,309,320C274.3,320,240,320,206,320C171.4,320,137,320,103,320C68.6,320,34,320,17,320L0,320Z"></path></svg>
-</article>
-
-<!-- ======================================================================= -->
-<!-- ========================[Our Approach]===================================== -->
-<!-- ======================================================================= -->
-<article class="content experience gray1-bg" id="chapterourapproach">
-  <div class="inner">
-    <h2>Our Approach</h2>
-    <div class="title-divider"></div>
-    <!-- <h3>Defining the State of Practice</h3> -->
-    <!-- <p>I've been involved in many different projects rangin from Software Engineering to Artificial Intelligence and Mind Wandering.</p> -->
-
-    <div class="experience-con">
-      <div class="container-sub">
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4 style="color: brown;"> <b>Ideas and Research</b> </h4></div><br/>
-            <div><img src="./images/home/ourApproach/idea.svg" alt="" id="idea"/></div><br/>
-            <div style="text-align: center; font-size: large;">
-              <summary style="background-color:cornsilk; border-radius: 25px; box-shadow: 5px 5px gray;">We work closely with academia and industry to identify the discoveries and new technologies that are solution enablers.</summary>
-            </div>
-          <br/><br/>
-        </div>
-        
-        <!-- ------------ -->
-        <div style="background-color: brown;" class="full-divider"></div>
-        <br/><br/>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4 style="color: brown;"> <b>Concept</b> </h4></div><br/>
-            <div><img src="./images/home/ourApproach/concept.svg" alt="" id="idea"/></div><br/>
-            <div style="text-align: center; font-size: large;">
-              <summary style="background-color:cornsilk; border-radius: 25px; box-shadow: 5px 5px gray;">Our knowledge of how our customers will use a product—including their environment and operational constraints—informs how we conceptualize the solution.</summary>
-            </div>
-        </div>
-        <br/><br/>
     </div>
-    <div style="background-color: brown;" class="full-divider"></div>
-        <br/><br/>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4 style="color: brown;"> <b>Design and Prototype</b> </h4></div><br/>
-            <div><img src="./images/home/ourApproach/design.svg" alt="" id="idea"/></div><br/>
-            <div style="text-align: center; font-size: large;">
-              <summary style="background-color:cornsilk; border-radius: 25px; box-shadow: 5px 5px gray;">Our modeling and simulation capabilities support rapid incorporation of new ideas and user feedback into virtual systems, demonstrable solutions, and fielded prototypes.</summary>
-            </div>
-        </div>
-        <br/><br/>
-    </div>
-    <div style="background-color: brown;" class="full-divider"></div>
-        <br/><br/>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4 style="color: brown;"> <b>Transition</b> </h4></div><br/>
-            <div><img src="./images/home/ourApproach/transition.svg" alt="" id="idea"/></div><br/>
-            <div style="text-align: center; font-size: large;">
-              <summary style="background-color:cornsilk; border-radius: 25px; box-shadow: 5px 5px gray;">End-use of a product informs how we approach its transition to the field. We work with outside companies to prepare our prototype design for high-volume mass production, or can produce the device in-house when only limited quantities are needed.</summary>
-            </div>
-        </div>
-        <br/><br/>
-    </div>
-    <div style="background-color: brown;" class="full-divider"></div>
-        <br/><br/>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4 style="color: brown;"> <b>Support</b> </h4></div><br/>
-            <div><img src="./images/home/ourApproach/support.svg" alt="" id="idea"/></div><br/>
-            <div style="text-align: center; font-size: large;">
-              <summary style="background-color:cornsilk; border-radius: 25px; box-shadow: 5px 5px gray;">Our time spent in the field with sponsors provides them with critical technical support and provides us with valuable insight into the future needs of those customers.</summary>
-            </div>
-        </div>
-        <br/><br/>
-    </div>
-  </div>
-</article>
-<!-- ======================================================================= -->
-<!-- ========================[Projects]===================================== -->
-<!-- ======================================================================= -->
-<article class="content experience gray-bg" id="chapterprojects">
-  <div class="inner">
-    <h2>Projects</h2>
-    <div class="title-divider"></div>
-    <h3>Are you up for the next adventure?!</h3>
-    <p>Here is a list of past and current projects people@R3iSE been involved over the past few years!
-    <!-- </br>Overview and status of the projects are shown in the Viso diagam in below (<i>last update: <span id="datetime">2024-05-03</span></i>) </p> -->
-    <!-- <iframe src="https://mcgill-my.sharepoint.com/personal/majid_babaei_mcgill_ca/_layouts/15/Doc.aspx?sourcedoc={e5508684-dbc7-4c00-a963-1ab3455ad57d}&amp;action=embedview" width="802px" height="527px" frameborder="0">This is an embedded <a target="_blank" href="https://office.com">Microsoft Office</a> diagram, powered by <a target="_blank" href="https://office.com/webapps">Office</a>.</iframe> -->
 
-    <div class="experience-con">
-      <div class="container-sub">
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock" style="text-align: center;"><h4>[ON-GOING] Towards an Analogical Reasoning with LLMs in Software Engineering Education</h4><span>2024 - 2025</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/Majid_SEE_2025.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/Majid_SEE_2025.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              Today’s education, particularly in Software Engineering (SE), is expected to equip students with the necessary skills to handle complex, multidimensional, and often poorly-defined problems involving technical, social, and environmental factors. Generative AI, particularly Large Language Models (LLMs), can significantly enhance education. This study proposes an interdisciplinary approach that focuses on developing analogical reasoning skills with the help of LLMs while teaching software engineering concepts.
-              <!-- Our experiments demonstrate the ODE-RNN model's superior performance, achieving 78.5% accuracy in predicting sampling rates within 5% of the ideal rates. Moreover, extended lookback periods consistently enhance forecasting outcomes, and our adaptive sampling technique leverages the ODE-RNN model's precision in approximating ideal sampling rates. This research advances the understanding and application of system usage data analysis techniques, with significant implications for improving system monitoring and resource management strategies.   -->
-            </div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <i>[1] .... <a style="color: blue;" href="#"><b>[LINK]</b></a></i></br> 
-          <hr />
-          <!-- <summary style="text-align: center;">Gallery</summary>
-          <div class="responsive">
-            <div class="gallery">
-              <a target="_blank" href="./images/home/Projects/DAPPER/dapperTeam.jpg">
-                <img src="./images/home/Projects/DAPPER/dapperTeam.jpg" alt="Presentation1" width="600" height="400">
-              </a>
-              <div class="desc">Strong Team, Solid Presentation, and Smiley Faces!</div>
-            </div>
-          </div> -->
-          <div class="clearfix"></div>
-        </details>
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock" style="text-align: center;"><h4>Utilizing Graph Neural Networks for Effective Link Prediction in Microservice Architectures</h4><span>2023 - 2024</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/Ghazal_Link_Prediction_2024.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/Ghazal_Link_Prediction_2024.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              This study introduces a Graph Neural Network GNN based approach, specifically using a Graph Attention Network GAT, for link prediction in microservice Call Graphs. Unlike social networks, where interactions tend to occur sporadically and are often less frequent, microservice Call Graphs involve highly frequent and time sensitive interactions that are essential to operational performance. Our approach leverages temporal segmentation, advanced negative sampling, and GATs attention mechanisms to model these complex interactions accurately.  
-              <!-- Our experiments demonstrate the ODE-RNN model's superior performance, achieving 78.5% accuracy in predicting sampling rates within 5% of the ideal rates. Moreover, extended lookback periods consistently enhance forecasting outcomes, and our adaptive sampling technique leverages the ODE-RNN model's precision in approximating ideal sampling rates. This research advances the understanding and application of system usage data analysis techniques, with significant implications for improving system monitoring and resource management strategies.   -->
-            </div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <i>[1] Ghazal Khodabandeh, Alireza Ezaz, Majid Babaei, Naser Ezzati-Jivan, 2024. <a style="color: blue;" href="https://arxiv.org/abs/2501.15019"><b>[https://arxiv.org/abs/2501.15019]</b></a></i></br> 
-          <hr />
-          <!-- <summary style="text-align: center;">Gallery</summary>
-          <div class="responsive">
-            <div class="gallery">
-              <a target="_blank" href="./images/home/Projects/DAPPER/dapperTeam.jpg">
-                <img src="./images/home/Projects/DAPPER/dapperTeam.jpg" alt="Presentation1" width="600" height="400">
-              </a>
-              <div class="desc">Strong Team, Solid Presentation, and Smiley Faces!</div>
-            </div>
-          </div> -->
-          <div class="clearfix"></div>
-        </details>
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4>MemAdapt</h4><span>2023 - 2024</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/MemAdapt.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/MemAdapt.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              MemAdapt is an innovative approach to analyzing memory usage data through two main contributions. First, we establish a theoretical framework that elucidates the relationship between sampling frequency and expected memory usage, highlighting the impact of sampling strategies on estimation accuracy. Second, we investigate state-of-the-art forecasting models designed to handle the irregularity of memory usage data, allowing for the prediction of future usage patterns based on historical data with varying sampling frequencies. 
-              <!-- Our experiments demonstrate the ODE-RNN model's superior performance, achieving 78.5% accuracy in predicting sampling rates within 5% of the ideal rates. Moreover, extended lookback periods consistently enhance forecasting outcomes, and our adaptive sampling technique leverages the ODE-RNN model's precision in approximating ideal sampling rates. This research advances the understanding and application of system usage data analysis techniques, with significant implications for improving system monitoring and resource management strategies.   -->
-            </div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <!-- <i>[1] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Project Proposal". <a style="color: blue;" href="./data/ECSE458/DAPPER/ECSE458N1_DP02_ProjectProposal.pdf"><b>[LINK]</b></a></i></br>
-          <i>[2] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 1". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 1_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[3] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 2". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 2_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[4] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 3". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 3_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[5] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 4". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 4_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[6] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 5". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 5_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[7] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 6". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 6_DP02.pdf"><b>[LINK]</b></a></i></br> -->
-          <i>[1] Pranjal Chakraborty, Majid Babaei, Leila Tahmooresnejad, Naser Ezzati-Jivan 2024. <a style="color: blue;" href="https://ieeexplore.ieee.org/abstract/document/10838037?casa_token=XHRqzCWply8AAAAA:QdjXICXGWz5SyU3BDqDvvjlcQx7NA2iPbR21wpLPn07lnaO8xymwRQKyiXpzy22PhtLoFdFC"><b>[10.1109/CASCON62161.2024.10838037]</b></a></i></br> 
-          <hr />
-          <!-- <summary style="text-align: center;">Gallery</summary>
-          <div class="responsive">
-            <div class="gallery">
-              <a target="_blank" href="./images/home/Projects/DAPPER/dapperTeam.jpg">
-                <img src="./images/home/Projects/DAPPER/dapperTeam.jpg" alt="Presentation1" width="600" height="400">
-              </a>
-              <div class="desc">Strong Team, Solid Presentation, and Smiley Faces!</div>
-            </div>
-          </div> -->
-          <div class="clearfix"></div>
-        </details>
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4>DAPPER</h4><span>2023 - 2024</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/dapperlogo.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/dapperlogo.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              Dapper is a subscription-based application that delivers personalized outfits based on personal preference. The outfits proposed would be tailored by fashion stylists to the user's individual fashion preferences, current season, preferred colors, size, and subscription level.</div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <i>[1] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Project Proposal". <a style="color: blue;" href="./data/ECSE458/DAPPER/ECSE458N1_DP02_ProjectProposal.pdf"><b>[LINK]</b></a></i></br>
-          <i>[2] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 1". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 1_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[3] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 2". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 2_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[4] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 3". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 3_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[5] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 4". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 4_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[6] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 5". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 5_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[7] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Progress Report 6". <a style="color: blue;" href="./data/ECSE458/DAPPER/ProgressReport 6_DP02.pdf"><b>[LINK]</b></a></i></br>
-          <i>[8] A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei. 2023. "Poster". <a style="color: blue;" href="./data/ECSE458/DAPPER/Poster.pdf"><b>[LINK]</b></a></i></br>
-          <hr />
-          <summary style="text-align: center;">Gallery</summary>
-          <div class="responsive">
-            <div class="gallery">
-              <a target="_blank" href="./images/home/Projects/DAPPER/dapperTeam.jpg">
-                <img src="./images/home/Projects/DAPPER/dapperTeam.jpg" alt="Presentation1" width="600" height="400">
-              </a>
-              <div class="desc">Strong Team, Solid Presentation, and Smiley Faces!</div>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-        </details>
-
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4>NFT Locker App</h4><span>2022 - 2023</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/NFTLOCKERAPP/nftlocker.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/NFTLOCKERAPP/nftlocker.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              The motivation of
-              this project is to allow people to have security while owning their assets which can potentially be very
-              valuable. What we achieved this semester was setting up our frontend application that enables users to
-              sign in with their Ethereum wallet and view a gallery of their NFTs by utilizing available online APIs.  
-            </div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <i>[1] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Progress Report 2". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/ProgressReport 2_DP37.pdf"><b>[LINK]</b></a></i></br>
-          <i>[2] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Progress Report 3". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/ProgressReport 3_DP37.pdf"><b>[LINK]</b></a></i></br>
-          <i>[3] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Progress Report 4". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/ProgressReport 4_DP37.pdf"><b>[LINK]</b></a></i></br>
-          <i>[4] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Progress Report 5". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/ProgressReport 5_DP37.pdf"><b>[LINK]</b></a></i></br>
-          <i>[5] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Progress Report 7". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/ProgressReport 7_DP37.pdf"><b>[LINK]</b></a></i></br>
-          <i>[6] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Final Progress Report". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/Final Project Report.pdf"><b>[LINK]</b></a></i></br>
-          <i>[7] M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei. 2023. "Poster". <a style="color: blue;" href="./data/ECSE458/NFTLOCKER/Poster.pdf"><b>[LINK]</b></a></i></br>
-          <hr />
-          <summary style="text-align: center;">Gallery</summary>
-          <div class="responsive">
-            <div class="gallery">
-              <a target="_blank" href="./images/home/Projects/NFTLOCKERAPP/presentation1.jpg">
-                <img src="./images/home/Projects/NFTLOCKERAPP/presentation1.jpg" alt="Presentation1" width="600" height="400">
-              </a>
-              <div class="desc">Team is busy with the presentation!</div>
-            </div>
-          </div>
-            
-          <div class="responsive">
-            <div class="gallery">
-              <a target="_blank" href="./images/home/Projects/NFTLOCKERAPP/presentation2.jpg">
-                <img src="./images/home/Projects/NFTLOCKERAPP/presentation2.jpg" alt="Presentation2" width="600" height="400">
-              </a>
-              <div class="desc">Ege seems to be hightly engaged with this work!</div>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-          
-          
-          <!-- <div class="thumbnail">
-            <a target="_blank" href="./images/home/Projects/NFTLOCKERAPP/presentation1.jpg"><img src="./images/home/Projects/NFTLOCKERAPP/presentation1.jpg" alt="Presentation1"></a>
-          </div>
-          <div class="thumbnail">
-          <a target="_blank" href="./images/home/Projects/NFTLOCKERAPP/presentation2.jpg"><img src="./images/home/Projects/NFTLOCKERAPP/presentation2.jpg" alt="Presentation2"></a>
-          </div> -->
-        </details>
-        
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4>RA4XSTATE</h4><span>2022 - 2023</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/ra4xstate-pic.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/ra4xstate-pic.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              RA4Xstate is a robustness analysis framework in the context of Model-Driven Development for systems designed based on finite state machines. RA4Xstate takes a behavioural and a property model of the system under the test as inputs. It evaluates the system's robustness based on a notion of cost that is computed for every off-track execution step.</div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <i>[1] Majid Babaei, Maroua Ben-Attia, and Yann-Gaël Guéhéneuc. 2023. "Efficient Automated Robustness Testing Framework for State Machines". submitted to the IEEE Transactions on Software Engineering.</i> </br>
-        </details>
-
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4>MRegTest</h4><span>2020 - 2022</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/mregtest-pic.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/mregtest-pic.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              As software evolves, regression testing techniques are typically used to ensure the new changes are not adversely affecting the existing features. Despite recent advances, regression testing for distributed systems remains challenging and extremely costly. Existing techniques often require running a failing system several time before detecting a regression. As a result, conventional approaches that use re-execution without considering the inherent non-determinism of distributed systems, and providing no (or low) control over execution are inadequate in many ways.</div>
-            </div>
-          </div>
-          <details>
-            <summary style="text-align: center;">List of the related papers</summary>
-            <i>[1] M. Babaei and J. Dingel, "Efficient Replay-based Regression Testing for Distributed Reactive Systems in the Context of Model-driven Development," 2021 ACM/IEEE 24th International Conference on Model Driven Engineering Languages and Systems (MODELS), 2021, pp. 89-100. <a style="color: blue;" href="https://ieeexplore.ieee.org/document/9592407"><b>[LINK]</a> <a style="color: red;" href="https://youtu.be/1PXjmKgadQI">[VIDEO]</a></b></i></br>
-            <i>[2] M. Babaei and J. Dingel, "MRegTest: A Replay-Based Regression Testing Tool for Distributed UML-RT Models," 2021 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion (MODELS-C), 2021, pp. 620-624. <a style="color: blue;" href="https://ieeexplore.ieee.org/document/9643665"><b>[LINK]</b></a></i>
-          </details>
-          <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div id="centerBlock"><h4>MReplayer</h4><span>2018 - 2020</span></div>
-            <div class="col-6 margin-bottom50 margin-top10">
-              <!-- <div class="col-3 icon-block"><i class="fa fa-send-o"></i></div> -->
-              <div class="longInfo"><img src="./images/home/Projects/mreplayer-logo.png" height= "300" width= "300" alt="" id="myProjectStyle"/></div>
-              <div class="shortInfo"><img src="./images/home/Projects/mreplayer-logo.png" height= "200" width= "200" alt="" id="myProjectStyle"/></div>
-            </div>
-            <div class="col-6 margin-bottom10 margin-top10 no-margin-top"> 
-              MReplayer that supports ordering and replaying of execution traces of distributed systems that are developed using communicated state machine models. Despite the existing solutions that require detailed traces annotated with timestamps (logical or physical), MReplayer only requires a minimum amount of traces without timestamps. Instead, it uses model analysis techniques to order and replay the traces.</div>
-            </div>
-          </div>
-        <details>
-          <summary style="text-align: center;">List of the related papers</summary>
-          <i>[1] Majid Babaei, Mojtaba Bagherzadeh, and Juergen Dingel. 2020. "Efficient reordering and replay of execution traces of distributed reactive systems in the context of model-driven development". In Proceedings of the 23rd ACM/IEEE International Conference on Model Driven Engineering Languages and Systems (MODELS'20), 285-296. <a style="color: blue;" href="https://doi.org/10.1145/3365438.3410939"><b>[LINK]</a> <a style="color: red;" href="https://youtu.be/WG5ggqPoJHg">[VIDEO]</a></b></i></br>
-          <i>[2] Majid Babaei, Mojtaba Bagherzadeh, and Juergen Dingel. 2020. "MReplayer: a trace replayer of distributed UML-RT models". Proceedings of the 23rd ACM/IEEE International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings, 1-5. <a style="color: blue;" href="https://doi.org/10.1145/3417990.3422003"><b>[LINK]</b></a></i>
-        </details>
-  <!--  -->
-          <!-- </div>
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-briefcase"></i></div>
-              <div class="flot-left">
-                <h5>Ace Advertising</h5>
-                <h4>Project Manager</h4>
-                <span>2013 - 2011</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> Phasellus nec gravida purus. Aliquam ac enim vel ipsum consectetur vulputate. Duis quis feugiat neque. Pellentesque eleifend, nisi vel mattis vestibulum, est lacus pretium quam. </div>
-          </div>
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-arrows-alt"></i></div>
-              <div class="flot-left">
-                <h5>Linksture Web</h5>
-                <h4>Senior UX Designer</h4>
-                <span>2011 - 2008</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> Phasellus nec gravida purus. Aliquam ac enim vel ipsum consectetur vulputate. Duis quis feugiat neque. Pellentesque eleifend, nisi vel mattis vestibulum, est lacus pretium quam. </div>
-          </div>
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-quote-right"></i></div>
-              <div class="flot-left">
-                <h5>Matrix Media</h5>
-                <h4>Visual / UI Designer</h4>
-                <span>2008 - 2006</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> Phasellus nec gravida purus. Aliquam ac enim vel ipsum consectetur vulputate. Duis quis feugiat neque. Pellentesque eleifend, nisi vel mattis vestibulum, est lacus pretium quam. </div>
-          </div>
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-bullhorn"></i></div>
-              <div class="flot-left">
-                <h5>Creatika Agency</h5>
-                <h4>Graphic Designer</h4>
-                <span>2006 - 2004</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> Phasellus nec gravida purus. Aliquam ac enim vel ipsum consectetur vulputate. Duis quis feugiat neque. Pellentesque eleifend, nisi vel mattis vestibulum, est lacus pretium quam. </div>
-          </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    </div>
-  </div>
-</article>
-
-<!-- ======================================================================= -->
-<!-- ========================[Teaching]===================================== -->
-<!-- ======================================================================= -->
-<article class="content skills gray1-bg" id="chapterteaching">
-  <div class="inner">
-    <h2>Teaching</h2>
-    <div class="title-divider"></div>
-    <table>
-      <tr><td><h2>McGill University</h2></td></tr>
-
-      <!-- <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/S24-CCCS690-764.pdf">Summer'24 - CCCS 690: Applied Computational Research</a> (Description) </td></tr> -->
-      <!-- <tr><td colspan="1"><div><p>Computer Science (CCE) : Analysis of a real-world case study of choice. Examination of version-controlled repositories and project management tools for tracking the tasks. Identification, formulation, and application of data-driven projects in areas of interest.</p></div> -->
-      <!-- </td></tr> -->
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/W25-CCCS301-754.pdf">Winter'25 - CCCS 301: Programing Techniques 2</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Object oriented design and programming techniques, including the creation of classes, the use of objects, inheritance, and other object oriented principles. Strong focus on problem solving techniques and ways in which programmers can support decision-making within an organization. Inheritance. Interfaces. Design patterns. Application development frameworks. Build automation tools.</p></div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/W25-CCCS300-764.pdf">Winter'25 - CCCS 300: Programing Techniques 1</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Fundamental programming techniques, concepts, and data structures, including modularization and maintainability. Emphasis on facilitating communication and understanding between systems analysts and programmers to support decision-making.</p></div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/F24-CCCS610-764.pdf">Fall'24 - CCCS 610: Digital Thinking for Data Analysis</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Examination of programmable tools for data analysis. Application methods to implement fundamental algorithms making use of data structures.</p></div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/W24-CCCS301-754.pdf">Winter'24 - CCCS 301: Programing Techniques 2</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Object oriented design and programming techniques, including the creation of classes, the use of objects, inheritance, and other object oriented principles. Strong focus on problem solving techniques and ways in which programmers can support decision-making within an organization. Inheritance. Interfaces. Design patterns. Application development frameworks. Build automation tools.</p></div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/W24-CCCS300-764.pdf">Winter'24 - CCCS 300: Programing Techniques 1</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Fundamental programming techniques, concepts, and data structures, including modularization and maintainability. Emphasis on facilitating communication and understanding between systems analysts and programmers to support decision-making.</p></div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="https://ecse437.majidbabaei.com/">Fall'23 - ECSE 437: Software Delivery</a> (Description)</td></tr>
-      <tr><td colspan="1"><div>ECSE 437 is a core course in the Computer Engineering stream in Electrical and Computer Engineering department at McGill University.
-        I will be teaching this course in Fall semester 2023 with the help of two Grad. TAs:</br>
-        <div class="col-12 margin-top10">
-          <ul>
-            <li><b>Motahareh Pour Ahimi</b> (motahareh.pourahimi@mail.mcgill.ca)</li>
-            <li><b>Sarvin Ghiasi Khalehoghli</b> (sarvin.ghiasikhalehoghli@mail.mcgill.ca)</li>
-          </ul>
-        </div>
-      <!-- </br> 
-        <p> The grade breakdown for this corse is as follows </p> -->
-        <!-- <div class="skills-con">
-          <div class="container-sub margin-top50">
-            <div class="row">
-              <div class="col-6 margin-bottom50">
-                <div class="col-6"><span class="chart" data-percent="30"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Assigments</h4>
-                  <p>5 Labs</p>
-                </div>
-              </div>
-              <div class="col-6 margin-bottom50">
-                <div class="col-6"><span class="chart" data-percent="30"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Short Exams</h4>
-                  <p>3 Quizzes</p>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="col-6"><span class="chart" data-percent="10"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Course Project</h4>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="col-6"><span class="chart" data-percent="30"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Final Exam</h4>
-                  <p></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="full-divider"></div>
-          <div class="container-sub skill-list">
-            <div class="row">
-              <h3>The core concepts</h3>
-              <div class="col-6 margin-top10">
-                <ul>
-                  <li>DevOps Culture and Practices</li>
-                  <li>Planning using Azure DevOps</li>
-                  <li>Version Control Systems</li>
-                  <li>Gerrit Code Review</li>
-                </ul>
-              </div>
-              <div class="col-6 margin-top10">
-                <ul>
-                  <li>Containerization</li>
-                  <li>Docker</li>
-                  <li>Continuous Integration</li>
-                  <li>Continuous Delivery</li>
-                </ul>
-              </div>
-            </div>  
-            <div class="full-divider"></div> -->
-          </div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/F23-CCCS301-754.pdf">Fall'23 - CCCS 301: Programing Techniques 2</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Object oriented design and programming techniques, including the creation of classes, the use of objects, inheritance, and other object oriented principles. Strong focus on problem solving techniques and ways in which programmers can support decision-making within an organization. Inheritance. Interfaces. Design patterns. Application development frameworks. Build automation tools.</p></div>
-      </td></tr>
-
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/outlines/S23-CCCS330-764.pdf">Summer'23 - CCCS 330: Database Design and Business Applications Development</a> (Description) </td></tr>
-      <tr><td colspan="1"><div><p>Computer Science (CCE) : Design and implement applications that make use of different database management systems. Simple and complex Structured Query Language (SQL) used in manipulation of information, data design, querying, and programming. Connectivity to different databases through programming languages to implement web applications.</p></div>
-      </td></tr>
-      
-      <tr><td colspan="1"><a style="color: #1F0FF0;" href="./pages/courses/ecse437fs22.html">Fall'22 - ECSE 437: Software Delivery</a> (Description)</td></tr>
-      <tr><td colspan="1"><div>ECSE 437 is a core course in the Computer Engineering stream in Electrical and Computer Engineering department at McGill University.
-        I will be teaching this course in Fall semester 2022 with the help of two Grad. TAs:
-        <div class="col-12 margin-top10">
-          <ul>
-            <li><b>Kirollos Roufail</b> (kirollos.roufail@mail.mcgill.ca)</li>
-            <li><b>Pavel Rumiantsev</b> (pavel.rumiantsev@mail.mcgill.ca)</li>
-          </ul>
-        </div>
-      </br>
-        <!-- <p> The grade breakdown for this corse is as follows </p> -->
-        <!-- <div class="skills-con">
-          <div class="container-sub margin-top50">
-            <div class="row">
-              <div class="col-6 margin-bottom50">
-                <div class="col-6"><span class="chart" data-percent="15"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Assigments</h4>
-                  <p>3 Labs</p>
-                </div>
-              </div>
-              <div class="col-6 margin-bottom50">
-                <div class="col-6"><span class="chart" data-percent="30"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Short Exams</h4>
-                  <p>3 Quizzes</p>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="col-6"><span class="chart" data-percent="15"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Course Project</h4>
-                  <p></p>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="col-6"><span class="chart" data-percent="40"><span class="percent"></span> </span></div>
-                <div class="col-6 chart-text">
-                  <h4>Final Exam</h4>
-                  <p></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="full-divider"></div>
-          <div class="container-sub skill-list">
-            <div class="row">
-              <h3>The core concepts</h3>
-              <div class="col-6 margin-top10">
-                <ul>
-                  <li>DevOps Culture and Practices</li>
-                  <li>Version Control Systems</li>
-                  <li>Gerrit Code Review</li>
-                  <li>Build Systems</li>
-                </ul>
-              </div>
-              <div class="col-6 margin-top10">
-                <ul>
-                  <li>Static Code Analysis</li>
-                  <li>Software Testing</li>
-                  <li>Continuous Integration</li>
-                  <li>Continuous Delivery</li>
-                </ul>
-              </div>
-            </div> 
-            <div class="full-divider"></div> -->
-          </div>
-      </td></tr>
-  </table>
-  <!-- <div class="full-divider"></div> -->
-  <div class="subtitle-divider"></div>
-  <table>
-    <tr><td><h2>Concordia University</h2></td></tr>
-    <tr><td colspan="1"><a style="color: #1F0FF0;" href="#">Winter'23 - COMP 218: Fundamentals of Programming</a> ( Description)</td></tr>
-    <tr><td colspan="1"><div><p>The primary objective of this course is to enable you to understand the basic principles of programming with classes and objects. The language used for the course is C++, chosen because it supports object oriented programming and because it is widely used in industry.
-      By the end of this course students should be able to:</br>
-      1.	Develop an algorithm for the solution of a word problem.</br>
-      2.	Write a complete C++ program given an algorithm.</br>
-      3.	Describe the output of a C++ program written by someone else.</br>
-      4.	Start judging the efficiency of a program.</br>
-      The course will include discussions and explanations of the following topics (not necessarily in this order): algorithm development; data types, expressions, and operators; input and output; assigning values to variables; control structures for decision and repetition; one dimensional arrays; the use of libraries; functions; classes and objects: design and implementation of simple classes; class descriptions, class development, program development using classes.
-      </p></div>
-    </td></tr>
-
-    <tr><td colspan="1"><a style="color: #1F0FF0;" href="#">Fall'21 - COMP 218: Fundamentals of Programming</a> (Description)</td></tr>
-    <tr><td colspan="1"><div><p>The primary objective of this course is to enable you to understand the basic principles of programming with classes and objects. The language used for the course is C++, chosen because it supports object oriented programming and because it is widely used in industry.
-      By the end of this course students should be able to:</br>
-      1.	Develop an algorithm for the solution of a word problem.</br>
-      2.	Write a complete C++ program given an algorithm.</br>
-      3.	Describe the output of a C++ program written by someone else.</br>
-      4.	Start judging the efficiency of a program.</br>
-      The course will include discussions and explanations of the following topics (not necessarily in this order): algorithm development; data types, expressions, and operators; input and output; assigning values to variables; control structures for decision and repetition; one dimensional arrays; the use of libraries; functions; classes and objects: design and implementation of simple classes; class descriptions, class development, program development using classes.
-      </p></div>
-    </td></tr>
-  </table>
-
-  <div class="subtitle-divider"></div>
-  <table>
-    <tr><td><h2>Queen's University</h2></td></tr>
-    <tr><td colspan="1"><a style="color: #1F0FF0;" href="#">Fall'21 - ELEC 377: Operating Systems</a> (Description)</td></tr>
-    <tr><td colspan="1"><div>ELEC 377 is a core course in the Computer Engineering stream in Electrical and Computer Engineering department at Queen's University.
-      I've thought this course in Fall semester 2021 with the help of 8 TAs (4 undergrad TAs and 4 Grad. TAs). 
-      I thought the students the basic concepts of operating systems and the historical and technical basis for many of the features that are in current operating systems.</div>
-    </td></tr>
-
-  </table>
-  
-    <!-- ELEC 377
-    <div class="subtitle-divider"></div>
-    <h2>ELEC 377: Operating Systems</h2>
-    <p><b>Description: </b>ELEC377 is a core course in the Computer Engineering stream in Electrical and Computer Engineering department at Queen's University.
-      I've thought this course in Fall semester 2021 with the help of 8 TAs (4 undergrad TAs and 4 Grad. TAs). 
-      I thought the students the basic concepts of operating systems and the historical and technical basis for many of the features that are in current operating systems.</p>
-    <p> The grade breakdown for this corse is as follows </p>
-    <div class="skills-con">
-      <div class="full-divider"></div>
-      <div class="container-sub skill-list">
-        <div class="row">
-          <h3>The core concepts</h3>
-          <p>The core concepts can be grouped into: Synchronizations, Scheduling, Memory Management (including paging and VM), Deadlock and Security. Other topics including File Systems, Device Drivers, Intro to Distributed Systems also covered.</p>
-          <div class="col-6 margin-top10">
-            <ul>
-              <li>The structure of Operating Systems</li>
-              <li>Using various primitives for synchronization</li>
-              <li>Different scheduling algorithms</li>
-              <li>Memory and File Management</li>
-            </ul>
-          </div>
-          <div class="col-6 margin-top10">
-            <ul>
-              <li>Principles of deadlock</li>
-              <li>Approaches for dealing with deadlocks</li>
-              <li>Kernel structure of modern operating systems</li>
-              <li>basics of security in Operating Systems</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="full-divider"></div>
-      <div class="container-sub">
-      </div>
-    </div>
-  </div> -->
-</article>
-
-<!-- ======================================================================= -->
-<!-- =========================[Industrial Collaborations]=================== -->
-<!-- ======================================================================= -->
-<!-- Experience -->
-<article class="content portfolio gray2-bg" id="chaptermyteam">
-  <div class="inner">
-    <h2>Collaborations with Industry</h2>
-    <div class="title-divider"></div>
-    <h3>The internships, fellowships and enterprise projects that I have been involved: </h3>
-    <p>The more I have been in industry, the more I realize that when it comes to a collaboration with an enterprise, quality and customer satisfaction cannot be compromised! 
-      Creating a pipline of the best practices technologies, perfomring regurous analysis, is one of the most promissing ways to ensure the quality of an industrial-grade projects. 
-      Leveraging on my academic skills enabling me to effectively served many companies/organisations in various domains.</p>
-      
-      <!-- I new sources of innovation, and partnering with them can be rewarding for both parties 
-      industry partnerships can provide resources and insight into ongoing research and potential areas for growth in research. When working with industry, it is important to keep in mind the contrast between its needs and priorities and those of an academic setting. The table below illustrates some of the critical differences to be aware of.</p> -->
-    <div class="experience-con">
-      <div class="container-sub">
-        <div class="full-divider"></div>
-        <div class="row">
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-laptop"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://www.imaginary-spaces.com/">Imaginary Spaces</a></h5>
-                <h4>Senior Software Developer</h4>
-                <span>Nov. 2021 - Apr. 2023</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> I've been working on <a href="https://row64.com/">Row64</a> that is the world first GPU-enabled spreadsheet software built for big data from the ground up. By combining the simplicity of spreadsheets with the enhanced functionality of big data systems. </div>
-          </div>
-          
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-briefcase"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://www.humanitas.io/">HUMANITAS</a></h5>
-                <h4>Team Lead</h4>
-                <span>Jan. 2022 - Mar. 2023</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> Software Robustness Analysis is a novel model-based approach that we have proposed to test the robustness of realtime embedded systems such as drones by leveraging the property and the behavioral model and performing static analysis.</div>
-          </div>
-
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-briefcase"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://ai.science/">Aggregate Intellect</a></h5>
-                <h4>Team Lead</h4>
-                <span>Jun. 2022 - Feb. 2023</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"><a href="https://community.ai.science/explainable-information-retrieval-xir">Explainable Information Retrieval</a>: The goal is to create open source libraries and publish papers on the topics of post-hoc or embedded explainability in Info Retrieval, Search, or related tasks.
-            </div>
-          </div>
-
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-briefcase"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://www.queensu.ca/studentwellness/">Student Wellness Services</a></h5>
-                <h4>Team Lead</h4>
-                <span>Jan. 2021 - Apr. 2023</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"><a href="https://www.queensu.ca/studentwellness/workshops/GIS">The GIS Wellness Resource Map</a> is a centralized platform that allows students to learn about the various support services available to them at Queen's. This tool uses mapping software to allow students to physically locate the services they need.
-            </div>
-          </div>
-          
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-arrows-alt"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://nrc.canada.ca/en">National Research Council</a></h5>
-                <h4>Internship</h4>
-                <span>Apr. 2021 - Aug. 2021</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top">Developing an Advanced Persistent Threat detection approach for large scale databases.
-            </div>
-          </div>
-
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-laptop"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://www.thelamplab.ca/">Lamp Lab</a></h5>
-                <h4>Software Developer</h4>
-                <span>Jan. 2020 - Jan. 2022</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"><a href="https://www.thelamplab.ca/our-projects"> Mind-Wandering: </a> In this project we have explored the experience of mind-wandering during online lectures. Specifically, we have developted an application called <a href="#">ProgApp</a> that is used to investigated how episodes of mind wandering impact learning and performance, and how mind wandering might be reduced in educational settings.
-            </div>
-          </div>
-          
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-arrows-alt"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://www.bosch-engineering.com/">Bosch Engineering Group</a></h5>
-                <h4>Internship</h4>
-                <span>Jan. 2017 - Dec. 2017</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top">Developing AMRA which is <a href="https://www.bosch-engineering.cn/en/cn/einsatzgebiete_1/schienenfahrzeuge_1/amra_4/amra_5.html"> AMRA</a> is a smart fleet management system solution that consists of the AMRA device, the AMRA portal, as well as the optional AMRA wireless sensor technology. The AMRA device is a piece of telematics hardware featuring a GPS module, integrated GSM antenna, numerous sensors (wired and wireless), and a powerful battery.
-            </div>
-          </div>
-
-          
-
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-laptop"></i></div>
-              <div class="flot-left">
-                <h5><a href="https://www.epak.de/en/">EPAK GmbH</a></h5>
-                <h4>Software Developer</h4>
-                <span>Jun. 2015 - Dec. 2016</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top">I worked on a software called <a href="https://www.epak.de/en/contact-form/trouble-shoot-guide">ProgSoft</a> that is used for programming and troubleshooting Maritime Antenna Systems.
-            </div>
-          </div>
-
-          <div class="full-divider"></div>
-          <div class="experience-details">
-            <div class="col-6 margin-bottom50 margin-top50">
-              <div class="col-3 icon-block"><i class="fa fa-laptop"></i></div>
-              <div class="flot-left">
-                <h5><a href="http://farazpajohan.com/">Farzapajohan</a></h5>
-                <h4>Software Developer</h4>
-                <span>Sep. 2012 - April. 2015</span> </div>
-            </div>
-            <div class="col-6 margin-bottom50 margin-top50 no-margin-top"> I worked on the national Certificate Authority (CA) project called <a href="#"> ParsTrust</a> that is PKI Certificate Authority software, built using Java (JEE) technology. Robust, flexible, high performance, scalable, and platform independent.
-            </div>
-          </div>
-
-        </div>
+    <div class="talks reveal">
+      <h3 class="sub-h"><span>Invited talks</span></h3>
+      <div class="talk-grid">
+        <div class="talk"><span>OXAI'24 · co-located with CASCON</span><p>Enhanced LLMs with KGs: Towards explainable performance analysis in microservices</p></div>
+        <div class="talk"><span>University of Regina</span><p>Software testing in distributed systems</p></div>
+        <div class="talk"><span>MacEwan University</span><p>From red to blue: How to apply test-driven development techniques</p></div>
+        <div class="talk"><span>University of the Fraser Valley</span><p>Recursive thinking with Fibonacci!</p></div>
       </div>
     </div>
   </div>
-</article>
+</section>
 
-
-<!-- 
-<article class="content portfolio white-bg" id="chaptermyteam">
-  <div class="inner">
-    <h2>Industrial Collaborations</h2>
-    <div class="title-divider"></div>
-    <h3>Our portfolio features a variety of projects and services</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare sem sed quam tempus aliquet vitae eget dolor. Proin eu ultrices libero. Curabitur vulputate vestibulum elementum. Suspendisse id neque a nibh mollis blandit. Quisque varius eros ac purus dignissim.</p>
-    <div class="portfolio-con">
-      <div class="container-sub margin-top50">
-        <div class="row">
-          <div id="grid-gallery" class="grid-gallery">
-            <section class="grid-wrap">
-              <ul class="grid">
-                <li>
-                  <figure> <img src="./images/home/industry/canada.png" alt="ImaginarySpaces"/>
-                    <figcaption>
-                      <div class="figcaption-details"> <img src="images/icon-plus.png" height="82" width="82" alt="" />
-                        <h3>My Work Experice in Canada</h3>
-                        <span>Where I have earned my Ph.D in Softwre Engineering.</span> </div>
-                    </figcaption>
-                  </figure>
-                </li>
-                <li>
-                  <figure> <img src="./images/home/industry/germany.png" alt="NRC"/>
-                    <figcaption>
-                      <div class="figcaption-details"> <img src="images/icon-plus.png" height="82" width="82" alt="" />
-                        <h3>My Work Experice in Germany</h3>
-                        <span>Where I have earned my M.Sc. in Automative Softwre Engineering.</span> </div>
-                    </figcaption>
-                  </figure>
-                </li>
-                <li>
-                  <figure> <img src="./images/home/industry/iran.png" alt=""/>
-                    <figcaption>
-                      <div class="figcaption-details"> <img src="images/icon-plus.png" height="82" width="82" alt="" />
-                        <h3>My Work Experice in Iran</h3>
-                        <span>Where I have earned my B.Eng. in Computer Engineering.</span> </div>
-                    </figcaption>
-                  </figure>
-                </li>
-                <li>
-                  <figure> <img src="http://placehold.it/700x475" alt=""/>
-                    <figcaption>
-                      <div class="figcaption-details"> <img src="images/icon-plus.png" height="82" width="82" alt="" />
-                        <h3>Fashion and You</h3>
-                        <span>APPS and Web Design</span> </div>
-                    </figcaption>
-                  </figure>
-                </li>
-                <li>
-                  <figure> <img src="http://placehold.it/700x475" alt=""/>
-                    <figcaption>
-                      <div class="figcaption-details"> <img src="images/icon-plus.png" height="82" width="82" alt="" />
-                        <h3>Whole Food Flour</h3>
-                        <span>Branding and Identity</span> </div>
-                    </figcaption>
-                  </figure>
-                </li>
-              </ul>
-            </section>
-           
-            <section class="slideshow">
-              <ul>
-                <li>
-                  <figure>
-                    <figcaption>
-                      <h3>The Flavour Restaurant</h3>
-                      <span>Website Design & Development</span>
-                      <p>Kale chips lomo biodiesel stumptown Godard Tumblr, mustache sriracha tattooed cray aute slow-carb placeat delectus. Letterpress asymmetrical fanny pack art party est pour-over skateboard anim quis, 						ullamco craft beer.</p>
-                    </figcaption>
-                    <div id="owl-demo1" class="owl-carousel">
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                    </div>
-                  </figure>
-                </li>
-                <li>
-                  <figure>
-                    <figcaption>
-                      <h3>Herbal Beauty Salon</h3>
-                      <span>Photography</span>
-                      <p>Kale chips lomo biodiesel stumptown Godard Tumblr, mustache sriracha tattooed cray aute slow-carb placeat delectus. Letterpress asymmetrical fanny pack art party est pour-over skateboard anim quis, ullamco craft beer.</p>
-                    </figcaption>
-                    <img src="http://placehold.it/700x475" alt=""/></figure>
-                </li>
-                <li>
-                  <figure>
-                    <figcaption>
-                      <h3>Kayra Modelleri</h3>
-                      <span>Branding and Identity</span>
-                      <p>Kale chips lomo biodiesel stumptown Godard Tumblr, mustache sriracha tattooed cray aute slow-carb placeat delectus. Letterpress asymmetrical fanny pack art party est pour-over skateboard anim quis, ullamco craft beer.</p>
-                    </figcaption>
-                    <div id="owl-demo2" class="owl-carousel">
-                       <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                      <div class="item"><img src="http://placehold.it/700x475" alt="" /></div>
-                    </div>
-                  </figure>
-                </li>
-                <li>
-                  <figure>
-                    <figcaption>
-                      <h3>Fashion and You</h3>
-                      <span>APPS and Web Design</span>
-                      <p>Kale chips lomo biodiesel stumptown Godard Tumblr, mustache sriracha tattooed cray aute slow-carb placeat delectus. Letterpress asymmetrical fanny pack art party est pour-over skateboard anim quis, ullamco craft beer.</p>
-                    </figcaption>
-                    <iframe width="854" height="480" src="//www.youtube.com/embed/ZwzY1o_hB5Y" frameborder="0" allowfullscreen></iframe></figure>
-                </li>
-                <li>
-                  <figure>
-                    <figcaption>
-                      <h3>Whole Food Flour</h3>
-                      <span>Branding and Identity</span>
-                      <p>Kale chips lomo biodiesel stumptown Godard Tumblr, mustache sriracha tattooed cray aute slow-carb placeat delectus. Letterpress asymmetrical fanny pack art party est pour-over skateboard anim quis, ullamco craft beer.</p>
-                    </figcaption>
-                    <img src="http://placehold.it/700x475" alt=""/></figure>
-                </li>
-              </ul>
-              <nav> <span class="fa nav-prev"></span> <span class="fa nav-next"></span> <span class="fa nav-close"></span> </nav>
-            </section>
-          </div>
-        </div>
+<!-- ================= BACKGROUND ================= -->
+<section class="section" id="background">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><span class="num">§ 06 — Background</span><h2>Appointments, education &amp; <em>industry</em></h2></div>
+      <p>Before academia I spent a decade building software in industry — PKI and networking in Tehran, IoT analytics at Bosch in Germany, and DevOps in Canada. That experience still shapes what I teach and the problems I choose.</p>
+    </div>
+    <div class="bg-grid">
+      <div class="bg-col reveal">
+        <h3 class="sub-h"><span>Academic appointments</span></h3>
+        <ol class="timeline">
+          <li class="current"><span class="when">Aug 2025 – present</span><h4>Assistant Professor (Tenure-Track)</h4><p class="where">University of the Fraser Valley · School of Computing</p><p class="what">Chair of Industry Partnerships.</p></li>
+          <li class="current"><span class="when">Nov 2024 – present</span><h4>Associate Member</h4><p class="where">McGill University · Electrical and Computer Engineering</p><p class="what">Adjunct professorship under review.</p></li>
+          <li><span class="when">Jan 2024 – Jul 2025</span><h4>Assistant Professor (Professional)</h4><p class="where">McGill University · School of Continuing Studies</p><p class="what">Academic Program Coordinator, Certificate in Computers and Information Technology.</p></li>
+          <li><span class="when">Jan 2023 – Jan 2024</span><h4>Faculty Lecturer</h4><p class="where">McGill University · School of Continuing Studies</p><p class="what">Academic Program Coordinator, Micro-credential in Digital Product Management and Emerging Technologies.</p></li>
+          <li><span class="when">2022 – 2023</span><h4>Postdoctoral Research Fellow</h4><p class="where">Concordia University · Computer Science and Software Engineering</p><p class="what">Software robustness analysis, with Prof. Yann-Gaël Guéhéneuc.</p></li>
+          <li><span class="when">2022 – 2023</span><h4>Visiting Researcher</h4><p class="where">McGill University · Electrical and Computer Engineering</p><p class="what">Knowledge-graph explainability for information retrieval, hosted by Prof. Dániel Varró; industry project with Aggregate Intelligence.</p></li>
+        </ol>
+      </div>
+      <div class="bg-col reveal">
+        <h3 class="sub-h"><span>Education</span></h3>
+        <ol class="timeline">
+          <li><span class="when">2018 – Dec 2021</span><h4>Ph.D. in Software Engineering</h4><p class="where">Queen's University, Kingston, Ontario</p><p class="what"><a href="https://qspace.library.queensu.ca/handle/1974/29842"><i>Regression Testing of Distributed Real-Time Embedded Systems in the Context of Model-Driven Development</i></a>. Supervisor: Prof. Juergen Dingel.</p></li>
+          <li><span class="when">2015 – Nov 2017</span><h4>M.Sc. in Automotive Software Engineering</h4><p class="where">Technische Universität Chemnitz, Germany</p><p class="what">Pattern recognition for Big Data from distributed embedded AMRA boxes. Supervisor: Prof. Martin Gaedke.</p></li>
+          <li><span class="when">2007 – May 2012</span><h4>B.Eng. in Computer Engineering</h4><p class="where">Shahrood University of Technology, Iran</p></li>
+        </ol>
+        <h3 class="sub-h mt"><span>Industry experience</span></h3>
+        <ol class="timeline">
+          <li><span class="when">Nov 2021 – Mar 2023</span><h4>Senior Software Developer &amp; DevOps Engineer</h4><p class="where">Imaginary Spaces, Canada</p><p class="what">Row64 development and debugging; CI/CD workflows for Pipeline-In-Box readers and writers.</p></li>
+          <li><span class="when">May – Sep 2021</span><h4>Software Developer (Internship)</h4><p class="where">National Research Council Canada, Ottawa</p><p class="what">Representation learning for cybersecurity logs; advanced persistent threat detection.</p></li>
+          <li><span class="when">Jan – Dec 2017</span><h4>Software Developer</h4><p class="where">Robert Bosch GmbH, Germany</p><p class="what">Bosch IoT/AMRA datasets; React and React Native monitoring apps; log analysis for real-time embedded devices.</p></li>
+          <li><span class="when">Apr 2015 – Dec 2016</span><h4>Software Developer</h4><p class="where">EPAK GmbH, Leipzig, Germany</p><p class="what">VSAT/TV antenna networking platform, simulation, and web interfaces.</p></li>
+          <li><span class="when">May 2012 – Apr 2015</span><h4>Software Developer</h4><p class="where">Farazpajohan, Tehran, Iran</p><p class="what">PKI-based digital certificates; Linux networking APIs; modular TCP/SSL servers.</p></li>
+        </ol>
       </div>
     </div>
   </div>
-</article>
--->
+</section>
 
-<!-- ======================================================================= -->
-<!-- =========================[contact]===================================== -->
-<!-- ======================================================================= -->
-
-<article class="content contact white-bg" id="chaptercontact" style="overflow: hidden ;">
-  <div class="inner">
-    <h2>Contact</h2>
-    <div class="title-divider"></div>
-    <h3>Let's Keep In Touch</h3>
-    <p>We are just one click away! I am always open to new opportunities and challenges, so if you have any ideas in the domain of software engineering and AI, I will be happy to help you and your team. Please fill out the form below and share with me some detail of your idea! </p>
-    <div class="full-divider"></div>
-    <div class="contact-con margin-top50">
-      <div class="container-sub">
-        <div class="row">
-          <div class="contact-details">
-            <!-- <div class="col-6">
-              <div class="contact-text">
-                <div class="col-2 icon-block address"><i class="fa fa-map-marker"></i></div>
-                <div class="flot-left"> <strong>Andrew Smith</strong><br>
-                  PO Box 16122 Collins Street West,<br>
-                  Victoria 8007, United States. </div>
-              </div>
-              <div class="contact-text">
-                <div class="col-2 icon-block phone"><i class="fa fa-phone"></i></div>
-                <div class="flot-left"> <strong>Phone</strong><br>
-                  +123-456-7890 </div>
-              </div>
-              <div class="contact-text">
-                <div class="col-2 icon-block email"><i class="fa fa-envelope"></i></div>
-                <div class="flot-left"> <strong>Email</strong><br>
-                  <a href="mailto:no-reply@domain.com">no-reply@domain.com</a> </div>
-              </div>
-            </div> -->
-            <center>
-            <div class="col-10 m-margin-top30">
-              <h3>Find me on Social Networks</h3>
-              <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare sem sed quam tempus aliquet vitae eget dolor. -->
-              <!-- <div class="contact-social margin-top30"><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a> <a href="https://twitter.com" target="_blank"><i class="fa fa-twitter"></i></a> <a href="https://www.youtube.com" target="_blank"><i class="fa fa-youtube"></i></a><a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a><a href="https://www.linkedin.com" target="_blank"><i class="fa fa-linkedin"></i></a> </div> -->
-              <div class="contact-social margin-top30"><a href="https://twitter.com/drmbabaei" target="_blank"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/majid-babaei-ph-d-20382874/" target="_blank"><i class="fa fa-linkedin"></i></a> </div>
-
-            </div>
-          </center>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="full-divider"></div>
-      <div class="container-sub">
-        <div class="row">
-          <div class="contact-form">
-            <h3>Drop Me a Line</h3>
-            <form id="form1" name="form1" method="post" >
-              <input name="name" type="text" id="name" placeholder="Your Name..." />
-              <input name="email" type="text" id="email" placeholder="Your Email..." />
-              <textarea name="message" id="message" cols="45" rows="5" placeholder="Your Message..."></textarea>
-              <input type="submit" name="button" id="button" value="say hello!" >
-              <div id="successmsg" ></div>
-            </form>
-          </div>
-        </div>
-      </div> -->
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="num">§ 07 — Contact</span>
+    <h2>Let's build software<br>you can <em>check.</em></h2>
+    <a class="mail" href="mailto:majid.babaei@ufv.ca">majid.babaei@ufv.ca <span aria-hidden="true">↗</span></a>
+    <div class="contact-grid">
+      <div><h4>Office</h4><p>School of Computing<br>University of the Fraser Valley<br>Abbotsford campus, Building C, Room ABC-2454</p></div>
+      <div><h4>Elsewhere</h4>
+        <a href="https://ai4se4ai-lab.github.io/">AI4SE4AI Lab ↗</a>
+        <a href="https://github.com/ai4se4ai-lab">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/majid-babaei-ph-d-20382874/">LinkedIn ↗</a>
+        <a href="https://majidbabaei.com/Ri3SE.blog/notes/">Notes &amp; blog ↗</a></div>
+      <div><h4>More</h4>
+        <a href="assets/Majid_Babaei_CV.pdf">Curriculum vitae (PDF) ↓</a>
+        <a href="https://www.mcgill.ca/continuingstudies/article/interview-majid-babaei">Interview, McGill SCS (2023) ↗</a>
+        <p style="margin-top:8px;opacity:.75">Languages: English and Persian</p></div>
     </div>
   </div>
-</article>
+</section>
+</main>
 
-<!-- ======================================================================= -->
-<!-- =======================[introduction]================================== -->
-<!-- ======================================================================= -->
-<!-- Introduction -->
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year">2026</span> Majid Babaei</span>
+    <span class="sync" id="sync-note" title="SHA-256 of the LaTeX CV this site was generated from">CV-synced</span>
+    <a class="top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
 
-<article class="content introduction-end" id="chapterthankyou">
-  <!-- <h1>Mavenlink</h1> -->
-  <canvas id="firstcanvas"></canvas>
-  <!-- <div class="inner">
-    <div class="introduction-end-con margin-top50">
-      <h3><strong>Majid Babaei</strong></h3>
-    </div>
-  </div> -->
-</article>
-</div>
-<!-- content-wrapper --> 
-</div>
-<!-- content-scroller --> 
-</div>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/head.min.js"></script>
-<!-- Portfolio Thumbnail --> 
-<script type="text/javascript" src="js/imagesloaded.min.js"></script> 
-<script type="text/javascript" src="js/masonry.min.js"></script> 
-<script type="text/javascript" src="js/class_helper.js"></script> 
-<script type="text/javascript" src="js/grid_gallery.js"></script>
-<script type="text/javascript" src="js/teaching_table_helper.js"></script>
-
-<!-- Portfolio Grid --> 
-<script>
-// new CBPGridGallery( document.getElementById( 'grid-gallery' ) );
-</script>
-<!-- Portfolio Slider--> 
-<script type="text/javascript"  src="js/carousel.js"></script> 
-<script type="text/javascript" src="js/jquery.easypiechart.js"></script> 
-<script type="text/javascript" src="js/text.rotator.js"></script>
-<!-- Page Scrolling --> 
-<script>
-head.js(
-{ mousewheel : "js/jquery.mousewheel.js" },
-{ mwheelIntent : "js/mwheelIntent.js" },
-{ jScrollPane : "js/jquery.jscrollpane.min.js" },
-{ history : "js/jquery.history.js" },
-{ stringLib : "js/core.string.js" },
-{ easing : "js/jquery.easing.1.3.js" },
-{ smartresize : "js/jquery.smartresize.js" },
-{ page : "js/jquery.page.js" }
-);
-</script>  
-<!-- Fit Video --> 
-<script type="text/javascript"  src="js/jquery.fitvids.js"></script>
-<!-- All Javascript Component--> 
-<script src="js/settings.js"></script>
-<!-- <script src="js/animation.js"></script> -->
-<!-- <script src="js/animation_intro.js"></script> -->
+<script src="assets/research-data.js"></script>
+<script src="assets/news-data.js"></script>
+<script src="assets/site.js"></script>
 </body>
 </html>

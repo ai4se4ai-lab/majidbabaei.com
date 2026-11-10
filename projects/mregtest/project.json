@@ -1,0 +1,84 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "models-companion-2021",
+      "date": "2021",
+      "type": "paper",
+      "title": "MODELS Companion 2021",
+      "notes": "**MRegTest: A replay-based regression testing tool for distributed UML-RT models.**\n\nM. Babaei and J. Dingel. pp. 620–624.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://ieeexplore.ieee.org/document/9643665",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "code-public",
+      "date": "2021-07-16",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/MajidGitHubRepos/MRegTest",
+          "type": "code"
+        }
+      ]
+    },
+    {
+      "tag": "models-2021-research",
+      "date": "2021",
+      "type": "paper",
+      "title": "MODELS 2021 research paper · ACM SIGSOFT Distinguished Paper Award",
+      "notes": "**Efficient replay-based regression testing for distributed reactive systems in the context of model-driven development.**\n\nM. Babaei and J. Dingel. pp. 89–100.\n\nThe regression-testing approach implemented by MRegTest received an **ACM SIGSOFT Distinguished Paper Award** 🏆.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1109/MODELS50736.2021.00018",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "phd-thesis",
+      "date": "2021-12",
+      "type": "thesis",
+      "title": "Ph.D. thesis, Queen's University",
+      "notes": "**Regression Testing of Distributed Real-Time Embedded Systems in the Context of Model-Driven Development**\n\nSupervisor: Prof. Juergen Dingel.",
+      "links": [
+        {
+          "label": "Thesis (QSpace)",
+          "url": "https://qspace.library.queensu.ca/handle/1974/29842",
+          "type": "thesis"
+        }
+      ]
+    },
+    {
+      "tag": "sosym-2023",
+      "date": "2023",
+      "type": "paper",
+      "title": "Software and Systems Modeling 2023 · journal article",
+      "notes": "**Efficient regression testing of distributed real-time reactive systems in the context of model-driven development.**\n\nM. Babaei and J. Dingel. 22(5):1565–1587.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1007/s10270-023-01086-5",
+          "type": "paper"
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "assets/img/gallery/mregtest.webp",
+      "caption": "MRegTest: replay-based regression testing for distributed UML-RT models.",
+      "w": 955,
+      "h": 730
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "name": "NFT Locker",
+    "theme": "Student projects",
+    "status": "Completed · ECSE 458 capstone, 2022–2023",
+    "tags": "Capstone · McGill ECE",
+    "description": "A decentralized NFT-locking application that lets people keep their digital assets secure: users sign in with an Ethereum wallet and view a gallery of their NFTs through online APIs."
+  },
+  "stage": "Completed",
+  "stages": [
+    "Proposal",
+    "Development",
+    "Poster",
+    "Completed"
+  ],
+  "team": [
+    "M. Buchar",
+    "D. Chan",
+    "E. Gomolin",
+    "E. Karadibak",
+    "M. Babaei"
+  ],
+  "links": [],
+  "releases": [
+    {
+      "tag": "v1.0-poster",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "poster",
+      "title": "Final poster",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Poster (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/Poster.pdf",
+          "type": "poster"
+        }
+      ]
+    },
+    {
+      "tag": "v0.9-final-report",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "report",
+      "title": "Final project report",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Final report (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/Final Project Report.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.7-progress-7",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "report",
+      "title": "Progress report 7",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 7 (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/ProgressReport 7_DP37.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.5-progress-5",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "report",
+      "title": "Progress report 5",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 5 (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/ProgressReport 5_DP37.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.4-progress-4",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "report",
+      "title": "Progress report 4",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 4 (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/ProgressReport 4_DP37.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.3-progress-3",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "report",
+      "title": "Progress report 3",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 3 (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/ProgressReport 3_DP37.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2-progress-2",
+      "date": "2023",
+      "label": "2022–2023",
+      "type": "report",
+      "title": "Progress report 2",
+      "notes": "M. Buchar, D. Chan, E. Gomolin, E. Karadibak, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 2 (PDF)",
+          "url": "data/ECSE458/NFTLOCKER/ProgressReport 2_DP37.pdf",
+          "type": "report"
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "assets/img/gallery/nftlocker-presentation-1.webp",
+      "caption": "The team is busy with the presentation!",
+      "label": "2022–2023",
+      "w": 1100,
+      "h": 825
+    },
+    {
+      "src": "assets/img/gallery/nftlocker-presentation-2.webp",
+      "caption": "Ege seems to be highly engaged with this work!",
+      "label": "2022–2023",
+      "w": 1100,
+      "h": 831
+    },
+    {
+      "src": "assets/img/gallery/nftlocker-app.webp",
+      "caption": "The NFT Locker app.",
+      "label": "2022–2023",
+      "w": 689,
+      "h": 860
+    }
+  ]
+}

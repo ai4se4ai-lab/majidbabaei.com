@@ -1,0 +1,29 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "v0-ongoing",
+      "date": "2026-10",
+      "type": "milestone",
+      "title": "Research in progress",
+      "notes": "**RES-AI: Evidence-bound readiness for AI software engineering experiments on shared HPC infrastructure.**\n\nM. Babaei.",
+      "links": []
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-10-23",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/RES-AI",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}

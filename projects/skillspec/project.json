@@ -1,0 +1,29 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "icse-2027",
+      "date": "2026-10",
+      "type": "paper",
+      "title": "Accepted · ICSE 2027 (to appear)",
+      "notes": "**SkillSpec: A formally verifiable specification format for composing agent skills.**\n\nM. Babaei and A. Heydarnoori. Research Track; to appear.",
+      "links": []
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-03-23",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/swe-multiskillsbench",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}

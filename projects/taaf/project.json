@@ -1,0 +1,48 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "icse-2026",
+      "date": "2026",
+      "type": "paper",
+      "title": "ICSE 2026",
+      "notes": "**TAAF: A trace abstraction and analysis framework synergizing knowledge graphs and LLMs.**\n\nA. Ezaz, G. Khodabandeh, M. Babaei, and N. Ezzati-Jivan.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1145/3744916.3787832",
+          "type": "paper"
+        },
+        {
+          "label": "Preprint",
+          "url": "https://arxiv.org/abs/2601.02632",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-01-12",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/Alireza-Ezaz/TAAF",
+          "type": "code"
+        }
+      ]
+    },
+    {
+      "tag": "msc-thesis",
+      "date": "2025-09",
+      "type": "thesis",
+      "title": "M.Sc. thesis, Brock University (Alireza Ezaz)",
+      "notes": "**TAAF: A Trace Abstraction and Analysis Framework Synergizing Knowledge Graphs and LLMs**\n\nCo-advised with Prof. Naser Ezzati-Jivan. Completed September 2025.",
+      "links": []
+    }
+  ],
+  "gallery": []
+}

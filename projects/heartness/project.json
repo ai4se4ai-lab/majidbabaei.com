@@ -1,0 +1,29 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "v0-ongoing",
+      "date": "2026-11-09",
+      "type": "milestone",
+      "title": "Research in progress",
+      "notes": "**Bad Habits Die Hard: A Model-Driven Approach to Traceable Self-Evolving Agent Harnesses.**\n\nM. Babaei. Heartness.",
+      "links": []
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-11-06",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/heartness",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}

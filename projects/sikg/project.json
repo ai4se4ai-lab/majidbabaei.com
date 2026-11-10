@@ -1,0 +1,35 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "icse-poster-2026",
+      "date": "2026",
+      "type": "paper",
+      "title": "ICSE Poster 2026",
+      "notes": "**SIKG: A semantic impact knowledge graph approach for adaptive test selection and prioritization.**\n\nM. Babaei, N. Ezzati-Jivan, and L. Wei. ICSE Companion, Poster Track.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1145/3774748.3795655",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "code-public",
+      "date": "2025-05-19",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/SIKG",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}

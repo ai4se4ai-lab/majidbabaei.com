@@ -1,0 +1,61 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "sosym-2026",
+      "date": "2026",
+      "type": "paper",
+      "title": "SoSyM 2026",
+      "notes": "**RATEN: An efficient robustness analysis and test enhancement framework for state machines.**\n\nM. Babaei and Y.-G. Guéhéneuc.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1007/s10270-026-01371-z",
+          "type": "paper"
+        },
+        {
+          "label": "Preprint",
+          "url": "https://assets.ptidej.net/Publications/Documents/SoSym26.doc.pdf",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "serp4iot-2023",
+      "date": "2023",
+      "type": "paper",
+      "title": "SERP4IoT 2023",
+      "notes": "**ra4xstate: An efficient quantitative robustness analysis approach for statecharts.**\n\nM. Babaei and M. Ben-Attia. pp. 46–53.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1109/SERP4IoT59158.2023.00013",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "code-public",
+      "date": "2025-11-14",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/RATEN-ra4xstate",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "assets/img/gallery/ra4xstate.webp",
+      "caption": "ra4xstate: quantitative robustness analysis for statecharts.",
+      "w": 992,
+      "h": 858
+    }
+  ]
+}

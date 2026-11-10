@@ -1,0 +1,56 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "models-companion-2020",
+      "date": "2020",
+      "type": "paper",
+      "title": "MODELS Companion 2020",
+      "notes": "**MReplayer: A trace replayer of distributed UML-RT models.**\n\nM. Babaei, M. Bagherzadeh, and J. Dingel.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1145/3417990.3422003",
+          "type": "paper"
+        }
+      ]
+    },
+    {
+      "tag": "code-public",
+      "date": "2019-06-19",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/MajidGitHubRepos/MReplayer",
+          "type": "code"
+        }
+      ]
+    },
+    {
+      "tag": "models-2020-research",
+      "date": "2020",
+      "type": "paper",
+      "title": "MODELS 2020 research paper · Artifacts Available & Evaluated–Reusable",
+      "notes": "**Efficient reordering and replay of execution traces of distributed reactive systems in the context of model-driven development.**\n\nM. Babaei, M. Bagherzadeh, and J. Dingel. pp. 285–296.\n\nThe paper's artifacts earned the **Artifacts Available and Evaluated–Reusable** badges 📦✅♻️.",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1145/3365438.3410939",
+          "type": "paper"
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "assets/img/gallery/mreplayer.webp",
+      "caption": "MReplayer: a trace replayer for distributed UML-RT models.",
+      "w": 798,
+      "h": 722
+    }
+  ]
+}

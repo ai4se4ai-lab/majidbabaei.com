@@ -1,0 +1,29 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "v0-ongoing",
+      "date": "2026-11-03",
+      "type": "milestone",
+      "title": "Research in progress",
+      "notes": "**When the team writes itself: Reliable and traceable LLM-assembled agent teams through checked model transformations.**\n\nM. Babaei, S. Farshadi, N. Ezzati-Jivan, J. C. Davis, and L. Wei. AutoM2M.",
+      "links": []
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-10-08",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/M2MColab",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}

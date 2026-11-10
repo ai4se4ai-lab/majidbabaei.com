@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "name": "DAPPER",
+    "theme": "Student projects",
+    "status": "Completed · ECSE 458 capstone, Fall 2023",
+    "tags": "Capstone · McGill ECE",
+    "description": "A subscription-based application that delivers personalized outfits, tailored by fashion stylists to each user's preferences, season, colors, size, and subscription level."
+  },
+  "stage": "Completed",
+  "stages": [
+    "Proposal",
+    "Development",
+    "Poster",
+    "Completed"
+  ],
+  "team": [
+    "A. Benakmoum",
+    "R. Ammar",
+    "Z. Bouhemhem",
+    "M. Babaei"
+  ],
+  "links": [],
+  "releases": [
+    {
+      "tag": "v1.0-poster",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "poster",
+      "title": "Final poster",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Poster (PDF)",
+          "url": "data/ECSE458/DAPPER/Poster.pdf",
+          "type": "poster"
+        }
+      ]
+    },
+    {
+      "tag": "v0.7-progress-6",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Progress report 6",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 6 (PDF)",
+          "url": "data/ECSE458/DAPPER/ProgressReport 6_DP02.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.6-progress-5",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Progress report 5",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 5 (PDF)",
+          "url": "data/ECSE458/DAPPER/ProgressReport 5_DP02.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.5-progress-4",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Progress report 4",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 4 (PDF)",
+          "url": "data/ECSE458/DAPPER/ProgressReport 4_DP02.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.4-progress-3",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Progress report 3",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 3 (PDF)",
+          "url": "data/ECSE458/DAPPER/ProgressReport 3_DP02.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.3-progress-2",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Progress report 2",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 2 (PDF)",
+          "url": "data/ECSE458/DAPPER/ProgressReport 2_DP02.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.2-progress-1",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Progress report 1",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Progress report 1 (PDF)",
+          "url": "data/ECSE458/DAPPER/ProgressReport 1_DP02.pdf",
+          "type": "report"
+        }
+      ]
+    },
+    {
+      "tag": "v0.1-proposal",
+      "date": "2023",
+      "label": "Fall 2023",
+      "type": "report",
+      "title": "Project proposal",
+      "notes": "A. Benakmoum, R. Ammar, Z. Bouhemhem, and M. Babaei (advisor).",
+      "links": [
+        {
+          "label": "Proposal (PDF)",
+          "url": "data/ECSE458/DAPPER/ECSE458N1_DP02_ProjectProposal.pdf",
+          "type": "report"
+        }
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "src": "assets/img/gallery/dapper-team.webp",
+      "caption": "Strong team, solid presentation, and smiley faces!",
+      "label": "Fall 2023",
+      "w": 1100,
+      "h": 825
+    },
+    {
+      "src": "assets/img/gallery/dapper-logo.webp",
+      "caption": "The DAPPER app design: personalized outfits by subscription plan.",
+      "label": "Fall 2023",
+      "w": 567,
+      "h": 1002
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" font-family="Georgia, 'Times New Roman', serif" role="img" aria-labelledby="t d">
+  <title id="t">The Human–AI abstraction loop</title>
+  <desc id="d">Two states, Human and Agentic AI. The upper transition carries human concerns to agents through MDE abstractions (models, contracts, transformations). The lower transition carries agent collaboration back to humans through abstractions of behavior (traces, slices, provenance).</desc>
+  <defs>
+    <marker id="ao" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#b84f12"/></marker>
+    <marker id="at" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" fill="#00737d"/></marker>
+  </defs>
+  <rect width="960" height="440" rx="22" fill="#f6f3ec"/>
+  <text x="40" y="44" font-family="Consolas, monospace" font-size="13" letter-spacing="1.5" fill="#596273">THE HUMAN–AI ABSTRACTION LOOP</text>
+  <!-- transitions -->
+  <path d="M250 175 C 360 70, 600 70, 708 175" fill="none" stroke="#b84f12" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#ao)"/>
+  <path d="M708 265 C 600 370, 360 370, 250 265" fill="none" stroke="#00737d" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#at)"/>
+  <rect x="330" y="68" width="300" height="56" rx="10" fill="#fbf9f4" stroke="#e3c9b6"/>
+  <text x="480" y="91" text-anchor="middle" font-size="17" fill="#b84f12" font-style="italic">MDE abstractions</text>
+  <text x="480" y="112" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#596273">concerns [modeled] / specify · verify</text>
+  <rect x="330" y="316" width="300" height="56" rx="10" fill="#fbf9f4" stroke="#b6d6d8"/>
+  <text x="480" y="339" text-anchor="middle" font-size="17" fill="#00737d" font-style="italic">Abstractions of collaboration</text>
+  <text x="480" y="360" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#596273">behavior [abstracted] / trace · explain</text>
+  <!-- states -->
+  <rect x="60" y="160" width="200" height="120" rx="60" fill="#fbf9f4" stroke="#19375f" stroke-width="2.2"/>
+  <text x="160" y="218" text-anchor="middle" font-size="30" fill="#14243a">Human</text>
+  <text x="160" y="244" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#596273">intent · concerns</text>
+  <rect x="700" y="160" width="200" height="120" rx="60" fill="#fbf9f4" stroke="#19375f" stroke-width="2.2"/>
+  <text x="800" y="218" text-anchor="middle" font-size="30" fill="#14243a">Agentic AI</text>
+  <text x="800" y="244" text-anchor="middle" font-family="Consolas, monospace" font-size="11.5" fill="#596273">agents · teams · tools</text>
+  <!-- center -->
+  <text x="480" y="214" text-anchor="middle" font-size="22" font-style="italic" fill="#14243a">the missing loop</text>
+  <text x="480" y="240" text-anchor="middle" font-family="Consolas, monospace" font-size="12" letter-spacing="1" fill="#596273">EFFICIENT · EFFECTIVE</text>
+  <text x="480" y="414" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#596273">explicit assumptions · traceable evidence · checkable guarantees</text>
+</svg>

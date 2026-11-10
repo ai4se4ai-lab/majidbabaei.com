@@ -1,0 +1,29 @@
+{
+  "team": [],
+  "links": [],
+  "releases": [
+    {
+      "tag": "submitted-ieee-tse",
+      "date": "2026-11-03",
+      "type": "paper",
+      "title": "Submitted · IEEE TSE",
+      "notes": "**Trust Is Not Transitive: Verifying the Composition of LLM Guardrail Hierarchies.**\n\nM. Babaei.",
+      "links": []
+    },
+    {
+      "tag": "code-public",
+      "date": "2026-10-29",
+      "type": "code",
+      "title": "Code repository published",
+      "notes": "The research artifact is public on GitHub.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/trust-is-not-transitive",
+          "type": "code"
+        }
+      ]
+    }
+  ],
+  "gallery": []
+}
