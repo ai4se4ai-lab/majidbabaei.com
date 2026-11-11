@@ -44,7 +44,8 @@ test('every Markdown post has a complete, crawlable article with canonical socia
     assert.match(html, /name="twitter:card" content="summary_large_image"/);
     for (const [, ref] of html.matchAll(/(?:src|href)="([^"#][^"]*)"/g)) {
       if (/^(https?:|mailto:|data:)/.test(ref)) continue;
-      const target = resolve(ref.startsWith('/') ? root : dirname(pagePath), '.' + (ref.startsWith('/') ? ref : '/' + ref.split(/[?#]/)[0]));
+      const localPath = ref.split(/[?#]/)[0];
+      const target = resolve(localPath.startsWith('/') ? root : dirname(pagePath), '.' + (localPath.startsWith('/') ? localPath : '/' + localPath));
       assert.ok(existsSync(decodeURIComponent(target)), `${slug}: missing ${ref}`);
     }
   }

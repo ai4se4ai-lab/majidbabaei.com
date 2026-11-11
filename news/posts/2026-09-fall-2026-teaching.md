@@ -17,7 +17,7 @@ The Fall 2026 term at the **University of the Fraser Valley** is under way. This
 
 ## Software engineering, with industry in the room
 
-COMP 370 is the course I have taught every term since joining UFV. As Chair of Industry Partnerships in the School of Computing, I try to bring practice into it. In earlier offerings, guest practitioners from Intuit Mailchimp and Caseway brought real requirements into the classroom.
+COMP 370 is the course I have taught every term since joining UFV. During my term as Chair of Industry Partnerships in the School of Computing (Fall 2025 to September 2026), I worked to bring industry practice into the classroom. In earlier offerings, guest practitioners from Intuit Mailchimp and Caseway brought real requirements into the classroom.
 
 ## By the numbers
 

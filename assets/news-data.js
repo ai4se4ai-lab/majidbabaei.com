@@ -120,6 +120,26 @@ window.NEWS = [
   "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
+  "slug": "industry-partnerships-term-completed",
+  "title": "Completing my term as Chair of Industry Partnerships at UFV",
+  "subtitle": "My service in the School of Computing ran from Fall 2025 to September 2026.",
+  "summary": "My term as Chair of Industry Partnerships in UFV's School of Computing ended in September 2026. I continue as a tenure-track Assistant Professor.",
+  "tags": [
+   "Service",
+   "Partnerships"
+  ],
+  "featured": false,
+  "cover": null,
+  "coverAlt": "Completing my term as Chair of Industry Partnerships at UFV cover",
+  "coverCaption": "",
+  "socialImage": null,
+  "date": "2026-09",
+  "dateLabel": "Sep 2026",
+  "iso": "2026-09-01",
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
+ },
+ {
   "slug": "icse-2026-taaf-sikg",
   "title": "Two papers at ICSE 2026, TAAF and SIKG",
   "subtitle": "Knowledge graphs meet execution traces and test selection at the IEEE/ACM International Conference on Software Engineering.",
