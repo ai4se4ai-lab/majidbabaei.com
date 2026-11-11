@@ -114,6 +114,7 @@
       !query || `${p.title} ${p.authors} ${p.venue} ${p.year || p.status}`.toLowerCase().includes(query));
     const link = (href, label) => href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${label} ↗</a>` : '';
     render($('#pub-list'), list.length ? list.map(({ p, i }) => {
+      if (p.anonymous) return `<li class="pub"><div class="pub-meta"><span class="yr">Under review</span></div><div><h3>[anonymous for review]</h3><p class="authors">Identifying details withheld during review.</p></div></li>`;
       const id = `${kind}-${i}`;
       const yr = reviewed ? (p.status === 'On-going' ? 'Now' : '—') : p.year;
       return `<li class="pub" id="pub-${esc(p.key)}">

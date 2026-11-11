@@ -12,4 +12,4 @@ The role focused on relationships supporting experiential learning, curriculum r
 
 This update concerns the chair responsibility. I continue as a **tenure-track Assistant Professor** in UFV's School of Computing, with my teaching and research responsibilities.
 
-The [service section](/#service) and [CV](/assets/Majid_Babaei_CV.pdf) now record the completed term. Earlier announcements remain dated accounts of activities during the appointment.
+The [service section](/#service) and [CV](mailto:majid.babaei@ufv.ca?subject=Latest%20CV%20request) now record the completed term. Earlier announcements remain dated accounts of activities during the appointment.

@@ -20,7 +20,7 @@ People care about **higher-level concerns**: safety, correctness, intent, accoun
 
 This is exactly the problem that **Model-Driven Engineering (MDE)** has worked on for decades. Models, contracts, and model transformations let us state concerns at the right level of abstraction and connect them, checkably, to what a system does. My group applies these techniques to agentic systems:
 
-- **SkillSpec**, with Abbas Heydarnoori, accepted to the ICSE 2027 Research Track, is a formally verifiable specification format for composing agent skills.
+- **[anonymous for review]**: manuscript details are withheld while review is ongoing.
 - **Trust Is Not Transitive (TINT)**, submitted to *IEEE Transactions on Software Engineering*, specifies LLM guardrail hierarchies with contracts. It then verifies whether their composition still meets its safety requirements.
 - **Safe Coordination of Untrusted AI Agents**, also submitted to *IEEE TSE*, places a deterministic controller between untrusted agent proposals and the shared state they change.
 - **AutoM2M**, ongoing work, assembles agent teams through checked model transformations.
@@ -30,7 +30,7 @@ This is exactly the problem that **Model-Driven Engineering (MDE)** has worked o
 The opposite direction matters just as much. When a team of agents succeeds or fails, a person needs to know **how** the agents collaborated and **why** the objective was or was not achieved. Raw transcripts, tool logs, and traces are abundant but nearly unreadable at scale. Humans need abstractions of agent behavior, not more data.
 
 - **Agent Slicing**, submitted to *ACM TOSEM*, detects and localizes composition defects in multi-agent teams before execution. In our experiments, 36.1% of defect symptoms escaped individual-agent checks. Confirmed slicing detected 99.9% of those hidden symptoms without false findings, and pointed to the small group of components whose interaction explains each one.
-- **AgentM2M**, submitted to the ICSE 2027 NIER track, represents hand-offs between agents as typed model-to-model transformations with persistent traces.
+- **[anonymous for review]**: manuscript details are withheld while review is ongoing.
 - **Heartness**, ongoing, takes a model-driven approach to *traceable* self-evolving agent harnesses.
 - **TAAF**, published at ICSE 2026 with my former Brock M.Sc. students, combines knowledge graphs and LLMs so that developers can ask questions of large execution traces.
 

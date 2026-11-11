@@ -86,6 +86,7 @@ ${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('\n'
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="../../assets/news.css">
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.summary, image: p.imageURL, datePublished: p.iso, keywords: p.tags.join(', '), url: `${SITE}/news/${p.slug}/`, author: { '@type': 'Person', name: 'Majid Babaei', url: `${SITE}/` } }).replace(/</g, '\\u003c')}</script>
+<link rel="stylesheet" href="../../assets/cv-request.css">
 </head>
 <body class="reader" data-page="post" data-root="../../" data-slug="${p.slug}">
 <a class="skip" href="#prose">Skip to article</a>
@@ -133,6 +134,7 @@ ${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('\n'
 <footer class="r-foot"><div class="r-foot-inner"><span>© Majid Babaei</span><a href="../../">majidbabaei.com</a><a href="../">Newsroom</a><a href="../feed.xml">RSS</a></div></footer>
 <script src="../../assets/news-data.js"></script>
 <script src="../../assets/news.js"></script>
+<script src="../../assets/cv-request.js"></script>
 </body>
 </html>
 `.replace(/[ \t]+$/gm, '');

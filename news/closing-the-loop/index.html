@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="../../assets/news.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Closing the loop between humans and agentic AI","description":"My research agenda in one picture. Two states, Human and AI, and two transitions driven by abstraction. Building that loop efficiently and effectively is what is missing.","image":"https://majidbabaei.com/assets/img/news/human-ai-loop.png","datePublished":"2026-11-10","keywords":"Research agenda, Agentic AI","url":"https://majidbabaei.com/news/closing-the-loop/","author":{"@type":"Person","name":"Majid Babaei","url":"https://majidbabaei.com/"}}</script>
+<link rel="stylesheet" href="../../assets/cv-request.css">
 </head>
 <body class="reader" data-page="post" data-root="../../" data-slug="closing-the-loop">
 <a class="skip" href="#prose">Skip to article</a>
@@ -72,7 +73,7 @@
 <p>People care about <strong>higher-level concerns</strong>: safety, correctness, intent, accountability, the constraints of an organization. Today most of those concerns reach an agent as informal prose in a prompt. The agent has no structured way to know which concerns apply, how they compose, or when they have been violated.</p>
 <p>This is exactly the problem that <strong>Model-Driven Engineering (MDE)</strong> has worked on for decades. Models, contracts, and model transformations let us state concerns at the right level of abstraction and connect them, checkably, to what a system does. My group applies these techniques to agentic systems:</p>
 <ul>
-<li><strong>SkillSpec</strong>, with Abbas Heydarnoori, accepted to the ICSE 2027 Research Track, is a formally verifiable specification format for composing agent skills.</li>
+<li><strong>[anonymous for review]</strong>: manuscript details are withheld while review is ongoing.</li>
 <li><strong>Trust Is Not Transitive (TINT)</strong>, submitted to <em>IEEE Transactions on Software Engineering</em>, specifies LLM guardrail hierarchies with contracts. It then verifies whether their composition still meets its safety requirements.</li>
 <li><strong>Safe Coordination of Untrusted AI Agents</strong>, also submitted to <em>IEEE TSE</em>, places a deterministic controller between untrusted agent proposals and the shared state they change.</li>
 <li><strong>AutoM2M</strong>, ongoing work, assembles agent teams through checked model transformations.</li>
@@ -81,7 +82,7 @@
 <p>The opposite direction matters just as much. When a team of agents succeeds or fails, a person needs to know <strong>how</strong> the agents collaborated and <strong>why</strong> the objective was or was not achieved. Raw transcripts, tool logs, and traces are abundant but nearly unreadable at scale. Humans need abstractions of agent behavior, not more data.</p>
 <ul>
 <li><strong>Agent Slicing</strong>, submitted to <em>ACM TOSEM</em>, detects and localizes composition defects in multi-agent teams before execution. In our experiments, 36.1% of defect symptoms escaped individual-agent checks. Confirmed slicing detected 99.9% of those hidden symptoms without false findings, and pointed to the small group of components whose interaction explains each one.</li>
-<li><strong>AgentM2M</strong>, submitted to the ICSE 2027 NIER track, represents hand-offs between agents as typed model-to-model transformations with persistent traces.</li>
+<li><strong>[anonymous for review]</strong>: manuscript details are withheld while review is ongoing.</li>
 <li><strong>Heartness</strong>, ongoing, takes a model-driven approach to <em>traceable</em> self-evolving agent harnesses.</li>
 <li><strong>TAAF</strong>, published at ICSE 2026 with my former Brock M.Sc. students, combines knowledge graphs and LLMs so that developers can ask questions of large execution traces.</li>
 </ul>
@@ -117,5 +118,6 @@
 <footer class="r-foot"><div class="r-foot-inner"><span>© Majid Babaei</span><a href="../../">majidbabaei.com</a><a href="../">Newsroom</a><a href="../feed.xml">RSS</a></div></footer>
 <script src="../../assets/news-data.js"></script>
 <script src="../../assets/news.js"></script>
+<script src="../../assets/cv-request.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # majidbabaei.com
 
-Personal academic website of Majid Babaei. It is a static site served by GitHub Pages, with the custom domain set in `CNAME`.
+Personal academic website of Majid Babaei. It is a static site served by GitHub Pages.
 
 ## Keep in sync
 
@@ -90,3 +90,7 @@ Then run `node tools/build-projects.mjs` (or the lab sync).
 | Styles / behavior | `assets/style.css`, `news.css`, `projects.css` / `site.js`, `news.js`, `projects.js` |
 
 Preview locally from this folder with `node ../scripts/serve.mjs`, then open http://localhost:8000.
+
+## Public deployment and CV requests
+
+CV links open an email-request modal with a blurred backdrop; the mailto fallback works without JavaScript. Run `node tools/build-public.mjs` to prepare `_site/`, which is what GitHub Pages publishes. It excludes CV PDFs, private drafts, project editing sources, and identifying pages for manuscripts under anonymous review, and refuses output containing their names. Keep the local PDF synchronized for private sharing, but do not publish the whole repository as a Pages artifact.
