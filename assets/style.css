@@ -75,6 +75,12 @@ button{cursor:pointer}
 .thesis{font:400 clamp(21px,2.3vw,28px)/1.35 var(--serif);max-width:640px;letter-spacing:-.01em}
 .thesis mark{background:none;color:inherit;font-style:italic;background-image:linear-gradient(transparent 62%,color-mix(in srgb,var(--orange) 26%,transparent) 62%);padding:0 2px}
 .hero-lede{color:var(--muted);max-width:590px;margin-top:20px;font-size:16px}
+.bio-noteref{font:500 .7em var(--mono);vertical-align:super;line-height:0;margin-left:2px}
+.bio-noteref a,.bio-backref{color:var(--teal);text-decoration:none}
+.bio-noteref a:hover,.bio-backref:hover{text-decoration:underline}
+.bio-footnote{max-width:590px;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font:400 13px/1.55 var(--sans);color:var(--muted);scroll-margin-top:90px}
+.bio-footnote > sup{font:500 10px var(--mono);color:var(--teal);margin-right:4px}
+.bio-footnote cite{font-style:italic}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;font:500 14px var(--sans);text-decoration:none;border:1px solid var(--ink);transition:transform .2s,background .2s,color .2s}
 .btn:hover{transform:translateY(-2px)}
