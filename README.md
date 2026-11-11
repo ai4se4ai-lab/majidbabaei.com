@@ -1,6 +1,6 @@
 # majidbabaei.com
 
-Personal academic website of Majid Babaei. It is a dependency-free static site served by GitHub Pages, with the custom domain set in `CNAME`.
+Personal academic website of Majid Babaei. It is a static site served by GitHub Pages, with the custom domain set in `CNAME`.
 
 ## Keep in sync
 
@@ -20,6 +20,8 @@ node scripts/push-all.mjs                     # push both repositories after com
 
 ## Post a news item (the Medium-style newsroom)
 
+Install build dependencies once with `npm ci` from this repository. Articles are rendered from Markdown into complete HTML **at build time**, so they are readable without JavaScript and social crawlers can read the article and preview metadata. The deployed site needs no Node server or Markdown CDN. Do not edit generated article HTML.
+
 1. Add `news/posts/YYYY-MM-DD-short-slug.md`. The date may also be `YYYY-MM` or `YYYY`; the slug becomes the URL `news/short-slug/`.
 
    ```markdown
@@ -30,13 +32,22 @@ node scripts/push-all.mjs                     # push both repositories after com
    tags: [Publications, Agentic AI]
    summary: One or two sentences for the homepage panel, feed, RSS, and link previews.
    featured: false          # optional; true pins it as the newsroom's featured story
-   cover: /assets/img/...   # optional image; otherwise a generated statechart-style cover is used
+   cover: /assets/img/news/example.png
+   coverAlt: A short accessible description of the top figure.
+   coverCaption: Optional caption shown below the top figure.
+   # socialImage: /assets/img/news/example-share.png
    ---
 
    Body in Markdown: headings, lists, links, images (`![caption](/assets/img/x.webp)`), tables, quotes.
    ```
 
 2. Run `node tools/build-news.mjs` (or the lab sync). This updates the homepage newsroom panel, `news/` (the feed), `news/<slug>/` (the article page with share previews), `news/feed.xml` (RSS), and `sitemap.xml`.
+
+To revise an existing article, edit its file in `news/posts/`, then run `npm run build:news`. Commit the Markdown, any images, and generated outputs together. `npm run check:news` detects stale pages; `npm test` checks rendering, safe markup, local article links, and RapidPay's share image.
+
+The `cover` is the article's top figure and its default sharing thumbnail. When `cover` is omitted, the first Markdown image becomes the top figure (shown once); articles without an image retain the decorative cover and portrait preview. Set `socialImage` to a PNG/JPEG export when the top figure is SVG or needs a separate social-sized version. Use site-root paths such as `/assets/img/news/example.png`. LinkedIn needs an accessible PNG/JPEG/GIF of at least 1200 by 627 pixels, under 5 MB, ideally at a 1.91:1 ratio ([LinkedIn's requirements](https://www.linkedin.com/help/linkedin/answer/a521928)).
+
+After deployment, use the article's **Share on LinkedIn** button or paste its canonical URL into a LinkedIn post. Open Graph tags are present in the initial HTML and use the top figure, title, and summary. For an old cached preview, inspect the deployed URL in [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/). LinkedIn fetches the public deployed files; local edits cannot change its preview until deployed. This opens the share composer and leaves posting to you.
 
 Only publish facts that are in the CV or that you have confirmed. Keep "submitted", "accepted", and "published" distinct.
 

@@ -1,13 +1,14 @@
 // Builds the Markdown-powered newsroom.
 //   Source:    news/posts/<date>-<slug>.md   (front matter + Markdown body)
 //   Generates: assets/news-data.js           (feed metadata for the home page and newsroom)
-//              news/<slug>/index.html        (one shareable article page per post; Markdown rendered in the browser)
+//              news/<slug>/index.html        (one shareable article page per post; Markdown rendered at build time)
 //              news/feed.xml, sitemap.xml
 // Usage: node tools/build-news.mjs [--check]     (run from anywhere)
 import { readFile, writeFile, readdir, mkdir, rm } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { firstImage, renderMarkdown } from './news-markdown.mjs';
 
 const SITE = 'https://majidbabaei.com';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -35,11 +36,14 @@ function parse(file, text) {
   const [y, mo, d] = date.split('-');
   const slug = file.replace(/\.md$/, '').replace(/^\d{4}(-\d{2}){0,2}-/, '');
   const body = m[2].trim() + '\n';
+  const image = firstImage(body);
   const words = body.replace(/[#>*_`|\-[\]()!]/g, ' ').split(/\s+/).filter(Boolean).length;
   return {
     slug, title: meta.title, subtitle: meta.subtitle || '', summary: meta.summary,
     tags: Array.isArray(meta.tags) ? meta.tags : [meta.tags], featured: meta.featured === true,
-    cover: meta.cover || null, date,
+    cover: meta.cover || image?.src || null,
+    coverAlt: meta.coverAlt || image?.alt || `${meta.title} cover`,
+    coverCaption: meta.coverCaption || '', socialImage: meta.socialImage || null, date,
     dateLabel: d ? `${MONTHS[mo - 1]} ${Number(d)}, ${y}` : mo ? `${MONTHS[mo - 1]} ${y}` : y,
     iso: `${y}-${mo || '01'}-${d || '01'}`, minutes: Math.max(1, Math.round(words / 230)), body
   };
@@ -62,10 +66,18 @@ ${MARK}
 <meta property="og:title" content="${esc(p.title)}">
 <meta property="og:description" content="${esc(p.summary)}">
 <meta property="og:url" content="${SITE}/news/${p.slug}/">
-<meta property="og:image" content="${SITE}/assets/img/portrait.jpg">
+<meta property="og:image" content="${esc(p.imageURL)}">
+<meta property="og:image:secure_url" content="${esc(p.imageURL)}">
+<meta property="og:image:alt" content="${esc(p.coverAlt)}">
+${p.imageSize ? `<meta property="og:image:width" content="${p.imageSize.width}">
+<meta property="og:image:height" content="${p.imageSize.height}">` : ''}
 <meta property="article:published_time" content="${p.iso}">
 ${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('\n')}
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(p.title)}">
+<meta name="twitter:description" content="${esc(p.summary)}">
+<meta name="twitter:image" content="${esc(p.imageURL)}">
+<meta name="twitter:image:alt" content="${esc(p.coverAlt)}">
 <link rel="alternate" type="application/rss+xml" title="Majid Babaei: News" href="../feed.xml">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
@@ -73,7 +85,7 @@ ${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('\n'
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="../../assets/news.css">
-<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.summary, datePublished: p.iso, keywords: p.tags.join(', '), url: `${SITE}/news/${p.slug}/`, author: { '@type': 'Person', name: 'Majid Babaei', url: `${SITE}/` } }).replace(/</g, '\\u003c')}</script>
+<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.summary, image: p.imageURL, datePublished: p.iso, keywords: p.tags.join(', '), url: `${SITE}/news/${p.slug}/`, author: { '@type': 'Person', name: 'Majid Babaei', url: `${SITE}/` } }).replace(/</g, '\\u003c')}</script>
 </head>
 <body class="reader" data-page="post" data-root="../../" data-slug="${p.slug}">
 <a class="skip" href="#prose">Skip to article</a>
@@ -100,10 +112,11 @@ ${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('\n'
     </div>
     <div class="a-actions" data-share></div>
   </header>
-  <figure class="a-cover" data-cover="${p.slug}" ${p.cover ? `data-src="${esc(p.cover)}"` : ''} aria-hidden="true"></figure>
-  <article class="prose" id="prose" tabindex="-1"><noscript><p>This article is written in Markdown. <a href="../posts/${p.file}">Read the source</a>, or enable JavaScript.</p></noscript></article>
-  <script type="text/markdown" id="post-md">
-${p.body.replace(/<\/script/gi, '<\\/script')}</script>
+  <figure class="a-cover${p.cover ? ' has-image' : ''}"${p.cover ? '' : ` data-cover="${p.slug}" aria-hidden="true"`}>
+    ${p.cover ? `<a href="${esc(p.cover)}" target="_blank" rel="noopener" aria-label="Open full-size figure"><img src="${esc(p.cover)}" alt="${esc(p.coverAlt)}" fetchpriority="high"></a>` : ''}
+    ${p.coverCaption ? `<figcaption>${esc(p.coverCaption)}</figcaption>` : ''}
+  </figure>
+  <article class="prose" id="prose" tabindex="-1">${renderMarkdown(p.body, { topImage: p.cover })}</article>
   <footer class="a-foot">
     <div class="a-tags">${p.tags.map(t => `<a href="../?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div>
     <div class="a-actions" data-share></div>
@@ -118,13 +131,11 @@ ${p.body.replace(/<\/script/gi, '<\\/script')}</script>
   </footer>
 </main>
 <footer class="r-foot"><div class="r-foot-inner"><span>© Majid Babaei</span><a href="../../">majidbabaei.com</a><a href="../">Newsroom</a><a href="../feed.xml">RSS</a></div></footer>
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script src="../../assets/news-data.js"></script>
 <script src="../../assets/news.js"></script>
 </body>
 </html>
-`;
+`.replace(/[ \t]+$/gm, '');
 
 const xml = v => esc(v);
 const rss = posts => `<?xml version="1.0" encoding="UTF-8"?>
@@ -155,7 +166,23 @@ const dupes = posts.map(p => p.slug).filter((s, i, a) => a.indexOf(s) !== i);
 if (dupes.length) throw new Error(`Duplicate news slugs: ${dupes.join(', ')}`);
 posts.sort((a, b) => b.iso.localeCompare(a.iso) || b.date.length - a.date.length || a.slug.localeCompare(b.slug));
 
-const meta = posts.map(({ body, file, ...p }) => p);
+// Social crawlers read the initial HTML and need an absolute raster image URL.
+for (const p of posts) {
+  const image = p.socialImage || p.cover || '/assets/img/portrait.jpg';
+  p.imageURL = new URL(image, SITE).href;
+  if (new URL(p.imageURL).origin === SITE) {
+    const pathname = decodeURIComponent(new URL(p.imageURL).pathname);
+    const path = resolve(root, '.' + pathname);
+    if (!path.startsWith(root + '/') && !path.startsWith(root + '\\')) throw new Error(`Invalid image path: ${image}`);
+    if (!existsSync(path)) throw new Error(`${p.file}: image does not exist: ${image}`);
+    if (/\.svg$/i.test(pathname)) throw new Error(`${p.file}: set socialImage to a PNG or JPEG export of the top figure`);
+    const data = await readFile(path);
+    if (data.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) {
+      p.imageSize = { width: data.readUInt32BE(16), height: data.readUInt32BE(20) };
+    }
+  }
+}
+const meta = posts.map(({ body, file, imageSize, ...p }) => p);
 const outputs = new Map([
   ['assets/news-data.js', `// GENERATED by tools/build-news.mjs from news/posts/*.md. Do not edit by hand.\nwindow.NEWS = ${JSON.stringify(meta, null, 1)};\n`],
   ['news/feed.xml', rss(posts)],

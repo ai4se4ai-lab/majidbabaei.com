@@ -4,6 +4,7 @@ subtitle: The missing piece in trustworthy agentic systems is not a better model
 date: 2026-11-10
 tags: [Research agenda, Agentic AI]
 featured: true
+socialImage: /assets/img/news/human-ai-loop.png
 summary: My research agenda in one picture. Two states, Human and AI, and two transitions driven by abstraction. Building that loop efficiently and effectively is what is missing.
 ---
 

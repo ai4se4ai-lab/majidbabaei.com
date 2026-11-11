@@ -10,11 +10,15 @@ window.NEWS = [
    "Agentic AI"
   ],
   "featured": true,
-  "cover": null,
+  "cover": "/assets/img/human-ai-loop.svg",
+  "coverAlt": "The Human–AI abstraction loop: MDE abstractions carry human concerns to agents; abstractions of agent collaboration carry behavior back to humans.",
+  "coverCaption": "",
+  "socialImage": "/assets/img/news/human-ai-loop.png",
   "date": "2026-11-10",
   "dateLabel": "Nov 10, 2026",
   "iso": "2026-11-10",
-  "minutes": 3
+  "minutes": 3,
+  "imageURL": "https://majidbabaei.com/assets/img/news/human-ai-loop.png"
  },
  {
   "slug": "agent-slicing",
@@ -27,10 +31,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Agent Slicing: finding the blind spots of multi-agent AI teams cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026-11-06",
   "dateLabel": "Nov 6, 2026",
   "iso": "2026-11-06",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "guardrails-and-coordination",
@@ -43,26 +51,34 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Two submissions on checkable agent teams cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026-11-03",
   "dateLabel": "Nov 3, 2026",
   "iso": "2026-11-03",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "rapidpay-emse",
   "title": "RapidPay accepted to Empirical Software Engineering",
-  "subtitle": "Identifying and prioritizing chains of self-admitted technical debt, so teams pay down the debt that matters most first.",
-  "summary": "Our paper on self-admitted technical-debt chains has been accepted to the Empirical Software Engineering journal and is to appear.",
+  "subtitle": "Technical debt does not live alone. RapidPay connects the dots and helps developers decide what to repay next.",
+  "summary": "Accepted to Empirical Software Engineering and to appear, RapidPay connects self-admitted technical debt into dependency chains and uses ripple scoring and commit context to prioritize repayment.",
   "tags": [
    "Publications",
    "Software evidence"
   ],
   "featured": false,
-  "cover": null,
+  "cover": "/assets/img/news/rapidpay-overview.png",
+  "coverAlt": "RapidPay overview showing SATD detection, dependency-chain construction, impact-ripple scoring, and commit-aware insights.",
+  "coverCaption": "RapidPay's workflow, from developer comments and repository history to connected debt chains, impact scores, and remediation opportunities. Open the figure to view it at full size.",
+  "socialImage": null,
   "date": "2026-10-31",
   "dateLabel": "Oct 31, 2026",
   "iso": "2026-10-31",
-  "minutes": 1
+  "minutes": 3,
+  "imageURL": "https://majidbabaei.com/assets/img/news/rapidpay-overview.png"
  },
  {
   "slug": "skillspec-icse-2027",
@@ -75,10 +91,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "SkillSpec accepted to the ICSE 2027 Research Track cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026-10",
   "dateLabel": "Oct 2026",
   "iso": "2026-10-01",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "fall-2026-teaching",
@@ -90,10 +110,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Teaching in Fall 2026 cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026-09",
   "dateLabel": "Sep 2026",
   "iso": "2026-09-01",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "icse-2026-taaf-sikg",
@@ -106,10 +130,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Two papers at ICSE 2026, TAAF and SIKG cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026-04",
   "dateLabel": "Apr 2026",
   "iso": "2026-04-01",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "tech-panel-2026",
@@ -122,10 +150,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Tech Panel 2026 at UFV cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026-03-12",
   "dateLabel": "Mar 12, 2026",
   "iso": "2026-03-12",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "service-2026",
@@ -137,10 +169,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Serving the software engineering community in 2026 cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2026",
   "dateLabel": "2026",
   "iso": "2026-01-01",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "msc-graduations",
@@ -152,10 +188,14 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Congratulations, Ghazal and Alireza! cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2025-09",
   "dateLabel": "Sep 2025",
   "iso": "2025-09-01",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
   "slug": "joining-ufv",
@@ -167,9 +207,13 @@ window.NEWS = [
   ],
   "featured": false,
   "cover": null,
+  "coverAlt": "Joining the University of the Fraser Valley cover",
+  "coverCaption": "",
+  "socialImage": null,
   "date": "2025-08",
   "dateLabel": "Aug 2025",
   "iso": "2025-08-01",
-  "minutes": 1
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  }
 ];

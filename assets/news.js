@@ -6,7 +6,7 @@
   const ROOT = body.dataset.root || '';
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  // Values are escaped with esc(); Markdown output is sanitized by DOMPurify before insertion.
+  // Values are escaped with esc(); article Markdown is rendered and sanitized at build time.
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const render = (el, html) => el.replaceChildren(document.createRange().createContextualFragment(html));
   const postURL = slug => `${ROOT}news/${slug}/`;
@@ -90,27 +90,12 @@
     const slug = body.dataset.slug;
     const post = NEWS.find(p => p.slug === slug) || { title: document.title, tags: [], summary: '' };
     const prose = $('#prose');
-    const md = $('#post-md').textContent;
-    if (window.marked && window.DOMPurify) {
-      const frag = DOMPurify.sanitize(marked.parse(md, { gfm: true }), { RETURN_DOM_FRAGMENT: true });
-      prose.replaceChildren(frag);
-    } else {
-      const pre = document.createElement('pre'); pre.className = 'md-fallback'; pre.textContent = md; prose.replaceChildren(pre);
-    }
-    // Images become captioned figures; external links open in a new tab; headings get anchors.
-    $$('p > img:only-child', prose).forEach(img => {
-      const fig = document.createElement('figure'); const cap = document.createElement('figcaption');
-      cap.textContent = img.alt; img.loading = 'lazy'; img.parentElement.replaceWith(fig); fig.append(img); if (img.alt) fig.append(cap);
-    });
-    $$('a[href^="http"]', prose).forEach(a => { if (!a.href.startsWith(location.origin)) { a.target = '_blank'; a.rel = 'noopener'; } });
-    $$('h2, h3', prose).forEach(h => { h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); });
-    $$('table', prose).forEach(t => { const w = document.createElement('div'); w.className = 'table-wrap'; t.replaceWith(w); w.append(t); });
-
+    // The full article and its figure are already in the HTML, including without JS.
     const fig = $('[data-cover]');
-    paintCover(fig, slug, post.tags[0], fig.dataset.src && ROOT + fig.dataset.src.replace(/^\//, ''));
+    if (fig) paintCover(fig, slug, post.tags[0]);
 
     // Share actions (top and bottom)
-    const url = location.href.split('#')[0];
+    const url = $('link[rel="canonical"]')?.href || location.href.split(/[?#]/)[0];
     const share = `<span class="share-k">Share</span>
       <button type="button" class="share" data-copy title="Copy link" aria-label="Copy link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg></button>
       <a class="share" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener" title="Share on LinkedIn" aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4v-11Z"/></svg></a>

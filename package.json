@@ -1,0 +1,14 @@
+{
+  "name": "majidbabaei-personal-site",
+  "private": true,
+  "description": "Static personal academic website; Markdown news rendered at build time.",
+  "scripts": {
+    "build:news": "node tools/build-news.mjs",
+    "check:news": "node tools/build-news.mjs --check",
+    "test": "node --test tools/news.test.mjs"
+  },
+  "dependencies": {
+    "marked": "18.2.0",
+    "sanitize-html": "2.18.1"
+  }
+}
