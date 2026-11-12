@@ -19,7 +19,7 @@ Alongside and before my academic positions, I worked as a software developer and
 
 ## What I will be working on
 
-At UFV I teach software engineering and programming, starting with COMP 370 (Software Engineering) and COMP 481 (Functional and Logic Programming) this fall. I also continue my research at the intersection of **model-driven engineering, software engineering, and AI**, with the [AI4SE4AI Lab](https://ai4se4ai-lab.github.io/).
+At UFV I teach software engineering and programming, starting with COMP 370 (Software Engineering) and COMP 481 (Functional and Logic Programming) this fall. I also continue my research at the intersection of **model-driven engineering, software engineering, and AI**, with the [anonymous for review].
 
 If you are a UFV student interested in research, or an organization interested in partnering with the School of Computing, please get in touch at [majid.babaei@ufv.ca](mailto:majid.babaei@ufv.ca).
 

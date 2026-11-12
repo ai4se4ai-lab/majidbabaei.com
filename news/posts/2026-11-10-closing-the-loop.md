@@ -53,4 +53,4 @@ Three principles guide the work: **explicit assumptions, traceable evidence, and
 
 ## Join the effort
 
-If you are a student or researcher interested in model-driven engineering, software testing, or trustworthy agentic systems, I would be glad to hear from you at [majid.babaei@ufv.ca](mailto:majid.babaei@ufv.ca). Code for most of these projects is open on [GitHub](https://github.com/ai4se4ai-lab), and the [AI4SE4AI Lab](https://ai4se4ai-lab.github.io/) site maps how they fit together.
+If you are a student or researcher interested in model-driven engineering, software testing, or trustworthy agentic systems, I would be glad to hear from you at [majid.babaei@ufv.ca](mailto:majid.babaei@ufv.ca). Code for most of these projects is open on [GitHub](https://github.com/ai4se4ai-lab), and the [anonymous for review] site maps how they fit together.
