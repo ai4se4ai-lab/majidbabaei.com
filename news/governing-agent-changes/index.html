@@ -7,13 +7,13 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>
 <title>An AI agent fixed its tool. Who checks what happens next? | Majid Babaei</title>
-<meta name="description" content="A repair can pass its tests and still leave trouble behind. SSEVOH-DSL keeps approvals tied to the versions they checked and stops tools, skills, and memories from reusing withdrawn work.">
+<meta name="description" content="Let agents propose improvements while trusted code controls what takes effect. Explore SSEVOH-DSL&#39;s Harness² integration, run a local demo without an LLM, and inspect the evidence behind each change.">
 <meta name="author" content="Majid Babaei">
 <link rel="canonical" href="https://majidbabaei.com/news/governing-agent-changes/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Majid Babaei">
 <meta property="og:title" content="An AI agent fixed its tool. Who checks what happens next?">
-<meta property="og:description" content="A repair can pass its tests and still leave trouble behind. SSEVOH-DSL keeps approvals tied to the versions they checked and stops tools, skills, and memories from reusing withdrawn work.">
+<meta property="og:description" content="Let agents propose improvements while trusted code controls what takes effect. Explore SSEVOH-DSL&#39;s Harness² integration, run a local demo without an LLM, and inspect the evidence behind each change.">
 <meta property="og:url" content="https://majidbabaei.com/news/governing-agent-changes/">
 <meta property="og:image" content="https://majidbabaei.com/assets/img/news/governing-agent-changes.jpg">
 <meta property="og:image:secure_url" content="https://majidbabaei.com/assets/img/news/governing-agent-changes.jpg">
@@ -21,11 +21,11 @@
 
 <meta property="article:published_time" content="2026-11-13">
 <meta property="article:tag" content="Agentic AI">
-<meta property="article:tag" content="Manuscripts">
+<meta property="article:tag" content="Research Software">
 <meta property="article:tag" content="Software Engineering">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="An AI agent fixed its tool. Who checks what happens next?">
-<meta name="twitter:description" content="A repair can pass its tests and still leave trouble behind. SSEVOH-DSL keeps approvals tied to the versions they checked and stops tools, skills, and memories from reusing withdrawn work.">
+<meta name="twitter:description" content="Let agents propose improvements while trusted code controls what takes effect. Explore SSEVOH-DSL&#39;s Harness² integration, run a local demo without an LLM, and inspect the evidence behind each change.">
 <meta name="twitter:image" content="https://majidbabaei.com/assets/img/news/governing-agent-changes.jpg">
 <meta name="twitter:image:alt" content="A human-controlled checkpoint separates proposed tool changes from active software; a teal branch leads to a report and a memory notebook, while a coral branch of withdrawn tools carries stop symbols.">
 <link rel="alternate" type="application/rss+xml" title="Majid Babaei: News" href="../feed.xml">
@@ -35,7 +35,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="../../assets/news.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"An AI agent fixed its tool. Who checks what happens next?","description":"A repair can pass its tests and still leave trouble behind. SSEVOH-DSL keeps approvals tied to the versions they checked and stops tools, skills, and memories from reusing withdrawn work.","image":"https://majidbabaei.com/assets/img/news/governing-agent-changes.jpg","datePublished":"2026-11-13","keywords":"Agentic AI, Manuscripts, Software Engineering","url":"https://majidbabaei.com/news/governing-agent-changes/","author":{"@type":"Person","name":"Majid Babaei","url":"https://majidbabaei.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"An AI agent fixed its tool. Who checks what happens next?","description":"Let agents propose improvements while trusted code controls what takes effect. Explore SSEVOH-DSL's Harness² integration, run a local demo without an LLM, and inspect the evidence behind each change.","image":"https://majidbabaei.com/assets/img/news/governing-agent-changes.jpg","datePublished":"2026-11-13","keywords":"Agentic AI, Research Software, Software Engineering","url":"https://majidbabaei.com/news/governing-agent-changes/","author":{"@type":"Person","name":"Majid Babaei","url":"https://majidbabaei.com/"}}</script>
 <link rel="stylesheet" href="../../assets/cv-request.css">
 </head>
 <body class="reader" data-page="post" data-root="../../" data-slug="governing-agent-changes">
@@ -55,7 +55,7 @@
   <header class="a-head">
     <a class="a-tag" href="../?tag=Agentic%20AI">Agentic AI</a>
     <h1>An AI agent fixed its tool. Who checks what happens next?</h1>
-    <p class="a-sub">My new IEEE TSE submission explores how permission, evidence, and accountability can keep pace with agents that change their own software.</p>
+    <p class="a-sub">How SSEVOH-DSL adds checked changes, traceable approvals, and controlled reuse to Harness²—and how to try it yourself.</p>
     <div class="byline">
       <img src="../../assets/img/portrait.webp" alt="" width="44" height="44">
       <div><a class="by-name" href="../../">Majid Babaei</a> <span class="dot-sep">·</span> <a class="by-follow" href="../../#contact">Contact</a>
@@ -67,52 +67,79 @@
     <a href="/assets/img/news/governing-agent-changes.jpg" target="_blank" rel="noopener" aria-label="Open full-size figure"><img src="/assets/img/news/governing-agent-changes.jpg" alt="A human-controlled checkpoint separates proposed tool changes from active software; a teal branch leads to a report and a memory notebook, while a coral branch of withdrawn tools carries stop symbols." fetchpriority="high"></a>
     <figcaption>Conceptual illustration, generated with AI: approving a change is the start of its accountability story. Withdrawn origins must remain visible wherever their results are reused.</figcaption>
   </figure>
-  <article class="prose" id="prose" tabindex="-1"><p>Imagine an AI agent notices a bug in its accounting tool. It fixes the code, runs the tests, and gets the right answer. So far, so good.</p>
-<p>The agent then builds a reporting skill around the repair and saves a lesson for future work. Days later, someone discovers that the repair was faulty and withdraws it. The original tool can be restored. <strong>But what happens to the report and the lesson that grew out of the withdrawn version?</strong></p>
-<p>That question is at the heart of my new manuscript, <strong>Governing Changes in Self-Evolving Agents</strong>, which I have submitted to <em>IEEE Transactions on Software Engineering (TSE)</em>. I am the sole author. This is a submission announcement; the paper has not been accepted or published.</p>
-<h2 id="when-an-agent-s-work-becomes-its-own-infrastructure">When an agent's work becomes its own infrastructure</h2>
-<p>Many familiar AI interactions end with an answer. A self-evolving agent can leave behind changes that shape its next task: a revised prompt, a new tool, a reusable skill, a modified workflow, or a stored lesson.</p>
-<p>The software around the model is often called a <strong>harness</strong>. It determines which tools the model can use, how tasks run, and how experience is retained. When agents can change that harness, today's output can become tomorrow's operating environment.</p>
-<p>That is useful: an agent might repair a recurring bug or save a better way to solve a task. It also creates a software engineering problem. A successful test answers a question about the tested behavior. Permission to make the change, and permission to keep using its consequences after other changes occur, require their own checks.</p>
-<h2 id="a-seven-dollar-example">A seven-dollar example</h2>
-<p>The paper uses a small ledger example. An account has a <strong>$9 payment and a $2 refund</strong>. A faulty tool ignores the refund and reports $9. The correct total is $7.</p>
-<p>Suppose the agent repairs the tool. Three different questions immediately arise:</p>
-<ol>
-<li><strong>May it make that repair?</strong> Permission to edit an accounting tool does not automatically permit changing protected guardrails or adding network access.</li>
-<li><strong>Is its approval still current?</strong> If another update changes the system while this repair is waiting, an approval based on the old state may no longer apply.</li>
-<li><strong>What happens downstream?</strong> A reporting skill that depends on the replaced tool may need to be checked again. If the repair is later withdrawn, a skill or lesson derived from that repair must not quietly remain available.</li>
-</ol>
-<p>These are different obligations. Retesting a dependent report after an update and withdrawing descendants of a disqualified source require different records and responses.</p>
-<h2 id="the-approach-rules-that-stay-attached-to-a-change">The approach: rules that stay attached to a change</h2>
-<p>The manuscript introduces <strong>SSEVOH-DSL</strong>, a small language for writing rules about self-modification, together with a trusted service that enforces them. I call these rules <strong>Foundational Contracts</strong> because they govern the infrastructure on which later agent behavior depends.</p>
-<p>The idea builds on a familiar software engineering practice: make the conditions for an operation explicit. Here, those conditions continue to matter after the operation finishes.</p>
-<p>The agent can propose an improvement. The human operator controls the rules: what may change, which evidence is required, and which parts remain protected. The enforcement service decides whether a proposal can take effect. It leaves the agent's method of searching for improvements in place.</p>
-<p>Think of approval as a receipt for <strong>this version, in this system state, under these rules, with this evidence</strong>. It is not an open-ended permission slip.</p>
+  <article class="prose" id="prose" tabindex="-1"><p>Imagine an AI agent fixes a tool, passes its tests, and saves the improvement for tomorrow. Another agent builds a skill around that tool. A useful lesson goes into memory. Then someone discovers a defect in the original repair.</p>
+<p>Restoring the old tool is only part of the job. <strong>What happens to the skill and the lesson that grew out of the faulty version?</strong></p>
+<p>That is the practical problem behind <strong>SSEVOH-DSL</strong>. It lets an agent suggest changes while an independent service checks whether those changes are allowed—and whether their results remain eligible for later use. The <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL/blob/main/README.md" target="_blank" rel="noopener noreferrer">repository README</a> provides the implementation, examples, verification commands, and a pinned integration with <strong>Google Research Harness²</strong>.</p>
+<h2 id="why-the-harness-matters">Why the harness matters</h2>
+<p>An agent's <strong>harness</strong> is the software around the model: tools, prompts, memory, workflows, and configuration. It shapes what the agent can do and what experience it carries into the next task.</p>
+<p>Letting an agent improve this environment can be useful. A recurring repair could become a reusable tool. A successful approach could become a skill. But those changes become infrastructure for future behavior, so a good answer on one task is not enough to justify every later use.</p>
+<p>SSEVOH-DSL separates three decisions: <strong>propose a change, approve it, and deploy it</strong>. Understanding a proposal does not authorize it. Approval is tied to the state and evidence that were actually checked. If that context changes before deployment, the service requires fresh approval.</p>
+<h2 id="what-it-adds-to-harness">What it adds to Harness²</h2>
+<p>The Harness² bridge adds checks at the points where improvements enter the system, run, and become available for reuse. It preserves the upstream workflows for proposing, probing, composing, selecting, and reflecting on improvements, as well as using a library on later tasks. The integration targets a <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL/blob/main/integrations/harness2/upstream-pin.json" target="_blank" rel="noopener noreferrer">specific upstream commit</a>, giving experiments a fixed starting point.</p>
+<p>For someone experimenting with self-evolving agents, the practical benefits are concrete:</p>
 <ul>
-<li><strong>Before a change takes effect</strong>, the service checks that the approval still matches the current context. An intervening change can make the receipt stale.</li>
-<li><strong>After a component is replaced</strong>, dependent components are temporarily disabled until they have been revalidated.</li>
-<li><strong>When an artifact runs</strong>, the service checks its identity and eligibility, including whether it still matches what was approved.</li>
-<li><strong>When a version is withdrawn</strong>, recorded derivation links carry that withdrawal through to artifacts derived from it, including retained skills and lessons.</li>
-<li><strong>During recovery</strong>, an older version can be restored only if it remains eligible. Being old does not make it acceptable automatically.</li>
+<li><strong>Keep control over what may change.</strong> Operator-owned rules limit the target, operation, and capabilities. Permission to repair a tool does not automatically permit editing protected policy or verifiers.</li>
+<li><strong>Connect approval to the checked artifact.</strong> The adapter binds approval receipts to artifacts and rechecks their exact bytes before execution. An approval cannot simply be carried over to a modified file.</li>
+<li><strong>Recheck affected components.</strong> Replacing a component can temporarily disable dependents until they are revalidated, rather than silently keeping incompatible assumptions active.</li>
+<li><strong>Control what enters the reusable library.</strong> Publication and reuse pass through guards. Recorded origins let a withdrawal affect artifacts derived from the withdrawn version.</li>
+<li><strong>Investigate why a change took effect.</strong> Version history and hash-chained journal records support inspection and replay checks within the documented trust assumptions.</li>
 </ul>
-<p>This depends on recording two relationships carefully: what a component <strong>needs to operate</strong>, and which earlier versions were <strong>used to derive it</strong>. A dependency tells us where a replacement may require retesting. A derivation tells us where a withdrawal must propagate.</p>
-<h2 id="what-the-evaluation-found">What the evaluation found</h2>
-<p>The paper examines both the rules and their implementation. Bounded conformance checks covered <strong>248,832 one-step cases</strong> and <strong>19,620 explored transitions</strong>, alongside TLA+ model checking. Within those checked bounds, the implementation agreed with independent reference semantics.</p>
-<p>I also integrated the service into <strong>Harness²</strong>, the self-evolving agent harness discussed in the manuscript. Across deterministic tests, model-generated tests, and tests inside that host, the service blocked <strong>all 178 assessed contract violations</strong> and rejected <strong>no permitted change</strong> in those assessments.</p>
-<p>The measured <strong>median admission time was 0.6 milliseconds</strong>. That is the time for the admission check, not the total cost of running an agent or validating a repair. In the host integration, full enforcement added 37.6 milliseconds to the mean permitted execution; stronger validators can add further cost.</p>
-<p>These results support the feasibility of enforcing the specified lifecycle rules in the evaluated setting. They do not establish that every possible harmful change will be caught.</p>
-<h2 id="what-the-contracts-cannot-promise">What the contracts cannot promise</h2>
-<p>A permitted change can still contain a bug that its tests miss. The system relies on trustworthy validators, operator policy, isolation, and an adapter that routes relevant actions through the guards. If an action bypasses those guards, the claimed protection does not apply.</p>
-<p>The empirical study uses one host and small task settings; portability across other frameworks remains untested. The work also does not establish verified recovery across restarts or distributed commits. Withdrawing a version cannot erase information already present in a model's context or undo an external action that has already happened.</p>
-<p>There is a practical trade-off, too. Very restrictive checks can reject useful repairs, while more flexible behavioral tests can miss defects. The task studies do <strong>not</strong> demonstrate an accuracy advantage over keeping the selection frozen.</p>
-<h2 id="where-this-fits-in-my-research">Where this fits in my research</h2>
-<p>My <a href="/news/closing-the-loop/">research agenda</a> connects <strong>Human ⇄ Agentic AI</strong> through abstractions in both directions. Explicit models carry human concerns to agents; understandable records of behavior carry evidence back to people.</p>
-<p>Foundational Contracts apply that perspective to self-evolution. People express permissions and evidence requirements in a checkable form. Version and origin records make it possible to follow the consequences of a change and enforce a later withdrawal.</p>
-<p>The question I want this work to make easier to answer is simple: <strong>as an agent changes its own working environment, can we still explain why each part is allowed to be there?</strong></p>
-<p>The tool repository is available at <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL" target="_blank" rel="noopener noreferrer">ai4se4ai-lab/SSEVOH-DSL</a>. The <a href="/projects/ssevoh-dsl/">project's submission release</a> records this milestone and links the research artifact. This overview is based on the submitted manuscript; the paper remains submitted to IEEE TSE.</p>
+<p>These mechanisms give developers explicit places to enforce their rules and inspect failures. They do not establish that an accepted improvement solves the task better.</p>
+<h2 id="follow-one-repair-through-its-lifecycle">Follow one repair through its lifecycle</h2>
+<p>Consider a ledger with a $9 payment and a $2 refund. A faulty tool ignores the refund and reports $9; the correct total is $7.</p>
+<p>An agent proposes a repair. Trusted validators check the evidence required by the operator. If the proposal is approved, it receives a single-use approval tied to the current context. Deployment checks that this context still holds.</p>
+<p>After the tool changes, a dependent reporting skill may need revalidation. If the repaired version is later withdrawn, the system also follows recorded derivation links to prevent affected skills or retained lessons from being reused. Recovery checks an older version against current rules and history before restoring it.</p>
+<p>Two records make this possible: <strong>dependencies</strong> describe what a component needs to operate; <strong>provenance</strong> describes the versions used to derive it. A dependency change can require retesting. A withdrawn origin can disqualify later reuse.</p>
+<h2 id="try-the-core-locally-without-an-llm">Try the core locally, without an LLM</h2>
+<p>The easiest starting point is the small demonstration sandbox. The core needs <strong>Python 3.11 or newer</strong> and has no third-party runtime dependencies. Its quick start needs no model service, Java, GPU, or cluster account.</p>
+<p>In a Bash shell on Linux or macOS, follow the <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL#quick-start" target="_blank" rel="noopener noreferrer">README quick start</a>:</p>
+<pre><code class="language-bash">git clone https://github.com/ai4se4ai-lab/SSEVOH-DSL.git
+cd SSEVOH-DSL
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+
+ssevoh compile examples/basic-evolution/example.sse
+ssevoh demo examples/basic-evolution/example.sse
+ssevoh verify
+</code></pre>
+<p>On Windows PowerShell, create the environment with <code>python -m venv .venv</code> and activate it with <code>.\.venv\Scripts\Activate.ps1</code>; then use the same installation and <code>ssevoh</code> commands.</p>
+<p>Each command answers a different question:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Command</th>
+<th>What you can inspect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>compile</code></td>
+<td>Whether the proposal parses and type-checks; it prints a JSON representation.</td>
+</tr>
+<tr>
+<td><code>demo</code></td>
+<td>Approval and deployment in a fresh example sandbox; successful output includes <code>revision: 1</code> and the journal.</td>
+</tr>
+<tr>
+<td><code>verify</code></td>
+<td>The built-in bounded lifecycle checks; a successful report includes <code>passed: true</code>.</td>
+</tr>
+</tbody></table>
+</div>
+<p>The demo supplies a permissive example policy for its operator. In an application, you must provide your own trusted initial state, policy, authenticated identity, and validators. Compilation by itself never grants permission to deploy.</p>
+<p>Next, explore the repository's <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL/tree/main/examples" target="_blank" rel="noopener noreferrer">six examples</a>, including tool permissions, dependency changes, memory evolution, and withdrawal. They offer small cases for understanding which rule rejects a proposal before attempting a larger integration.</p>
+<h2 id="move-from-the-demo-to-harness">Move from the demo to Harness²</h2>
+<p>The integration needs <strong>Python 3.12 or newer, Git, Java, and current core assurance evidence</strong>. The full assurance workflow uses <code>make verify</code> and the checksum-pinned TLC checker; it is broader than the CLI's <code>ssevoh verify</code> suite.</p>
+<p>After completing that workflow, the <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL#work-with-the-harness%C2%B2-integration" target="_blank" rel="noopener noreferrer">Harness² setup guide in the README</a> walks through fetching the pinned upstream source, packaging its runtime, and checking the upstream tests, adapter, workers, and publication model. Read the <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL/blob/main/integrations/harness2/formal/contracts.md" target="_blank" rel="noopener noreferrer">integration contract</a> before changing what the adapter can execute: the original ledger integration uses a finite Python syntax catalog and a bounded executor, while later coding and ToolRepair studies have separate boundaries.</p>
+<p>Researchers can also <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL#reanalyze-the-collected-studies" target="_blank" rel="noopener noreferrer">reanalyze retained results</a> without generating new model outputs. This provides a practical route to inspect the recorded decisions and compare enforcement conditions before arranging model inference or cluster experiments.</p>
+<h2 id="what-to-expect-from-the-prototype">What to expect from the prototype</h2>
+<p>SSEVOH-DSL is a <strong>research prototype</strong>. Its core keeps trusted metadata in memory; recreating the engine does not provide durable recovery after a crash. The default structural validator checks metadata, so claims about a tool's behavior need appropriate semantic validators. A hostile agent must also be separated from the service's policy, identity, validators, and memory by a suitable host or process boundary.</p>
+<p>The <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL#evidence-and-research-limits" target="_blank" rel="noopener noreferrer">README's evidence summary</a> keeps authorization and usefulness separate. In the controlled Harness² shared-fixture trials, full assurance accepted all 15 legitimate trials and none of 45 prohibited trials. The evolved and frozen model workflows both achieved zero task successes out of 50 outcomes. Those observations support studying the enforcement mechanisms; they do not demonstrate a task-performance gain or universal safety.</p>
+<p>For practitioners, the useful starting point is therefore a controlled experiment: define a small set of editable components, specify permissions, supply validators you trust, and inspect approval, deployment, withdrawal, and recovery together. Keep production deployment and arbitrary generated-code safety outside what this prototype has demonstrated.</p>
+<p><strong>Start with one proposed change—and make its permission, evidence, and consequences visible.</strong> Explore the <a href="https://github.com/ai4se4ai-lab/SSEVOH-DSL" target="_blank" rel="noopener noreferrer">tool and README</a> or the <a href="/projects/ssevoh-dsl/">project overview</a> to continue.</p>
 </article>
   <footer class="a-foot">
-    <div class="a-tags"><a href="../?tag=Agentic%20AI">Agentic AI</a><a href="../?tag=Manuscripts">Manuscripts</a><a href="../?tag=Software%20Engineering">Software Engineering</a></div>
+    <div class="a-tags"><a href="../?tag=Agentic%20AI">Agentic AI</a><a href="../?tag=Research%20Software">Research Software</a><a href="../?tag=Software%20Engineering">Software Engineering</a></div>
     <div class="a-actions" data-share></div>
     <section class="author-card">
       <img src="../../assets/img/portrait.webp" alt="Majid Babaei" width="72" height="72" loading="lazy">

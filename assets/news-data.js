@@ -3,11 +3,11 @@ window.NEWS = [
  {
   "slug": "governing-agent-changes",
   "title": "An AI agent fixed its tool. Who checks what happens next?",
-  "subtitle": "My new IEEE TSE submission explores how permission, evidence, and accountability can keep pace with agents that change their own software.",
-  "summary": "A repair can pass its tests and still leave trouble behind. SSEVOH-DSL keeps approvals tied to the versions they checked and stops tools, skills, and memories from reusing withdrawn work.",
+  "subtitle": "How SSEVOH-DSL adds checked changes, traceable approvals, and controlled reuse to Harness²—and how to try it yourself.",
+  "summary": "Let agents propose improvements while trusted code controls what takes effect. Explore SSEVOH-DSL's Harness² integration, run a local demo without an LLM, and inspect the evidence behind each change.",
   "tags": [
    "Agentic AI",
-   "Manuscripts",
+   "Research Software",
    "Software Engineering"
   ],
   "featured": true,
