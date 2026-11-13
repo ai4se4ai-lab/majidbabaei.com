@@ -346,6 +346,42 @@ window.PROJECTS = [
   ]
  },
  {
+  "slug": "ssevoh-dsl",
+  "name": "SSEVOH-DSL",
+  "theme": "Agents",
+  "description": "Operator-controlled contracts govern self-modification, bind approvals to their checked context, and block reuse of artifacts derived from withdrawn versions.",
+  "status": "Submitted · IEEE TSE",
+  "url": "https://github.com/ai4se4ai-lab/SSEVOH-DSL",
+  "tags": "Foundational Contracts · Harness evolution",
+  "research": true,
+  "stage": "Submitted",
+  "stages": null,
+  "team": [
+   "M. Babaei"
+  ],
+  "links": [
+   {
+    "label": "Plain-language overview",
+    "url": "news/governing-agent-changes/",
+    "type": "paper"
+   }
+  ],
+  "updated": "Nov 13, 2026",
+  "releaseCount": 2,
+  "latest": {
+   "tag": "repository-linked-2026-11-13",
+   "title": "Tool repository linked",
+   "label": "Nov 13, 2026",
+   "iso": "2026-11-13"
+  },
+  "galleryCount": 0,
+  "cover": null,
+  "types": [
+   "code",
+   "paper"
+  ]
+ },
+ {
   "slug": "autom2m",
   "name": "AutoM2M",
   "theme": "Agents",
@@ -514,41 +550,6 @@ window.PROJECTS = [
   "types": [
    "poster",
    "report"
-  ]
- },
- {
-  "slug": "ssevoh-dsl",
-  "name": "SSEVOH-DSL",
-  "theme": "Agents",
-  "description": "Operator-controlled contracts govern self-modification, keep approvals tied to their checked context, and prevent reuse of artifacts derived from withdrawn versions. Introduced in Governing Changes in Self-Evolving Agents, submitted to IEEE TSE.",
-  "status": "Submitted · IEEE TSE",
-  "url": "",
-  "tags": "Foundational Contracts · Self-evolving agents",
-  "research": false,
-  "stage": "Submitted",
-  "stages": null,
-  "team": [
-   "M. Babaei"
-  ],
-  "links": [
-   {
-    "label": "Plain-language overview",
-    "url": "news/governing-agent-changes/",
-    "type": "paper"
-   }
-  ],
-  "updated": "Nov 13, 2026",
-  "releaseCount": 1,
-  "latest": {
-   "tag": "submitted-ieee-tse-2026",
-   "title": "Manuscript submitted to IEEE TSE",
-   "label": "Nov 13, 2026",
-   "iso": "2026-11-13"
-  },
-  "galleryCount": 0,
-  "cover": null,
-  "types": [
-   "paper"
   ]
  }
 ];

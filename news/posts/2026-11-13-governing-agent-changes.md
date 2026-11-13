@@ -80,4 +80,4 @@ Foundational Contracts apply that perspective to self-evolution. People express 
 
 The question I want this work to make easier to answer is simple: **as an agent changes its own working environment, can we still explain why each part is allowed to be there?**
 
-The [project's submission release](/projects/ssevoh-dsl/) records this milestone. This overview is based on the submitted manuscript; no public paper or code link is announced here.
+The tool repository is available at [ai4se4ai-lab/SSEVOH-DSL](https://github.com/ai4se4ai-lab/SSEVOH-DSL). The [project's submission release](/projects/ssevoh-dsl/) records this milestone and links the research artifact. This overview is based on the submitted manuscript; the paper remains submitted to IEEE TSE.

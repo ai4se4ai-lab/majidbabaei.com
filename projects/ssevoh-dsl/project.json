@@ -1,23 +1,42 @@
 {
-  "meta": {
-    "name": "SSEVOH-DSL",
-    "theme": "Agents",
-    "status": "Submitted · IEEE TSE",
-    "tags": "Foundational Contracts · Self-evolving agents",
-    "description": "Operator-controlled contracts govern self-modification, keep approvals tied to their checked context, and prevent reuse of artifacts derived from withdrawn versions. Introduced in Governing Changes in Self-Evolving Agents, submitted to IEEE TSE."
-  },
-  "team": ["M. Babaei"],
+  "team": [
+    "M. Babaei"
+  ],
   "links": [
-    { "label": "Plain-language overview", "url": "news/governing-agent-changes/", "type": "paper" }
+    {
+      "label": "Plain-language overview",
+      "url": "news/governing-agent-changes/",
+      "type": "paper"
+    }
   ],
   "releases": [
+    {
+      "tag": "repository-linked-2026-11-13",
+      "date": "2026-11-13",
+      "type": "code",
+      "title": "Tool repository linked",
+      "notes": "The author supplied the public SSEVOH-DSL tool repository on November 13, 2026. This date records the portfolio update, not the original code release date or a tagged software version. The associated manuscript remains submitted to IEEE TSE.",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/ai4se4ai-lab/SSEVOH-DSL",
+          "type": "code"
+        }
+      ]
+    },
     {
       "tag": "submitted-ieee-tse-2026",
       "date": "2026-11-13",
       "type": "paper",
       "title": "Manuscript submitted to IEEE TSE",
-      "notes": "**Governing Changes in Self-Evolving Agents**\n\nMajid Babaei. Submitted to IEEE Transactions on Software Engineering; not accepted or published. Introduces SSEVOH-DSL and Foundational Contracts for version-bound approval, dependency quarantine, withdrawal through recorded origins, and eligible recovery. Evaluated in one self-evolving host; broader portability remains untested. Submission confirmed by the author on November 13, 2026. No public manuscript or repository URL supplied.",
-      "links": []
+      "notes": "**Governing Changes in Self-Evolving Agents**\n\nMajid Babaei. Submitted to IEEE Transactions on Software Engineering; not accepted or published. Introduces SSEVOH-DSL and Foundational Contracts for version-bound approval, dependency quarantine, withdrawal through recorded origins, and eligible recovery. Evaluated in one self-evolving host; broader portability remains untested. Submission confirmed by the author on November 13, 2026. Research artifact: https://github.com/ai4se4ai-lab/SSEVOH-DSL.",
+      "links": [
+        {
+          "label": "Tool repository",
+          "url": "https://github.com/ai4se4ai-lab/SSEVOH-DSL",
+          "type": "code"
+        }
+      ]
     }
   ],
   "gallery": []
