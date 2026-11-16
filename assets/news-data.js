@@ -103,8 +103,8 @@ window.NEWS = [
  {
   "slug": "rapidpay-emse",
   "title": "Which TODO should you fix next? Follow the chain with RapidPay",
-  "subtitle": "A checkout retry, a shared payment state, and three deferred fixes explain how RapidPay connects technical debt to the work happening now.",
-  "summary": "Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. A checkout example explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.",
+  "subtitle": "An autonomous shuttle, a delayed sensor frame, and three deferred fixes show why technical debt must be understood across the code it connects.",
+  "summary": "Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. An illustrative autonomous vehicle scenario explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.",
   "tags": [
    "Publications",
    "Software evidence"
