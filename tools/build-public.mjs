@@ -31,7 +31,7 @@ async function copy(rel) {
 for (const item of await readdir(root, { withFileTypes: true })) {
   if (item.isDirectory()) {
     if (['assets', 'news', 'projects', 'pages', 'data', 'images'].includes(item.name)) await copy(item.name);
-  } else if (['index.html', '404.html', 'robots.txt', 'sitemap.xml', '.nojekyll'].includes(item.name)) {
+  } else if (['index.html', '404.html', 'favicon.ico', 'robots.txt', 'sitemap.xml', '.nojekyll'].includes(item.name)) {
     const text = await readFile(resolve(root, item.name), 'utf8');
     if (hidden.test(text) || /(?:02_Curriculum_Vitae|Majid_Babaei_CV)\.pdf/i.test(text)) throw new Error(`Private reference in ${item.name}`);
     await copyFile(resolve(root, item.name), resolve(output, item.name));

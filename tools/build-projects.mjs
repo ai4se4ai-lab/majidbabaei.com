@@ -10,6 +10,8 @@ import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
+import { renderMarkdown } from './news-markdown.mjs';
+import { headOpen, headAssets, header, footer, maskWords } from './chrome.mjs';
 
 const SITE = 'https://majidbabaei.com';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -66,63 +68,83 @@ const labelOf = d => { const [y, m, dd] = String(d).split('-'); return dd ? `${M
 const authorsOf = pubs => [...new Set(pubs.flatMap(p => p.authors.split('.').length && p.authors.replace(/\. (pp\.|\d|ICSE|Research|Poster|To appear|LIFTDroid|MORPH-FL|AutoM2M|Heartness|ACM|Artifacts).*$/, '')
   .split(/,\s*(?:and\s+)?|\s+and\s+/).map(s => s.trim().replace(/\.$/, '')).filter(s => /^[A-Z]\./.test(s))))];
 
-const page = proj => `<!doctype html>
+const ROOT = '../../';
+const THEME_LABEL = { Agents: 'Agentic systems', Analysis: 'Analysis & testing', Infrastructure: 'Infrastructure', 'Student projects': 'Student projects' };
+const THEME_COLOR = { Agents: 'var(--orange)', Analysis: 'var(--teal)', Infrastructure: 'var(--navy)', 'Student projects': 'var(--teal)' };
+const STUDENT_STAGES = ['Proposal', 'Development', 'Poster', 'Completed'];
+const ICON = {
+  code: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
+  tag: '<path d="M3 3h8l10 10-8 8L3 11V3Z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+  image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+  book: '<path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2V4Zm20 0h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8V4Z"/>'
+};
+const icon = n => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[n]}</svg>`;
+// The progress track is plain HTML so it reads without script; CSS fills it once on load.
+const track = (stage, stages) => {
+  const at = Math.max(0, stages.indexOf(stage));
+  return `<ol class="track" style="--n:${stages.length};--at:${at}" aria-label="Progress: ${esc(stage)}">${stages.map((s, i) =>
+    `<li class="${i < at ? 'done' : i === at ? 'now' : ''}"${i === at ? ' aria-current="step"' : ''}><span class="st-dot"></span><span class="st-l">${esc(s)}</span></li>`).join('')}</ol>`;
+};
+
+const page = proj => {
+  const stages = proj.stages || (proj.research ? STAGES : STUDENT_STAGES);
+  const cover = proj.gallery[0];
+  return `<!doctype html>
 ${MARK}
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>
+${headOpen}
 <title>${esc(proj.name)} · Projects | Majid Babaei</title>
 <meta name="description" content="${esc(proj.description)}">
 <link rel="canonical" href="${SITE}/projects/${proj.slug}/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(proj.name)}: ${esc(proj.status)}">
 <meta property="og:description" content="${esc(proj.description)}">
-<meta property="og:image" content="${SITE}/${esc((proj.gallery[0] && proj.gallery[0].src) || 'assets/img/portrait.jpg')}">
-<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/style.css">
-<link rel="stylesheet" href="../../assets/news.css">
-<link rel="stylesheet" href="../../assets/projects.css">
-<link rel="stylesheet" href="../../assets/cv-request.css">
+<meta property="og:image" content="${SITE}/${esc((cover && cover.src) || 'assets/img/portrait.jpg')}">
+${headAssets(ROOT, ['news', 'projects'])}
 </head>
 <body class="reader" data-page="project" data-root="../../">
-<a class="skip" href="#pj-main">Skip to content</a>
-<header class="r-bar" id="r-bar">
-  <div class="r-bar-inner wide">
-    <a class="brand" href="../../" aria-label="Majid Babaei, home"><span class="brand-mark">m<span>b</span>.</span></a>
-    <a class="r-section" href="../">Projects</a>
-    <div class="r-tools">
-      <a class="r-link" href="../../news/">News</a>
-      <a class="r-link" href="../../">Home</a>
-      <button class="icon-btn theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+<a class="skip" href="#pj-content">Skip to content</a>
+${header(ROOT, 'projects/')}
+<main id="pj-main" style="--c:${THEME_COLOR[proj.theme] || 'var(--navy)'}">
+  <header class="pj-hero wrap">
+    <div class="pj-hero-text">
+      <nav class="crumbs enter" aria-label="Breadcrumb"><a href="../">Projects</a><span aria-hidden="true">/</span><strong>${esc(THEME_LABEL[proj.theme] || proj.theme)}</strong></nav>
+      <h1>${maskWords(proj.name, esc)}</h1>
+      <p class="pj-lede enter" style="--i:1">${esc(proj.description)}</p>
+      <div class="pj-actions enter" style="--i:2">
+        ${proj.url ? `<a class="pj-btn" href="${esc(proj.url)}" target="_blank" rel="noopener">${icon('code')}View the code ↗</a>` : ''}
+        <a class="pj-btn ghost" href="#releases">${icon('tag')}Release history</a>
+        ${proj.gallery.length ? `<a class="pj-btn ghost" href="#gallery">${icon('image')}Gallery</a>` : ''}
+      </div>
     </div>
+    <figure class="pj-emblem" data-morph-target data-emblem="${proj.slug}" data-theme="${esc(proj.theme)}">${cover ? `<img class="settle" src="${ROOT}${esc(encodeURI(cover.src))}" alt="${esc(cover.alt || cover.caption || '')}" fetchpriority="high">` : ''}</figure>
+  </header>
+  <section class="pj-progress wrap" aria-label="Progress">
+    <div class="pj-progress-h"><span>Progress</span><span>${esc(proj.status)}</span></div>
+    ${track(proj.stage, stages)}
+  </section>
+  <div class="pj-bar">
+    <nav class="wrap pj-tabs" id="pj-tabs" aria-label="Project sections">
+      <a href="#overview" data-tab="overview">${icon('book')}Overview</a>
+      <a href="#releases" data-tab="releases">${icon('tag')}Releases<span class="cnt">${proj.releases.length}</span></a>
+      <a href="#gallery" data-tab="gallery">${icon('image')}Gallery<span class="cnt">${proj.gallery.length}</span></a>
+    </nav>
   </div>
-</header>
-<div class="pj-top">
-  <div class="pj-wrap">
-    <nav class="pj-crumbs" aria-label="Breadcrumb"><a href="../../">majid babaei</a><span>/</span><a href="../">projects</a><span>/</span><strong>${esc(proj.slug)}</strong>
-      <span class="pj-stage-pill">${esc(proj.stage)}</span></nav>
-    <div class="pj-tabs" role="tablist" aria-label="Project sections" id="pj-tabs"></div>
+  <div class="wrap pj-grid">
+    <div class="pj-content" id="pj-content" data-key="pj-content"><noscript><p>Enable JavaScript to view releases and the gallery.</p></noscript></div>
+    <aside class="pj-side" id="pj-side" aria-label="About this project"></aside>
   </div>
-</div>
-<main class="pj-wrap pj-grid" id="pj-main">
-  <div class="pj-content" id="pj-content"><noscript><p>${esc(proj.description)}</p><p>Enable JavaScript to view releases and the gallery.</p></noscript></div>
-  <aside class="pj-side" id="pj-side" aria-label="About this project"></aside>
 </main>
-<footer class="r-foot"><div class="r-foot-inner wide"><span>© Majid Babaei</span><a href="../">All projects</a><a href="../../news/">Newsroom</a><a href="../../#contact">Contact</a></div></footer>
+${footer(ROOT)}
 <script type="application/json" id="project-data">${JSON.stringify(proj).replace(/</g, '\\u003c')}</script>
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script src="../../assets/projects.js"></script>
 <script src="../../assets/cv-request.js"></script>
+<i id="page-ready" hidden></i>
 </body>
 </html>
 `;
+};
 
 // Collect research projects plus local-only projects (folders whose project.json has "meta").
 const dir = resolve(root, 'projects');
@@ -144,20 +166,21 @@ for (const { base, slug, research } of entries) {
   else { data = scaffold(slug, base, pubs); scaffolds.push(`projects/${slug}/project.json`); outputs.set(`projects/${slug}/project.json`, JSON.stringify(data, null, 2) + '\n'); }
   const readmePath = resolve(dir, slug, 'README.md');
   const readme = existsSync(readmePath) ? await readFile(readmePath, 'utf8') : '';
-  const releases = (data.releases || []).map((r, i) => ({ ...r, iso: isoOf(r.date), label: r.label || labelOf(r.date), order: i }))
+  // Release notes and the README are rendered and sanitized here, so pages need no Markdown library at run time.
+  const releases = (data.releases || []).map((r, i) => ({ ...r, notesHtml: r.notes ? renderMarkdown(r.notes) : '', iso: isoOf(r.date), label: r.label || labelOf(r.date), order: i }))
     .sort((a, b) => b.iso.localeCompare(a.iso) || a.order - b.order);
   const gallery = (data.gallery || []).map(g => ({ ...g, label: g.date ? (g.label || labelOf(g.date)) : (g.label || '') }));
   const proj = {
     slug, name: base.name, theme: base.theme, description: base.description, status: base.status, url: base.url || '', tags: base.tags || '',
     research, stage: data.stage || stageOf(base.status, pubs, Boolean(base.url)), stages: data.stages || null, team: data.team?.length ? data.team : authorsOf(pubs),
-    links: data.links || [], publications: pubs.map(({ bibtex, ...x }) => ({ ...x, bibtex })), releases, gallery, readme,
+    links: data.links || [], publications: pubs.map(({ bibtex, ...x }) => ({ ...x, bibtex })), releases, gallery, readme, readmeHtml: readme ? renderMarkdown(readme) : '',
     updated: releases[0] ? releases[0].label : ''
   };
   projects.push(proj);
-  outputs.set(`projects/${slug}/index.html`, page(proj));
+  outputs.set(`projects/${slug}/index.html`, page(proj).replace(/[\t ]+$/gm, ''));
 }
 
-const index = projects.map(({ publications, readme, releases, gallery, ...p }) => ({
+const index = projects.map(({ publications, readme, readmeHtml, releases, gallery, ...p }) => ({
   ...p, releaseCount: releases.length, latest: releases[0] ? { tag: releases[0].tag, title: releases[0].title, label: releases[0].label, iso: releases[0].iso } : null,
   galleryCount: gallery.length, cover: gallery[0] ? gallery[0].src : null, types: [...new Set(releases.map(r => r.type))]
 }));

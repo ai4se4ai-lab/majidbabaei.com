@@ -25,6 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/motion.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Majid Babaei","honorificSuffix":"Ph.D.","jobTitle":"Assistant Professor (Tenure-Track)","email":"mailto:majid.babaei@ufv.ca","url":"https://majidbabaei.com/","image":"https://majidbabaei.com/assets/img/portrait.jpg",
 "worksFor":{"@type":"CollegeOrUniversity","name":"University of the Fraser Valley","department":"School of Computing"},
@@ -33,6 +34,8 @@
 "sameAs":["https://github.com/ai4se4ai-lab","https://www.linkedin.com/in/majid-babaei-ph-d-20382874/"]}
 </script>
 <link rel="stylesheet" href="assets/cv-request.css">
+<link rel="expect" href="#page-ready" blocking="render">
+<script src="assets/motion.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -74,8 +77,8 @@
 <section class="hero">
   <div class="wrap hero-grid" id="hero-grid">
     <div class="hero-name">
-      <p class="kicker rise"><span class="dot" aria-hidden="true"></span>Assistant Professor (Tenure-Track) · University of the Fraser Valley</p>
-      <h1 class="rise">Majid <em>Babaei</em><span class="phd">PH.D.</span></h1>
+      <p class="kicker enter"><span class="dot" aria-hidden="true"></span>Assistant Professor (Tenure-Track) · University of the Fraser Valley</p>
+      <h1><span class="mask"><span>Majid</span></span> <span class="mask" style="--i:1"><span><em>Babaei</em></span></span><span class="phd enter" style="--i:2">PH.D.</span></h1>
     </div>
     <div class="hero-text">
       <p class="thesis rise">I pursue <mark>accountability by contract</mark> for AI agents</p>
@@ -92,13 +95,13 @@
         <span><strong>Lead</strong>, <span>[anonymous for review]</span></span>
       </div>
     </div>
-    <div class="portrait-col rise">
+    <div class="portrait-col">
       <div class="portrait-wrap">
         <div class="portrait-ring" aria-hidden="true"></div>
         <figure class="portrait">
           <picture>
             <source srcset="assets/img/portrait.webp" type="image/webp">
-            <img src="assets/img/portrait.jpg" width="900" height="953" alt="Portrait of Majid Babaei" fetchpriority="high">
+            <img class="settle" src="assets/img/portrait.jpg" width="900" height="953" alt="Portrait of Majid Babaei" fetchpriority="high">
           </picture>
         </figure>
         <div class="award-chip">
@@ -128,7 +131,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
         </div>
         <ol class="nr-list" id="nr-list"><li><a href="news/">Browse all news &amp; notes</a></li></ol>
-        <a class="nr-all" href="news/">All news &amp; notes <span id="nr-total"></span><span aria-hidden="true">→</span></a>
+        <a class="nr-all" href="news/">All news &amp; notes <span id="nr-total"></span><span class="m-arrow" aria-hidden="true">→</span></a>
       </div>
     </aside>
   </div>
@@ -137,12 +140,12 @@
 <!-- ================= RESEARCH ================= -->
 <section class="section" id="research">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div><span class="num">§ 01 — Research agenda</span><h2>Closing the loop between <em>humans</em> and <em>agentic AI</em></h2></div>
       <p>Agentic AI systems plan, delegate, and collaborate, yet they rarely see the higher-level concerns people care about, and people rarely see how agent teams reach their objectives. My research builds abstractions in both directions. Building this loop <b>efficiently</b> and <b>effectively</b> is, I believe, what is missing.</p>
     </div>
 
-    <figure class="loop reveal" id="loop" aria-labelledby="loop-cap">
+    <figure class="loop" id="loop" aria-labelledby="loop-cap">
       <div class="loop-top"><span>agenda.statechart</span><span>2 states · 2 transitions · 1 loop</span></div>
       <svg class="loop-h" viewBox="0 0 1000 430" role="img" aria-labelledby="loop-cap">
         <defs>
@@ -198,27 +201,27 @@
     </figure>
 
     <div class="transitions">
-      <article class="tr reveal" data-t="down" style="--c:var(--orange)">
+      <article class="tr" data-t="down" style="--c:var(--orange)">
         <div class="tr-top"><span>01 · Human → AI</span><span>abstractions for agents</span></div>
         <h3>Connecting agents to higher-level concerns</h3>
         <p class="body">Safety, correctness, intent, and organizational constraints usually reach an agent as informal prose. I use model-driven engineering (models, contracts, and model transformations) so that agentic systems can be specified against these concerns and checked for them.</p>
         <div class="milestones"><span class="chip">[anonymous for review]</span><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · submitted to TSE</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a></div>
       </article>
-      <article class="tr reveal" data-t="up" style="--c:var(--teal)">
+      <article class="tr" data-t="up" style="--c:var(--teal)">
         <div class="tr-top"><span>02 · AI → Human</span><span>abstractions for people</span></div>
         <h3>Showing people how agents collaborate</h3>
         <p class="body">Transcripts, tool logs, and traces are abundant but unreadable at scale. I build abstractions (slices, typed hand-offs, provenance, and knowledge graphs) that explain how agent teams collaborate, where they break, and why an objective was or was not achieved.</p>
         <div class="milestones"><a class="chip" data-find="Agent Slicing">Agent Slicing</a><span class="chip">[anonymous for review]</span><a class="chip" data-find="Bad Habits Die Hard">Heartness</a><a class="chip" data-find="TAAF">TAAF · ICSE 2026</a></div>
       </article>
-      <article class="tr tr-loop reveal" data-t="loop" style="--c:var(--navy)">
+      <article class="tr tr-loop" data-t="loop" style="--c:var(--navy)">
         <div class="tr-top"><span>03 · The loop</span><span>what is missing</span></div>
         <h3>Effective and efficient, together</h3>
         <p class="body">Specifications without visibility cannot tell us whether they were honored; visibility without specifications gives us nothing to check against. The loop must be <b>effective</b>, with abstractions at the level people reason about yet precise enough to check. It must also be <b>efficient</b> enough to repeat whenever a team, prompt, or model changes.</p>
-        <a class="tr-read" href="news/closing-the-loop/">Read the full agenda <span aria-hidden="true">→</span></a>
+        <a class="tr-read" href="news/closing-the-loop/">Read the full agenda <span class="m-arrow" aria-hidden="true">→</span></a>
       </article>
     </div>
 
-    <div class="foundations reveal">
+    <div class="foundations">
       <h3 class="sub-h"><span>Foundations · how the agenda grew</span><span>MDE → SE × AI → AI × MDE</span></h3>
       <div class="found-grid">
         <div class="found" style="--c:var(--navy)"><span class="f-k">01 · Model behavior</span><p>Behavioral models to isolate interactions, replay executions, and regression-test distributed real-time systems.</p>
@@ -229,7 +232,7 @@
           <div class="milestones"><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="Agent Slicing">Agent Slicing</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a></div></div>
       </div>
     </div>
-    <p class="principles reveal"><span>Explicit assumptions</span><span>Traceable evidence</span><span>Checkable guarantees</span></p>
+    <p class="principles" data-lit><span>Explicit assumptions.</span> <span>Traceable evidence.</span> <span>Checkable guarantees.</span></p>
 
     <div class="artifacts" id="software">
       <h3 class="sub-h"><span>Research software &amp; artifacts</span><span id="art-count"></span></h3>
@@ -245,7 +248,7 @@
       <button type="button" class="more-btn" id="art-more" aria-controls="art-grid">Show all artifacts</button>
       <a class="lab-link lab-link-alt" href="projects/">
         <div><strong>Projects &amp; memories</strong><br><span>Release history for every project (papers, posters, code) and a gallery of the moments behind them.</span></div>
-        <span class="arrow" aria-hidden="true">→</span>
+        <span class="arrow m-arrow" aria-hidden="true">→</span>
       </a>
       <div class="lab-link">
         <div><strong>[anonymous for review]</strong><br><span>Details withheld during anonymous review.</span></div>
@@ -257,11 +260,11 @@
 <!-- ================= PUBLICATIONS ================= -->
 <section class="section" id="publications">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div><span class="num">§ 02 — Publications</span><h2>Papers &amp; <em>manuscripts</em></h2></div>
       <p>Refereed journal articles and conference papers, with abstracts, artifacts, and BibTeX. Submitted and in-progress work is listed separately and is not counted as published.</p>
     </div>
-    <div class="award-banner reveal">
+    <div class="award-banner">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0V4Zm0 2H4a3 3 0 0 0 3 4m10-4h3a3 3 0 0 1-3 4"/></svg>
       <div><strong>ACM SIGSOFT Distinguished Paper Award</strong><p>Efficient replay-based regression testing for distributed reactive systems in the context of model-driven development (with J. Dingel). MODELS 2020 also earned Artifacts Available &amp; Evaluated–Reusable badges.</p></div>
       <span class="mono">MODELS 2021</span>
@@ -284,12 +287,12 @@
 <!-- ================= TEACHING ================= -->
 <section class="section" id="teaching">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div><span class="num">§ 03 — Teaching</span><h2>Teaching &amp; <em>educational leadership</em></h2></div>
       <p>Software engineering and programming at UFV, building on courses and program coordination at McGill, Concordia, Queen's, and St. Lawrence College.</p>
     </div>
     <div class="teach-grid">
-      <div class="reveal">
+      <div>
         <div class="stats">
           <div><strong>9</strong><span>UFV sections</span></div>
           <div><strong>237</strong><span>Course enrolments</span></div>
@@ -311,7 +314,7 @@
         </table>
         <p class="pub-note">Enrolments count course seats across completed and current terms, not unique students.</p>
       </div>
-      <div class="reveal">
+      <div>
         <h3 class="sub-h"><span>Earlier teaching &amp; coordination</span></h3>
         <ul class="earlier">
           <li><span class="inst">McGill · Electrical &amp; Computer Engineering</span><p>ECSE 437, Software Delivery — Fall <a href="pages/courses/ecse437fs22.html">2022</a> and Fall <a href="pages/courses/ecse437fs23.html">2023</a>; software-project instruction with structured peer feedback. <a href="https://ecse437.majidbabaei.com/">Course site ↗</a></p></li>
@@ -328,35 +331,35 @@
 <!-- ================= STUDENTS ================= -->
 <section class="section" id="students">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div><span class="num">§ 04 — Students</span><h2>Supervision &amp; <em>advising</em></h2></div>
       <p>Currently co-supervising, with Abbas Heydarnoori, two graduate students and one undergraduate on AI-powered fault localization and context engineering. With Fatemeh Hendijani Fard, I co-supervise graduate and undergraduate students on collaborative projects, including <i>CodeFaithBench</i>, a benchmark on the faithfulness of LLM code explanations.</p>
     </div>
-    <h3 class="sub-h reveal"><span>Completed master's theses · co-advised</span><span>Brock University, with Prof. Naser Ezzati-Jivan</span></h3>
+    <h3 class="sub-h"><span>Completed master's theses · co-advised</span><span>Brock University, with Prof. Naser Ezzati-Jivan</span></h3>
     <div class="people">
-      <article class="person reveal">
+      <article class="person">
         <img src="assets/img/ghazal.webp" alt="Ghazal Khodabandeh" width="96" height="96" loading="lazy">
         <div><span class="role">M.Sc. · Jan 2024 – Sep 2025</span><h3>Ghazal Khodabandeh</h3><p><em>Link Prediction on Distributed Systems</em>. Publication: ICPE 2025.</p><p class="now">Now <b>Research Assistant, York University</b></p></div>
       </article>
-      <article class="person reveal">
+      <article class="person">
         <img src="assets/img/alireza.webp" alt="Alireza Ezaz" width="96" height="96" loading="lazy">
         <div><span class="role">M.Sc. · Jan 2024 – Sep 2025</span><h3>Alireza Ezaz</h3><p><em>TAAF: A Trace Abstraction and Analysis Framework Synergizing Knowledge Graphs and LLMs</em>. Publication: ICSE 2026.</p><p class="now">Now <b>Data Quality Specialist, Cohere</b></p></div>
       </article>
     </div>
-    <h3 class="sub-h reveal"><span>Undergraduate &amp; project advising</span></h3>
+    <h3 class="sub-h"><span>Undergraduate &amp; project advising</span></h3>
     <div class="cohorts">
-      <div class="cohort reveal"><span class="when">Brock · Jan 2024 – Apr 2025</span><h4>Bilal Bilal · Yuvraj Sehgal</h4><p>Semantic code coverage using topic models and LLMs; LLM-generated README files from source code.</p></div>
-      <div class="cohort reveal"><span class="when">McGill · Jan – Apr 2024</span><h4>Felicia Sun · Zachary Hayden</h4><p>A review of AI-enabled continuous testing in DevOps; LLMs and technical debt in DevOps.</p>
+      <div class="cohort"><span class="when">Brock · Jan 2024 – Apr 2025</span><h4>Bilal Bilal · Yuvraj Sehgal</h4><p>Semantic code coverage using topic models and LLMs; LLM-generated README files from source code.</p></div>
+      <div class="cohort"><span class="when">McGill · Jan – Apr 2024</span><h4>Felicia Sun · Zachary Hayden</h4><p>A review of AI-enabled continuous testing in DevOps; LLMs and technical debt in DevOps.</p>
         <div class="faces"><img src="assets/img/felicia.webp" alt="Felicia Sun" width="34" height="34" loading="lazy"><img src="assets/img/zachary.webp" alt="Zachary Hayden" width="34" height="34" loading="lazy"></div></div>
-      <div class="cohort reveal"><span class="when">McGill · Sep – Dec 2023</span><h4>Benakmoum Amine · Ammar Ryad · Zakaria Bouhemhem</h4><p>DAPPER, a subscription application (ECSE 458 capstone).</p>
+      <div class="cohort"><span class="when">McGill · Sep – Dec 2023</span><h4>Benakmoum Amine · Ammar Ryad · Zakaria Bouhemhem</h4><p>DAPPER, a subscription application (ECSE 458 capstone).</p>
         <div class="faces"><img src="assets/img/zakaria.webp" alt="Zakaria Bouhemhem" width="34" height="34" loading="lazy"></div>
         <div class="docs"><a class="chip" href="data/ECSE458/DAPPER/ECSE458N1_DP02_ProjectProposal.pdf">Proposal</a><a class="chip" href="data/ECSE458/DAPPER/Poster.pdf">Poster</a></div></div>
-      <div class="cohort reveal"><span class="when">McGill · Sep – Dec 2022</span><h4>Michael Buchar · Ege Karadibak · Ezra Gomolin · Dominic Chan</h4><p>A decentralized NFT-locking application (ECSE 458 capstone).</p>
+      <div class="cohort"><span class="when">McGill · Sep – Dec 2022</span><h4>Michael Buchar · Ege Karadibak · Ezra Gomolin · Dominic Chan</h4><p>A decentralized NFT-locking application (ECSE 458 capstone).</p>
         <div class="faces"><img src="assets/img/michael.webp" alt="Michael Buchar" width="34" height="34" loading="lazy"><img src="assets/img/dominic.webp" alt="Dominic Chan" width="34" height="34" loading="lazy"></div>
         <div class="docs"><a class="chip" href="data/ECSE458/NFTLOCKER/Final%20Project%20Report.pdf">Final report</a><a class="chip" href="data/ECSE458/NFTLOCKER/Poster.pdf">Poster</a></div></div>
     </div>
 
-    <div class="callout reveal" id="join">
+    <div class="callout" id="join">
       <h3>Interested in working <em>with me?</em></h3>
       <div>
         <p>If you are a bachelor's, master's, or capstone student interested in model-driven engineering, software testing, or trustworthy AI systems, I'd like to hear from you. In your email, please include:</p>
@@ -370,12 +373,12 @@
 <!-- ================= SERVICE ================= -->
 <section class="section" id="service">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div><span class="num">§ 05 — Service</span><h2>Community &amp; <em>partnerships</em></h2></div>
       <p>Conference organizing and program committees for the software engineering community, institutional committees, and industry partnerships that connect UFV students with practice.</p>
     </div>
     <div class="service-grid">
-      <div class="reveal">
+      <div>
         <h3 class="sub-h"><span>Conference organization</span></h3>
         <ul class="roles">
           <li><span class="y">2026</span><span><span class="c">CASCON</span><span class="r">Publicity Co-Chair</span></span><a href="https://conf.researchr.org/committee/cascon-2026/cascon-2026-organizing-committee">Committee ↗</a></li>
@@ -392,7 +395,7 @@
           <li><span class="y">2024</span><span><span class="c">Program Evaluation Committee</span><span class="r">Chair; Honours Bachelor of Computer Science, Sheridan College</span></span></li>
         </ul>
       </div>
-      <div class="reveal">
+      <div>
         <h3 class="sub-h"><span>Program committees</span></h3>
         <ul class="roles">
           <li><span class="y">2026</span><span><span class="c">ASE</span><span class="r">Tools and Datasets</span></span><a href="https://conf.researchr.org/committee/ase-2026/ase-2026-tools-and-data-sets-program-committee">Committee ↗</a></li>
@@ -405,7 +408,7 @@
       </div>
     </div>
 
-    <div class="partner reveal">
+    <div class="partner">
       <div>
         <h3>Industry partnerships &amp; knowledge mobilization</h3>
         <p>As Chair of Industry Partnerships (Fall 2025–September 2026), I built relationships that support experiential learning, curriculum relevance, applied research, and professional pathways for UFV computing students.</p>
@@ -419,7 +422,7 @@
       </ul>
     </div>
 
-    <div class="talks reveal">
+    <div class="talks">
       <h3 class="sub-h"><span>Invited talks</span></h3>
       <div class="talk-grid">
         <div class="talk"><span>OXAI'24 · co-located with CASCON</span><p>Enhanced LLMs with KGs: Towards explainable performance analysis in microservices</p></div>
@@ -434,12 +437,12 @@
 <!-- ================= BACKGROUND ================= -->
 <section class="section" id="background">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head">
       <div><span class="num">§ 06 — Background</span><h2>Appointments, education &amp; <em>industry</em></h2></div>
       <p>Before academia I spent a decade building software in industry — PKI and networking in Tehran, IoT analytics at Bosch in Germany, and DevOps in Canada. That experience still shapes what I teach and the problems I choose.</p>
     </div>
     <div class="bg-grid">
-      <div class="bg-col reveal">
+      <div class="bg-col">
         <h3 class="sub-h"><span>Academic appointments</span></h3>
         <ol class="timeline">
           <li class="current"><span class="when">Aug 2025 – present</span><h4>Assistant Professor (Tenure-Track)</h4><p class="where">University of the Fraser Valley · School of Computing</p><p class="what">Chair of Industry Partnerships (Fall 2025–Sep 2026).</p></li>
@@ -450,7 +453,7 @@
           <li><span class="when">2022 – 2023</span><h4>Visiting Researcher</h4><p class="where">McGill University · Electrical and Computer Engineering</p><p class="what">Knowledge-graph explainability for information retrieval, hosted by Prof. Dániel Varró; industry project with Aggregate Intelligence.</p></li>
         </ol>
       </div>
-      <div class="bg-col reveal">
+      <div class="bg-col">
         <h3 class="sub-h"><span>Education</span></h3>
         <ol class="timeline">
           <li><span class="when">2018 – Dec 2021</span><h4>Ph.D. in Software Engineering</h4><p class="where">Queen's University, Kingston, Ontario</p><p class="what"><a href="https://qspace.library.queensu.ca/handle/1974/29842"><i>Regression Testing of Distributed Real-Time Embedded Systems in the Context of Model-Driven Development</i></a>. Supervisor: Prof. Juergen Dingel.</p></li>
@@ -475,7 +478,7 @@
   <div class="wrap">
     <span class="num">§ 07 — Contact</span>
     <h2>Let's build software<br>you can <em>check.</em></h2>
-    <a class="mail" href="mailto:majid.babaei@ufv.ca">majid.babaei@ufv.ca <span aria-hidden="true">↗</span></a>
+    <a class="mail" href="mailto:majid.babaei@ufv.ca">majid.babaei@ufv.ca <span class="m-arrow" aria-hidden="true">↗</span></a>
     <div class="contact-grid">
       <div><h4>Office</h4><p>School of Computing<br>University of the Fraser Valley<br>Abbotsford campus, Building C, Room ABC-2454</p></div>
       <div><h4>Elsewhere</h4>
@@ -504,5 +507,6 @@
 <script src="assets/news-data.js"></script>
 <script src="assets/site.js"></script>
 <script src="assets/cv-request.js"></script>
+<i id="page-ready" hidden></i>
 </body>
 </html>

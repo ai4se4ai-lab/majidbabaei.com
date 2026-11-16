@@ -9,6 +9,7 @@ import { existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { firstImage, renderMarkdown } from './news-markdown.mjs';
+import { headOpen, headAssets, header, footer, maskWords } from './chrome.mjs';
 
 const SITE = 'https://majidbabaei.com';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -49,14 +50,19 @@ function parse(file, text) {
   };
 }
 
-const page = p => `<!doctype html>
+const stripTags = h => h.replace(/<[^>]+>/g, '');
+const tocOf = html => [...html.matchAll(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/g)].map(m => ({ id: m[1], text: stripTags(m[2]) }));
+const ROOT = '../../';
+const nextCard = (p, newer) => p ? `<a class="an ${newer ? 'an-newer' : 'an-older'}" href="../${p.slug}/"><span class="an-k">${newer ? '<span class="m-arrow" aria-hidden="true">←</span> Newer story' : 'Older story <span class="m-arrow" aria-hidden="true">→</span>'}</span><strong>${esc(p.title)}</strong><span class="an-meta">${esc(p.dateLabel)} · ${esc(p.tags[0])}</span></a>` : '<span class="an an-empty" aria-hidden="true"></span>';
+
+const page = (p, newer, older) => {
+  const prose = renderMarkdown(p.body, { topImage: p.cover });
+  const toc = tocOf(prose);
+  return `<!doctype html>
 ${MARK}
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>
+${headOpen}
 <title>${esc(p.title)} | Majid Babaei</title>
 <meta name="description" content="${esc(p.summary)}">
 <meta name="author" content="Majid Babaei">
@@ -79,65 +85,64 @@ ${p.tags.map(t => `<meta property="article:tag" content="${esc(t)}">`).join('\n'
 <meta name="twitter:image" content="${esc(p.imageURL)}">
 <meta name="twitter:image:alt" content="${esc(p.coverAlt)}">
 <link rel="alternate" type="application/rss+xml" title="Majid Babaei: News" href="../feed.xml">
-<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/style.css">
-<link rel="stylesheet" href="../../assets/news.css">
+${headAssets(ROOT, ['news'])}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.summary, image: p.imageURL, datePublished: p.iso, keywords: p.tags.join(', '), url: `${SITE}/news/${p.slug}/`, author: { '@type': 'Person', name: 'Majid Babaei', url: `${SITE}/` } }).replace(/</g, '\\u003c')}</script>
-<link rel="stylesheet" href="../../assets/cv-request.css">
 </head>
 <body class="reader" data-page="post" data-root="../../" data-slug="${p.slug}">
 <a class="skip" href="#prose">Skip to article</a>
 <div class="read-progress" id="read-progress" aria-hidden="true"></div>
-<header class="r-bar" id="r-bar">
-  <div class="r-bar-inner">
-    <a class="brand" href="../../" aria-label="Majid Babaei, home"><span class="brand-mark">m<span>b</span>.</span></a>
-    <a class="r-section" href="../">Newsroom</a>
-    <div class="r-tools">
-      <a class="r-link" href="../feed.xml" title="RSS feed">RSS</a>
-      <button class="icon-btn theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-    </div>
-  </div>
-</header>
+${header(ROOT, 'news/')}
 <main class="article">
-  <header class="a-head">
-    <a class="a-tag" href="../?tag=${encodeURIComponent(p.tags[0])}">${esc(p.tags[0])}</a>
-    <h1>${esc(p.title)}</h1>
-    ${p.subtitle ? `<p class="a-sub">${esc(p.subtitle)}</p>` : ''}
-    <div class="byline">
-      <img src="../../assets/img/portrait.webp" alt="" width="44" height="44">
-      <div><a class="by-name" href="../../">Majid Babaei</a> <span class="dot-sep">·</span> <a class="by-follow" href="../../#contact">Contact</a>
-        <p><span>${p.minutes} min read</span> <span class="dot-sep">·</span> <time datetime="${p.iso}">${esc(p.dateLabel)}</time></p></div>
+  <header class="a-head wrap">
+    <nav class="crumbs enter" aria-label="Breadcrumb"><a href="../">Newsroom</a><span aria-hidden="true">/</span><a class="a-tag" href="../?tag=${encodeURIComponent(p.tags[0])}">${esc(p.tags[0])}</a></nav>
+    <h1>${maskWords(p.title, esc)}</h1>
+    ${p.subtitle ? `<p class="a-sub enter" style="--i:1">${esc(p.subtitle)}</p>` : ''}
+    <div class="a-meta enter" style="--i:2">
+      <div class="byline">
+        <img src="../../assets/img/portrait.webp" alt="" width="44" height="44">
+        <div><a class="by-name" href="../../">Majid Babaei</a>
+          <p><time datetime="${p.iso}">${esc(p.dateLabel)}</time> <span class="dot-sep">·</span> <span>${p.minutes} min read</span></p></div>
+      </div>
+      <div class="a-actions" data-share></div>
     </div>
-    <div class="a-actions" data-share></div>
   </header>
-  <figure class="a-cover${p.cover ? ' has-image' : ''}"${p.cover ? '' : ` data-cover="${p.slug}" aria-hidden="true"`}>
-    ${p.cover ? `<a href="${esc(p.cover)}" target="_blank" rel="noopener" aria-label="Open full-size figure"><img src="${esc(p.cover)}" alt="${esc(p.coverAlt)}" fetchpriority="high"></a>` : ''}
-    ${p.coverCaption ? `<figcaption>${esc(p.coverCaption)}</figcaption>` : ''}
-  </figure>
-  <article class="prose" id="prose" tabindex="-1">${renderMarkdown(p.body, { topImage: p.cover })}</article>
-  <footer class="a-foot">
-    <div class="a-tags">${p.tags.map(t => `<a href="../?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div>
-    <div class="a-actions" data-share></div>
-    <section class="author-card">
-      <img src="../../assets/img/portrait.webp" alt="Majid Babaei" width="72" height="72" loading="lazy">
-      <div><p class="ac-k">Written by</p><h2><a href="../../">Majid Babaei</a></h2>
-        <p>Assistant Professor (Tenure-Track), School of Computing, University of the Fraser Valley. I build abstractions that connect people and agentic AI systems, from model-driven engineering to checkable agent teams.</p>
-        <p class="ac-links"><a href="../../#research">Research</a><a href="../../#publications">Publications</a><a href="mailto:majid.babaei@ufv.ca">Email</a></p></div>
-    </section>
-    <section class="more" aria-labelledby="more-h"><h2 id="more-h">More from Majid Babaei</h2><div class="more-grid" id="more-grid"></div>
-      <a class="all-link" href="../">See all news &amp; notes →</a></section>
+  <div class="wrap">
+    <figure class="a-cover${p.cover ? ' has-image' : ''}" data-morph-target${p.cover ? '' : ` data-cover="${p.slug}" aria-hidden="true"`}>
+      ${p.cover ? `<a href="${esc(p.cover)}" target="_blank" rel="noopener" aria-label="Open full-size figure"><img src="${esc(p.cover)}" alt="${esc(p.coverAlt)}" fetchpriority="high"></a>` : ''}
+      ${p.coverCaption ? `<figcaption>${esc(p.coverCaption)}</figcaption>` : ''}
+    </figure>
+  </div>
+  <div class="a-body wrap">
+    <aside class="a-rail" aria-label="In this story">
+      ${toc.length > 1 ? `<p class="rail-k">In this story</p>
+      <ol class="toc" id="toc">${toc.map(t => `<li><a href="#${t.id}">${t.text}</a></li>`).join('')}</ol>` : `<p class="rail-k">${esc(p.tags[0])}</p><p class="rail-note">${esc(p.dateLabel)}<br>${p.minutes} min read</p>`}
+    </aside>
+    <article class="prose" id="prose" tabindex="-1">${prose}</article>
+  </div>
+  <footer class="a-foot wrap">
+    <div class="a-end">
+      <div class="a-tags">${p.tags.map(t => `<a href="../?tag=${encodeURIComponent(t)}">${esc(t)}</a>`).join('')}</div>
+      <div class="a-actions" data-share></div>
+      <section class="author-card">
+        <img src="../../assets/img/portrait.webp" alt="Majid Babaei" width="72" height="72" loading="lazy">
+        <div><p class="ac-k">Written by</p><h2><a href="../../">Majid Babaei</a></h2>
+          <p>Assistant Professor (Tenure-Track), School of Computing, University of the Fraser Valley. I build abstractions that connect people and agentic AI systems, from model-driven engineering to checkable agent teams.</p>
+          <p class="ac-links"><a class="u-link" href="../../#research">Research</a><a class="u-link" href="../../#publications">Publications</a><a class="u-link" href="mailto:majid.babaei@ufv.ca">Email</a></p></div>
+      </section>
+    </div>
+    <nav class="a-next" aria-label="Newer and older stories">${nextCard(newer, true)}${nextCard(older, false)}</nav>
+    <section class="more" aria-labelledby="more-h"><div class="more-h"><h2 id="more-h">Keep reading</h2><a class="all-link" href="../">All news &amp; notes <span class="m-arrow" aria-hidden="true">→</span></a></div><div class="more-grid" id="more-grid"></div></section>
   </footer>
 </main>
-<footer class="r-foot"><div class="r-foot-inner"><span>© Majid Babaei</span><a href="../../">majidbabaei.com</a><a href="../">Newsroom</a><a href="../feed.xml">RSS</a></div></footer>
+${footer(ROOT)}
 <script src="../../assets/news-data.js"></script>
 <script src="../../assets/news.js"></script>
 <script src="../../assets/cv-request.js"></script>
+<i id="page-ready" hidden></i>
 </body>
 </html>
 `.replace(/[ \t]+$/gm, '');
+};
 
 const xml = v => esc(v);
 const rss = posts => `<?xml version="1.0" encoding="UTF-8"?>
@@ -189,7 +194,7 @@ const outputs = new Map([
   ['assets/news-data.js', `// GENERATED by tools/build-news.mjs from news/posts/*.md. Do not edit by hand.\nwindow.NEWS = ${JSON.stringify(meta, null, 1)};\n`],
   ['news/feed.xml', rss(posts)],
   ['sitemap.xml', sitemap(posts)],
-  ...posts.map(p => [`news/${p.slug}/index.html`, page(p)])
+  ...posts.map((p, i) => [`news/${p.slug}/index.html`, page(p, posts[i - 1], posts[i + 1])])
 ]);
 
 // Generated article folders that no longer have a source post.

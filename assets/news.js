@@ -1,7 +1,8 @@
 'use strict';
-// Newsroom: feed page (news/) and Markdown article pages (news/<slug>/).
+// Newsroom: front page (news/) and article pages (news/<slug>/). Theme, menu and page transitions live in motion.js.
 (() => {
   const NEWS = window.NEWS || [];
+  const M = window.Motion || { swap: (_, fn) => fn(), cover: () => '' };
   const body = document.body;
   const ROOT = body.dataset.root || '';
   const $ = (s, el = document) => el.querySelector(s);
@@ -10,53 +11,33 @@
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const render = (el, html) => el.replaceChildren(document.createRange().createContextualFragment(html));
   const postURL = slug => `${ROOT}news/${slug}/`;
-  const store = { set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* unavailable */ } } };
 
-  /* ---------- Theme ---------- */
-  const rootEl = document.documentElement;
-  $('#theme-btn')?.addEventListener('click', () => {
-    const dark = rootEl.dataset.theme ? rootEl.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    rootEl.dataset.theme = dark ? 'light' : 'dark';
-    store.set('theme', rootEl.dataset.theme);
-  });
-
-  /* ---------- Generative covers (statechart motif, seeded by slug) ---------- */
-  const TAG_HUE = { 'Research agenda': ['#19375f', '#b84f12'], 'Agentic AI': ['#b84f12', '#19375f'], Publications: ['#19375f', '#00737d'],
-    Manuscripts: ['#00737d', '#b84f12'], 'Software evidence': ['#00737d', '#19375f'], Teaching: ['#00737d', '#b84f12'],
-    Students: ['#00737d', '#19375f'], Partnerships: ['#b84f12', '#00737d'], Service: ['#19375f', '#00737d'], Milestones: ['#b84f12', '#19375f'] };
-  const hash = s => [...s].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619), 2166136261) >>> 0;
-  function rng(seed) { return () => { seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-  function cover(slug, tag) {
-    const [a, b] = TAG_HUE[tag] || ['#19375f', '#b84f12'];
-    const r = rng(hash(slug)); const W = 800, H = 400;
-    const n = 3 + Math.floor(r() * 3); const nodes = [];
-    for (let i = 0; i < n; i++) nodes.push({ x: 150 + (i * (W - 300)) / (n - 1) + (r() - .5) * 50, y: 110 + r() * 180, w: 110 + r() * 70 });
-    const dots = Array.from({ length: 140 }, (_, i) => `<circle cx="${(i % 20) * 42 + 10}" cy="${Math.floor(i / 20) * 60 + 20}" r="1.4"/>`).join('');
-    const edges = nodes.slice(1).map((m, i) => { const p = nodes[i]; const up = r() > .5 ? -1 : 1;
-      return `<path d="M${p.x + p.w / 2} ${p.y} C ${p.x + p.w} ${p.y + up * 90}, ${m.x - m.w / 2} ${m.y + up * 90}, ${m.x - m.w / 2} ${m.y}" />`; }).join('');
-    const back = `<path d="M${nodes[n - 1].x} ${nodes[n - 1].y + 28} C ${nodes[n - 1].x} ${H - 10}, ${nodes[0].x} ${H - 10}, ${nodes[0].x} ${nodes[0].y + 28}" stroke="${b}" />`;
-    const states = nodes.map((m, i) => `<rect x="${m.x - m.w / 2}" y="${m.y - 28}" width="${m.w}" height="56" rx="28" fill="${i % 2 ? b : a}" fill-opacity="${i === 0 ? .9 : .14}" stroke="${i % 2 ? b : a}" stroke-width="2"/>`).join('');
-    return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g${hash(slug)}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}" stop-opacity=".16"/><stop offset="1" stop-color="${b}" stop-opacity=".12"/></linearGradient></defs>
-      <rect width="${W}" height="${H}" fill="#f3eee3"/><rect width="${W}" height="${H}" fill="url(#g${hash(slug)})"/>
-      <g fill="${a}" fill-opacity=".18">${dots}</g>
-      <g fill="none" stroke="${a}" stroke-width="2" stroke-dasharray="7 6" stroke-opacity=".7">${edges}${back}</g>
-      <circle cx="${nodes[0].x - nodes[0].w / 2 - 34}" cy="${nodes[0].y}" r="8" fill="${a}"/>${states}</svg>`;
+  /* ---------- Covers: the post's own figure, or a generated statechart in the topic's colours ---------- */
+  const N = 'var(--navy)', T = 'var(--teal)', O = 'var(--orange)';
+  const TAG_HUE = { 'Research agenda': [N, O], 'Agentic AI': [O, N], Publications: [N, T], Manuscripts: [T, O], 'Software evidence': [T, N],
+    Teaching: [T, O], Students: [T, N], Partnerships: [O, T], Service: [N, T], Milestones: [O, N] };
+  function paintCover(el, p) {
+    if (p.cover) { el.classList.add('is-figure'); render(el, `<img src="${esc(ROOT + p.cover.replace(/^\//, ''))}" alt="" loading="lazy">`); }
+    else render(el, M.cover(p.slug, TAG_HUE[p.tags[0]]));
   }
-  function paintCover(el, slug, tag, src) {
-    if (src) render(el, `<img src="${esc(src)}" alt="" loading="lazy">`); else render(el, cover(slug, tag));
-  }
+  const paintAll = scope => $$('[data-c]', scope).forEach(el => { const p = NEWS.find(x => x.slug === el.dataset.c); if (p) paintCover(el, p); });
+  const isNew = p => (Date.now() - new Date(`${p.iso}T12:00:00`).getTime()) / 864e5 < 45;
+  const kicker = p => `<p class="story-k">${isNew(p) ? '<span class="new">New</span>' : ''}<span class="tg">${esc(p.tags[0])}</span><time datetime="${esc(p.iso)}">${esc(p.dateLabel)}</time></p>`;
+  const card = (p, big) => `<article class="story${big === true ? ' big' : ''}" data-key="${esc(p.slug)}"><a class="story-link" href="${postURL(p.slug)}">
+      <figure class="story-cover m-zoom" data-morph data-c="${esc(p.slug)}"></figure>
+      ${kicker(p)}<h3 class="story-title"><span class="u">${esc(p.title)}</span></h3><p class="story-sum">${esc(p.summary)}</p>
+      <p class="story-meta">${p.minutes} min read <span class="m-arrow" aria-hidden="true">→</span></p></a></article>`;
 
-  /* ---------- Feed ---------- */
-  const byline = p => `<span class="fl-by"><img src="${ROOT}assets/img/portrait.webp" alt="" width="20" height="20">Majid Babaei</span>`;
+  /* ---------- Front page ---------- */
   function feed() {
     const params = new URLSearchParams(location.search);
     const tags = [...new Set(NEWS.flatMap(p => p.tags))];
-    const counts = Object.fromEntries(tags.map(t => [t, NEWS.filter(p => p.tags.includes(t)).length]));
+    const count = t => NEWS.filter(p => p.tags.includes(t)).length;
     let tag = tags.includes(params.get('tag')) ? params.get('tag') : 'All';
+    const main = $('main');
 
-    render($('#feed-tabs'), ['All', ...tags].map(t => `<button type="button" role="tab" data-tag="${esc(t)}">${esc(t === 'All' ? 'All stories' : t)}</button>`).join(''));
-    render($('#topics'), tags.map(t => `<button type="button" data-tag="${esc(t)}">${esc(t)} <span>${counts[t]}</span></button>`).join(''));
+    render($('#feed-tabs'), ['All', ...tags].map(t => `<button type="button" role="tab" data-tag="${esc(t)}">${esc(t === 'All' ? 'All stories' : t)}<sup>${t === 'All' ? NEWS.length : count(t)}</sup></button>`).join(''));
+    if (NEWS[0]) $('#feed-latest').textContent = `Latest · ${NEWS[0].dateLabel}`;
 
     function draw() {
       const list = NEWS.filter(p => tag === 'All' || p.tags.includes(tag));
@@ -64,35 +45,37 @@
       const rest = list.filter(p => p !== featured);
       const fe = $('#featured');
       fe.hidden = !featured;
-      if (featured) {
-        render(fe, `<a class="feat" href="${postURL(featured.slug)}"><figure class="feat-cover" data-c></figure>
-          <div class="feat-body"><span class="feat-k">Featured · ${esc(featured.tags[0])}</span><h2>${esc(featured.title)}</h2>
-          <p>${esc(featured.subtitle || featured.summary)}</p><p class="fl-meta">${byline()}<span>${esc(featured.dateLabel)}</span><span>${featured.minutes} min read</span></p></div></a>`);
-        paintCover($('[data-c]', fe), featured.slug, featured.tags[0], featured.cover && ROOT + featured.cover.replace(/^\//, ''));
-      }
-      render($('#feed-list'), rest.map(p => `<article class="fl"><a class="fl-link" href="${postURL(p.slug)}">
-          <div class="fl-text">${byline()}<h3>${esc(p.title)}</h3><p class="fl-sum">${esc(p.summary)}</p>
-            <p class="fl-meta"><span>${esc(p.dateLabel)}</span><span>${p.minutes} min read</span><span class="pill">${esc(p.tags[0])}</span></p></div>
-          <figure class="fl-thumb" data-c="${esc(p.slug)}"></figure></a></article>`).join('') || '<p class="empty">No stories with this topic yet.</p>');
-      $$('#feed-list [data-c]').forEach(el => { const p = NEWS.find(x => x.slug === el.dataset.c); paintCover(el, p.slug, p.tags[0], p.cover && ROOT + p.cover.replace(/^\//, '')); });
+      render(fe, featured ? `<a class="lead" href="${postURL(featured.slug)}" data-key="${esc(featured.slug)}">
+          <figure class="story-cover m-zoom" data-morph data-c="${esc(featured.slug)}"></figure>
+          <div class="lead-body">${kicker(featured)}<h2 class="story-title"><span class="u">${esc(featured.title)}</span></h2>
+            <p class="story-sum">${esc(featured.subtitle || featured.summary)}</p>
+            <p class="story-meta">Read the story · ${featured.minutes} min <span class="m-arrow" aria-hidden="true">→</span></p></div></a>` : '');
+      const big = rest.length % 3 === 1 ? 4 : rest.length % 3 === 2 ? 2 : 0; // wide cards first, so the last row is always full
+      render($('#feed-list'), rest.map((p, i) => card(p, i < big)).join('') || (featured ? '' : '<p class="empty">No stories with this topic yet.</p>'));
+      paintAll(main);
       $$('#feed-tabs [role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tag === tag)));
-      $$('#topics button').forEach(b => b.classList.toggle('on', b.dataset.tag === tag));
       $('#feed-count').textContent = `${list.length} ${list.length === 1 ? 'story' : 'stories'}`;
     }
-    const pick = t => { tag = t; const u = new URL(location.href); if (t === 'All') u.searchParams.delete('tag'); else u.searchParams.set('tag', t); history.replaceState(null, '', u); draw(); };
-    $('#feed-tabs').addEventListener('click', e => { const b = e.target.closest('[data-tag]'); if (b) pick(b.dataset.tag); });
-    $('#topics').addEventListener('click', e => { const b = e.target.closest('[data-tag]'); if (b) { pick(b.dataset.tag); scrollTo({ top: 0, behavior: 'smooth' }); } });
+    $('#feed-tabs').addEventListener('click', e => {
+      const b = e.target.closest('[data-tag]'); if (!b || b.dataset.tag === tag) return;
+      tag = b.dataset.tag;
+      const u = new URL(location.href); if (tag === 'All') u.searchParams.delete('tag'); else u.searchParams.set('tag', tag);
+      history.replaceState(null, '', u);
+      const top = $('#feed-bar').offsetTop;
+      if (scrollY > top) scrollTo({ top });
+      M.swap(main, draw);
+    });
     draw();
   }
 
   /* ---------- Article ---------- */
   function article() {
     const slug = body.dataset.slug;
-    const post = NEWS.find(p => p.slug === slug) || { title: document.title, tags: [], summary: '' };
+    const post = NEWS.find(p => p.slug === slug) || { slug, title: document.title, tags: [], summary: '' };
     const prose = $('#prose');
     // The full article and its figure are already in the HTML, including without JS.
     const fig = $('[data-cover]');
-    if (fig) paintCover(fig, slug, post.tags[0]);
+    if (fig) render(fig, M.cover(slug, TAG_HUE[post.tags[0]]));
 
     // Share actions (top and bottom)
     const url = $('link[rel="canonical"]')?.href || location.href.split(/[?#]/)[0];
@@ -110,22 +93,25 @@
       setTimeout(() => { s.textContent = ''; }, 2200);
     });
 
-    // More from the author: same-topic posts first, then most recent.
+    // Keep reading: same-topic posts first, then most recent.
     const others = NEWS.filter(p => p.slug !== slug);
-    const more = [...others.filter(p => p.tags.some(t => post.tags.includes(t))), ...others].filter((p, i, a) => a.indexOf(p) === i).slice(0, 4);
-    render($('#more-grid'), more.map(p => `<a class="mc" href="${postURL(p.slug)}"><figure data-c="${esc(p.slug)}"></figure>
-      <span class="mc-k">${esc(p.tags[0])}</span><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p><span class="mc-meta">${esc(p.dateLabel)} · ${p.minutes} min read</span></a>`).join(''));
-    $$('#more-grid [data-c]').forEach(el => { const p = NEWS.find(x => x.slug === el.dataset.c); paintCover(el, p.slug, p.tags[0], p.cover && ROOT + p.cover.replace(/^\//, '')); });
+    const more = [...others.filter(p => p.tags.some(t => post.tags.includes(t))), ...others].filter((p, i, a) => a.indexOf(p) === i).slice(0, 3);
+    render($('#more-grid'), more.map(p => card(p)).join(''));
+    paintAll($('#more-grid'));
 
-    // Reading progress and a top bar that hides while reading down.
-    const bar = $('#r-bar'), progress = $('#read-progress');
-    let last = scrollY;
+    // Reading progress, and the contents rail following the section in view.
+    const progress = $('#read-progress');
     addEventListener('scroll', () => {
       const end = prose.offsetTop + prose.offsetHeight - innerHeight;
       progress.style.transform = `scaleX(${Math.min(1, Math.max(0, scrollY / Math.max(1, end)))})`;
-      bar.classList.toggle('hide', scrollY > last && scrollY > 120);
-      last = scrollY;
     }, { passive: true });
+    const links = new Map($$('#toc a').map(a => [a.hash.slice(1), a]));
+    if (links.size) {
+      const spy = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) links.forEach((a, id) => a.classList.toggle('on', id === e.target.id));
+      }), { rootMargin: '-96px 0px -70% 0px' });
+      links.forEach((_, id) => { const h = document.getElementById(id); if (h) spy.observe(h); });
+    }
   }
 
   if (body.dataset.page === 'feed') feed();

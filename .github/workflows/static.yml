@@ -1,19 +1,20 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Deploys the privacy-checked public artifact (_site/) to GitHub Pages.
+# The site is static: generated pages (articles, project pages, feed, sitemap) are committed, so the build only
+# verifies that they are current, runs the tests, assembles _site/, and checks that artifact before publishing it.
 name: Deploy static content to Pages
 
 on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
+  # Lets pull requests prove the site builds and passes its checks, without deploying
+  pull_request:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Least privilege by default; the deploy job adds what Pages needs.
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -22,27 +23,49 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+      - name: Install build dependencies
+        run: npm ci
+      # Fails when someone edited a post or project.json (or the CV data) without regenerating its pages.
+      - name: Verify generated pages are current
+        run: |
+          node tools/build-news.mjs --check
+          node tools/build-projects.mjs --check
+      - name: Test newsroom rendering and links
+        run: npm test
       - name: Prepare public files
         run: node tools/build-public.mjs
+      - name: Check the public artifact
+        run: node tools/check-public.mjs
+      - name: Setup Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload only the privacy-checked public artifact
           path: '_site'
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

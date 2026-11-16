@@ -9,13 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=JetBrains+Mono:wght@500&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/motion.css">
+<script src="/assets/motion.js"></script>
 </head>
 <body>
 <main class="wrap" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:22px">
-  <span class="kicker"><span class="dot" aria-hidden="true"></span>404 · unreachable state</span>
-  <h1 style="font:300 clamp(48px,9vw,110px)/.95 var(--serif);letter-spacing:-.035em">This transition<br>has <em style="color:var(--orange)">no target.</em></h1>
-  <p style="color:var(--muted);max-width:520px">The page you were looking for may have moved when the site was redesigned.</p>
-  <p><a class="btn btn-solid" href="/">Return to majidbabaei.com</a></p>
+  <span class="kicker enter"><span class="dot" aria-hidden="true"></span>404 · unreachable state</span>
+  <h1 style="font:300 clamp(48px,9vw,110px)/.95 var(--serif);letter-spacing:-.035em"><span class="mask"><span>This</span></span> <span class="mask"><span>transition</span></span><br><span class="mask" style="--i:1"><span>has</span></span> <span class="mask" style="--i:1"><span><em style="color:var(--orange)">no target.</em></span></span></h1>
+  <p class="enter" style="--i:1;color:var(--muted);max-width:520px">The page you were looking for may have moved when the site was redesigned.</p>
+  <p class="enter" style="--i:2;display:flex;flex-wrap:wrap;gap:12px"><a class="btn btn-solid" href="/">Return to majidbabaei.com</a><a class="btn btn-ghost" href="/news/">Read the newsroom</a><a class="btn btn-ghost" href="/projects/">Browse projects</a></p>
 </main>
 </body>
 </html>

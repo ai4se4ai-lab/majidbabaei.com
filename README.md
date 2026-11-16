@@ -88,6 +88,8 @@ Then run `node tools/build-projects.mjs` (or the lab sync).
 | Project pages, newsroom pages, RSS, sitemap, `assets/projects-data.js`, `assets/news-data.js` | **generated** by `tools/` |
 | Bio, research agenda, teaching, students, service, background, contact | `index.html`, edited by hand from the CV |
 | Styles / behavior | `assets/style.css`, `news.css`, `projects.css` / `site.js`, `news.js`, `projects.js` |
+| Page transitions, hero entrance, hover layer, theme toggle, phone menu | `assets/motion.css`, `assets/motion.js`, loaded by every page |
+| Header and footer of generated pages | `tools/chrome.mjs`; the hand-written pages (`index.html`, `news/index.html`, `projects/index.html`) carry the same markup, so change them together |
 
 Preview locally from this folder with `node ../scripts/serve.mjs`, then open http://localhost:8000.
 

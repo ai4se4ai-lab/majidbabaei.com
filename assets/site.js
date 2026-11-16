@@ -14,32 +14,15 @@
   $('#year').textContent = new Date().getFullYear();
   if (R.cvSha256) $('#sync-note').textContent = `CV-synced · ${R.cvSha256.slice(0, 10).toLowerCase()}`;
 
-  /* ---------- Theme ---------- */
-  const root = document.documentElement;
-  $('#theme-btn').addEventListener('click', () => {
-    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-    root.dataset.theme = dark ? 'light' : 'dark';
-    store.set('theme', root.dataset.theme);
-  });
+  const M = window.Motion || { swap: (_, fn) => fn() };
+  const main = $('#main');
 
-  /* ---------- Header, menu, scroll-spy ---------- */
-  const header = $('.site-header'), nav = $('#nav'), menuBtn = $('#menu-btn');
-  const setMenu = open => { nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open)); };
-  menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
-  nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 8), { passive: true });
-  const links = new Map($$('a', nav).map(a => [a.hash.slice(1), a]));
+  /* ---------- Scroll-spy (theme, menu and header behaviour live in motion.js) ---------- */
+  const links = new Map($$('#nav a').filter(a => a.hash && a.pathname === location.pathname).map(a => [a.hash.slice(1), a]));
   const spy = new IntersectionObserver(entries => entries.forEach(e => {
     if (e.isIntersecting) links.forEach((a, id) => a.classList.toggle('current', id === e.target.id));
   }), { rootMargin: '-45% 0px -50% 0px' });
   links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
-
-  /* ---------- Reveal on scroll ---------- */
-  const reveal = new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); reveal.unobserve(e.target); }
-  }), { rootMargin: '0px 0px -8% 0px' });
-  $$('.reveal').forEach(el => reveal.observe(el));
 
   /* ---------- Newsroom panel (hero) ---------- */
   const NEWS = window.NEWS || [];
@@ -82,13 +65,13 @@
   function renderArtifacts(theme) {
     const items = R.projects.filter(p => theme === 'All' || p.theme === theme).sort(ongoingLast);
     const slugOf = name => name.split(' / ')[0].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    render($('#art-grid'), items.map(p => `<a class="art" data-theme="${esc(p.theme)}" href="projects/${esc(slugOf(p.name))}/">
-      <span class="art-top"><span>${esc(themeLabel[p.theme] || p.theme)}</span><span aria-hidden="true">→</span></span>
+    render($('#art-grid'), items.map(p => `<a class="art" data-key="art-${esc(slugOf(p.name))}" data-theme="${esc(p.theme)}" href="projects/${esc(slugOf(p.name))}/">
+      <span class="art-top"><span>${esc(themeLabel[p.theme] || p.theme)}</span><span class="m-arrow" aria-hidden="true">→</span></span>
       <h4>${esc(p.name)}</h4><p>${esc(p.description)}</p><span class="status">${esc(p.status)}</span></a>`).join(''));
     $('#art-count').textContent = `${items.length} of ${R.projects.length}`;
     $$('#art-filter button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.theme === theme)));
   }
-  $('#art-filter').addEventListener('click', e => { const b = e.target.closest('button'); if (b) renderArtifacts(b.dataset.theme); });
+  $('#art-filter').addEventListener('click', e => { const b = e.target.closest('button'); if (b) M.swap(main, () => renderArtifacts(b.dataset.theme)); });
   $('#art-more').addEventListener('click', () => { $('#art-grid').classList.remove('collapsed'); });
   renderArtifacts('All');
 
@@ -129,7 +112,7 @@
     }).join('') : '<li class="empty">No matching entries. Try another search or switch tabs.</li>');
     $$('#pub-tabs [role=tab]').forEach(t => t.setAttribute('aria-selected', String(t.dataset.kind === kind)));
   }
-  $('#pub-tabs').addEventListener('click', e => { const t = e.target.closest('[role=tab]'); if (t) { kind = t.dataset.kind; renderPubs(); } });
+  $('#pub-tabs').addEventListener('click', e => { const t = e.target.closest('[role=tab]'); if (t && t.dataset.kind !== kind) { kind = t.dataset.kind; M.swap(main, renderPubs); } });
   $('#pub-tabs').addEventListener('keydown', e => {
     if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
     const tabs = $$('#pub-tabs [role=tab]');

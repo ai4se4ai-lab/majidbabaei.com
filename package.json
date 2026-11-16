@@ -5,7 +5,10 @@
   "scripts": {
     "build:news": "node tools/build-news.mjs",
     "check:news": "node tools/build-news.mjs --check",
-    "test": "node --test tools/news.test.mjs"
+    "test": "node --test tools/news.test.mjs",
+    "check:projects": "node tools/build-projects.mjs --check",
+    "build:projects": "node tools/build-projects.mjs",
+    "build:public": "node tools/build-public.mjs && node tools/check-public.mjs"
   },
   "dependencies": {
     "marked": "18.2.0",
