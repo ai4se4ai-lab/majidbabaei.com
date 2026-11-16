@@ -86,7 +86,7 @@
       <div class="byline">
         <img src="../../assets/img/portrait.webp" alt="" width="44" height="44">
         <div><a class="by-name" href="../../">Majid Babaei</a>
-          <p><time datetime="2026-10-31">Oct 31, 2026</time> <span class="dot-sep">·</span> <span>8 min read</span></p></div>
+          <p><time datetime="2026-10-31">Oct 31, 2026</time> <span class="dot-sep">·</span> <span>9 min read</span></p></div>
       </div>
       <div class="a-actions" data-share></div>
     </div>
@@ -113,7 +113,8 @@
 <p>RapidPay asks three connected questions. <strong>Which debt items are related? Which have the greatest structural reach? When does active development create a practical opportunity to address them?</strong></p>
 <h2 id="three-shortcuts-on-the-path-to-a-braking-decision">Three shortcuts on the path to a braking decision</h2>
 <p>The shuttle is a constructed example for explaining RapidPay. Its code, comments, and possible consequences are illustrative. The evaluation later in this article reports results from the paper's open-source projects.</p>
-<div class="table-wrap"><table>
+<p>The diagrams build up the same example as the article progresses. Select a diagram to open it at full size.</p>
+<figure><a href="/assets/img/news/rapidpay-shuttle-observation.png"><img src="/assets/img/news/rapidpay-shuttle-observation.png" alt="A delayed observation. The pedestrian has moved between capture and arrival of a sensor frame. Three connected components use arrival time, a fixed tracking time step, and tracks assumed to be current. This is an illustrative simulation." loading="lazy" /></a></figure><div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Location</th>
@@ -157,7 +158,7 @@
 </ul>
 <p>RapidPay searches within a bounded dependency scope, using five hops by default. It gives relationships type-specific weights adjusted to the project's coupling and complexity, then constructs a directed dependency graph. Its chain-construction and visualization layer groups connected debt-bearing entities into chains, using connectivity with edge direction ignored for grouping.</p>
 <p>In our shuttle scenario, this gives the engineer a way to inspect the path from sensor timestamps through obstacle tracking to the braking planner. Even when the comments live in different files, the data connecting their code entities makes the relationship visible. The graph retains dependency direction for the impact analysis that follows.</p>
-<h3 id="3-estimate-how-widely-a-change-could-ripple">3. Estimate how widely a change could ripple</h3>
+<figure><a href="/assets/img/news/rapidpay-shuttle-chain.png"><img src="/assets/img/news/rapidpay-shuttle-chain.png" alt="From comments to a debt chain. The capture-timestamp TODO belongs to sensor ingestion, the fixed-time-step FIXME to tracking, and the current-track HACK to planning. Measurements flow from ingestion to tracking, and obstacle tracks flow from tracking to planning, connecting the three items into one illustrative debt chain." loading="lazy" /></a></figure><h3 id="3-estimate-how-widely-a-change-could-ripple">3. Estimate how widely a change could ripple</h3>
 <p>The <strong>SATD Impact Ripple (SIR)</strong> score summarizes an item's position in that graph. It combines three normalized structural signals.</p>
 <ul>
 <li><strong>Weighted fanout</strong> measures the strength of its outgoing connections to other debt-bearing entities.</li>
@@ -165,14 +166,14 @@
 <li><strong>Weighted reachability</strong> measures the wider set of debt-bearing entities reachable from it, accounting for connection strength.</li>
 </ul>
 <p>Together, these signals give higher priority to items with greater potential structural influence. In the shuttle example, the timestamp item could receive a higher score if its outgoing dependencies reach the tracking and planning items. Its actual score would depend on the extracted graph and the rest of the project.</p>
-<p>SIR is a relative structural score. In a vehicle project, engineers would interpret it alongside hazard analysis and the safety requirements for perception and braking. A planner with few graph connections can still have a critical role in vehicle behavior.</p>
+<figure><a href="/assets/img/news/rapidpay-shuttle-ripple.png"><img src="/assets/img/news/rapidpay-shuttle-ripple.png" alt="Trace the potential ripple from sensor ingestion through obstacle tracking to braking planning. Fanout considers direct connections, chain length considers the depth of a path, and reachability considers all reachable debt items. The diagram is conceptual and gives no computed SIR score." loading="lazy" /></a></figure><p>SIR is a relative structural score. In a vehicle project, engineers would interpret it alongside hazard analysis and the safety requirements for perception and braking. A planner with few graph connections can still have a critical role in vehicle behavior.</p>
 <p>RapidPay also derives a soft effort signal from repository history, combining the time between SATD-touching commits with the number of files modified. That signal helps identify potentially manageable fixes when impact scores are similar. The timing proxy can include scheduling and review delays, so its interpretation requires care.</p>
 <h3 id="4-bring-the-recommendation-into-today-s-work">4. Bring the recommendation into today's work</h3>
 <p><strong>Commit-Aware Insight Generation (CAIG)</strong> adds development context. It looks for recent changes to the debt-bearing code or its graph neighbors, and considers contributors' previous work in the relevant files.</p>
 <p>Suppose your latest commit updates the sensor interface to retain capture timestamps. RapidPay can use that activity to raise relevant debt in the tracking and planning code. The engineer is already reviewing the timing data, and the graph identifies consumers whose assumptions may need to be revisited in the same change.</p>
 <p>The final ranking combines ripple impact, commit relevance, historical effort, and an LLM assessment of fix potential. For candidates assessed as having high or partial fix potential, another prompt generates an ordered remediation plan using recent changes and connected debt items.</p>
 <p>For our illustrative shuttle, a proposed plan could ask the engineer to trace capture timestamps through the pipeline, review the tracker's time-step assumption, and examine the planner's handling of observation age. It could also identify simulation cases with delayed and irregular frames for the team to test against its timing and safety requirements. These steps illustrate the kind of coordinated maintenance plan the approach aims to support. The engineering team would assess the proposal against the implementation and its safety process.</p>
-<blockquote>
+<figure><a href="/assets/img/news/rapidpay-shuttle-commit.png"><img src="/assets/img/news/rapidpay-shuttle-commit.png" alt="Connect the chain to today's change. A commit preserving capture timestamps touches sensor ingestion and creates an opportunity to review timing in tracking and freshness in planning. A proposed plan traces timestamps, reviews downstream assumptions, and tests delayed frames in simulation. An engineer reviews the proposal." loading="lazy" /></a></figure><blockquote>
 <p>A useful recommendation connects the deferred fix, the code it can affect, and the change a developer is making today.</p>
 </blockquote>
 <h2 id="what-the-study-found">What the study found</h2>

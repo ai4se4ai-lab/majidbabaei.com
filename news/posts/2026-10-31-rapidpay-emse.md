@@ -30,6 +30,10 @@ RapidPay asks three connected questions. **Which debt items are related? Which h
 
 The shuttle is a constructed example for explaining RapidPay. Its code, comments, and possible consequences are illustrative. The evaluation later in this article reports results from the paper's open-source projects.
 
+The diagrams build up the same example as the article progresses. Select a diagram to open it at full size.
+
+<figure><a href="/assets/img/news/rapidpay-shuttle-observation.png"><img src="/assets/img/news/rapidpay-shuttle-observation.png" alt="A delayed observation. The pedestrian has moved between capture and arrival of a sensor frame. Three connected components use arrival time, a fixed tracking time step, and tracks assumed to be current. This is an illustrative simulation."></a></figure>
+
 | Location | Developer's admission | Why it matters during a sensor-interface change |
 | --- | --- | --- |
 | `sensor_ingest.cpp` | `TODO preserve sensor capture timestamps` | The adapter currently labels measurements with the time they arrive, hiding transport delay. |
@@ -67,6 +71,8 @@ RapidPay searches within a bounded dependency scope, using five hops by default.
 
 In our shuttle scenario, this gives the engineer a way to inspect the path from sensor timestamps through obstacle tracking to the braking planner. Even when the comments live in different files, the data connecting their code entities makes the relationship visible. The graph retains dependency direction for the impact analysis that follows.
 
+<figure><a href="/assets/img/news/rapidpay-shuttle-chain.png"><img src="/assets/img/news/rapidpay-shuttle-chain.png" alt="From comments to a debt chain. The capture-timestamp TODO belongs to sensor ingestion, the fixed-time-step FIXME to tracking, and the current-track HACK to planning. Measurements flow from ingestion to tracking, and obstacle tracks flow from tracking to planning, connecting the three items into one illustrative debt chain."></a></figure>
+
 ### 3. Estimate how widely a change could ripple
 
 The **SATD Impact Ripple (SIR)** score summarizes an item's position in that graph. It combines three normalized structural signals.
@@ -76,6 +82,8 @@ The **SATD Impact Ripple (SIR)** score summarizes an item's position in that gra
 - **Weighted reachability** measures the wider set of debt-bearing entities reachable from it, accounting for connection strength.
 
 Together, these signals give higher priority to items with greater potential structural influence. In the shuttle example, the timestamp item could receive a higher score if its outgoing dependencies reach the tracking and planning items. Its actual score would depend on the extracted graph and the rest of the project.
+
+<figure><a href="/assets/img/news/rapidpay-shuttle-ripple.png"><img src="/assets/img/news/rapidpay-shuttle-ripple.png" alt="Trace the potential ripple from sensor ingestion through obstacle tracking to braking planning. Fanout considers direct connections, chain length considers the depth of a path, and reachability considers all reachable debt items. The diagram is conceptual and gives no computed SIR score."></a></figure>
 
 SIR is a relative structural score. In a vehicle project, engineers would interpret it alongside hazard analysis and the safety requirements for perception and braking. A planner with few graph connections can still have a critical role in vehicle behavior.
 
@@ -90,6 +98,8 @@ Suppose your latest commit updates the sensor interface to retain capture timest
 The final ranking combines ripple impact, commit relevance, historical effort, and an LLM assessment of fix potential. For candidates assessed as having high or partial fix potential, another prompt generates an ordered remediation plan using recent changes and connected debt items.
 
 For our illustrative shuttle, a proposed plan could ask the engineer to trace capture timestamps through the pipeline, review the tracker's time-step assumption, and examine the planner's handling of observation age. It could also identify simulation cases with delayed and irregular frames for the team to test against its timing and safety requirements. These steps illustrate the kind of coordinated maintenance plan the approach aims to support. The engineering team would assess the proposal against the implementation and its safety process.
+
+<figure><a href="/assets/img/news/rapidpay-shuttle-commit.png"><img src="/assets/img/news/rapidpay-shuttle-commit.png" alt="Connect the chain to today's change. A commit preserving capture timestamps touches sensor ingestion and creates an opportunity to review timing in tracking and freshness in planning. A proposed plan traces timestamps, reviews downstream assumptions, and tests delayed frames in simulation. An engineer reviews the proposal."></a></figure>
 
 > A useful recommendation connects the deferred fix, the code it can affect, and the change a developer is making today.
 

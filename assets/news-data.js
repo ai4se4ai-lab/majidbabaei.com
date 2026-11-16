@@ -117,7 +117,7 @@ window.NEWS = [
   "date": "2026-10-31",
   "dateLabel": "Oct 31, 2026",
   "iso": "2026-10-31",
-  "minutes": 8,
+  "minutes": 9,
   "imageURL": "https://majidbabaei.com/assets/img/news/rapidpay-overview.png"
  },
  {
