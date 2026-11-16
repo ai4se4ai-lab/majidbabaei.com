@@ -6,28 +6,28 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>
-<title>RapidPay accepted to Empirical Software Engineering | Majid Babaei</title>
-<meta name="description" content="Accepted to Empirical Software Engineering and to appear, RapidPay connects self-admitted technical debt into dependency chains and uses ripple scoring and commit context to prioritize repayment.">
+<title>Which TODO should you fix next? Follow the chain with RapidPay | Majid Babaei</title>
+<meta name="description" content="Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. A checkout example explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.">
 <meta name="author" content="Majid Babaei">
 <link rel="canonical" href="https://majidbabaei.com/news/rapidpay-emse/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Majid Babaei">
-<meta property="og:title" content="RapidPay accepted to Empirical Software Engineering">
-<meta property="og:description" content="Accepted to Empirical Software Engineering and to appear, RapidPay connects self-admitted technical debt into dependency chains and uses ripple scoring and commit context to prioritize repayment.">
+<meta property="og:title" content="Which TODO should you fix next? Follow the chain with RapidPay">
+<meta property="og:description" content="Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. A checkout example explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.">
 <meta property="og:url" content="https://majidbabaei.com/news/rapidpay-emse/">
 <meta property="og:image" content="https://majidbabaei.com/assets/img/news/rapidpay-overview.png">
 <meta property="og:image:secure_url" content="https://majidbabaei.com/assets/img/news/rapidpay-overview.png">
-<meta property="og:image:alt" content="RapidPay overview showing SATD detection, dependency-chain construction, impact-ripple scoring, and commit-aware insights.">
+<meta property="og:image:alt" content="RapidPay architecture connecting developer comments and repository history to debt detection, dependency chains, ripple scoring, and commit-aware recommendations.">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="836">
 <meta property="article:published_time" content="2026-10-31">
 <meta property="article:tag" content="Publications">
 <meta property="article:tag" content="Software evidence">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="RapidPay accepted to Empirical Software Engineering">
-<meta name="twitter:description" content="Accepted to Empirical Software Engineering and to appear, RapidPay connects self-admitted technical debt into dependency chains and uses ripple scoring and commit context to prioritize repayment.">
+<meta name="twitter:title" content="Which TODO should you fix next? Follow the chain with RapidPay">
+<meta name="twitter:description" content="Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. A checkout example explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.">
 <meta name="twitter:image" content="https://majidbabaei.com/assets/img/news/rapidpay-overview.png">
-<meta name="twitter:image:alt" content="RapidPay overview showing SATD detection, dependency-chain construction, impact-ripple scoring, and commit-aware insights.">
+<meta name="twitter:image:alt" content="RapidPay architecture connecting developer comments and repository history to debt detection, dependency chains, ripple scoring, and commit-aware recommendations.">
 <link rel="alternate" type="application/rss+xml" title="Majid Babaei: News" href="../feed.xml">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="../../assets/cv-request.css">
 <link rel="expect" href="#page-ready" blocking="render">
 <script src="../../assets/motion.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"RapidPay accepted to Empirical Software Engineering","description":"Accepted to Empirical Software Engineering and to appear, RapidPay connects self-admitted technical debt into dependency chains and uses ripple scoring and commit context to prioritize repayment.","image":"https://majidbabaei.com/assets/img/news/rapidpay-overview.png","datePublished":"2026-10-31","keywords":"Publications, Software evidence","url":"https://majidbabaei.com/news/rapidpay-emse/","author":{"@type":"Person","name":"Majid Babaei","url":"https://majidbabaei.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Which TODO should you fix next? Follow the chain with RapidPay","description":"Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. A checkout example explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.","image":"https://majidbabaei.com/assets/img/news/rapidpay-overview.png","datePublished":"2026-10-31","keywords":"Publications, Software evidence","url":"https://majidbabaei.com/news/rapidpay-emse/","author":{"@type":"Person","name":"Majid Babaei","url":"https://majidbabaei.com/"}}</script>
 </head>
 <body class="reader" data-page="post" data-root="../../" data-slug="rapidpay-emse">
 <a class="skip" href="#prose">Skip to article</a>
@@ -80,84 +80,147 @@
 <main class="article">
   <header class="a-head wrap">
     <nav class="crumbs enter" aria-label="Breadcrumb"><a href="../">Newsroom</a><span aria-hidden="true">/</span><a class="a-tag" href="../?tag=Publications">Publications</a></nav>
-    <h1><span class="mask"><span>RapidPay</span></span> <span class="mask" style="--i:1"><span>accepted</span></span> <span class="mask" style="--i:2"><span>to</span></span> <span class="mask" style="--i:3"><span>Empirical</span></span> <span class="mask" style="--i:3"><span>Software</span></span> <span class="mask" style="--i:3"><span>Engineering</span></span></h1>
-    <p class="a-sub enter" style="--i:1">Technical debt does not live alone. RapidPay connects the dots and helps developers decide what to repay next.</p>
+    <h1><span class="mask"><span>Which</span></span> <span class="mask" style="--i:1"><span>TODO</span></span> <span class="mask" style="--i:2"><span>should</span></span> <span class="mask" style="--i:3"><span>you</span></span> <span class="mask" style="--i:3"><span>fix</span></span> <span class="mask" style="--i:3"><span>next?</span></span> <span class="mask" style="--i:3"><span>Follow</span></span> <span class="mask" style="--i:3"><span>the</span></span> <span class="mask" style="--i:3"><span>chain</span></span> <span class="mask" style="--i:3"><span>with</span></span> <span class="mask" style="--i:3"><span>RapidPay</span></span></h1>
+    <p class="a-sub enter" style="--i:1">A checkout retry, a shared payment state, and three deferred fixes explain how RapidPay connects technical debt to the work happening now.</p>
     <div class="a-meta enter" style="--i:2">
       <div class="byline">
         <img src="../../assets/img/portrait.webp" alt="" width="44" height="44">
         <div><a class="by-name" href="../../">Majid Babaei</a>
-          <p><time datetime="2026-10-31">Oct 31, 2026</time> <span class="dot-sep">·</span> <span>3 min read</span></p></div>
+          <p><time datetime="2026-10-31">Oct 31, 2026</time> <span class="dot-sep">·</span> <span>8 min read</span></p></div>
       </div>
       <div class="a-actions" data-share></div>
     </div>
   </header>
   <div class="wrap">
     <figure class="a-cover has-image" data-morph-target>
-      <a href="/assets/img/news/rapidpay-overview.png" target="_blank" rel="noopener" aria-label="Open full-size figure"><img src="/assets/img/news/rapidpay-overview.png" alt="RapidPay overview showing SATD detection, dependency-chain construction, impact-ripple scoring, and commit-aware insights." fetchpriority="high"></a>
-      <figcaption>RapidPay&#39;s workflow, from developer comments and repository history to connected debt chains, impact scores, and remediation opportunities. Open the figure to view it at full size.</figcaption>
+      <a href="/assets/img/news/rapidpay-overview.png" target="_blank" rel="noopener" aria-label="Open full-size figure"><img src="/assets/img/news/rapidpay-overview.png" alt="RapidPay architecture connecting developer comments and repository history to debt detection, dependency chains, ripple scoring, and commit-aware recommendations." fetchpriority="high"></a>
+
     </figure>
   </div>
   <div class="a-body wrap">
     <aside class="a-rail" aria-label="In this story">
       <p class="rail-k">In this story</p>
-      <ol class="toc" id="toc"><li><a href="#beyond-a-list-of-todos">Beyond a list of TODOs</a></li><li><a href="#how-rapidpay-works">How RapidPay works</a></li><li><a href="#what-we-found">What we found</a></li><li><a href="#why-it-matters">Why it matters</a></li><li><a href="#explore-the-work">Explore the work</a></li></ol>
+      <ol class="toc" id="toc"><li><a href="#the-problem-hidden-in-a-todo-list">The problem hidden in a TODO list</a></li><li><a href="#a-checkout-example-you-can-follow">A checkout example you can follow</a></li><li><a href="#how-rapidpay-builds-the-picture">How RapidPay builds the picture</a></li><li><a href="#what-the-study-found">What the study found</a></li><li><a href="#why-researchers-should-follow-the-chain">Why researchers should follow the chain</a></li><li><a href="#read-the-implementation-and-research">Read the implementation and research</a></li></ol>
     </aside>
-    <article class="prose" id="prose" tabindex="-1"><p>A <code>TODO</code> comment can look like a small, local problem. But software is connected: a shortcut in one function can affect the classes, modules, and data flows around it. Fixing one issue may mean untangling several others. <strong>Which debt should a team repay, and when?</strong></p>
-<p>Our paper <strong>RapidPay: Identifying and prioritizing self-admitted technical debt chains for effective debt management in software systems</strong> has been accepted to <em>Empirical Software Engineering</em> and is <strong>to appear</strong>.</p>
-<p><strong>Authors:</strong> M. Babaei, N. Ezzati-Jivan, F. Hendijani Fard, and A. Hamou-Lhadj.</p>
-<h2 id="beyond-a-list-of-todos">Beyond a list of TODOs</h2>
-<p>When developers acknowledge a shortcut or a known limitation in a comment, they leave behind <em>self-admitted technical debt</em> (SATD). Sometimes it is explicit, marked <code>TODO</code>, <code>FIXME</code>, or <code>HACK</code>. Sometimes it is implicit: a comment describes a temporary solution without using any of those keywords.</p>
-<p>Detecting those comments is useful, but it leaves three questions unanswered: how debt items connect, how much their effects can ripple through a system, and when current development work creates an opportunity to address them. RapidPay brings these questions together by treating debt as <strong>chains of connected issues</strong>, rather than isolated comments.</p>
-<h2 id="how-rapidpay-works">How RapidPay works</h2>
-<p>The overview above follows four stages:</p>
-<ol>
-<li><strong>Detect debt (SID).</strong> SATD Instance Detection combines lexical patterns with LLM-based analysis to identify explicit and implicit admissions of debt.</li>
-<li><strong>Connect related items (IRD).</strong> Inter-SATD Relationship Discovery examines call graphs, control flow, module dependencies, and data dependencies. Its Chain Construction and Visualization (CCV) layer organizes these relationships into structural propagation chains.</li>
-<li><strong>Estimate ripple impact (SIR).</strong> SATD Impact Ripple scoring combines intrinsic severity, outgoing chain influence, incoming chain dependency, and chain length to rank debt in its wider dependency context.</li>
-<li><strong>Surface opportunities in context (CAIG).</strong> Commit-Aware Insight Generation uses development changes to prioritize relevant debt and suggest remediation opportunities while developers are working nearby.</li>
-</ol>
-<h2 id="what-we-found">What we found</h2>
-<p>We evaluated RapidPay on <strong>10 open-source projects</strong>. For debt detection, it achieved average precision of <strong>0.90</strong>, recall of <strong>0.89</strong>, and an F1-score of <strong>0.90</strong>, outperforming four baselines in the reported study.</p>
-<p>We then replayed <strong>18 months of post-snapshot commit history</strong> across all 10 projects to examine prioritization and timing. Here, <em>Hit@5</em> measures how often the debt item maintainers actually addressed appeared among the top five recommendations.</p>
+    <article class="prose" id="prose" tabindex="-1"><p>A customer clicks <strong>Pay</strong>. The payment service takes too long to respond, so the checkout retries. Somewhere in the code, a developer has left a comment asking for better duplicate-request handling. Elsewhere, another comment admits that payment status is stored too loosely. A third flags a shortcut in receipt generation.</p>
+<p>You have been asked to improve checkout retries. Which of those comments belongs in your change? How far will the fix reach? And which deferred improvement is worth tackling while you already have the code open?</p>
+<p>This is the maintenance problem behind <strong>RapidPay</strong>. Our paper, <em>RapidPay: Identifying and prioritizing self-admitted technical debt chains for effective debt management in software systems</em>, has been <strong>accepted to Empirical Software Engineering</strong> and is <strong>to appear</strong>.</p>
+<p>The authors are M. Babaei, N. Ezzati-Jivan, F. Hendijani Fard, and A. Hamou-Lhadj.</p>
+<h2 id="the-problem-hidden-in-a-todo-list">The problem hidden in a TODO list</h2>
+<p>Developers often leave an explanation when they accept a shortcut to get something working. A comment might acknowledge a temporary implementation, a missing safeguard, or code that needs refactoring. Researchers call these admissions <strong>self-admitted technical debt</strong>, or <strong>SATD</strong>.</p>
+<p>Such comments preserve valuable knowledge. They tell a future maintainer where an earlier developer saw a compromise. But a repository-wide search can produce a long list of comments with very little guidance about the next change.</p>
+<p>A comment's wording gives only part of the picture. The surrounding function may call another debt-bearing function, read shared state, or control whether another component runs. Following those relationships can reveal several deferred fixes that a developer should consider together. A small-looking change may require coordinating assumptions across files.</p>
+<p>RapidPay asks three connected questions. <strong>Which debt items are related? Which have the greatest structural reach? When does active development create a practical opportunity to address them?</strong></p>
+<h2 id="a-checkout-example-you-can-follow">A checkout example you can follow</h2>
+<p>Consider an illustrative online shop with the following comments. The scenario is constructed to explain the approach. The study results later in this article come from open-source repositories.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Finding</th>
-<th>Reported result</th>
+<th>Location</th>
+<th>Developer's admission</th>
+<th>Why it matters during a retry change</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Ranking with SIR</td>
-<td>Hit@5 of 0.48, compared with 0.29 for the baseline; mean reciprocal rank of 0.33</td>
+<td><code>checkout.py</code></td>
+<td><code>TODO prevent duplicate payment attempts on retry</code></td>
+<td>The checkout calls the payment routine again after a timeout.</td>
 </tr>
 <tr>
-<td>First-ranked recommendation</td>
-<td>Hit@1 increased from 0.09 to 0.18</td>
+<td><code>payments.py</code></td>
+<td><code>FIXME replace shared last_payment_status with per-order state</code></td>
+<td>The payment routine writes state that receipt generation also reads.</td>
 </tr>
 <tr>
-<td>Connected debt addressed together</td>
-<td>Chain-linked items were co-addressed within 30 days at 3.2 times the rate of random, unlinked pairs</td>
-</tr>
-<tr>
-<td>Adding commit context with CAIG</td>
-<td>Hit@5 increased to 0.61, a gain of 13 percentage points over SIR alone; mean reciprocal rank of 0.42</td>
-</tr>
-<tr>
-<td>Earlier opportunities</td>
-<td>CAIG surfaced 63% of eventually resolved SATD in its top-five recommendations at commits before maintainers addressed it</td>
+<td><code>receipts.py</code></td>
+<td><code>HACK receipt assumes the latest payment status belongs to this order</code></td>
+<td>Receipt generation relies on an assumption that a state change would affect.</td>
 </tr>
 </tbody></table>
 </div>
-<p>These are <strong>retrospective findings</strong>: they compare recommendations with recorded maintenance activity. They do not establish that showing the recommendations to developers caused faster repayment. Structural connections point to potential propagation and useful opportunities to investigate, rather than proving that one debt item caused another.</p>
-<h2 id="why-it-matters">Why it matters</h2>
-<p>The goal is to help developers move from "we know this needs fixing" to <strong>"this is connected, consequential, and relevant to the work we are doing now."</strong> RapidPay combines evidence already present in comments, code dependencies, and commits to make debt repayment a more informed decision.</p>
-<h2 id="explore-the-work">Explore the work</h2>
+<p>Reading the first comment naturally raises a question about repeated requests. Following the code raises another question about how an order's payment result is represented. Following the data reaches the receipt logic. A developer now has a reason to inspect all three locations before deciding on the scope of a fix.</p>
+<p>The code supplies the connections. Checkout <strong>calls</strong> payment handling, and payment handling supplies <strong>data</strong> used by receipts. RapidPay uses relationships like these to assemble a <em>debt chain</em>. Despite the name, a chain can branch into a network of connected items.</p>
+<p>Membership in that chain records structural reachability through code dependencies. It gives a maintainer evidence about where to investigate possible interactions. Establishing the actual behavior still requires inspecting the code and its tests.</p>
+<h2 id="how-rapidpay-builds-the-picture">How RapidPay builds the picture</h2>
+<p>RapidPay combines four stages. Each stage adds information needed for the next decision, from recognizing an admission of debt to identifying an opportunity to act on it.</p>
+<h3 id="1-find-the-admissions-of-debt">1. Find the admissions of debt</h3>
+<p><strong>SATD Instance Detection (SID)</strong> starts with an inexpensive lexical filter. It looks for markers such as <code>TODO</code>, <code>FIXME</code>, and <code>HACK</code>, along with phrases such as “temporary solution” and “needs refactoring.” An LLM then classifies the candidate comments and supplies a confidence score used for filtering.</p>
+<p>This second pass helps interpret what a comment is admitting. A request to add a README link and an admission that payment state is shared incorrectly describe different maintenance concerns, even if both begin with <code>TODO</code>. The approach also considers debt expressed through natural-language phrases beyond the familiar markers.</p>
+<p>The initial filter defines which comments reach the LLM. Its coverage therefore affects what the rest of the pipeline can discover. In the supplied approach, the classifier uses zero-shot prompting with GPT-4o.</p>
+<h3 id="2-connect-the-code-behind-the-comments">2. Connect the code behind the comments</h3>
+<p><strong>Inter-SATD Relationship Discovery (IRD)</strong> associates detected comments with their enclosing code entities, such as functions, classes, or modules. Static analysis then looks for four kinds of dependency.</p>
 <ul>
-<li><a href="/assets/img/news/rapidpay-overview.pdf">Overview figure (PDF)</a></li>
-<li><a href="/projects/rapidpay/">RapidPay project and releases</a></li>
-<li><a href="https://github.com/ai4se4ai-lab/RapidPay" target="_blank" rel="noopener noreferrer">Open-source code: ai4se4ai-lab/RapidPay</a></li>
+<li><strong>Calls</strong> connect code that invokes other code.</li>
+<li><strong>Data dependencies</strong> connect definitions of values with code that uses them.</li>
+<li><strong>Control dependencies</strong> connect decisions with the execution they govern.</li>
+<li><strong>Module dependencies</strong> connect importing or otherwise syntactically dependent modules.</li>
 </ul>
-<p>The paper remains accepted and to appear. Final publication details will be added when available.</p>
+<p>RapidPay searches within a bounded dependency scope, using five hops by default. It gives relationships type-specific weights adjusted to the project's coupling and complexity, then constructs a directed dependency graph. Its chain-construction and visualization layer groups connected debt-bearing entities into chains, using connectivity with edge direction ignored for grouping.</p>
+<p>In our checkout scenario, this gives the developer a way to inspect the path from the retry comment through payment handling to receipt generation. The graph retains dependency direction for the impact analysis that follows.</p>
+<h3 id="3-estimate-how-widely-a-change-could-ripple">3. Estimate how widely a change could ripple</h3>
+<p>The <strong>SATD Impact Ripple (SIR)</strong> score summarizes an item's position in that graph. It combines three normalized structural signals.</p>
+<ul>
+<li><strong>Weighted fanout</strong> measures the strength of its outgoing connections to other debt-bearing entities.</li>
+<li><strong>Weighted chain length</strong> measures how far a dependency path can extend from it.</li>
+<li><strong>Weighted reachability</strong> measures the wider set of debt-bearing entities reachable from it, accounting for connection strength.</li>
+</ul>
+<p>Together, these signals give higher priority to items with greater potential structural influence. In the checkout example, the retry entry point could receive a higher score if its outgoing dependencies reach several other debt-bearing entities. Its actual score would depend on the extracted graph and the rest of the project.</p>
+<p>SIR is a relative structural score. Interpreting it requires the surrounding domain knowledge, including the business importance and consequences of the behavior being changed.</p>
+<p>RapidPay also derives a soft effort signal from repository history, combining the time between SATD-touching commits with the number of files modified. That signal helps identify potentially manageable fixes when impact scores are similar. The timing proxy can include scheduling and review delays, so its interpretation requires care.</p>
+<h3 id="4-bring-the-recommendation-into-today-s-work">4. Bring the recommendation into today's work</h3>
+<p><strong>Commit-Aware Insight Generation (CAIG)</strong> adds development context. It looks for recent changes to the debt-bearing code or its graph neighbors, and considers contributors' previous work in the relevant files.</p>
+<p>Suppose your latest commit changes payment timeout handling. RapidPay can use that activity to raise relevant debt in the checkout chain. A different item elsewhere in the repository may have a high structural score, while the payment-state fix has a timely connection to your current work.</p>
+<p>The final ranking combines ripple impact, commit relevance, historical effort, and an LLM assessment of fix potential. For candidates assessed as having high or partial fix potential, another prompt generates an ordered remediation plan using recent changes and connected debt items.</p>
+<p>For our illustrative shop, a developer-facing plan could propose reviewing retry behavior, introducing per-order payment state, updating receipt generation to read that state, and testing timeout and retry paths across the affected code. These steps illustrate the kind of coordinated plan the approach aims to support. A maintainer would review the proposal against the implementation.</p>
+<blockquote>
+<p>A useful recommendation connects the deferred fix, the code it can affect, and the change a developer is making today.</p>
+</blockquote>
+<h2 id="what-the-study-found">What the study found</h2>
+<p>We evaluated RapidPay across <strong>10 open-source projects</strong>. It achieved average SATD-detection precision of <strong>0.90</strong>, recall of <strong>0.89</strong>, and F1 of <strong>0.90</strong>, outperforming four baselines in the reported study. The analysis identified <strong>742 distinct SATD chains</strong>.</p>
+<p>Detection is the first question. To examine whether the graph and development context help with prioritization, we replayed <strong>18 months of post-snapshot commit history</strong> across the projects and compared recommendations with the debt maintainers subsequently addressed.</p>
+<p><strong>Hit@5</strong> measures how often the debt item actually addressed appears within the top five recommendations. <strong>Mean reciprocal rank (MRR)</strong> rewards placing that item nearer the top, using the reciprocal of its rank and averaging across cases.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Evaluation question</th>
+<th>Reported result</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Does structural ranking help identify the next addressed item?</td>
+<td>SIR reached Hit@5 of <strong>0.48</strong>, versus <strong>0.29</strong> for the reported baseline, with MRR of <strong>0.33</strong>. Hit@1 rose from <strong>0.09</strong> to <strong>0.18</strong>.</td>
+<td>The graph supplied information associated with later maintenance choices.</td>
+</tr>
+<tr>
+<td>Do chain members tend to be addressed close together?</td>
+<td>Linked items were co-addressed within <strong>30 days</strong> at <strong>3.2 times</strong> the rate of random, unlinked pairs.</td>
+<td>Chain membership captured relationships relevant to coordinated maintenance.</td>
+</tr>
+<tr>
+<td>Does development context improve the ranking?</td>
+<td>Full CAIG reached Hit@5 of <strong>0.61</strong> and MRR of <strong>0.42</strong>.</td>
+<td>Adding context improved Hit@5 by <strong>13 percentage points</strong> over SIR alone.</td>
+</tr>
+<tr>
+<td>How often did a recommendation precede the recorded fix?</td>
+<td><strong>63%</strong> of eventually resolved SATD appeared in the top five at commits before maintainers addressed it.</td>
+<td>The replay identified opportunities to surface debt earlier.</td>
+</tr>
+</tbody></table>
+</div>
+<p>These retrospective findings measure alignment with historical maintenance activity. Measuring effects on developer effort, repayment speed, and software quality would require a prospective evaluation in which developers use the recommendations. The reported co-addressing result also concerns maintenance association within structurally connected groups.</p>
+<h2 id="why-researchers-should-follow-the-chain">Why researchers should follow the chain</h2>
+<p>RapidPay brings comment interpretation, program structure, and repository activity into one prioritization process. Each supplies a different part of the maintenance decision. Comments express a known compromise, dependencies reveal possible interactions, and commits indicate where attention is already concentrated.</p>
+<p>That combination opens concrete research questions. How sensitive are rankings to dependency scope and graph weights? How much debt does the lexical filter leave undiscovered? How well do historical time and file counts represent remediation effort? How do maintainers assess the usefulness and correctness of generated plans?</p>
+<p>The checkout example makes the practical objective tangible. A developer arrives to improve retries. A connected view helps them inspect payment state and receipt assumptions while planning that change. The research challenge is to make that guidance accurate, timely, and worth the developer's attention.</p>
+<h2 id="read-the-implementation-and-research">Read the implementation and research</h2>
+<ul>
+<li><a href="https://github.com/ai4se4ai-lab/RapidPay" target="_blank" rel="noopener noreferrer">Browse the RapidPay implementation and replication package</a></li>
+<li><a href="/projects/rapidpay/">View the RapidPay project and release record</a></li>
+<li><a href="/assets/img/news/rapidpay-overview.pdf">Open the architecture figure as a PDF</a></li>
+</ul>
+<p>The technical description and reported results in this article follow the author-supplied manuscript material. The publication status follows the CV record, which lists the paper as accepted and to appear in <em>Empirical Software Engineering</em>.</p>
 </article>
   </div>
   <footer class="a-foot wrap">

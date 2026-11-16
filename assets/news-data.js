@@ -102,22 +102,22 @@ window.NEWS = [
  },
  {
   "slug": "rapidpay-emse",
-  "title": "RapidPay accepted to Empirical Software Engineering",
-  "subtitle": "Technical debt does not live alone. RapidPay connects the dots and helps developers decide what to repay next.",
-  "summary": "Accepted to Empirical Software Engineering and to appear, RapidPay connects self-admitted technical debt into dependency chains and uses ripple scoring and commit context to prioritize repayment.",
+  "title": "Which TODO should you fix next? Follow the chain with RapidPay",
+  "subtitle": "A checkout retry, a shared payment state, and three deferred fixes explain how RapidPay connects technical debt to the work happening now.",
+  "summary": "Accepted to Empirical Software Engineering and to appear, RapidPay connects technical-debt comments through code dependencies. A checkout example explains its ripple scoring, commit-aware recommendations, and findings across 10 open-source projects.",
   "tags": [
    "Publications",
    "Software evidence"
   ],
   "featured": false,
   "cover": "/assets/img/news/rapidpay-overview.png",
-  "coverAlt": "RapidPay overview showing SATD detection, dependency-chain construction, impact-ripple scoring, and commit-aware insights.",
-  "coverCaption": "RapidPay's workflow, from developer comments and repository history to connected debt chains, impact scores, and remediation opportunities. Open the figure to view it at full size.",
+  "coverAlt": "RapidPay architecture connecting developer comments and repository history to debt detection, dependency chains, ripple scoring, and commit-aware recommendations.",
+  "coverCaption": "",
   "socialImage": null,
   "date": "2026-10-31",
   "dateLabel": "Oct 31, 2026",
   "iso": "2026-10-31",
-  "minutes": 3,
+  "minutes": 8,
   "imageURL": "https://majidbabaei.com/assets/img/news/rapidpay-overview.png"
  },
  {
