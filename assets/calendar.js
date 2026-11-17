@@ -69,6 +69,27 @@
     let occ = new Map();                                                  // id -> occurrence, for the popover
     const keep = list => { occ = new Map(list.map(o => [o.id, o])); return list; };
 
+    /* ---------- Fitting full screen to the window ---------- */
+    // On a computer (wider than 700px) full screen fits the window with no page scroll; phones keep scrolling.
+    const desk = matchMedia('(min-width:701px)');
+    function fits() { return state.full && desk.matches; }
+    // Height left under the pinned toolbar (12px + 16px layout padding), shared with CSS as --cal-avail.
+    function avail() {
+      const a = Math.max(300, innerHeight - $('#cal-bar').offsetHeight - 28);
+      document.documentElement.style.setProperty('--cal-avail', `${a}px`);
+      return a;
+    }
+    // Week: shrink or stretch the hour so every hour row fits under the day header and all-day lane.
+    function fit() {
+      grid.style.removeProperty('--cal-hour');
+      if (!fits()) return;
+      const a = avail(), wb = $('.cal-wb', grid);
+      if (!wb) return;
+      // The last hour label hangs ~8px below the grid, hence the extra 8.
+      const head = $('.cal-wh', grid).offsetHeight + $('.cal-allday', grid).offsetHeight + 2;
+      grid.style.setProperty('--cal-hour', `${Math.max(18, (a - head - 8) / Number(wb.dataset.hours)).toFixed(2)}px`);
+    }
+
     /* ---------- Views ---------- */
     function week() {
       const from = C.startOfWeek(state.date), to = C.addDays(from, 7), now = new Date(), today = C.key(now);
@@ -102,12 +123,16 @@
       return `<div class="cal-week" data-key="cal-week"><div class="cal-week-scroll"><div class="cal-week-inner">
         <div class="cal-wh"><div></div>${days.map(d => `<div class="${C.key(d) === today ? 'is-today' : ''}${C.dow(d) > 4 ? ' is-weekend' : ''}"><span class="dn">${C.DAYS[C.dow(d)]}</span><span class="dd">${d.getDate()}</span></div>`).join('')}</div>
         <div class="cal-allday"><div class="lbl">All day</div>${lane ? `<div class="cal-allday-lane">${lane}</div>` : '<div class="cal-allday-empty"></div>'}</div>
-        <div class="cal-wb"><div class="cal-hours" style="height:calc(${h1 - h0} * var(--cal-hour))">${hours}</div>${cols}</div>
+        <div class="cal-wb" data-hours="${h1 - h0}"><div class="cal-hours" style="height:calc(${h1 - h0} * var(--cal-hour))">${hours}</div>${cols}</div>
       </div></div></div>${items.length ? '' : empty('Nothing this week')}`;
     }
     function month() {
       const first = new Date(state.date.getFullYear(), state.date.getMonth(), 1), from = C.startOfWeek(first), to = C.addDays(from, 42), today = C.key(new Date());
       const items = keep(C.expand(visible(), from, to));
+      // Full screen on a computer: as many chips as fit in a sixth of the window
+      // (cell padding + date 40px, each chip 24px, the "+n more" link 20px). Otherwise 3, or 2 plus the link.
+      const room = fits() ? (avail() - 37) / 6 - 40 : 3 * 24;
+      const cap = Math.max(0, Math.floor(room / 24)), capMore = Math.max(0, Math.floor((room - 20) / 24));
       const byDay = new Map();
       for (const o of items) {
         const a = o.start < from ? from : C.atMidnight(o.start), b = o.allDay ? o.end : (C.key(o.start) === C.key(o.end) ? o.start : o.end);
@@ -115,7 +140,7 @@
       }
       const cells = [...Array(42)].map((_, i) => {
         const d = C.addDays(from, i), k = C.key(d), list = byDay.get(k) || [];
-        const other = d.getMonth() !== first.getMonth(), max = 3, shown = list.slice(0, list.length > max ? max - 1 : max);
+        const other = d.getMonth() !== first.getMonth(), shown = list.length > cap ? list.slice(0, capMore) : list;
         const chips = shown.map(o => chip(o, 'month', `${o.allDay && o.multi && C.key(o.start) !== k ? 'cont-l' : ''} ${o.allDay && o.multi && C.key(o.end) !== k ? 'cont-r' : ''}`)).join('');
         const more = list.length > shown.length ? `<button type="button" class="cal-more" data-more="${k}">+${list.length - shown.length} more</button>` : '';
         return `<div class="cal-mc${other ? ' is-other' : ''}${k === today ? ' is-today' : ''}${C.dow(d) > 4 ? ' is-weekend' : ''}" data-day="${k}">
@@ -179,7 +204,7 @@
       render($('#cal-title'), title());
       $$('#cal-views [data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === state.view)));
       $$('#cal-legend [data-type]').forEach(b => b.setAttribute('aria-pressed', String(state.types.has(b.dataset.type))));
-      rail(); sync();
+      rail(); sync(); fit();
     }
     const go = (fn, animate = true) => { closePop(); fn(); if (animate) M.swap(main, draw); else draw(); };
     const step = n => {
@@ -230,7 +255,6 @@
     // and the next F (or the button) widens it to the whole screen.
     const fullBtn = $('#cal-full'), canNative = !!document.fullscreenEnabled;
     let native = false, tried = false;                                    // holding browser full screen; asked for it this session
-    const chrome = () => document.documentElement.style.setProperty('--cal-chrome', `${Math.ceil($('#cal-bar').offsetHeight + 40)}px`);
     function setFull(on, gesture = false) {
       state.full = on;
       document.documentElement.classList.toggle('cal-focus', on);
@@ -240,7 +264,7 @@
       $('.fs-label', fullBtn).textContent = on ? 'Exit' : 'Full screen';
       if (on && gesture && canNative && !document.fullscreenElement) { tried = true; document.documentElement.requestFullscreen().then(() => { native = true; }, () => {}); }
       if (!on) { tried = false; if (document.fullscreenElement) { native = false; document.exitFullscreen().catch(() => {}); } }
-      closePop(); chrome(); sync();
+      closePop(); draw();
       if (on) scrollTo({ top: 0 });
     }
     // F: enter; in focus mode without browser full screen, go whole-screen; otherwise leave.
@@ -250,11 +274,12 @@
       else setFull(false);
     };
     document.addEventListener('fullscreenchange', () => {
-      if (document.fullscreenElement) { chrome(); return; }
+      if (document.fullscreenElement) { draw(); return; }
       if (native) { native = false; setFull(false); }                       // Esc out of browser full screen leaves focus mode too
     });
     fullBtn.addEventListener('click', () => (state.full ? setFull(false) : setFull(true, true)));
-    addEventListener('resize', () => { if (state.full) chrome(); });
+    let fitFrame = 0;
+    addEventListener('resize', () => { if (state.full && !fitFrame) fitFrame = requestAnimationFrame(() => { fitFrame = 0; draw(); }); });
 
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && !pop.hidden) { closePop(); return; }
