@@ -35,6 +35,15 @@
   });
   addEventListener('pageshow', () => html.classList.remove('is-leaving'));
 
+  /* ---------- F anywhere: open the calendar in full screen (calendar.js handles F on the calendar itself) ---------- */
+  document.addEventListener('keydown', e => {
+    const b = document.body;
+    if (!b || b.dataset.page === 'calendar' || e.defaultPrevented || e.repeat || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+    if (e.key.toLowerCase() !== 'f' || e.target.closest?.('input,textarea,select,[contenteditable],dialog[open]')) return;
+    e.preventDefault();
+    location.href = `${b.dataset.root || ''}calendar/?full=1`;
+  });
+
   /* ---------- In-page swaps: keyed items glide to their new place ---------- */
   const nameOf = el => { el.style.viewTransitionName = 'k-' + el.dataset.key.replace(/[^a-z0-9_-]/gi, '_'); };
   function swap(scope, update) {

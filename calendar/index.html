@@ -16,6 +16,7 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1520" media="(prefers-color-scheme: dark)">
+<script>if(/[?&]full=1(&|$)/.test(location.search))document.documentElement.classList.add('cal-focus')</script>
 <script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
@@ -116,6 +117,10 @@
       <label class="cal-search"><span class="visually-hidden">Find an entry</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
         <input id="cal-q" type="search" placeholder="Find an entry…" autocomplete="off"></label>
+      <button type="button" class="cal-btn cal-full" id="cal-full" aria-pressed="false" aria-label="Full screen" title="Full screen (F)">
+        <svg class="fs-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        <svg class="fs-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+        <span class="fs-label">Full screen</span><kbd>F</kbd></button>
     </div>
     <div class="wrap cal-legend" id="cal-legend" role="group" aria-label="Show types"></div>
   </div>
@@ -127,7 +132,7 @@
     <aside class="cal-rail" aria-labelledby="up-h">
       <h2 id="up-h" class="rail-k">Up next</h2>
       <ol class="cal-up" id="cal-up"></ol>
-      <p class="cal-keys" aria-label="Keyboard shortcuts"><kbd>←</kbd><kbd>→</kbd> move <kbd>T</kbd> today <kbd>W</kbd><kbd>M</kbd><kbd>Y</kbd> view</p>
+      <p class="cal-keys" aria-label="Keyboard shortcuts"><kbd>←</kbd><kbd>→</kbd> move <kbd>T</kbd> today <kbd>W</kbd><kbd>M</kbd><kbd>Y</kbd> view <kbd>F</kbd> full screen</p>
     </aside>
   </div>
 

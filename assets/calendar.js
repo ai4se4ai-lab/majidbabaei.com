@@ -53,7 +53,8 @@
       view: ['week', 'month', 'year'].includes(params.get('view')) ? params.get('view') : 'month',
       date: C.parse(params.get('date')) || C.atMidnight(new Date()),
       types: new Set(params.get('types') ? params.get('types').split(',').filter(t => HUE[t]) : TYPE_ORDER),
-      q: params.get('q') || ''
+      q: params.get('q') || '',
+      full: params.get('full') === '1'
     };
     if (!state.types.size) TYPE_ORDER.forEach(t => state.types.add(t));
     $('#cal-q').value = state.q;
@@ -156,6 +157,7 @@
       p.set('view', state.view); p.set('date', C.key(state.date));
       if (state.types.size < present.length) p.set('types', TYPE_ORDER.filter(t => state.types.has(t)).join(',')); else p.delete('types');
       if (state.q.trim()) p.set('q', state.q.trim()); else p.delete('q');
+      if (state.full) p.set('full', '1'); else p.delete('full');
       history.replaceState(null, '', u);
     };
     function rail() {
@@ -222,10 +224,44 @@
     pop.addEventListener('click', e => { if (e.target.closest('.cal-pop-x')) closePop(); const c = e.target.closest('[data-occ]'); if (c) showOcc(c.dataset.occ, c); });
     document.addEventListener('click', e => { if (!pop.hidden && !pop.contains(e.target) && !e.target.closest('[data-occ],[data-more]')) closePop(); });
     addEventListener('resize', closePop);
+    /* ---------- Full screen ---------- */
+    // Focus mode (html.cal-focus) hides the site chrome and lets the grid fill the window; it survives reloads via ?full=1.
+    // Browser full screen needs a click or key press, so it is requested only from one; arriving at ?full=1 gets focus mode,
+    // and the next F (or the button) widens it to the whole screen.
+    const fullBtn = $('#cal-full'), canNative = !!document.fullscreenEnabled;
+    let native = false, tried = false;                                    // holding browser full screen; asked for it this session
+    const chrome = () => document.documentElement.style.setProperty('--cal-chrome', `${Math.ceil($('#cal-bar').offsetHeight + 40)}px`);
+    function setFull(on, gesture = false) {
+      state.full = on;
+      document.documentElement.classList.toggle('cal-focus', on);
+      fullBtn.setAttribute('aria-pressed', String(on));
+      fullBtn.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+      fullBtn.title = on ? 'Exit full screen (F or Esc)' : 'Full screen (F)';
+      $('.fs-label', fullBtn).textContent = on ? 'Exit' : 'Full screen';
+      if (on && gesture && canNative && !document.fullscreenElement) { tried = true; document.documentElement.requestFullscreen().then(() => { native = true; }, () => {}); }
+      if (!on) { tried = false; if (document.fullscreenElement) { native = false; document.exitFullscreen().catch(() => {}); } }
+      closePop(); chrome(); sync();
+      if (on) scrollTo({ top: 0 });
+    }
+    // F: enter; in focus mode without browser full screen, go whole-screen; otherwise leave.
+    const toggleFull = () => {
+      if (!state.full) setFull(true, true);
+      else if (canNative && !document.fullscreenElement && !tried) setFull(true, true);
+      else setFull(false);
+    };
+    document.addEventListener('fullscreenchange', () => {
+      if (document.fullscreenElement) { chrome(); return; }
+      if (native) { native = false; setFull(false); }                       // Esc out of browser full screen leaves focus mode too
+    });
+    fullBtn.addEventListener('click', () => (state.full ? setFull(false) : setFull(true, true)));
+    addEventListener('resize', () => { if (state.full) chrome(); });
+
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && !pop.hidden) { closePop(); return; }
-      if (e.target.closest('input,textarea,select') || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'Escape' && state.full && !document.fullscreenElement && !e.target.closest('input,textarea,select')) { setFull(false); return; }
+      if (e.target.closest('input,textarea,select,[contenteditable]') || e.metaKey || e.ctrlKey || e.altKey) return;
       const k = e.key.toLowerCase();
+      if (k === 'f') { if (!e.repeat) toggleFull(); e.preventDefault(); return; }
       if (e.key === 'ArrowLeft') go(() => step(-1)); else if (e.key === 'ArrowRight') go(() => step(1));
       else if (k === 't') go(() => { state.date = C.atMidnight(new Date()); });
       else if (k === 'w' || k === 'm' || k === 'y') go(() => { state.view = { w: 'week', m: 'month', y: 'year' }[k]; });
@@ -257,6 +293,7 @@
     const keepTop = () => { const top = bar.offsetTop; if (scrollY > top + 40) scrollTo({ top }); };
     [$('#cal-prev'), $('#cal-next'), $('#cal-today'), $('#cal-views')].forEach(el => el.addEventListener('click', keepTop));
     stats(); draw();
+    if (state.full) setFull(true);
     // In the week view, scroll the first entry (or the working day) into view inside the grid.
     const firstChip = $('.cal-day .cal-ev', grid);
     if (firstChip && state.view === 'week') firstChip.scrollIntoView({ block: 'nearest', inline: 'nearest' });

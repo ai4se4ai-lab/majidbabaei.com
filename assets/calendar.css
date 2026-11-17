@@ -214,6 +214,23 @@
 .ev-prose > p:first-child::first-letter{all:unset}
 .ev-back{grid-column:1/-1;margin-top:28px;text-align:center}
 
+/* ---------- Full screen (html.cal-focus; ?full=1, the F key, or the toolbar button) ---------- */
+.cal-full{width:auto;gap:7px;padding:0 13px;grid-auto-flow:column;font:500 13px var(--sans)}
+.cal-full svg{width:16px;height:16px}
+.cal-full .fs-off,.cal-focus .cal-full .fs-on{display:none}
+.cal-focus .cal-full .fs-off{display:block}
+.cal-full kbd{display:none;font:500 10px var(--mono);opacity:.55;border:1px solid currentColor;border-radius:4px;padding:0 4px;line-height:1.5}
+@media (hover:hover) and (pointer:fine){.cal-full kbd{display:inline-block}}
+.cal-focus body{min-height:100dvh;background:var(--paper)}
+.cal-focus .site-header,.cal-focus .skip,.cal-focus .masthead,.cal-focus .statement,.cal-focus .site-foot,.cal-focus .cal-rail{display:none!important}
+.cal-focus .cal-bar{top:0}
+.cal-focus .cal-bar .wrap,.cal-focus .cal-layout{max-width:none;padding-inline:clamp(12px,2vw,28px)}
+.cal-focus .cal-layout{grid-template-columns:minmax(0,1fr);padding-top:12px;padding-bottom:16px}
+/* Month cells share the height left under the toolbar; the week gets taller hours. */
+.cal-focus .cal-mb{grid-auto-rows:minmax(max(96px,calc((100dvh - var(--cal-chrome,150px)) / 6)),auto)}
+.cal-focus{--cal-hour:64px}
+.cal-focus .cal-week-scroll{max-height:calc(100dvh - var(--cal-chrome,150px));overflow:auto}
+
 /* ---------- Responsive ---------- */
 @media (max-width:1100px){
   .cal-layout{grid-template-columns:1fr}
@@ -228,7 +245,9 @@
 @media (max-width:700px){
   :root{--cal-hour:48px;--cal-gutter:44px}
   .cal-bar-inner{gap:10px 12px}
-  .cal-search{flex:1 1 100%}
+  .cal-search{flex:1 1 auto}
+  .cal-full .fs-label,.cal-full kbd{display:none!important}
+  .cal-full{width:36px;padding:0}
   .cal-views{order:3}
   .cal-title{font-size:18px}
   .cal-mb{grid-auto-rows:minmax(84px,auto)}
@@ -243,7 +262,7 @@
 }
 @media (max-width:480px){.cal-year{grid-template-columns:1fr}}
 @media print{
-  .cal-bar,.cal-rail,.statement,.cal-pop,.cal-search,.cal-views kbd{display:none!important}
+  .cal-bar,.cal-rail,.statement,.cal-pop,.cal-search,.cal-views kbd,.cal-full{display:none!important}
   .cal-layout{display:block}
   .cal-week-inner{min-width:0}
   .cal-ev-in{border:1px solid var(--c);border-left-width:3px;background:none!important}
