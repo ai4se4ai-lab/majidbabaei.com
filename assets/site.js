@@ -58,36 +58,40 @@
   });
   $$('.tr').forEach(c => { c.addEventListener('mouseenter', () => highlight(c.dataset.t)); c.addEventListener('mouseleave', () => highlight(null)); });
 
-  /* ---------- The statechart, in detail: project nodes on each arc, one token round the loop ----------
-     Nodes come from the milestone chips of the two transition cards, so the diagram and the cards can
-     never disagree (and review-stage work stays anonymous in one place). The token is driven by script:
-     it travels transition ①, enters Agentic AI (entry action), returns by ②, enters Human, and repeats.
-     Each project lights as the token passes it. */
+  /* ---------- The statechart, in detail: the concepts that carry work across each transition ----------
+     Each arc carries the abstractions that move work from one state to the other: ① turns human concerns
+     into models, contracts, transformations, and verification that agents can be held to; ② turns agent
+     traces into slices, provenance, and explanations that people can read. A hover names the projects
+     behind each concept. One token is driven by script round the whole loop; concepts it has passed stay
+     marked until the next pass, and a state's entry action stays lit while the token is inside. */
+  const CONCEPTS = {
+    down: [
+      { c: 'concerns', d: 'safety, intent, correctness, and organizational constraints, as people state them' },
+      { c: 'models', d: 'the same concerns at the level people reason about, precise enough to check · SSEVOH-DSL' },
+      { c: 'contracts', d: 'checkable obligations between people, guardrails, and agents · TINT, SSEVOH-DSL' },
+      { c: 'transformations', s: 'transforms', d: 'checked composition of agent teams and the state they share · AutoM2M, Safe Coordination' },
+      { c: 'verification', d: 'does the composed team still meet its concerns? · TINT, Safe Coordination' },
+    ],
+    up: [
+      { c: 'traces', d: 'transcripts, tool calls, and executions, abundant but unreadable at scale · TAAF' },
+      { c: 'slices', d: 'the few components whose interaction explains a symptom · Agent Slicing' },
+      { c: 'provenance', d: 'which version, approval, and context produced a behavior · Heartness' },
+      { c: 'explanations', d: 'why an objective was or was not achieved, in terms people can check · TAAF' },
+    ],
+  };
   const SVG = 'http://www.w3.org/2000/svg';
   const mk = (tag, attrs = {}, text) => { const n = document.createElementNS(SVG, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (text != null) n.textContent = text; return n; };
-  const chipsOf = t => $$(`.tr[data-t="${t}"] .milestones .chip`);
-  const shortName = chip => chip.textContent.trim().split(' · ')[0].replace(/^\[anonymous for review\]$/, 'anonymous');
-  const linkedNodes = [];
   const diagrams = $$('.loop svg').map(svg => {
     const arcs = {}; $$('path[data-arc]', svg).forEach(p => { arcs[p.dataset.arc] = { path: p, len: 0, nodes: [] }; });
     $$('.nodes', svg).forEach(group => {
-      const t = group.dataset.t, side = group.dataset.side, arc = arcs[t], chips = chipsOf(t);
-      chips.forEach((chip, i) => {
-        const anon = !chip.dataset.find;
-        const node = mk('g', { class: `node${anon ? ' nd-anon' : ''}` });
-        node.append(mk('title', {}, chip.textContent.trim()));
-        node.append(mk('circle', { class: 'nd-ring', r: 12 }), mk('circle', { class: 'nd', r: anon ? 4 : 4.8 }));
-        const label = mk('text', { class: 'nd-l', 'text-anchor': side === 'right' ? 'start' : side === 'left' ? 'end' : 'middle' },
-          (side === 'right' || side === 'left') && chip.dataset.short ? chip.dataset.short : shortName(chip));
+      const t = group.dataset.t, side = group.dataset.side, arc = arcs[t], steps = CONCEPTS[t], vertical = side === 'right' || side === 'left';
+      steps.forEach((step, i) => {
+        const node = mk('g', { class: 'node', tabindex: '0' });
+        node.append(mk('title', {}, `${step.c} — ${step.d}`));
+        node.append(mk('circle', { class: 'nd', r: 4.8 }));
+        const label = mk('text', { class: 'nd-l', 'text-anchor': side === 'right' ? 'start' : side === 'left' ? 'end' : 'middle' }, vertical && step.s ? step.s : step.c);
         node.append(label);
-        node.addEventListener('mouseenter', () => chip.classList.add('hot'));
-        node.addEventListener('mouseleave', () => chip.classList.remove('hot'));
-        // Chips are linked to publication entries further down; a node follows its chip's link, if it gets one.
-        const open = () => { if (chip.href) chip.click(); };
-        node.addEventListener('click', e => { if (chip.href) e.stopPropagation(); open(); });
-        node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
-        linkedNodes.push({ node, chip });
-        group.append(node); arc.nodes.push({ i, n: chips.length, at: 0, el: node, label, side, lit: false });
+        group.append(node); arc.nodes.push({ i, n: steps.length, at: 0, el: node, label, side });
       });
     });
     const tok = mk('g', { class: 'tok', opacity: 0 });
@@ -112,6 +116,8 @@
           if (!inward) { nx = -nx; ny = -ny; }
           const dist = (n.side === 'right' || n.side === 'left') ? 16 : 22 + (n.i % 2 ? 15 : 0);
           n.label.setAttribute('x', (nx * dist).toFixed(1)); n.label.setAttribute('y', (ny * dist + 4).toFixed(1));
+          // On the horizontal arcs, labels near either end run toward the loop's interior, away from the steep line.
+          if (n.side === 'below' || n.side === 'above') n.label.setAttribute('text-anchor', p.x < 440 ? 'start' : p.x > 560 ? 'end' : 'middle');
         });
       }
       return (d.ready = true);
@@ -120,8 +126,7 @@
     d.layout();
     return d;
   });
-  const projectCount = chipsOf('down').length + chipsOf('up').length;
-  $('#loop-sig').textContent = `2 states · 2 transitions · 1 loop · ${projectCount} projects`;
+  $('#loop-sig').textContent = `2 states · 2 transitions · 1 loop · ${CONCEPTS.down.length + CONCEPTS.up.length} concepts`;
 
   if (!(window.Motion?.reduced)) {
     // Timeline, in ms: travel ①, dwell in AI, travel ②, dwell in Human.
@@ -134,17 +139,15 @@
       d.tok.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
       d.ghosts.forEach((g, i) => { const q = arc.path.getPointAtLength(Math.max(0, len - (3 - i) * 13)); g.setAttribute('cx', (q.x - p.x).toFixed(1)); g.setAttribute('cy', (q.y - p.y).toFixed(1)); });
     };
-    const enter = (d, which, from) => {
-      const st = d.states[which]; st.style.setProperty('--c', from === 'down' ? 'var(--orange)' : 'var(--teal)');
-      st.classList.remove('enter'); void st.getBBox(); st.classList.add('enter');
-      setTimeout(() => st.classList.remove('enter'), 950);
-    };
+    // Steady marks, no flashes: the entry action stays lit while the token is in the state.
+    const enter = (d, which, from) => { const st = d.states[which]; st.style.setProperty('--c', from === 'down' ? 'var(--orange)' : 'var(--teal)'); st.classList.add('enter'); };
+    const leave = d => Object.values(d.states).forEach(st => st.classList.remove('enter'));
     const frame = now => {
       const elapsed = (now - t0) % total; let acc = 0, i = 0;
       while (elapsed >= acc + phases[i].dur) { acc += phases[i].dur; i++; }
       const ph = phases[i], k = (elapsed - acc) / ph.dur;
       if (i !== lastPhase) {
-        if (ph.arc) diagrams.forEach(d => { d.arcs[ph.arc].nodes.forEach(n => { n.lit = false; }); d.tok.setAttribute('class', `tok tok-${ph.arc === 'down' ? 'o' : 't'}`); d.tok.setAttribute('opacity', 1); });
+        if (ph.arc) diagrams.forEach(d => { leave(d); d.arcs[ph.arc].nodes.forEach(n => n.el.classList.remove('on')); d.tok.setAttribute('class', `tok tok-${ph.arc === 'down' ? 'o' : 't'}`); d.tok.setAttribute('opacity', 1); });
         else diagrams.forEach(d => { d.tok.setAttribute('opacity', 0); enter(d, ph.dwell, phases[(i + 3) % 4].arc); });
         if (i === 0 && lastPhase !== -1) { passes++; $('#loop-pass').textContent = `pass ${String(passes + 1).padStart(2, '0')}`; }
         lastPhase = i;
@@ -152,7 +155,7 @@
       if (ph.arc) diagrams.forEach(d => {
         if (!d.ready) return;
         const arc = d.arcs[ph.arc], len = ease(k) * arc.len; place(d, arc, len);
-        arc.nodes.forEach(n => { if (!n.lit && len >= n.at - 2) { n.lit = true; n.el.classList.remove('lit'); void n.el.getBBox(); n.el.classList.add('lit'); setTimeout(() => n.el.classList.remove('lit'), 950); } });
+        arc.nodes.forEach(n => { if (len >= n.at - 2) n.el.classList.add('on'); });
       });
       raf = requestAnimationFrame(frame);
     };
@@ -258,6 +261,4 @@
       el.animate([{ backgroundColor: 'rgba(184,79,18,.14)' }, { backgroundColor: 'rgba(184,79,18,0)' }], { duration: 1800, easing: 'ease-out' });
     });
   });
-  // Statechart nodes whose chip resolved to a publication become focusable links.
-  linkedNodes.forEach(({ node, chip }) => { if (chip.href) { node.dataset.link = '1'; node.setAttribute('tabindex', '0'); node.setAttribute('role', 'link'); } });
 })();

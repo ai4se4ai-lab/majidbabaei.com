@@ -175,32 +175,21 @@ button{cursor:pointer}
 .loop.hl-down .tr-g[data-t="up"],.loop.hl-up .tr-g[data-t="down"]{opacity:.22}
 .loop.hl-down .arc-o,.loop.hl-up .arc-t{stroke-width:4}
 .loop.hl-down .tr-g[data-t="down"] .lbl{stroke:var(--orange)}.loop.hl-up .tr-g[data-t="up"] .lbl{stroke:var(--teal)}
-/* Project nodes on the arcs (built from the milestone chips) and the state's entry action. */
+/* Concept nodes on the arcs and the state's entry action: steady marks, no flashes. */
 .loop .nodes[data-t="down"]{--c:var(--orange)}.loop .nodes[data-t="up"]{--c:var(--teal)}
-.loop .node{cursor:default;outline:0}
-.loop .node[data-link]{cursor:pointer}
-.loop .nd{fill:var(--paper);stroke:var(--c);stroke-width:2;transition:fill .3s,r .3s}
-.loop .nd-anon .nd{stroke-dasharray:3 2.5}
-.loop .nd-ring{fill:var(--c);opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.3)}
-.loop .nd-l{font:500 10.5px var(--mono);fill:var(--muted);transition:fill .3s}
-.loop .nd-anon .nd-l{font-style:italic}
+.loop .node{cursor:help;outline:0}
+.loop .nd{fill:var(--paper);stroke:var(--c);stroke-width:2;transition:fill .5s var(--ease)}
+.loop .nd-l{font:500 10.5px var(--mono);fill:var(--muted);transition:fill .5s var(--ease)}
 .loop .loop-v .nd-l{font-size:13px}
-.loop .node.lit .nd,.loop .node:hover .nd,.loop .node:focus-visible .nd{fill:var(--c)}
-.loop .node.lit .nd-l,.loop .node:hover .nd-l,.loop .node:focus-visible .nd-l{fill:var(--ink)}
-.loop .node.lit .nd-ring{animation:nd-ring .9s var(--ease-enter) both}
-@keyframes nd-ring{from{opacity:.55;transform:scale(.3)}to{opacity:0;transform:scale(1.9)}}
-.loop .st rect{transition:stroke .4s}
-.loop .st.enter rect{stroke:var(--c);animation:st-enter .9s var(--ease-enter) both}
+.loop .node.on .nd,.loop .node:hover .nd,.loop .node:focus-visible .nd{fill:var(--c)}
+.loop .node.on .nd-l,.loop .node:hover .nd-l,.loop .node:focus-visible .nd-l{fill:var(--ink)}
+.loop .st rect{transition:stroke .5s var(--ease)}
+.loop .st.enter rect{stroke:var(--c)}
 .loop .st.enter .st-e{fill:var(--c)}
-.loop .st.enter .st-n{animation:st-text .9s var(--ease-enter) both}
-@keyframes st-enter{0%{stroke-width:2.2}30%{stroke-width:5}100%{stroke-width:2.2}}
-@keyframes st-text{30%{transform:translateY(-2px)}}
-.loop .st .st-n{transform-box:fill-box;transform-origin:center}
 .loop .tok{transition:opacity .3s}
 .loop .tok-halo{opacity:.16}
 .loop .tok-ghost{pointer-events:none}
 .loop .token{stroke:var(--card);stroke-width:1.5}
-.chip.hot{border-color:var(--c,var(--ink));background:color-mix(in srgb,var(--c,var(--ink)) 12%,var(--paper))}
 .transitions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .tr{--c:var(--navy);position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px 22px;display:flex;flex-direction:column;transition:border-color .3s,transform .3s,box-shadow .3s}
 .tr::before{content:"";position:absolute;left:24px;right:24px;top:0;height:3px;border-radius:0 0 3px 3px;background:var(--c)}
