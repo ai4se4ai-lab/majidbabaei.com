@@ -42,7 +42,6 @@ export const header = (root, current) => `<header class="site-header" id="top">
   <div class="wrap header-inner">
     <a class="brand" href="${root}" aria-label="Majid Babaei — home">
       <span class="brand-mark">m<span>b</span>.</span>
-      <span class="brand-text"><b>Majid Babaei</b></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
       ${navigation(root, current)}
