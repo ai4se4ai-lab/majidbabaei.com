@@ -21,20 +21,38 @@ ${styles.map(s => `<link rel="stylesheet" href="${root}assets/${s}.css">`).join(
 <link rel="expect" href="#page-ready" blocking="render">
 <script src="${root}assets/motion.js"></script>`;
 
-const NAV = [['#research', 'Agenda'], ['#publications', 'Publications'], ['news/', 'News'], ['projects/', 'Projects'], ['calendar/', 'Calendar'], ['#teaching', 'Teaching'],
-  ['#students', 'Students'], ['#service', 'Service'], ['#background', 'Background'], ['#contact', 'Contact']];
-
-const NAV_GROUPS = [
-  ['Research', ['#research', '#publications', 'projects/']],
-  ['Teaching', ['#teaching', '#students']],
-  ['Updates', ['news/', 'calendar/']],
-  ['About', ['#background', '#service', '#contact']]
+// [href, label, one-line description, icon path data (24×24, stroked)]
+const NAV = [
+  ['#research', 'Agenda', 'Closing the human ⇄ agentic AI loop', '<path d="M4 10a6 6 0 0 1 6-6h5"/><path d="m13 1.5 2.5 2.5L13 6.5"/><path d="M20 14a6 6 0 0 1-6 6H9"/><path d="m11 22.5-2.5-2.5 2.5-2.5"/>'],
+  ['#publications', 'Publications', 'Papers &amp; manuscripts', '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/>'],
+  ['projects/', 'Projects', 'Research software &amp; releases', '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>'],
+  ['#teaching', 'Teaching', 'Courses &amp; educational leadership', '<path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>'],
+  ['#students', 'Students', 'Supervision &amp; advising', '<circle cx="9" cy="8" r="3.5"/><path d="M3 20c.8-3.5 3.2-5 6-5s5.2 1.5 6 5M16 4.5a3.5 3.5 0 0 1 0 7M18 15c1.6.6 2.6 2.2 3 5"/>'],
+  ['news/', 'News', 'Progress notes &amp; milestones', '<rect x="3" y="4" width="14" height="16" rx="2"/><path d="M17 8h4v10a2 2 0 0 1-4 0M7 8h6M7 12h6M7 16h3"/>'],
+  ['calendar/', 'Calendar', 'Classes, talks &amp; deadlines', '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'],
+  ['#background', 'Background', 'Appointments, education &amp; industry', '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>'],
+  ['#service', 'Service', 'Community &amp; partnerships', '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3"/>'],
+  ['#contact', 'Contact', 'Office &amp; ways to reach me', '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>']
 ];
 
-export const navigation = (root, current) => NAV_GROUPS.map(([label, destinations]) => `<details class="nav-group" name="main-navigation">
+// [label, tone, destinations]
+const NAV_GROUPS = [
+  ['Research', 'orange', ['#research', '#publications', 'projects/']],
+  ['Teaching', 'teal', ['#teaching', '#students']],
+  ['Updates', 'navy', ['news/', 'calendar/']],
+  ['About', 'orange', ['#background', '#service', '#contact']]
+];
+
+const navLink = (root, current, href) => {
+  const [, label, desc, icon] = NAV.find(([url]) => url === href);
+  return `<a href="${root}${href}"${href === current ? ' aria-current="page"' : ''}><span class="np-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${icon}</svg></span><span class="np-txt"><span class="np-t">${label}</span><span class="np-d">${desc}</span></span></a>`;
+};
+
+export const navigation = (root, current) => NAV_GROUPS.map(([label, tone, destinations], i) => `<details class="nav-group" name="main-navigation" data-tone="${tone}">
         <summary${destinations.includes(current) ? ' class="current"' : ''}>${label}<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></summary>
         <div class="nav-panel">
-          ${destinations.map(href => `<a href="${root}${href}"${href === current ? ' aria-current="page"' : ''}>${NAV.find(([url]) => url === href)[1]}</a>`).join('\n          ')}
+          <p class="np-eyebrow" aria-hidden="true"><span>0${i + 1}</span>${label}</p>
+          ${destinations.map(href => navLink(root, current, href)).join('\n          ')}
         </div>
       </details>`).join('\n      ');
 

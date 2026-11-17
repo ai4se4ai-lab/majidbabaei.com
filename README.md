@@ -111,7 +111,7 @@ Times are written and shown as Pacific time (`America/Vancouver` in the `.ics` f
 
 ## Where content lives
 
-The floating glass header groups navigation into four menus: Research (Agenda, Publications, Projects), Teaching (Teaching, Students), Updates (News, Calendar), and About (Background, Service, Contact). Theme and CV request controls sit beside them. Shared menu markup lives in `tools/chrome.mjs`; keep the four hand-maintained index-page headers consistent with it, then rebuild generated pages. Menus use native disclosures, close on outside clicks and Escape, and collapse behind the menu button on smaller screens.
+The floating glass header groups navigation into four menus: Research (Agenda, Publications, Projects), Teaching (Teaching, Students), Updates (News, Calendar), and About (Background, Service, Contact). Theme and CV request controls sit beside them. Shared menu markup (labels, one-line descriptions, icons, group tones) lives in `tools/chrome.mjs`; run `node tools/sync-nav.mjs` to copy it into the four hand-maintained index pages (`--check` reports drift; `scripts/sync-personal-site.mjs` runs both), then rebuild generated pages. Menus use native disclosures that open on hover intent on desktop, animate in and out, close on outside clicks and Escape, and collapse behind the menu button on smaller screens. The header responds to scrolling through CSS variables set in `assets/motion.js`: `--hp` (compacts width, height, radius, blur, opacity and shadow), `--prog` (page-progress hairline), `--tilt` (a spring lean from scroll speed, off under reduced motion) and `--mx/--my` (pointer light).
 
 | Content | File |
 | --- | --- |

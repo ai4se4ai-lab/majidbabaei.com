@@ -64,7 +64,7 @@ test('every entry page is static, links to its .ics, and references only files t
     assert.ok(html.includes(`<link rel="canonical" href="https://majidbabaei.com/calendar/${e.slug}/">`));
     assert.ok(html.includes('href="event.ics"'));
     assert.doesNotMatch(html, /undefined|NaN/, `${e.slug}: a date failed to render`);
-    assert.ok(html.includes('aria-current="page">Calendar</a>'), `${e.slug}: Calendar is not the current nav item`);
+    assert.ok(/aria-current="page">(?:(?!<\/a>).)*<span class="np-t">Calendar<\/span>/.test(html), `${e.slug}: Calendar is not the current nav item`);
     assert.doesNotMatch(html, /<script src="https:\/\/cdn/);
     for (const [, ref] of html.matchAll(/(?:src|href)="([^"#][^"]*)"/g)) {
       if (/^(https?:|mailto:|data:)/.test(ref)) continue;
@@ -94,11 +94,11 @@ test('the iCalendar feed is well formed: CRLF, escaped text, date values, and a 
 
 test('the calendar page and the shared chrome link to each other', async () => {
   const page = await readFile(resolve(root, 'calendar/index.html'), 'utf8');
-  assert.ok(page.includes('aria-current="page">Calendar</a>'));
+  assert.ok(/aria-current="page">(?:(?!<\/a>).)*<span class="np-t">Calendar<\/span>/.test(page));
   assert.ok(page.includes('href="feed.ics"'));
   for (const file of ['index.html', 'news/index.html', 'projects/index.html']) {
     const html = await readFile(resolve(root, file), 'utf8');
-    assert.ok(/href="(?:\.\.\/)?calendar\/">Calendar<\/a>/.test(html), `${file}: no Calendar link in the navigation`);
+    assert.ok(/href="(?:\.\.\/)?calendar\/">(?:(?!<\/a>).)*<span class="np-t">Calendar<\/span>/.test(html), `${file}: no Calendar link in the navigation`);
   }
   const sitemap = await readFile(resolve(root, 'sitemap.xml'), 'utf8');
   assert.ok(sitemap.includes('https://majidbabaei.com/calendar/</loc>'));

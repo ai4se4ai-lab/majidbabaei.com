@@ -134,35 +134,112 @@
       t.finished.finally(() => { delete html.dataset.vt; });
     });
 
-    /* Header: phone menu, hairline once scrolled, and (articles) stepping aside while reading down. */
+    /* Header: menus (hover-intent on desktop, animated open/close, a gliding pill), the phone menu,
+       and the scroll response: compacts with depth, leans with scroll speed, traces page progress,
+       and (articles) steps aside while reading down. */
     const header = $('.site-header'), nav = $('#nav'), menuBtn = $('#menu-btn');
+    const desk = matchMedia('(min-width: 921px)'), finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+    let moveInd = () => {};
     if (nav && menuBtn) {
       const groups = [...nav.querySelectorAll('.nav-group')];
-      const closeGroups = () => groups.forEach(group => { group.open = false; });
-      const setMenu = open => { nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); if (!open) closeGroups(); };
+      const animated = () => desk.matches && !reduced;
+      const openGroup = g => { clearTimeout(g.navTimer); g.classList.remove('closing'); g.open = true; };
+      const closeGroup = (g, now) => {
+        clearTimeout(g.navTimer);
+        if (!g.open) return;
+        if (now || !animated()) { g.classList.remove('closing'); g.open = false; return; }
+        g.classList.add('closing');
+        g.navTimer = setTimeout(() => { g.classList.remove('closing'); g.open = false; }, 150);
+      };
+      const closeGroups = now => groups.forEach(g => closeGroup(g, now));
+      const setMenu = open => { nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); if (!open) closeGroups(true); };
       menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
       nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
-      groups.forEach(group => group.addEventListener('toggle', () => {
-        if (group.open) groups.forEach(other => { if (other !== group) other.open = false; });
-      }));
-      document.addEventListener('click', e => { if (!header.contains(e.target)) setMenu(false); });
-      header.addEventListener('focusout', e => { if (e.relatedTarget && !header.contains(e.relatedTarget)) setMenu(false); });
+
+      /* The pill that glides to the hovered or open group (desktop). */
+      const ind = document.createElement('span');
+      ind.className = 'nav-ind'; ind.setAttribute('aria-hidden', 'true');
+      nav.prepend(ind); nav.classList.add('ind-live');
+      let hovered = null;
+      moveInd = () => {
+        const target = hovered || groups.find(g => g.open && !g.classList.contains('closing'))?.querySelector('summary');
+        if (!target || !desk.matches) { ind.style.opacity = '0'; return; }
+        let x = 0, y = 0;
+        for (let n = target; n && n !== nav; n = n.offsetParent) { x += n.offsetLeft; y += n.offsetTop; }
+        const wasHidden = ind.style.opacity !== '1';
+        ind.classList.toggle('snap', wasHidden);
+        ind.style.width = `${target.offsetWidth}px`; ind.style.height = `${target.offsetHeight}px`;
+        ind.style.transform = `translate(${x}px, ${y}px)`;
+        if (wasHidden) void ind.offsetWidth;
+        ind.classList.remove('snap');
+        ind.style.opacity = '1';
+      };
+
+      groups.forEach(g => {
+        const summary = g.querySelector('summary');
+        summary.addEventListener('click', e => {
+          e.preventDefault();
+          const recentHover = Date.now() - (g.hoverOpenedAt || 0) < 450;
+          if (g.open && !g.classList.contains('closing') && !recentHover) closeGroup(g); else openGroup(g);
+        });
+        g.addEventListener('toggle', () => {
+          if (g.open) groups.forEach(other => { if (other !== g) closeGroup(other, true); });
+          moveInd();
+        });
+        summary.addEventListener('pointerenter', () => { hovered = summary; moveInd(); });
+        summary.addEventListener('pointerleave', () => { hovered = null; moveInd(); });
+        g.addEventListener('pointerenter', e => {
+          if (e.pointerType !== 'mouse' || !desk.matches || !finePointer.matches) return;
+          clearTimeout(g.navTimer);
+          if (g.open && !g.classList.contains('closing')) return;
+          g.navTimer = setTimeout(() => { openGroup(g); g.hoverOpenedAt = Date.now(); }, groups.some(o => o.open) ? 0 : 80);
+        });
+        g.addEventListener('pointerleave', e => {
+          if (e.pointerType !== 'mouse' || !desk.matches || !finePointer.matches) return;
+          clearTimeout(g.navTimer);
+          if (g.open) g.navTimer = setTimeout(() => closeGroup(g), 220);
+        });
+      });
+      nav.addEventListener('pointerleave', () => { hovered = null; moveInd(); });
+      desk.addEventListener('change', () => { closeGroups(true); setMenu(false); moveInd(); });
+
+      document.addEventListener('click', e => { if (!header.contains(e.target)) { closeGroups(); setMenu(false); } });
+      header.addEventListener('focusout', e => { if (e.relatedTarget && !header.contains(e.relatedTarget)) { closeGroups(); setMenu(false); } });
       document.addEventListener('keydown', e => {
         if (e.key !== 'Escape') return;
-        const openGroup = groups.find(group => group.open);
-        if (openGroup) { openGroup.open = false; openGroup.querySelector('summary').focus(); }
+        const open = groups.find(g => g.open);
+        if (open) { closeGroup(open); open.querySelector('summary').focus(); }
         else if (nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); }
       });
     }
     if (header) {
       const hides = document.body.dataset.page === 'post';
-      let last = scrollY;
-      const onScroll = () => {
-        header.classList.toggle('scrolled', scrollY > 8);
-        if (hides) header.classList.toggle('hide', scrollY > last && scrollY > 160 && !nav?.classList.contains('open') && !nav?.querySelector('details[open]') && !header.contains(document.activeElement));
-        last = scrollY;
+      const root = document.documentElement, set = (k, v) => header.style.setProperty(k, v);
+      let last = scrollY, tilt = 0, push = 0, frame = 0;
+      const step = () => {
+        frame = 0;
+        const y = Math.max(0, scrollY), dy = y - last; last = y;
+        set('--hp', Math.min(1, y / 220).toFixed(3));
+        set('--prog', Math.min(1, y / Math.max(1, root.scrollHeight - innerHeight)).toFixed(4));
+        header.classList.toggle('scrolled', y > 8);
+        if (hides && dy) header.classList.toggle('hide', dy > 0 && y > 160 && !nav?.classList.contains('open') && !nav?.querySelector('details[open]') && !header.contains(document.activeElement));
+        if (!reduced) {
+          /* A spring toward a lean set by scroll speed; it settles back flat once scrolling stops. */
+          push = push * .72 + Math.max(-1, Math.min(1, dy / 36)) * .28;
+          tilt += (Math.max(-5, Math.min(5, push * -11)) - tilt) * .24;
+          if (Math.abs(tilt) < .01 && Math.abs(push) < .002) { tilt = 0; push = 0; }
+          set('--tilt', `${tilt.toFixed(3)}deg`);
+          if (tilt) frame = requestAnimationFrame(step);
+        }
+        if (nav?.querySelector('details[open]')) moveInd();
       };
-      addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(step); }, { passive: true });
+      addEventListener('resize', () => { if (!frame) frame = requestAnimationFrame(step); }, { passive: true });
+      step();
+      if (finePointer.matches && !reduced) header.addEventListener('pointermove', e => {
+        const r = header.getBoundingClientRect();
+        set('--mx', `${(e.clientX - r.left).toFixed(0)}px`); set('--my', `${(e.clientY - r.top).toFixed(0)}px`);
+      }, { passive: true });
     }
 
     /* The scroll-lit statement: split into words once; CSS does the rest. */
