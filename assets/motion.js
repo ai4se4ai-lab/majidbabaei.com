@@ -65,9 +65,60 @@
       <circle cx="${first.x - first.w / 2 - 34}" cy="${first.y}" r="8" style="fill:${a}"/>${states}</svg>`;
   }
 
-  window.Motion = { reduced, swap, cover };
+  /* ---------- Segmented controls: a thumb on a bounded spring ---------- */
+  // One thumb slides under the selected button. Each of its four dimensions follows a damped spring
+  // (stiffness k, damping ratio zeta ≈ .78, about 2% overshoot). The x position is clamped to the
+  // track, so the thumb never leaves the control, and a small velocity stretch is allowed only while
+  // the stretched thumb still fits inside the bounds.
+  function spring(x, to, v, dt, k = 380, zeta = .78) {
+    const c = 2 * Math.sqrt(k) * zeta, n = Math.max(1, Math.ceil(dt / 4)), h = dt / n / 1000;
+    for (let i = 0; i < n; i++) { v += (-k * (x - to) - c * v) * h; x += v * h; }
+    return [x, v];
+  }
+  function seg(el) {
+    if (el.querySelector(':scope > .seg-thumb')) return;
+    const thumb = document.createElement('span'); thumb.className = 'seg-thumb'; thumb.setAttribute('aria-hidden', 'true');
+    el.prepend(thumb);
+    const selected = () => el.querySelector('button[aria-pressed="true"],button[aria-selected="true"]');
+    const cur = { x: 0, y: 0, w: 0, h: 0 }, vel = { x: 0, y: 0, w: 0, h: 0 };
+    let target = null, raf = 0, last = 0;
+    const paint = still => {
+      const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0, inner = Math.max(el.clientWidth, el.scrollWidth) - pad;
+      const x = Math.min(Math.max(cur.x, pad), Math.max(pad, inner - cur.w));
+      let stretch = still ? 0 : Math.min(.09, Math.abs(vel.x) / 2600);
+      if (x - cur.w * stretch / 2 < pad || x + cur.w * (1 + stretch / 2) > inner) stretch = 0;
+      thumb.style.transform = `translate3d(${x.toFixed(2)}px,${cur.y.toFixed(2)}px,0) scaleX(${(1 + stretch).toFixed(3)})`;
+      thumb.style.width = cur.w.toFixed(2) + 'px'; thumb.style.height = cur.h.toFixed(2) + 'px';
+    };
+    const rest = () => { Object.assign(cur, target); for (const k in vel) vel[k] = 0; };
+    const tick = now => {
+      const dt = Math.min(32, now - last || 16); last = now; let still = true;
+      for (const k of ['x', 'y', 'w', 'h']) {
+        [cur[k], vel[k]] = spring(cur[k], target[k], vel[k], dt);
+        if (Math.abs(cur[k] - target[k]) > .08 || Math.abs(vel[k]) > 1) still = false;
+      }
+      if (still) rest();
+      paint(still);
+      raf = still ? 0 : requestAnimationFrame(tick);
+    };
+    const go = animate => {
+      const b = selected(); if (!b) { el.classList.remove('seg-live'); return; }
+      target = { x: b.offsetLeft, y: b.offsetTop, w: b.offsetWidth, h: b.offsetHeight };
+      el.classList.add('seg-live');
+      if (!animate || reduced || !cur.w) { rest(); paint(true); return; }
+      if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+    };
+    new MutationObserver(ms => go(ms.every(m => m.type === 'attributes'))).observe(el, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'aria-selected'] });
+    new ResizeObserver(() => go(false)).observe(el);
+    document.fonts?.ready?.then(() => go(false));
+    go(false);
+  }
+
+  window.Motion = { reduced, swap, cover, seg, spring };
 
   document.addEventListener('DOMContentLoaded', () => {
+    $$('.seg, .feed-tabs').forEach(seg);
+
     /* Theme: the new palette opens in a circle from the button. */
     const store = (k, v) => { try { localStorage.setItem(k, v); } catch { /* storage unavailable */ } };
     $('#theme-btn')?.addEventListener('click', e => {

@@ -57,7 +57,111 @@
     g.addEventListener('click', () => $(`.tr[data-t="${g.dataset.t}"]`).scrollIntoView({ behavior: 'smooth', block: 'center' }));
   });
   $$('.tr').forEach(c => { c.addEventListener('mouseenter', () => highlight(c.dataset.t)); c.addEventListener('mouseleave', () => highlight(null)); });
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) $$('.loop svg').forEach(s => s.pauseAnimations?.());
+
+  /* ---------- The statechart, in detail: project nodes on each arc, one token round the loop ----------
+     Nodes come from the milestone chips of the two transition cards, so the diagram and the cards can
+     never disagree (and review-stage work stays anonymous in one place). The token is driven by script:
+     it travels transition ①, enters Agentic AI (entry action), returns by ②, enters Human, and repeats.
+     Each project lights as the token passes it. */
+  const SVG = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs = {}, text) => { const n = document.createElementNS(SVG, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (text != null) n.textContent = text; return n; };
+  const chipsOf = t => $$(`.tr[data-t="${t}"] .milestones .chip`);
+  const shortName = chip => chip.textContent.trim().split(' · ')[0].replace(/^\[anonymous for review\]$/, 'anonymous');
+  const linkedNodes = [];
+  const diagrams = $$('.loop svg').map(svg => {
+    const arcs = {}; $$('path[data-arc]', svg).forEach(p => { arcs[p.dataset.arc] = { path: p, len: 0, nodes: [] }; });
+    $$('.nodes', svg).forEach(group => {
+      const t = group.dataset.t, side = group.dataset.side, arc = arcs[t], chips = chipsOf(t);
+      chips.forEach((chip, i) => {
+        const anon = !chip.dataset.find;
+        const node = mk('g', { class: `node${anon ? ' nd-anon' : ''}` });
+        node.append(mk('title', {}, chip.textContent.trim()));
+        node.append(mk('circle', { class: 'nd-ring', r: 12 }), mk('circle', { class: 'nd', r: anon ? 4 : 4.8 }));
+        const label = mk('text', { class: 'nd-l', 'text-anchor': side === 'right' ? 'start' : side === 'left' ? 'end' : 'middle' },
+          (side === 'right' || side === 'left') && chip.dataset.short ? chip.dataset.short : shortName(chip));
+        node.append(label);
+        node.addEventListener('mouseenter', () => chip.classList.add('hot'));
+        node.addEventListener('mouseleave', () => chip.classList.remove('hot'));
+        // Chips are linked to publication entries further down; a node follows its chip's link, if it gets one.
+        const open = () => { if (chip.href) chip.click(); };
+        node.addEventListener('click', e => { if (chip.href) e.stopPropagation(); open(); });
+        node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+        linkedNodes.push({ node, chip });
+        group.append(node); arc.nodes.push({ i, n: chips.length, at: 0, el: node, label, side, lit: false });
+      });
+    });
+    const tok = mk('g', { class: 'tok', opacity: 0 });
+    const ghosts = [3, 2, 1].map(i => { const c = mk('circle', { class: 'tok-ghost', r: 2 + i, opacity: (.12 * i).toFixed(2) }); tok.append(c); return c; });
+    tok.append(mk('circle', { class: 'tok-halo', r: 15 }), mk('circle', { class: 'token', r: 6 }));
+    svg.append(tok);
+    const d = { svg, arcs, tok, ghosts, ready: false, states: { human: $('.st[data-st="human"]', svg), ai: $('.st[data-st="ai"]', svg) } };
+    // Path lengths read as 0 while the variant is display:none (one of the two always is), so nodes are
+    // placed the first time the variant has a size.
+    d.layout = () => {
+      for (const arc of Object.values(arcs)) {
+        arc.len = arc.path.getTotalLength(); if (!arc.len) return false;
+        arc.nodes.forEach(n => {
+          n.at = arc.len * (n.i + 1) / (n.n + 1);
+          const p = arc.path.getPointAtLength(n.at), a = arc.path.getPointAtLength(Math.max(0, n.at - 4)), b = arc.path.getPointAtLength(Math.min(arc.len, n.at + 4));
+          n.el.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
+          // The label sits on the arc's normal, toward the inside of the loop, so it clears the line even
+          // where the arc is steep. Alternate rows keep neighbouring labels apart.
+          const tx = b.x - a.x, ty = b.y - a.y, m = Math.hypot(tx, ty) || 1;
+          let nx = -ty / m, ny = tx / m;
+          const inward = n.side === 'below' ? ny > 0 : n.side === 'above' ? ny < 0 : n.side === 'right' ? nx > 0 : nx < 0;
+          if (!inward) { nx = -nx; ny = -ny; }
+          const dist = (n.side === 'right' || n.side === 'left') ? 16 : 22 + (n.i % 2 ? 15 : 0);
+          n.label.setAttribute('x', (nx * dist).toFixed(1)); n.label.setAttribute('y', (ny * dist + 4).toFixed(1));
+        });
+      }
+      return (d.ready = true);
+    };
+    new ResizeObserver(es => { if (!d.ready && es.some(e => e.contentRect.width > 0)) d.layout(); }).observe(svg);
+    d.layout();
+    return d;
+  });
+  const projectCount = chipsOf('down').length + chipsOf('up').length;
+  $('#loop-sig').textContent = `2 states · 2 transitions · 1 loop · ${projectCount} projects`;
+
+  if (!(window.Motion?.reduced)) {
+    // Timeline, in ms: travel ①, dwell in AI, travel ②, dwell in Human.
+    const phases = [{ arc: 'down', enters: 'ai', dur: 3600 }, { dwell: 'ai', dur: 1000 }, { arc: 'up', enters: 'human', dur: 3600 }, { dwell: 'human', dur: 1000 }];
+    const total = phases.reduce((s, p) => s + p.dur, 0);
+    const ease = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; // slow out of a state, slow into the next
+    let t0 = performance.now(), raf = 0, passes = 0, lastPhase = -1;
+    const place = (d, arc, len) => {
+      const p = arc.path.getPointAtLength(len);
+      d.tok.setAttribute('transform', `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`);
+      d.ghosts.forEach((g, i) => { const q = arc.path.getPointAtLength(Math.max(0, len - (3 - i) * 13)); g.setAttribute('cx', (q.x - p.x).toFixed(1)); g.setAttribute('cy', (q.y - p.y).toFixed(1)); });
+    };
+    const enter = (d, which, from) => {
+      const st = d.states[which]; st.style.setProperty('--c', from === 'down' ? 'var(--orange)' : 'var(--teal)');
+      st.classList.remove('enter'); void st.getBBox(); st.classList.add('enter');
+      setTimeout(() => st.classList.remove('enter'), 950);
+    };
+    const frame = now => {
+      const elapsed = (now - t0) % total; let acc = 0, i = 0;
+      while (elapsed >= acc + phases[i].dur) { acc += phases[i].dur; i++; }
+      const ph = phases[i], k = (elapsed - acc) / ph.dur;
+      if (i !== lastPhase) {
+        if (ph.arc) diagrams.forEach(d => { d.arcs[ph.arc].nodes.forEach(n => { n.lit = false; }); d.tok.setAttribute('class', `tok tok-${ph.arc === 'down' ? 'o' : 't'}`); d.tok.setAttribute('opacity', 1); });
+        else diagrams.forEach(d => { d.tok.setAttribute('opacity', 0); enter(d, ph.dwell, phases[(i + 3) % 4].arc); });
+        if (i === 0 && lastPhase !== -1) { passes++; $('#loop-pass').textContent = `pass ${String(passes + 1).padStart(2, '0')}`; }
+        lastPhase = i;
+      }
+      if (ph.arc) diagrams.forEach(d => {
+        if (!d.ready) return;
+        const arc = d.arcs[ph.arc], len = ease(k) * arc.len; place(d, arc, len);
+        arc.nodes.forEach(n => { if (!n.lit && len >= n.at - 2) { n.lit = true; n.el.classList.remove('lit'); void n.el.getBBox(); n.el.classList.add('lit'); setTimeout(() => n.el.classList.remove('lit'), 950); } });
+      });
+      raf = requestAnimationFrame(frame);
+    };
+    // Off screen or in a hidden tab the loop stops; it restarts from the Human state when it is seen again.
+    const run = on => { if (on && !raf && !document.hidden) { t0 = performance.now(); lastPhase = -1; raf = requestAnimationFrame(frame); } else if (!on && raf) { cancelAnimationFrame(raf); raf = 0; } };
+    let seen = false;
+    new IntersectionObserver(es => { seen = es.some(e => e.isIntersecting); run(seen); }, { threshold: .15 }).observe(loop);
+    document.addEventListener('visibilitychange', () => run(seen && !document.hidden));
+  }
 
   /* ---------- Artifacts ---------- */
   const themeLabel = { Agents: 'Agentic systems', Analysis: 'Analysis & testing', Infrastructure: 'Infrastructure' };
@@ -154,4 +258,6 @@
       el.animate([{ backgroundColor: 'rgba(184,79,18,.14)' }, { backgroundColor: 'rgba(184,79,18,0)' }], { duration: 1800, easing: 'ease-out' });
     });
   });
+  // Statechart nodes whose chip resolved to a publication become focusable links.
+  linkedNodes.forEach(({ node, chip }) => { if (chip.href) { node.dataset.link = '1'; node.setAttribute('tabindex', '0'); node.setAttribute('role', 'link'); } });
 })();

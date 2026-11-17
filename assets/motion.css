@@ -91,6 +91,18 @@ html[data-vt="theme"]::view-transition-old(root),html[data-vt="theme"]::view-tra
   .m-lift:hover,.m-lift:has(a:hover){transform:translateY(-2px);transition-duration:180ms}
 }
 
+/* ---------- 5. Segmented controls: one thumb, on a bounded spring ---------- */
+/* motion.js positions the thumb with a damped spring that is clamped to the track. Without script,
+   the selected button keeps its own background, so the control is complete at rest. */
+.seg,.feed-tabs{position:relative;isolation:isolate}
+.seg-thumb{position:absolute;left:0;top:0;z-index:0;border-radius:999px;background:var(--ink);opacity:0;pointer-events:none;will-change:transform,width,height}
+.seg-live .seg-thumb{opacity:1}
+.seg button,.feed-tabs button{position:relative;z-index:1}
+.seg-live button{transition:color 180ms var(--ease),background var(--m-out),border-color var(--m-out),transform var(--m-out) var(--ease)}
+.seg-live.seg button[aria-pressed="true"],.seg-live.seg button[aria-selected="true"],.seg-live.feed-tabs button[aria-selected="true"]{background:transparent;border-color:transparent}
+.seg-live.seg button:not([aria-pressed="true"]):not([aria-selected="true"]):hover,.seg-live.feed-tabs button:not([aria-selected="true"]):hover{color:var(--ink)}
+.seg-live button:active{transform:scale(.97);transition-duration:var(--m-press)}
+
 /* ---------- Shared chrome: current page, compact header, footer ---------- */
 .nav a{position:relative}
 .nav a[aria-current="page"]{color:var(--ink)}

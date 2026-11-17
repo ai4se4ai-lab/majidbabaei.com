@@ -146,56 +146,61 @@
     </div>
 
     <figure class="loop" id="loop" aria-labelledby="loop-cap">
-      <div class="loop-top"><span>agenda.statechart</span><span>2 states · 2 transitions · 1 loop</span></div>
-      <svg class="loop-h" viewBox="0 0 1000 430" role="img" aria-labelledby="loop-cap">
+      <div class="loop-top"><span>agenda.statechart</span><span><span id="loop-sig">2 states · 2 transitions · 1 loop</span><span class="loop-pass" id="loop-pass" aria-hidden="true"></span></span></div>
+      <!-- Project nodes along each arc and the travelling token are added by site.js from the milestone chips below;
+           the diagram is complete at rest without them. -->
+      <svg class="loop-h" viewBox="0 0 1000 520" role="img" aria-labelledby="loop-cap">
         <defs>
           <marker id="ar-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-o"/></marker>
           <marker id="ar-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-t"/></marker>
         </defs>
         <g class="tr-g" data-t="down">
-          <path id="p-down" class="arc arc-o" d="M262 168 C 390 40, 610 40, 738 168" marker-end="url(#ar-o)"/>
-          <rect class="lbl" x="342" y="40" width="316" height="62" rx="12"/>
-          <text class="lbl-t lbl-o" x="500" y="66" text-anchor="middle">① MDE abstractions <tspan class="lbl-p">for agents</tspan></text>
-          <text class="lbl-m" x="500" y="88" text-anchor="middle">concerns [modeled] / specify · verify</text>
-          <circle class="token tok-o" r="6"><animateMotion dur="4.2s" repeatCount="indefinite"><mpath href="#p-down"/></animateMotion></circle>
+          <path class="arc arc-o" data-arc="down" d="M262 212 C 390 60, 610 60, 738 212" marker-end="url(#ar-o)"/>
+          <rect class="lbl" x="342" y="6" width="316" height="62" rx="12"/>
+          <text class="lbl-t lbl-o" x="500" y="32" text-anchor="middle">① MDE abstractions <tspan class="lbl-p">for agents</tspan></text>
+          <text class="lbl-m" x="500" y="54" text-anchor="middle">concerns [modeled] / specify · verify</text>
+          <g class="nodes" data-t="down" data-side="below"></g>
         </g>
         <g class="tr-g" data-t="up">
-          <path id="p-up" class="arc arc-t" d="M738 262 C 610 390, 390 390, 262 262" marker-end="url(#ar-t)"/>
-          <rect class="lbl" x="322" y="328" width="356" height="62" rx="12"/>
-          <text class="lbl-t lbl-tl" x="500" y="354" text-anchor="middle">② Abstractions of collaboration <tspan class="lbl-p">for people</tspan></text>
-          <text class="lbl-m" x="500" y="376" text-anchor="middle">behavior [abstracted] / trace · explain</text>
-          <circle class="token tok-t" r="6"><animateMotion dur="4.2s" begin="-2.1s" repeatCount="indefinite"><mpath href="#p-up"/></animateMotion></circle>
+          <path class="arc arc-t" data-arc="up" d="M738 308 C 610 460, 390 460, 262 308" marker-end="url(#ar-t)"/>
+          <rect class="lbl" x="322" y="452" width="356" height="62" rx="12"/>
+          <text class="lbl-t lbl-tl" x="500" y="478" text-anchor="middle">② Abstractions of collaboration <tspan class="lbl-p">for people</tspan></text>
+          <text class="lbl-m" x="500" y="500" text-anchor="middle">behavior [abstracted] / trace · explain</text>
+          <g class="nodes" data-t="up" data-side="above"></g>
         </g>
-        <g class="st">
-          <rect x="30" y="140" width="232" height="150" rx="75"/>
-          <text class="st-n" x="146" y="210" text-anchor="middle">Human</text>
-          <text class="st-m" x="146" y="238" text-anchor="middle">intent · concerns · oversight</text>
+        <g class="st" data-st="human">
+          <rect x="30" y="185" width="232" height="150" rx="75"/>
+          <text class="st-n" x="146" y="252" text-anchor="middle">Human</text>
+          <text class="st-m" x="146" y="280" text-anchor="middle">intent · concerns · oversight</text>
+          <text class="st-e" x="146" y="306" text-anchor="middle">entry / inspect · decide</text>
         </g>
-        <g class="st">
-          <rect x="738" y="140" width="232" height="150" rx="75"/>
-          <text class="st-n" x="854" y="210" text-anchor="middle">Agentic AI</text>
-          <text class="st-m" x="854" y="238" text-anchor="middle">agents · teams · tools</text>
+        <g class="st" data-st="ai">
+          <rect x="738" y="185" width="232" height="150" rx="75"/>
+          <text class="st-n" x="854" y="252" text-anchor="middle">Agentic AI</text>
+          <text class="st-m" x="854" y="280" text-anchor="middle">agents · teams · tools</text>
+          <text class="st-e" x="854" y="306" text-anchor="middle">entry / plan · delegate · act</text>
         </g>
-        <text class="mid-n" x="500" y="212" text-anchor="middle">the missing loop</text>
-        <text class="mid-m" x="500" y="240" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
+        <text class="mid-n" x="500" y="254" text-anchor="middle">the missing loop</text>
+        <text class="mid-m" x="500" y="282" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
+        <text class="mid-s" x="500" y="304" text-anchor="middle">incremental · checkable · repeatable</text>
       </svg>
-      <svg class="loop-v" viewBox="0 0 400 600" aria-hidden="true">
+      <svg class="loop-v" viewBox="0 0 580 600" aria-hidden="true">
         <defs>
           <marker id="vr-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-o"/></marker>
           <marker id="vr-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-t"/></marker>
         </defs>
-        <path id="v-down" class="arc arc-o" d="M300 118 C 392 220, 392 380, 300 482" marker-end="url(#vr-o)"/>
-        <path id="v-up" class="arc arc-t" d="M100 482 C 8 380, 8 220, 100 118" marker-end="url(#vr-t)"/>
-        <circle class="token tok-o" r="6"><animateMotion dur="4.2s" repeatCount="indefinite"><mpath href="#v-down"/></animateMotion></circle>
-        <circle class="token tok-t" r="6"><animateMotion dur="4.2s" begin="-2.1s" repeatCount="indefinite"><mpath href="#v-up"/></animateMotion></circle>
-        <g class="st"><rect x="95" y="16" width="210" height="104" rx="52"/><text class="st-n" x="200" y="68" text-anchor="middle">Human</text><text class="st-m" x="200" y="94" text-anchor="middle">intent · concerns</text></g>
-        <g class="st"><rect x="95" y="480" width="210" height="104" rx="52"/><text class="st-n" x="200" y="532" text-anchor="middle">Agentic AI</text><text class="st-m" x="200" y="558" text-anchor="middle">agents · teams</text></g>
-        <text class="lbl-t lbl-o" x="200" y="196" text-anchor="middle">① MDE abstractions</text>
-        <text class="lbl-m" x="200" y="218" text-anchor="middle">for agents ↓</text>
-        <text class="mid-n" x="200" y="300" text-anchor="middle">the missing loop</text>
-        <text class="mid-m" x="200" y="326" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
-        <text class="lbl-t lbl-tl" x="200" y="396" text-anchor="middle">② Abstractions of collaboration</text>
-        <text class="lbl-m" x="200" y="418" text-anchor="middle">↑ for people</text>
+        <path class="arc arc-o" data-arc="down" d="M390 118 C 482 220, 482 380, 390 482" marker-end="url(#vr-o)"/>
+        <path class="arc arc-t" data-arc="up" d="M190 482 C 98 380, 98 220, 190 118" marker-end="url(#vr-t)"/>
+        <g class="nodes" data-t="down" data-side="right"></g>
+        <g class="nodes" data-t="up" data-side="left"></g>
+        <g class="st" data-st="human"><rect x="185" y="16" width="210" height="104" rx="52"/><text class="st-n" x="290" y="62" text-anchor="middle">Human</text><text class="st-m" x="290" y="86" text-anchor="middle">intent · concerns</text><text class="st-e" x="290" y="106" text-anchor="middle">entry / inspect · decide</text></g>
+        <g class="st" data-st="ai"><rect x="185" y="480" width="210" height="104" rx="52"/><text class="st-n" x="290" y="526" text-anchor="middle">Agentic AI</text><text class="st-m" x="290" y="550" text-anchor="middle">agents · teams</text><text class="st-e" x="290" y="570" text-anchor="middle">entry / plan · act</text></g>
+        <text class="lbl-t lbl-o" x="290" y="196" text-anchor="middle">① MDE abstractions</text>
+        <text class="lbl-m" x="290" y="218" text-anchor="middle">for agents ↓</text>
+        <text class="mid-n" x="290" y="300" text-anchor="middle">the missing loop</text>
+        <text class="mid-m" x="290" y="326" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
+        <text class="lbl-t lbl-tl" x="290" y="396" text-anchor="middle">② Abstractions of collaboration</text>
+        <text class="lbl-m" x="290" y="418" text-anchor="middle">↑ for people</text>
       </svg>
       <figcaption id="loop-cap" class="visually-hidden">Two states, Human and Agentic AI. MDE abstractions carry human concerns to agents; abstractions of agent collaboration carry behavior back to people. Building this loop efficiently and effectively is the missing piece.</figcaption>
     </figure>
@@ -205,7 +210,7 @@
         <div class="tr-top"><span>01 · Human → AI</span><span>abstractions for agents</span></div>
         <h3>Connecting agents to higher-level concerns</h3>
         <p class="body">Safety, correctness, intent, and organizational constraints usually reach an agent as informal prose. I use model-driven engineering (models, contracts, and model transformations) so that agentic systems can be specified against these concerns and checked for them.</p>
-        <div class="milestones"><span class="chip">[anonymous for review]</span><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · submitted to TSE</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a></div>
+        <div class="milestones"><span class="chip">[anonymous for review]</span><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · submitted to TSE</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination" data-short="Safe Coord.">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a></div>
       </article>
       <article class="tr" data-t="up" style="--c:var(--teal)">
         <div class="tr-top"><span>02 · AI → Human</span><span>abstractions for people</span></div>
