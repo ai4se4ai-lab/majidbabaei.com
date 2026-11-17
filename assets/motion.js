@@ -137,17 +137,29 @@
     /* Header: phone menu, hairline once scrolled, and (articles) stepping aside while reading down. */
     const header = $('.site-header'), nav = $('#nav'), menuBtn = $('#menu-btn');
     if (nav && menuBtn) {
-      const setMenu = open => { nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); };
+      const groups = [...nav.querySelectorAll('.nav-group')];
+      const closeGroups = () => groups.forEach(group => { group.open = false; });
+      const setMenu = open => { nav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', String(open)); menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); if (!open) closeGroups(); };
       menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
       nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+      groups.forEach(group => group.addEventListener('toggle', () => {
+        if (group.open) groups.forEach(other => { if (other !== group) other.open = false; });
+      }));
+      document.addEventListener('click', e => { if (!header.contains(e.target)) setMenu(false); });
+      header.addEventListener('focusout', e => { if (e.relatedTarget && !header.contains(e.relatedTarget)) setMenu(false); });
+      document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        const openGroup = groups.find(group => group.open);
+        if (openGroup) { openGroup.open = false; openGroup.querySelector('summary').focus(); }
+        else if (nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); }
+      });
     }
     if (header) {
       const hides = document.body.dataset.page === 'post';
       let last = scrollY;
       const onScroll = () => {
         header.classList.toggle('scrolled', scrollY > 8);
-        if (hides) header.classList.toggle('hide', scrollY > last && scrollY > 160 && !nav?.classList.contains('open'));
+        if (hides) header.classList.toggle('hide', scrollY > last && scrollY > 160 && !nav?.classList.contains('open') && !nav?.querySelector('details[open]') && !header.contains(document.activeElement));
         last = scrollY;
       };
       addEventListener('scroll', onScroll, { passive: true }); onScroll();

@@ -111,6 +111,8 @@ Times are written and shown as Pacific time (`America/Vancouver` in the `.ics` f
 
 ## Where content lives
 
+The floating glass header groups navigation into four menus: Research (Agenda, Publications, Projects), Teaching (Teaching, Students), Updates (News, Calendar), and About (Background, Service, Contact). Theme and CV request controls sit beside them. Shared menu markup lives in `tools/chrome.mjs`; keep the four hand-maintained index-page headers consistent with it, then rebuild generated pages. Menus use native disclosures, close on outside clicks and Escape, and collapse behind the menu button on smaller screens.
+
 | Content | File |
 | --- | --- |
 | Publications, manuscripts, artifacts, CV hash | `assets/research-data.js`, **generated** from the CV; do not edit |

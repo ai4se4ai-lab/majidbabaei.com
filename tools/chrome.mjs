@@ -24,6 +24,20 @@ ${styles.map(s => `<link rel="stylesheet" href="${root}assets/${s}.css">`).join(
 const NAV = [['#research', 'Agenda'], ['#publications', 'Publications'], ['news/', 'News'], ['projects/', 'Projects'], ['calendar/', 'Calendar'], ['#teaching', 'Teaching'],
   ['#students', 'Students'], ['#service', 'Service'], ['#background', 'Background'], ['#contact', 'Contact']];
 
+const NAV_GROUPS = [
+  ['Research', ['#research', '#publications', 'projects/']],
+  ['Teaching', ['#teaching', '#students']],
+  ['Updates', ['news/', 'calendar/']],
+  ['About', ['#background', '#service', '#contact']]
+];
+
+export const navigation = (root, current) => NAV_GROUPS.map(([label, destinations]) => `<details class="nav-group" name="main-navigation">
+        <summary${destinations.includes(current) ? ' class="current"' : ''}>${label}<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></summary>
+        <div class="nav-panel">
+          ${destinations.map(href => `<a href="${root}${href}"${href === current ? ' aria-current="page"' : ''}>${NAV.find(([url]) => url === href)[1]}</a>`).join('\n          ')}
+        </div>
+      </details>`).join('\n      ');
+
 export const header = (root, current) => `<header class="site-header" id="top">
   <div class="wrap header-inner">
     <a class="brand" href="${root}" aria-label="Majid Babaei — home">
@@ -31,14 +45,14 @@ export const header = (root, current) => `<header class="site-header" id="top">
       <span class="brand-text"><b>Majid Babaei</b></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
-      ${NAV.map(([href, label]) => `<a href="${root}${href}"${href === current ? ' aria-current="page"' : ''}>${label}</a>`).join('\n      ')}
+      ${navigation(root, current)}
     </nav>
     <div class="header-tools">
       <button class="icon-btn theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       </button>
-      <a class="cv-btn" href="mailto:majid.babaei@ufv.ca?subject=Latest%20CV%20request" data-cv-request>
+      <a class="cv-btn" aria-label="Request CV" href="mailto:majid.babaei@ufv.ca?subject=Latest%20CV%20request" data-cv-request>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="label">CV</span>
       </a>
       <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">

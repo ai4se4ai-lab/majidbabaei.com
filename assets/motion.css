@@ -107,7 +107,7 @@ html[data-vt="theme"]::view-transition-old(root),html[data-vt="theme"]::view-tra
 .nav a{position:relative}
 .nav a[aria-current="page"]{color:var(--ink)}
 .nav a[aria-current="page"]::after{content:"";position:absolute;left:11px;right:11px;bottom:2px;height:2px;border-radius:2px;background:var(--orange)}
-.site-header.hide{transform:translateY(-100%)}
+.site-header.hide{transform:translateY(calc(-100% - 24px))}
 .site-header{transition:border-color .3s,transform .3s var(--ease)}
 
 .site-foot{margin-top:clamp(56px,8vw,104px);background:var(--ink);color:var(--paper)}
