@@ -193,8 +193,8 @@ button{cursor:pointer}
 .loop .node.on .nd,.loop .node:hover .nd,.loop .node:focus-visible .nd{fill:var(--c)}
 .loop .node.on .nd-l,.loop .node:hover .nd-l,.loop .node:focus-visible .nd-l{fill:var(--ink)}
 .loop .st rect{transition:stroke .5s var(--ease)}
-.loop .st.enter rect{stroke:var(--c)}
-.loop .st.enter .st-e{fill:var(--c)}
+.loop .st.state-active rect{stroke:var(--c)}
+.loop .st.state-active .st-e{fill:var(--c)}
 .loop .tok{transition:opacity .3s}
 .loop .tok-halo{opacity:.16}
 .loop .tok-ghost{pointer-events:none}

@@ -140,8 +140,8 @@
       d.ghosts.forEach((g, i) => { const q = arc.path.getPointAtLength(Math.max(0, len - (3 - i) * 13)); g.setAttribute('cx', (q.x - p.x).toFixed(1)); g.setAttribute('cy', (q.y - p.y).toFixed(1)); });
     };
     // Steady marks, no flashes: the entry action stays lit while the token is in the state.
-    const enter = (d, which, from) => { const st = d.states[which]; st.style.setProperty('--c', from === 'down' ? 'var(--orange)' : 'var(--teal)'); st.classList.add('enter'); };
-    const leave = d => Object.values(d.states).forEach(st => st.classList.remove('enter'));
+    const enter = (d, which, from) => { const st = d.states[which]; st.style.setProperty('--c', from === 'down' ? 'var(--orange)' : 'var(--teal)'); st.classList.add('state-active'); };
+    const leave = d => Object.values(d.states).forEach(st => st.classList.remove('state-active'));
     const frame = now => {
       const elapsed = (now - t0) % total; let acc = 0, i = 0;
       while (elapsed >= acc + phases[i].dur) { acc += phases[i].dur; i++; }
