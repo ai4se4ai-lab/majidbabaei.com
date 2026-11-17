@@ -64,34 +64,6 @@ window.CALENDAR = {
    "url": "calendar/icse-2026/"
   },
   {
-   "slug": "fall-2026-term",
-   "title": "Fall 2026 teaching term",
-   "type": "teaching",
-   "start": "2026-09-01",
-   "end": "2026-12-10",
-   "allDay": true,
-   "repeat": null,
-   "days": [],
-   "interval": 1,
-   "until": null,
-   "except": [],
-   "location": "University of the Fraser Valley",
-   "link": "https://majidbabaei.com/news/fall-2026-teaching/",
-   "project": "",
-   "tags": [
-    "UFV",
-    "COMP 370",
-    "COMP 481",
-    "COMP 155",
-    "CIS 285"
-   ],
-   "summary": "Five sections this term, COMP 370 (two sections), COMP 481, COMP 155, and CIS 285, with 129 students.",
-   "status": "confirmed",
-   "whenLabel": "All day · Sep 1 – Dec 10, 2026",
-   "hasPage": true,
-   "url": "calendar/fall-2026-term/"
-  },
-  {
    "slug": "cis-285-90282",
    "title": "CIS 285 End User Training and Support (90282)",
    "type": "teaching",

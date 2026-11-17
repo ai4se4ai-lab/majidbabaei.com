@@ -34,20 +34,6 @@ CATEGORIES:Events & talks
 STATUS:TENTATIVE
 END:VEVENT
 BEGIN:VEVENT
-UID:fall-2026-term@majidbabaei.com
-DTSTAMP:20260101T000000Z
-SUMMARY:Fall 2026 teaching term
-DTSTART;VALUE=DATE:20260901
-DTEND;VALUE=DATE:20261211
-DESCRIPTION:Five sections this term\, COMP 370 (two sections)\, COMP 481\
- , COMP 155\, and CIS 285\, with 129 students.\nhttps://majidbabaei.com/n
- ews/fall-2026-teaching/
-LOCATION:University of the Fraser Valley
-URL:https://majidbabaei.com/calendar/fall-2026-term/
-CATEGORIES:Teaching
-STATUS:CONFIRMED
-END:VEVENT
-BEGIN:VEVENT
 UID:cis-285-90282@majidbabaei.com
 DTSTAMP:20260101T000000Z
 SUMMARY:CIS 285 End User Training and Support (90282)
