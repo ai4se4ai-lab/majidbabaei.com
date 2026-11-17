@@ -37,9 +37,10 @@ jobs:
       # Fails when someone edited a post or project.json (or the CV data) without regenerating its pages.
       - name: Verify generated pages are current
         run: |
-          node tools/build-news.mjs --check
           node tools/build-projects.mjs --check
-      - name: Test newsroom rendering and links
+          node tools/build-calendar.mjs --check
+          node tools/build-news.mjs --check
+      - name: Test newsroom, calendar, and links
         run: npm test
       - name: Prepare public files
         run: node tools/build-public.mjs

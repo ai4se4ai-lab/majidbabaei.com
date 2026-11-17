@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//majidbabaei.com//calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Majid Babaei: commitments
+X-WR-TIMEZONE:America/Vancouver
+BEGIN:VEVENT
+UID:tech-panel-2026@majidbabaei.com
+DTSTAMP:20260101T000000Z
+SUMMARY:Tech Panel 2026
+DTSTART;VALUE=DATE:20260312
+DTEND;VALUE=DATE:20260313
+DESCRIPTION:A panel and networking evening with four industry leaders\, o
+ rganized with the Computing Student Association.\nhttps://majidbabaei.co
+ m/news/tech-panel-2026/
+LOCATION:University of the Fraser Valley\, Abbotsford campus
+URL:https://majidbabaei.com/calendar/tech-panel-2026/
+CATEGORIES:Events & talks
+STATUS:CONFIRMED
+END:VEVENT
+BEGIN:VEVENT
+UID:icse-2026@majidbabaei.com
+DTSTAMP:20260101T000000Z
+SUMMARY:ICSE 2026
+DTSTART;VALUE=DATE:20260412
+DTEND;VALUE=DATE:20260419
+DESCRIPTION:Two pieces of our work appear at the IEEE/ACM International C
+ onference on Software Engineering\, a research paper on TAAF and a poste
+ r on SIKG.\nhttps://conf.researchr.org/home/icse-2026
+LOCATION:Rio de Janeiro\, Brazil
+URL:https://majidbabaei.com/calendar/icse-2026/
+CATEGORIES:Events & talks
+STATUS:TENTATIVE
+END:VEVENT
+BEGIN:VEVENT
+UID:fall-2026-term@majidbabaei.com
+DTSTAMP:20260101T000000Z
+SUMMARY:Fall 2026 teaching term
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20261208
+DESCRIPTION:Five sections this term\, COMP 370 (two sections)\, COMP 481\
+ , COMP 155\, and CIS 285\, with 129 students.\nhttps://majidbabaei.com/n
+ ews/fall-2026-teaching/
+LOCATION:University of the Fraser Valley
+URL:https://majidbabaei.com/calendar/fall-2026-term/
+CATEGORIES:Teaching
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR

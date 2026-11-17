@@ -1,5 +1,5 @@
-// Shared page chrome for generated pages (news articles, project pages).
-// The hand-written pages (index.html, news/index.html, projects/index.html) carry the same markup; keep them alike.
+// Shared page chrome for generated pages (news articles, project pages, calendar entries).
+// The hand-written pages (index.html, news/index.html, projects/index.html, calendar/index.html) carry the same markup; keep them alike.
 const GTAG = `<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>`;
 
@@ -21,7 +21,7 @@ ${styles.map(s => `<link rel="stylesheet" href="${root}assets/${s}.css">`).join(
 <link rel="expect" href="#page-ready" blocking="render">
 <script src="${root}assets/motion.js"></script>`;
 
-const NAV = [['#research', 'Agenda'], ['#publications', 'Publications'], ['news/', 'News'], ['projects/', 'Projects'], ['#teaching', 'Teaching'],
+const NAV = [['#research', 'Agenda'], ['#publications', 'Publications'], ['news/', 'News'], ['projects/', 'Projects'], ['calendar/', 'Calendar'], ['#teaching', 'Teaching'],
   ['#students', 'Students'], ['#service', 'Service'], ['#background', 'Background'], ['#contact', 'Contact']];
 
 export const header = (root, current) => `<header class="site-header" id="top">
@@ -56,7 +56,7 @@ export const footer = root => `<footer class="site-foot">
     </div>
     <div class="sf-bot">
       <span>© Majid Babaei</span>
-      <nav aria-label="Footer"><a class="u-link" href="${root}">Home</a><a class="u-link" href="${root}news/">Newsroom</a><a class="u-link" href="${root}projects/">Projects</a><a class="u-link" href="${root}news/feed.xml">RSS</a><a class="u-link" href="https://github.com/ai4se4ai-lab">GitHub ↗</a><a class="u-link" href="https://www.linkedin.com/in/majid-babaei-ph-d-20382874/">LinkedIn ↗</a></nav>
+      <nav aria-label="Footer"><a class="u-link" href="${root}">Home</a><a class="u-link" href="${root}news/">Newsroom</a><a class="u-link" href="${root}projects/">Projects</a><a class="u-link" href="${root}calendar/">Calendar</a><a class="u-link" href="${root}news/feed.xml">RSS</a><a class="u-link" href="https://github.com/ai4se4ai-lab">GitHub ↗</a><a class="u-link" href="https://www.linkedin.com/in/majid-babaei-ph-d-20382874/">LinkedIn ↗</a></nav>
     </div>
   </div>
 </footer>`;

@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://majidbabaei.com/</loc></url>
 <url><loc>https://majidbabaei.com/news/</loc></url>
+<url><loc>https://majidbabaei.com/projects/</loc></url>
+<url><loc>https://majidbabaei.com/calendar/</loc></url>
 <url><loc>https://majidbabaei.com/news/governing-agent-changes/</loc><lastmod>2026-11-13</lastmod></url>
 <url><loc>https://majidbabaei.com/news/anonymous-review-update/</loc><lastmod>2026-11-11</lastmod></url>
 <url><loc>https://majidbabaei.com/news/closing-the-loop/</loc><lastmod>2026-11-10</lastmod></url>
@@ -15,4 +17,7 @@
 <url><loc>https://majidbabaei.com/news/service-2026/</loc><lastmod>2026-01-01</lastmod></url>
 <url><loc>https://majidbabaei.com/news/msc-graduations/</loc><lastmod>2025-09-01</lastmod></url>
 <url><loc>https://majidbabaei.com/news/joining-ufv/</loc><lastmod>2025-08-01</lastmod></url>
+<url><loc>https://majidbabaei.com/calendar/tech-panel-2026/</loc></url>
+<url><loc>https://majidbabaei.com/calendar/icse-2026/</loc></url>
+<url><loc>https://majidbabaei.com/calendar/fall-2026-term/</loc></url>
 </urlset>

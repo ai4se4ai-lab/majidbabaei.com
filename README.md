@@ -13,7 +13,7 @@ Three things stay consistent:
 This repository is cloned as `majidbabaei.com/` inside the lab-site working copy, which ignores it. Run these from the lab-site root:
 
 ```sh
-node scripts/sync-personal-site.mjs           # regenerate CV data and PDF, then rebuild project pages and the newsroom
+node scripts/sync-personal-site.mjs           # regenerate CV data and PDF, then rebuild project pages, the calendar, and the newsroom
 node scripts/sync-personal-site.mjs --check   # fail if anything here has drifted
 node scripts/push-all.mjs                     # push both repositories after committing in each
 ```
@@ -78,6 +78,37 @@ Each project page `projects/<slug>/` is built from `projects/<slug>/project.json
 
 Then run `node tools/build-projects.mjs` (or the lab sync).
 
+## Keep the calendar (commitments by week, month, and year)
+
+The **Calendar** tab shows teaching, research blocks, events and talks, service, deadlines, travel, and blocked time on a week grid, a month grid, and a year overview, with an "Up next" rail, type filters, search, keyboard shortcuts (arrows, T, W, M, Y), and an iCalendar feed (`calendar/feed.ics`) that any calendar app can subscribe to. Every entry has its own page at `calendar/<slug>/` with a Markdown body, a details rail, and an `event.ics` download. Nothing is edited in the browser: entries are files.
+
+1. Copy `calendar/events/_template.md` to `calendar/events/YYYY-MM-DD-short-slug.md` (files starting with `_` are ignored; the slug becomes the URL).
+
+   ```markdown
+   ---
+   title: COMP 370 Software Engineering
+   type: teaching              # teaching | research | event | service | deadline | travel | block
+   start: 2027-01-11T10:00     # YYYY-MM-DD (all day) or YYYY-MM-DDTHH:MM, Pacific time
+   end: 2027-01-11T11:20       # optional; all-day ranges use an inclusive end date
+   repeat: weekly              # optional; needs until; days defaults to the start weekday
+   days: [Mon, Wed]
+   until: 2027-04-16
+   except: [2027-02-15]        # optional dates to skip
+   location: UFV Abbotsford, Building D
+   link: https://…
+   project: rapidpay           # optional slug under projects/
+   tags: [COMP 370, UFV]
+   summary: One sentence for the popover, the rail, and the page lede.
+   status: confirmed           # or tentative (hatched on the grid)
+   ---
+
+   Markdown body for the entry page. Leave it empty for a details-only page.
+   ```
+
+2. Run `node tools/build-calendar.mjs` (or the lab sync). This regenerates `assets/calendar-data.js`, `calendar/<slug>/index.html`, `calendar/<slug>/event.ics`, and `calendar/feed.ics`; `tools/build-news.mjs` then lists the entry pages in `sitemap.xml`. `npm run check:calendar` detects stale pages and `npm test` covers recurrence, overlap layout, generated pages, links, and the feed.
+
+Times are written and shown as Pacific time (`America/Vancouver` in the `.ics` files); the browser does not convert them. Entries that are not yet settled should carry `status: tentative`. Do not invent class times or dates: record them when they are confirmed.
+
 ## Where content lives
 
 | Content | File |
@@ -85,11 +116,12 @@ Then run `node tools/build-projects.mjs` (or the lab sync).
 | Publications, manuscripts, artifacts, CV hash | `assets/research-data.js`, **generated** from the CV; do not edit |
 | Project releases, gallery, team | `projects/<slug>/project.json`, edited by hand |
 | News posts | `news/posts/*.md`, edited by hand |
-| Project pages, newsroom pages, RSS, sitemap, `assets/projects-data.js`, `assets/news-data.js` | **generated** by `tools/` |
+| Calendar entries | `calendar/events/*.md`, edited by hand (see `_template.md`) |
+| Project pages, newsroom pages, calendar pages, RSS, iCalendar feeds, sitemap, `assets/projects-data.js`, `assets/news-data.js`, `assets/calendar-data.js` | **generated** by `tools/` |
 | Bio, research agenda, teaching, students, service, background, contact | `index.html`, edited by hand from the CV |
-| Styles / behavior | `assets/style.css`, `news.css`, `projects.css` / `site.js`, `news.js`, `projects.js` |
+| Styles / behavior | `assets/style.css`, `news.css`, `projects.css`, `calendar.css` / `site.js`, `news.js`, `projects.js`, `calendar.js` (+ `calendar-core.js`, shared with the build and tests) |
 | Page transitions, hero entrance, hover layer, theme toggle, phone menu | `assets/motion.css`, `assets/motion.js`, loaded by every page |
-| Header and footer of generated pages | `tools/chrome.mjs`; the hand-written pages (`index.html`, `news/index.html`, `projects/index.html`) carry the same markup, so change them together |
+| Header and footer of generated pages | `tools/chrome.mjs`; the hand-written pages (`index.html`, `news/index.html`, `projects/index.html`, `calendar/index.html`) carry the same markup, so change them together |
 
 Preview locally from this folder with `node ../scripts/serve.mjs`, then open http://localhost:8000.
 

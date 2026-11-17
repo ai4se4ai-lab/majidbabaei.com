@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//majidbabaei.com//calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Majid Babaei: commitments
+X-WR-TIMEZONE:America/Vancouver
+BEGIN:VEVENT
+UID:fall-2026-term@majidbabaei.com
+DTSTAMP:20260101T000000Z
+SUMMARY:Fall 2026 teaching term
+DTSTART;VALUE=DATE:20260908
+DTEND;VALUE=DATE:20261208
+DESCRIPTION:Five sections this term\, COMP 370 (two sections)\, COMP 481\
+ , COMP 155\, and CIS 285\, with 129 students.\nhttps://majidbabaei.com/n
+ ews/fall-2026-teaching/
+LOCATION:University of the Fraser Valley
+URL:https://majidbabaei.com/calendar/fall-2026-term/
+CATEGORIES:Teaching
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR

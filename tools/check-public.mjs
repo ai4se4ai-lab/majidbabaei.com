@@ -32,7 +32,7 @@ for (const file of pages) {
     else if (path.endsWith('/') && !existsSync(join(target, 'index.html'))) problems.push(`${name}: ${ref} is a folder without an index page`);
   }
 }
-for (const need of ['index.html', '404.html', 'news/index.html', 'projects/index.html', 'news/feed.xml', 'sitemap.xml', 'assets/motion.css', 'assets/motion.js'])
+for (const need of ['index.html', '404.html', 'news/index.html', 'projects/index.html', 'calendar/index.html', 'calendar/feed.ics', 'news/feed.xml', 'sitemap.xml', 'assets/motion.css', 'assets/motion.js'])
   if (!files.includes(join(site, ...need.split('/')))) problems.push(`missing required file: ${need}`);
 if (files.some(f => /(?:Curriculum_Vitae|Majid_Babaei_CV)\.pdf$/i.test(f))) problems.push('a CV PDF is in the public artifact');
 if (files.some(f => f.endsWith('project.json'))) problems.push('a project.json editing source is in the public artifact');

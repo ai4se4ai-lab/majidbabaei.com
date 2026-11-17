@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1YH193FZ7V"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1YH193FZ7V');</script>
+<title>Calendar | Majid Babaei</title>
+<meta name="description" content="Teaching, research blocks, talks, service, and deadlines: where Majid Babaei's weeks go, by week, month, and year.">
+<link rel="canonical" href="https://majidbabaei.com/calendar/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calendar | Majid Babaei">
+<meta property="og:description" content="Teaching, research blocks, talks, service, and deadlines, by week, month, and year.">
+<meta property="og:image" content="https://majidbabaei.com/assets/img/portrait.jpg">
+<link rel="alternate" type="text/calendar" title="Majid Babaei: commitments" href="feed.ics">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1520" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/motion.css">
+<link rel="stylesheet" href="../assets/news.css">
+<link rel="stylesheet" href="../assets/calendar.css">
+<link rel="stylesheet" href="../assets/cv-request.css">
+<link rel="expect" href="#page-ready" blocking="render">
+<script src="../assets/motion.js"></script>
+</head>
+<body data-page="calendar" data-root="../">
+<a class="skip" href="#cal-grid">Skip to the calendar</a>
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a class="brand" href="../" aria-label="Majid Babaei — home">
+      <span class="brand-mark">m<span>b</span>.</span>
+      <span class="brand-text"><b>Majid Babaei</b>Software Eng. × AI</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="../#research">Agenda</a>
+      <a href="../#publications">Publications</a>
+      <a href="../news/">News</a>
+      <a href="../projects/">Projects</a>
+      <a href="./" aria-current="page">Calendar</a>
+      <a href="../#teaching">Teaching</a>
+      <a href="../#students">Students</a>
+      <a href="../#service">Service</a>
+      <a href="../#background">Background</a>
+      <a href="../#contact">Contact</a>
+    </nav>
+    <div class="header-tools">
+      <button class="icon-btn theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="cv-btn" href="mailto:majid.babaei@ufv.ca?subject=Latest%20CV%20request" data-cv-request>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="label">CV</span>
+      </a>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="cal-main">
+  <header class="masthead is-long wrap">
+    <div class="mast-rule enter"><span><span class="dot" aria-hidden="true"></span>Calendar</span><span id="cal-today-label"></span><span class="cal-tz">Pacific time</span><a class="u-link" href="feed.ics">Subscribe (.ics) ↗</a></div>
+    <div class="mast-grid">
+      <h1><span class="mask"><span>Time,</span></span> <span class="mask" style="--i:1"><span><em>committed</em></span></span></h1>
+      <p class="mast-lede enter" style="--i:1">Where my weeks go: teaching, research blocks, talks, service, and deadlines, with the time blocked on the grid. Open any entry for the details behind it.</p>
+    </div>
+    <dl class="cal-stats enter" style="--i:2">
+      <div><dt>This week</dt><dd id="st-week">—</dd></div>
+      <div><dt>This month</dt><dd id="st-month">—</dd></div>
+      <div><dt>Entries</dt><dd id="st-total">—</dd></div>
+      <div><dt>Next up</dt><dd id="st-next" class="cal-stat-next">—</dd></div>
+    </dl>
+  </header>
+
+  <div class="feed-bar cal-bar" id="cal-bar">
+    <div class="wrap cal-bar-inner">
+      <div class="cal-nav" role="group" aria-label="Period">
+        <button type="button" class="cal-btn" id="cal-prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+        <button type="button" class="cal-btn cal-today" id="cal-today">Today</button>
+        <button type="button" class="cal-btn" id="cal-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+        <h2 class="cal-title" id="cal-title" aria-live="polite"></h2>
+      </div>
+      <div class="seg cal-views" id="cal-views" role="group" aria-label="View">
+        <button type="button" data-view="week" aria-pressed="false">Week<kbd>W</kbd></button>
+        <button type="button" data-view="month" aria-pressed="false">Month<kbd>M</kbd></button>
+        <button type="button" data-view="year" aria-pressed="false">Year<kbd>Y</kbd></button>
+      </div>
+      <label class="cal-search"><span class="visually-hidden">Find an entry</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+        <input id="cal-q" type="search" placeholder="Find an entry…" autocomplete="off"></label>
+    </div>
+    <div class="wrap cal-legend" id="cal-legend" role="group" aria-label="Show types"></div>
+  </div>
+
+  <div class="wrap cal-layout">
+    <section class="cal-grid-wrap" id="cal-grid" aria-label="Calendar" tabindex="-1">
+      <noscript><p class="empty">Enable JavaScript to browse the calendar, or <a href="feed.ics">subscribe to the iCalendar feed</a>.</p></noscript>
+    </section>
+    <aside class="cal-rail" aria-labelledby="up-h">
+      <h2 id="up-h" class="rail-k">Up next</h2>
+      <ol class="cal-up" id="cal-up"></ol>
+      <p class="cal-keys" aria-label="Keyboard shortcuts"><kbd>←</kbd><kbd>→</kbd> move <kbd>T</kbd> today <kbd>W</kbd><kbd>M</kbd><kbd>Y</kbd> view</p>
+    </aside>
+  </div>
+
+  <section class="statement" aria-label="On time">
+    <div class="wrap">
+      <p class="statement-k">Why publish a calendar</p>
+      <blockquote data-lit>A commitment written down can be checked. Blocked time protects the work that matters most: the long, uninterrupted hours research needs.</blockquote>
+      <a class="btn btn-ghost" href="../#research">See the research agenda <span class="m-arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="sf-top">
+      <p class="sf-line">Let's build software you can <em>check.</em></p>
+      <a class="sf-mail u-link" href="mailto:majid.babaei@ufv.ca">majid.babaei@ufv.ca <span class="m-arrow" aria-hidden="true">↗</span></a>
+    </div>
+    <div class="sf-bot">
+      <span>© Majid Babaei</span>
+      <nav aria-label="Footer"><a class="u-link" href="../">Home</a><a class="u-link" href="../news/">Newsroom</a><a class="u-link" href="../projects/">Projects</a><a class="u-link" href="./">Calendar</a><a class="u-link" href="../news/feed.xml">RSS</a><a class="u-link" href="https://github.com/ai4se4ai-lab">GitHub ↗</a><a class="u-link" href="https://www.linkedin.com/in/majid-babaei-ph-d-20382874/">LinkedIn ↗</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="../assets/calendar-core.js"></script>
+<script src="../assets/calendar-data.js"></script>
+<script src="../assets/calendar.js"></script>
+<script src="../assets/cv-request.js"></script>
+<i id="page-ready" hidden></i>
+</body>
+</html>

@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//majidbabaei.com//calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Majid Babaei: commitments
+X-WR-TIMEZONE:America/Vancouver
+BEGIN:VEVENT
+UID:icse-2026@majidbabaei.com
+DTSTAMP:20260101T000000Z
+SUMMARY:ICSE 2026
+DTSTART;VALUE=DATE:20260412
+DTEND;VALUE=DATE:20260419
+DESCRIPTION:Two pieces of our work appear at the IEEE/ACM International C
+ onference on Software Engineering\, a research paper on TAAF and a poste
+ r on SIKG.\nhttps://conf.researchr.org/home/icse-2026
+LOCATION:Rio de Janeiro\, Brazil
+URL:https://majidbabaei.com/calendar/icse-2026/
+CATEGORIES:Events & talks
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR
