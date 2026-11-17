@@ -67,8 +67,8 @@ window.CALENDAR = {
    "slug": "fall-2026-term",
    "title": "Fall 2026 teaching term",
    "type": "teaching",
-   "start": "2026-09-08",
-   "end": "2026-12-07",
+   "start": "2026-09-01",
+   "end": "2026-12-10",
    "allDay": true,
    "repeat": null,
    "days": [],
@@ -86,10 +86,150 @@ window.CALENDAR = {
     "CIS 285"
    ],
    "summary": "Five sections this term, COMP 370 (two sections), COMP 481, COMP 155, and CIS 285, with 129 students.",
-   "status": "tentative",
-   "whenLabel": "All day · Sep 8 – Dec 7, 2026",
+   "status": "confirmed",
+   "whenLabel": "All day · Sep 1 – Dec 10, 2026",
    "hasPage": true,
    "url": "calendar/fall-2026-term/"
+  },
+  {
+   "slug": "cis-285-90282",
+   "title": "CIS 285 End User Training and Support (90282)",
+   "type": "teaching",
+   "start": "2026-09-01T19:00",
+   "end": "2026-09-01T22:00",
+   "allDay": false,
+   "repeat": "weekly",
+   "days": [
+    "Tue"
+   ],
+   "interval": 1,
+   "until": "2026-12-10",
+   "except": [],
+   "location": "Online",
+   "link": "",
+   "project": "",
+   "tags": [
+    "UFV",
+    "Fall 2026",
+    "CIS 285"
+   ],
+   "summary": "Tuesdays 7–10pm, online.",
+   "status": "confirmed",
+   "whenLabel": "Tue, Sep 1, 2026 · 7pm–10pm",
+   "hasPage": true,
+   "url": "calendar/cis-285-90282/"
+  },
+  {
+   "slug": "comp-370-90364",
+   "title": "COMP 370 Software Engineering (90364)",
+   "type": "teaching",
+   "start": "2026-09-02T08:30",
+   "end": "2026-09-02T11:20",
+   "allDay": false,
+   "repeat": "weekly",
+   "days": [
+    "Wed"
+   ],
+   "interval": 1,
+   "until": "2026-12-10",
+   "except": [],
+   "location": "Abbotsford, Building D 221",
+   "link": "",
+   "project": "",
+   "tags": [
+    "UFV",
+    "Fall 2026",
+    "COMP 370"
+   ],
+   "summary": "Wednesdays 8:30–11:20am, Abbotsford Building D 221.",
+   "status": "confirmed",
+   "whenLabel": "Wed, Sep 2, 2026 · 8:30am–11:20am",
+   "hasPage": true,
+   "url": "calendar/comp-370-90364/"
+  },
+  {
+   "slug": "comp-481-90374",
+   "title": "COMP 481 Functional and Logic Programming (90374)",
+   "type": "teaching",
+   "start": "2026-09-02T11:30",
+   "end": "2026-09-02T14:20",
+   "allDay": false,
+   "repeat": "weekly",
+   "days": [
+    "Wed"
+   ],
+   "interval": 1,
+   "until": "2026-12-10",
+   "except": [],
+   "location": "Abbotsford, Building A 302",
+   "link": "",
+   "project": "",
+   "tags": [
+    "UFV",
+    "Fall 2026",
+    "COMP 481"
+   ],
+   "summary": "Wednesdays 11:30am–2:20pm, Abbotsford Building A 302.",
+   "status": "confirmed",
+   "whenLabel": "Wed, Sep 2, 2026 · 11:30am–2:20pm",
+   "hasPage": true,
+   "url": "calendar/comp-481-90374/"
+  },
+  {
+   "slug": "comp-155",
+   "title": "COMP 155 Object-oriented Programming",
+   "type": "teaching",
+   "start": "2026-09-02T17:30",
+   "end": "2026-09-02T20:30",
+   "allDay": false,
+   "repeat": "weekly",
+   "days": [
+    "Wed"
+   ],
+   "interval": 1,
+   "until": "2026-12-10",
+   "except": [],
+   "location": "",
+   "link": "",
+   "project": "",
+   "tags": [
+    "UFV",
+    "Fall 2026",
+    "COMP 155"
+   ],
+   "summary": "Wednesdays 5:30–8:30pm.",
+   "status": "confirmed",
+   "whenLabel": "Wed, Sep 2, 2026 · 5:30pm–8:30pm",
+   "hasPage": true,
+   "url": "calendar/comp-155/"
+  },
+  {
+   "slug": "comp-370-90365",
+   "title": "COMP 370 Software Engineering (90365)",
+   "type": "teaching",
+   "start": "2026-09-04T14:30",
+   "end": "2026-09-04T17:20",
+   "allDay": false,
+   "repeat": "weekly",
+   "days": [
+    "Fri"
+   ],
+   "interval": 1,
+   "until": "2026-12-10",
+   "except": [],
+   "location": "Abbotsford, Building D 226 (hybrid)",
+   "link": "",
+   "project": "",
+   "tags": [
+    "UFV",
+    "Fall 2026",
+    "COMP 370"
+   ],
+   "summary": "Fridays 2:30–5:20pm, hybrid, Abbotsford Building D 226.",
+   "status": "confirmed",
+   "whenLabel": "Fri, Sep 4, 2026 · 2:30pm–5:20pm",
+   "hasPage": true,
+   "url": "calendar/comp-370-90365/"
   }
  ]
 };
