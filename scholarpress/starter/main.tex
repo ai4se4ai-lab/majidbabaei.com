@@ -1,0 +1,46 @@
+% ScholarPress starter manuscript for the "House preprint" profile.
+% Upload this file as the main .tex and references.bib as the bibliography. Figures go in as supporting files
+% with the same relative paths used in \includegraphics (for example figures/overview.png).
+\documentclass[notice={Preprint. This version has not been peer reviewed.}]{scholarpress-preprint}
+\usepackage[numbers,sort&compress]{natbib}
+
+\title{A Starter Manuscript for ScholarPress Preprints}
+\author{First Author}
+\affiliation{School of Computing, Example University}
+\author{Second Author}
+\affiliation{Department of Software Engineering, Another University}
+% \preprintdate{November 19, 2026}  % optional; defaults to the build date
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This starter shows the elements the house preprint style supports: a title and author block with affiliations,
+an abstract, numbered sections, displayed equations, a figure, cross-references, and linked references.
+Replace the text, keep the structure, and rebuild.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+Preprints let readers find work before formal publication~\cite{ginsparg2011arxiv}. Section~\ref{sec:method}
+describes the method and Equation~\eqref{eq:loss} gives the objective.
+
+\section{Method}\label{sec:method}
+We minimise the regularised loss
+\begin{equation}\label{eq:loss}
+  \mathcal{L}(\theta) = \frac{1}{n}\sum_{i=1}^{n} \ell\bigl(f_\theta(x_i), y_i\bigr) + \lambda \lVert \theta \rVert_2^2 ,
+\end{equation}
+following standard practice~\cite{goodfellow2016deep}. Figure~\ref{fig:placeholder} is a placeholder figure.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\rule{0pt}{1.2in}\hspace{3in}}
+  \caption{Replace this box with \texttt{\textbackslash includegraphics\{figures/overview.png\}}.}
+  \label{fig:placeholder}
+\end{figure}
+
+\section{Conclusion}
+State the contribution and its limits plainly.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

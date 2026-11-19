@@ -32,10 +32,19 @@ for (const file of pages) {
     else if (path.endsWith('/') && !existsSync(join(target, 'index.html'))) problems.push(`${name}: ${ref} is a folder without an index page`);
   }
 }
-for (const need of ['index.html', '404.html', 'news/index.html', 'projects/index.html', 'calendar/index.html', 'calendar/feed.ics', 'news/feed.xml', 'sitemap.xml', 'assets/motion.css', 'assets/motion.js'])
+for (const need of ['index.html', '404.html', 'news/index.html', 'projects/index.html', 'calendar/index.html', 'preprints/index.html', 'calendar/feed.ics', 'news/feed.xml', 'sitemap.xml', 'assets/motion.css', 'assets/motion.js', 'assets/preprints-data.js'])
   if (!files.includes(join(site, ...need.split('/')))) problems.push(`missing required file: ${need}`);
 if (files.some(f => /(?:Curriculum_Vitae|Majid_Babaei_CV)\.pdf$/i.test(f))) problems.push('a CV PDF is in the public artifact');
 if (files.some(f => f.endsWith('project.json'))) problems.push('a project.json editing source is in the public artifact');
+// Preprints: release records, workspace code, sources, and build logs never ship; every listed version has its PDF.
+if (files.some(f => f.endsWith('preprint.json'))) problems.push('a preprint.json release record is in the public artifact');
+if (files.some(f => /[\\/](?:scholarpress|private-drafts)[\\/]/i.test(f) || /\.(?:tex|log|blg|aux|bbl|sty|cls|bst)$/i.test(f))) problems.push('LaTeX sources, build logs, or workspace files are in the public artifact');
+const ppData = files.find(f => f.endsWith(join('assets', 'preprints-data.js')));
+if (ppData) {
+  const pp = JSON.parse((await readFile(ppData, 'utf8')).replace(/^[\s\S]*?window\.PREPRINTS = /, '').replace(/;\s*$/, ''));
+  for (const a of pp) for (const v of a.versions) for (const need of [`${v.url}index.html`, v.pdf, `${v.url}citation.bib`, `${a.url}index.html`, `${a.url}paper.pdf`])
+    if (!files.includes(join(site, ...need.split('/')))) problems.push(`preprint ${a.slug}: missing ${need}`);
+}
 
 if (problems.length) { console.error(`Public artifact check failed:\n- ${problems.join('\n- ')}`); process.exit(1); }
 console.log(`Public artifact OK: ${pages.length} pages, ${files.length} files.`);

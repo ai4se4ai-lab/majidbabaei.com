@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="{{ csrf }}">
+<title>{% block title %}ScholarPress{% endblock %} · ScholarPress</title>
+<link rel="stylesheet" href="/static/app.css">
+<script src="/static/app.js" defer></script>
+</head>
+<body data-page="{% block page %}{% endblock %}">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="brand" href="/">ScholarPress</a>
+  <nav aria-label="Workspace"><a href="/">Articles</a><a href="/articles/new">New article</a>
+    <a href="http://127.0.0.1:{{ cfg.staging_port }}/preprints/" target="_blank" rel="noopener">Staging site ↗</a></nav>
+  <span class="tag">{{ cfg.adapter }} adapter</span>
+</header>
+{% if runner == 'local' %}
+<p class="banner warn" role="note"><strong>Local compiler (not sandboxed).</strong> Builds use latexmk on this computer with shell escape disabled, a {{ cfg.timeout_seconds }} s limit and memory/process caps, but without network or filesystem isolation: TeX can read files your account can read. Compile only manuscripts you trust, or configure a digest-pinned Docker image.</p>
+{% endif %}
+<div id="live" class="visually-hidden" role="status" aria-live="polite"></div>
+<main id="main" tabindex="-1">
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

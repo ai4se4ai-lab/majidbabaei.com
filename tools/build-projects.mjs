@@ -25,6 +25,16 @@ const STAGES = ['Idea', 'Prototype', 'Submitted', 'Accepted', 'Published'];
 const ctx = { window: {} };
 vm.runInNewContext(await readFile(resolve(root, 'assets/research-data.js'), 'utf8'), ctx);
 const R = ctx.window.RESEARCH;
+// Preprints released through ScholarPress (tools/build-preprints.mjs runs first). Each project–article relationship
+// adds exactly one release keyed "preprint-<slug>", so rebuilding or posting a new version never duplicates it.
+const pctx = { window: {} };
+if (existsSync(resolve(root, 'assets/preprints-data.js'))) vm.runInNewContext(await readFile(resolve(root, 'assets/preprints-data.js'), 'utf8'), pctx);
+const PREPRINTS = pctx.window.PREPRINTS || [];
+const preprintReleases = slug => PREPRINTS.filter(a => a.projectIds.includes(slug)).map(a => ({
+  tag: `preprint-${a.slug}`, date: a.firstDate, type: 'paper', title: `Preprint · ${a.title}`,
+  notes: `**${a.title}**\n\n${a.authors.join(', ')}\n\nLatest version: v${a.version} (${a.date}).`,
+  links: [{ label: 'Preprint', url: a.url, type: 'paper' }, ...a.versions.map(v => ({ label: `v${v.version} (${v.date})`, url: v.url, type: 'paper' }))]
+}));
 
 // Publications belong to a project when they share its repository or start with its short name.
 const linkedPubs = p => {
@@ -167,7 +177,7 @@ for (const { base, slug, research } of entries) {
   const readmePath = resolve(dir, slug, 'README.md');
   const readme = existsSync(readmePath) ? await readFile(readmePath, 'utf8') : '';
   // Release notes and the README are rendered and sanitized here, so pages need no Markdown library at run time.
-  const releases = (data.releases || []).map((r, i) => ({ ...r, notesHtml: r.notes ? renderMarkdown(r.notes) : '', iso: isoOf(r.date), label: r.label || labelOf(r.date), order: i }))
+  const releases = [...(data.releases || []).filter(r => !String(r.tag).startsWith('preprint-')), ...preprintReleases(slug)].map((r, i) => ({ ...r, notesHtml: r.notes ? renderMarkdown(r.notes) : '', iso: isoOf(r.date), label: r.label || labelOf(r.date), order: i }))
     .sort((a, b) => b.iso.localeCompare(a.iso) || a.order - b.order);
   const gallery = (data.gallery || []).map(g => ({ ...g, label: g.date ? (g.label || labelOf(g.date)) : (g.label || '') }));
   const proj = {

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ v.a.title }}{% endblock %}
+{% block page %}article{% endblock %}
+{% block content %}
+<script type="application/json" id="page-data">{{ {"article": v.a.id, "links": links, "venue": venue, "catalog": catalog} | json }}</script>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Articles</a> / <span>{{ v.a.title }}</span></nav>
+<h1>{{ v.a.title }}</h1>
+<p class="mono muted">{{ cfg.site_url }}/preprints/{{ v.a.slug }}/{% if v.a.disclosure != 'public' %} · withheld (anonymous review){% endif %}</p>
+<div class="split panel">
+  <div><h2>Latest public version</h2>
+    {% if v.latest %}<p><strong>v{{ v.latest.version }}</strong> · released {{ v.latest.release_date }}</p><p>{{ v.latest_meta.title }}</p>
+      <p><a href="/releases/{{ v.latest.id }}/paper.pdf">PDF (owner copy)</a> · <a href="http://127.0.0.1:{{ cfg.staging_port }}/preprints/{{ v.a.slug }}/" target="_blank" rel="noopener">Staging page ↗</a></p>
+    {% else %}<p class="muted">Nothing released yet.</p>{% endif %}</div>
+  <div><h2>Newer draft</h2>
+    {% if v.draft %}<p><a href="/drafts/{{ v.draft.id }}">{{ v.draft_meta.title or 'Untitled draft' }}</a></p>
+      <p>Build: <span class="pill {{ v.build.status if v.build else 'none' }}">{{ v.build.status if v.build else 'not built' }}</span>{% if v.build and v.build.status == 'failed' and v.latest %} — v{{ v.latest.version }} remains current.{% endif %}</p>
+    {% else %}<p class="muted">No open draft.</p>{% endif %}
+    <p><a class="btn" href="/articles/{{ v.a.id }}/revise">New revision{% if not v.latest %} (replace sources){% endif %}</a></p></div>
+</div>
+
+<section class="panel" aria-labelledby="hist-h">
+  <h2 id="hist-h">Version history</h2>
+  {% if not releases %}<p class="muted">No released versions.</p>{% endif %}
+  <ol class="history" reversed>
+  {% for r in releases %}
+    <li><h3>v{{ r.version }} · {{ r.release_date }}{% if r.state == 'exposed' %} <span class="pill failed">exposed, unverified</span>{% endif %}</h3>
+      <p>{{ r.meta.title }}</p>{% if r.note %}<p class="muted">{{ r.note }}</p>{% endif %}
+      <p class="row-actions"><a href="/releases/{{ r.id }}/paper.pdf">Immutable PDF</a><a href="/articles/{{ v.a.id }}/revise?release={{ r.id }}" class="btn small">New revision from this version</a></p>
+      <details><summary>Original sources and diagnostics</summary>
+        <ul class="plain">{% for f in r.files %}<li><a href="/files/{{ f.id }}" download>{{ f.path }}</a> <span class="muted">{{ f.role }} · {{ f.size }} B</span></li>{% endfor %}</ul>
+        <p class="mono">PDF SHA-256 {{ r.pdf_sha256 }} · {{ r.pages or '?' }} pages{% if r.log_path %} · <a href="/builds/{{ r.build_id }}/build.log">build log</a>{% endif %}</p>
+        <ul class="diags">{% for x in r.diags %}<li class="{{ x.severity }}">{{ x.severity }} · {{ x.message }}{% if x.line %} (line {{ x.line }}){% endif %}</li>{% else %}<li>No diagnostics.</li>{% endfor %}</ul></details></li>
+  {% endfor %}
+  </ol>
+</section>
+
+{% if v.latest %}
+<section class="panel" aria-labelledby="upd-h">
+  <h2 id="upd-h">Update public metadata (no new PDF)</h2>
+  <p class="help">Record a confirmed venue status, DOI or official link, or change site associations. Numbered PDFs, their pages and citations, and story permalinks stay as published.</p>
+  <form id="update-form" novalidate>
+    <div class="grid2">
+      <label>Status <select name="v-status">{% for s in ['preprint', 'under-review', 'revision-requested', 'accepted', 'published'] %}<option {% if (venue.status or 'preprint') == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label>
+      <label>Venue <input name="v-name" value="{{ venue.name or '' }}"></label>
+      <label>Kind <select name="v-kind"><option value="">—</option><option {% if venue.kind == 'journal' %}selected{% endif %}>journal</option><option {% if venue.kind == 'conference' %}selected{% endif %}>conference</option></select></label>
+      <label>DOI <input name="v-doi" value="{{ venue.doi or '' }}"></label>
+      <label>Official link <input name="v-url" value="{{ venue.url or '' }}"></label>
+      <label>Venue date <input name="v-date" value="{{ venue.date or '' }}" placeholder="YYYY-MM-DD"></label>
+    </div>
+    <label>Formal citation <input name="v-citation" value="{{ venue.citation or '' }}"></label>
+    <label class="approve"><input type="checkbox" name="v-confirmed" {% if venue.confirmed %}checked{% endif %}> This status is verified</label>
+    <fieldset><legend>Projects</legend><div class="checks">{% for p in catalog.projects %}<label><input type="checkbox" name="projectIds" value="{{ p.id }}" {% if p.id in (links.projectIds or []) %}checked{% endif %}> {{ p.name }}</label>{% endfor %}</div></fieldset>
+    <label>Publications entry <select name="publicationId"><option value="">None</option>{% for p in catalog.publications %}<option value="{{ p.key }}" {% if links.publicationId == p.key %}selected{% endif %}>{{ p.title }}</option>{% endfor %}</select></label>
+    <button class="btn" type="button" id="update-preview">Review update</button>
+    <div id="update-review" aria-live="polite"></div>
+    <button class="btn danger" type="button" id="update-apply" disabled>Publish metadata update</button>
+    <div id="update-status" class="status" aria-live="polite"></div>
+  </form>
+</section>
+{% endif %}
+
+<section class="panel" aria-labelledby="pubs-h">
+  <h2 id="pubs-h">Publication attempts</h2>
+  <table class="files"><thead><tr><th scope="col">When</th><th scope="col">Kind</th><th scope="col">Adapter</th><th scope="col">Status</th><th scope="col">Message</th></tr></thead><tbody>
+  {% for p in pubs %}<tr><td>{{ p.created }}</td><td>{{ p.kind }}</td><td>{{ p.adapter }}</td><td><span class="pill {{ p.status }}">{{ p.status }}</span></td><td>{{ p.message }}</td></tr>{% else %}<tr><td colspan="5">None yet.</td></tr>{% endfor %}
+  </tbody></table>
+</section>
+{% endblock %}

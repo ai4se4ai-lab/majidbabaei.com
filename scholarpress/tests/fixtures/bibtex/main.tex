@@ -1,0 +1,26 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\title{Synthetic Integration Manuscript}
+\author{Majid Babaei}
+\begin{document}
+\maketitle
+\begin{abstract}
+A synthetic manuscript used to exercise ScholarPress builds with BibTeX, a figure, and an equation.
+\end{abstract}
+\section{Introduction}\label{sec:intro}
+We cite prior work~\cite{knuth1984}. Section~\ref{sec:method} follows.
+\section{Method}\label{sec:method}
+\begin{equation}\label{eq:one}
+  E = mc^2
+\end{equation}
+Equation~\eqref{eq:one} and Figure~\ref{fig:dot}.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1cm]{figures/dot.png}
+  \caption{A dot.}\label{fig:dot}
+\end{figure}
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}

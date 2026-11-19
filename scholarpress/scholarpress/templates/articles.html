@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Articles{% endblock %}
+{% block page %}articles{% endblock %}
+{% block content %}
+<div class="head-row"><h1>Articles</h1><a class="btn primary" href="/articles/new">New article</a></div>
+<form class="filters" method="get" action="/" role="search">
+  <label>Search <input type="search" name="q" value="{{ q }}" placeholder="Title or slug"></label>
+  <label>Show
+    <select name="status">
+      <option value="" {% if not status %}selected{% endif %}>All articles</option>
+      <option value="published" {% if status == 'published' %}selected{% endif %}>Publicly released</option>
+      <option value="unpublished" {% if status == 'unpublished' %}selected{% endif %}>Never released</option>
+      <option value="draft-open" {% if status == 'draft-open' %}selected{% endif %}>With an open draft</option>
+      <option value="draft-failed" {% if status == 'draft-failed' %}selected{% endif %}>Latest draft build failed</option>
+    </select></label>
+  <button class="btn" type="submit">Apply</button>
+</form>
+{% if not items %}
+<p class="empty">No articles{% if q or status %} match{% endif %}. <a href="/articles/new">Upload a .tex and .bib pair</a> to start.</p>
+{% else %}
+<ul class="cards">
+{% for i in items %}
+  <li class="card">
+    <h2><a href="/articles/{{ i.a.id }}">{{ i.a.title }}</a></h2>
+    <p class="mono muted">/preprints/{{ i.a.slug }}/{% if i.a.slug_locked %} · slug locked{% endif %}{% if i.a.disclosure != 'public' %} · <strong>withheld</strong>{% endif %}</p>
+    <div class="split">
+      <div><h3>Latest public</h3>
+        {% if i.latest %}<p><strong>v{{ i.latest.version }}</strong> · {{ i.latest.release_date }}</p>{% else %}<p class="muted">Not released</p>{% endif %}</div>
+      <div><h3>Newer draft</h3>
+        {% if i.draft %}<p><a href="/drafts/{{ i.draft.id }}">Open draft</a> · build:
+          <span class="pill {{ i.build.status if i.build else 'none' }}">{{ i.build.status if i.build else 'not built' }}</span></p>
+        {% else %}<p class="muted">None</p>{% endif %}</div>
+    </div>
+  </li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

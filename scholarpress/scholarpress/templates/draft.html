@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Draft · {{ a.title }}{% endblock %}
+{% block page %}draft{% endblock %}
+{% block content %}
+<script type="application/json" id="page-data">{{ {"draft": d.id, "article": a.id, "rev": d.rev, "build": build.id if build else None, "buildStatus": build.status if build else None, "catalog": catalog, "defaultAnnouncement": default_ann, "slug": a.slug, "siteUrl": cfg.site_url} | json }}</script>
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Articles</a> / <a href="/articles/{{ a.id }}">{{ a.title }}</a> / <span>Draft</span></nav>
+<div class="head-row"><h1>{{ meta.title or a.slug }}</h1>
+  <span class="pill {{ 'published' if d.status == 'published' else 'open' }}">{{ 'Published' if d.status == 'published' else ('Superseded' if d.status == 'superseded' else 'Open draft') }}</span></div>
+{% if is_revision %}<p class="muted">Revision draft. The current public version stays live until this draft is published; a failed build changes nothing public.</p>{% endif %}
+
+<nav class="tabs" aria-label="Draft sections"><a href="#sources">Sources</a><a href="#metadata">Metadata</a><a href="#build">Build &amp; preview</a><a href="#links">Website links</a><a href="#publish">Publish</a></nav>
+
+<section id="sources" class="panel" aria-labelledby="sources-h">
+  <div class="head-row"><h2 id="sources-h">Sources and files</h2><a class="btn" href="/articles/{{ a.id }}/revise?draft={{ d.id }}">New revision from this draft</a></div>
+  <table class="files"><caption class="visually-hidden">Files in this draft's source snapshot</caption>
+    <thead><tr><th scope="col">Path</th><th scope="col">Role</th><th scope="col">Origin</th><th scope="col">Size</th><th scope="col">SHA-256</th><th scope="col">Original</th></tr></thead>
+    <tbody>{% for f in files %}<tr><td class="mono">{{ f.path }}</td><td>{{ {'entry': 'Main .tex', 'bibliography': 'Bibliography', 'support': 'Supporting'}[f.role] }}</td>
+      <td>{{ f.origin }}</td><td>{{ f.size }} B</td><td class="mono" title="{{ f.sha256 }}">{{ f.sha256[:12] }}…</td>
+      <td><a href="/files/{{ f.id }}" download>Download</a></td></tr>{% endfor %}</tbody></table>
+  <p class="help">Originals are stored byte-for-byte; builds use temporary copies. The house style file, when used, is added only to the build copy.</p>
+</section>
+
+<section id="metadata" class="panel" aria-labelledby="meta-h">
+  <h2 id="meta-h">Public metadata</h2>
+  <form id="meta-form" novalidate>
+    <div class="field" data-field="title"><label for="m-title">Title</label><input id="m-title" name="title" value="{{ meta.title }}" required><p class="err"></p></div>
+    <fieldset class="field" data-field="authors"><legend>Authors, in publication order</legend>
+      <ol id="authors" class="authors">{% for au in meta.authors %}<li><label>Name <input name="author-name" value="{{ au.name }}"></label><label>Affiliation <input name="author-affiliation" value="{{ au.affiliation }}"></label>
+        <span class="row-actions"><button type="button" class="btn small" data-move="-1" aria-label="Move up">↑</button><button type="button" class="btn small" data-move="1" aria-label="Move down">↓</button><button type="button" class="btn small" data-remove aria-label="Remove author">✕</button></span></li>{% endfor %}</ol>
+      <button type="button" class="btn small" id="add-author">Add author</button><p class="err"></p></fieldset>
+    <div class="field" data-field="abstract"><label for="m-abstract">Abstract</label><textarea id="m-abstract" name="abstract" rows="7">{{ meta.abstract }}</textarea><p class="err"></p></div>
+    <div class="field" data-field="slug"><label for="m-slug">Slug</label><input id="m-slug" name="slug" value="{{ a.slug }}" {% if a.slug_locked %}readonly aria-describedby="slug-locked"{% endif %}>
+      {% if a.slug_locked %}<p id="slug-locked" class="help">Locked: the stable URL /preprints/{{ a.slug }}/ never changes.</p>{% endif %}<p class="err"></p></div>
+    <div class="field" data-field="revision_note"><label for="m-note">Revision note (optional, shown on the version page)</label><textarea id="m-note" name="revision_note" rows="2">{{ d.revision_note }}</textarea></div>
+    <fieldset class="field" data-field="disclosure"><legend>Public disclosure</legend>
+      <label><input type="radio" name="disclosure" value="public" {% if d.disclosure == 'public' %}checked{% endif %}> Public: the paper may be released and linked</label>
+      <label><input type="radio" name="disclosure" value="withheld" {% if d.disclosure == 'withheld' %}checked{% endif %}> Withheld: anonymous review; nothing identifying is exported anywhere</label>
+      {% if a.disclosure != 'public' %}<label class="approve"><input type="checkbox" name="disclosureApproved" {% if meta.disclosureApproved %}checked{% endif %}> I approve changing this work from withheld to public</label>{% endif %}
+      <p class="err"></p></fieldset>
+    <label class="approve"><input type="checkbox" name="confirmed" {% if meta.confirmed %}checked{% endif %}> I reviewed the title, author order, affiliations, abstract and slug</label>
+    <p class="err" data-form-err role="alert"></p>
+    <button class="btn primary" type="submit" {% if d.status != 'open' %}disabled{% endif %}>Save metadata</button>
+  </form>
+</section>
+
+<section id="build" class="panel" aria-labelledby="build-h">
+  <h2 id="build-h">Build and preview</h2>
+  <form id="profile-form" class="inline">
+    <label>Profile <select name="kind">
+      <option value="preserve" {% if profile.kind == 'preserve' %}selected{% endif %}>Preserve layout (original class and preamble)</option>
+      <option value="house" {% if profile.kind == 'house' %}selected{% endif %}>House preprint (scholarpress-preprint class)</option></select></label>
+    <label>Engine <select name="engine">{% for e in ['pdflatex', 'xelatex', 'lualatex'] %}<option {% if profile.engine == e %}selected{% endif %}>{{ e }}</option>{% endfor %}</select></label>
+    <button class="btn" type="submit" {% if d.status != 'open' %}disabled{% endif %}>Save profile and build</button>
+    <button class="btn primary" type="button" id="build-btn" {% if d.status != 'open' %}disabled{% endif %}>Build PDF</button>
+  </form>
+  <div id="build-status" class="status" aria-live="polite">{% if build %}Build <span class="pill {{ build.status }}">{{ build.status }}</span>{% else %}Not built yet.{% endif %}</div>
+  <ul id="diagnostics" class="diags" aria-label="Diagnostics">{% for x in diags %}<li class="{{ x.severity }}"><strong>{{ x.severity|capitalize }}</strong> · <span class="mono">{{ x.code }}</span> — {{ x.message }}{% if x.file %} in <span class="mono">{{ x.file }}</span>{% endif %}{% if x.line %}, line {{ x.line }}{% endif %}.
+    <span class="action">{{ x.action }}</span>{% if x.excerpt %}<details><summary>Log excerpt</summary><pre>{{ x.excerpt }}</pre></details>{% endif %}</li>{% endfor %}</ul>
+  <div id="pdf-area">{% if build and build.pdf_path %}
+    {% if build.blocked %}<p class="banner warn">Partial preview: this PDF has blocking problems and cannot be published.</p>{% endif %}
+    <div class="row-actions"><a class="btn" href="/builds/{{ build.id }}/paper.pdf" target="_blank" rel="noopener">Open PDF in a new tab</a><a class="btn" href="/builds/{{ build.id }}/paper.pdf?download=1">Download PDF</a><a class="btn" href="/builds/{{ build.id }}/build.log">Download build log</a></div>
+    <iframe class="pdf" src="/builds/{{ build.id }}/paper.pdf" title="PDF preview"></iframe>
+  {% elif build and build.log_path %}<div class="row-actions"><a class="btn" href="/builds/{{ build.id }}/build.log">Download build log</a></div>{% endif %}</div>
+</section>
+
+<section id="links" class="panel" aria-labelledby="links-h">
+  <h2 id="links-h">Website links</h2>
+  <form id="links-form" novalidate>
+    <div class="field" data-field="publicationId"><label for="l-pub">Publications entry</label>
+      <select id="l-pub" name="publicationId"><option value="">None: list under the Preprints tab</option>
+        {% for p in catalog.publications %}<option value="{{ p.key }}" {% if links.publicationId == p.key %}selected{% endif %}>{{ p.title }} — {{ 'Published & accepted' if p.group == 'published' else p.status }}</option>{% endfor %}</select>
+      {% if cand.suggestions %}<p class="help">Possible match{% if cand.suggestions|length > 1 %}es{% endif %} by title (confirm before choosing):
+        {% for s in cand.suggestions %}<button type="button" class="btn small" data-suggest="{{ s.key }}">{{ s.title }} ({{ (s.score * 100)|round|int }}%)</button>{% endfor %}</p>{% endif %}
+      <p class="help">Anonymous-for-review entries are not offered. A preprint never changes publication counts.</p><p class="err"></p></div>
+    <fieldset class="field" data-field="projectIds"><legend>Projects (release history)</legend><div class="checks">
+      {% for p in catalog.projects %}<label><input type="checkbox" name="projectIds" value="{{ p.id }}" {% if p.id in (links.projectIds or []) %}checked{% endif %}> {{ p.name }}</label>{% endfor %}</div><p class="err"></p></fieldset>
+    <fieldset class="field" data-field="newsPostIds"><legend>Related Newsroom stories (linked from the article page)</legend><div class="checks">
+      {% for n in catalog.news %}<label><input type="checkbox" name="newsPostIds" value="{{ n.id }}" {% if n.id in (links.newsPostIds or []) %}checked{% endif %}> {{ n.title }} <span class="muted">{{ n.date }}</span></label>{% endfor %}</div><p class="err"></p></fieldset>
+    <fieldset class="field" data-field="agendaIds"><legend>Homepage sections</legend><div class="checks">
+      {% for g in catalog.agenda %}<label><input type="checkbox" name="agendaIds" value="{{ g.id }}" {% if g.id in (links.agendaIds or []) %}checked{% endif %}> {{ g.name }}</label>{% endfor %}</div></fieldset>
+    <fieldset class="field" data-field="announcement"><legend>Announcement</legend>
+      <label><input type="radio" name="ann-mode" value="none" {% if ann.mode == 'none' %}checked{% endif %}> Publish quietly (no story)</label>
+      <label><input type="radio" name="ann-mode" value="new" {% if ann.mode == 'new' %}checked{% endif %}> Approve a new story</label>
+      <label><input type="radio" name="ann-mode" value="update" {% if ann.mode == 'update' %}checked{% endif %}> Add to an existing story</label>
+      {% if is_revision %}<p class="help">Revisions publish quietly unless you explicitly choose a story here.</p>{% endif %}
+      <div id="ann-new" class="sub" {% if ann.mode != 'new' %}hidden{% endif %}>
+        <div class="field" data-field="announcement.title"><label>Story title <input name="ann-title" value="{{ ann.title or '' }}"></label><p class="err"></p></div>
+        <div class="field" data-field="announcement.newsSlug"><label>Story URL slug <input name="ann-slug" value="{{ ann.newsSlug or '' }}"></label><p class="err"></p></div>
+        <div class="field" data-field="announcement.summary"><label>Summary (homepage panel, RSS) <input name="ann-summary" value="{{ ann.summary or '' }}"></label><p class="err"></p></div>
+        <div class="field" data-field="announcement.body"><label>Story (Markdown) <textarea name="ann-body" rows="7">{{ ann.body or '' }}</textarea></label><p class="err"></p></div>
+        <button type="button" class="btn small" id="ann-fill">Fill with a draft announcement</button>
+      </div>
+      <div id="ann-update" class="sub" {% if ann.mode != 'update' %}hidden{% endif %}>
+        <div class="field" data-field="announcement.newsPostId"><label>Story <select name="ann-post"><option value="">Choose…</option>{% for n in catalog.news %}<option value="{{ n.id }}" {% if ann.newsPostId == n.id %}selected{% endif %}>{{ n.title }}</option>{% endfor %}</select></label><p class="err"></p></div>
+        <div class="field" data-field="announcement.body"><label>Paragraph to add (Markdown) <textarea name="ann-update-body" rows="4">{{ ann.body if ann.mode == 'update' else '' }}</textarea></label><p class="err"></p></div>
+      </div>
+    </fieldset>
+    <fieldset class="field" data-field="venue"><legend>Venue status (confirmed facts only)</legend>
+      <div class="grid2">
+        <label>Status <select name="v-status">{% for s in ['preprint', 'under-review', 'revision-requested', 'accepted', 'published'] %}<option {% if (venue.status or 'preprint') == s %}selected{% endif %}>{{ s }}</option>{% endfor %}</select></label>
+        <label>Venue <input name="v-name" value="{{ venue.name or '' }}"></label>
+        <label>Kind <select name="v-kind"><option value="">—</option><option {% if venue.kind == 'journal' %}selected{% endif %}>journal</option><option {% if venue.kind == 'conference' %}selected{% endif %}>conference</option></select></label>
+        <label>DOI <input name="v-doi" value="{{ venue.doi or '' }}" placeholder="10.1234/…"></label>
+        <label>Official link <input name="v-url" value="{{ venue.url or '' }}" placeholder="https://…"></label>
+        <label>Venue date <input name="v-date" value="{{ venue.date or '' }}" placeholder="YYYY-MM-DD"></label>
+      </div>
+      <label>Formal citation <input name="v-citation" value="{{ venue.citation or '' }}"></label>
+      <label class="approve"><input type="checkbox" name="v-confirmed" {% if venue.confirmed %}checked{% endif %}> This status is verified (acceptance letter or published version)</label>
+      <p class="err"></p></fieldset>
+    <fieldset class="field" data-field="cv"><legend>CV entry</legend>
+      <label>Section <select name="cv-section"><option value="">Automatic</option>
+        {% for k, label in [('preprints','Preprints'),('submitted','Submitted / under review'),('ongoing','On-going projects'),('journal','Journal (published or accepted)'),('conference','Conference (published or accepted)')] %}<option value="{{ k }}" {% if cvj.section == k %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+      <label>Existing CV label (\label{pub:…}) <input name="cv-key" value="{{ cvj.entryKey or '' }}"></label>
+      <div id="cv-handoff" class="handoff">{% if cand.cv.entry %}<p><span class="pill {{ cand.cv.status }}">{{ cand.cv.status }}</span> {{ cand.cv.sectionLabel }}</p><pre>{{ cand.cv.entry }}</pre>{% endif %}<p class="help">{{ cand.cv.note }}</p></div>
+    </fieldset>
+    <p class="err" data-form-err role="alert"></p>
+    <button class="btn primary" type="submit" {% if d.status != 'open' %}disabled{% endif %}>Save website links</button>
+  </form>
+</section>
+
+<section id="publish" class="panel" aria-labelledby="pub-h">
+  <h2 id="pub-h">Publish</h2>
+  <div id="candidate">
+    <dl class="kv"><dt>Proposed version</dt><dd>v{{ cand.version }}</dd>
+      <dt>Stable article link</dt><dd class="mono">{{ cfg.site_url }}/preprints/{{ a.slug }}/</dd>
+      <dt>Exact version link</dt><dd class="mono">{{ cfg.site_url }}/preprints/{{ a.slug }}/v{{ cand.version }}/</dd>
+      <dt>Approval fingerprint</dt><dd class="mono" id="fp">{{ cand.fingerprint[:16] }}…</dd></dl>
+    <h3>Changes on the website</h3>
+    <ul class="summary">{% for s in cand.summary %}<li><strong>{{ s.surface }}</strong>: {{ s.change }}</li>{% endfor %}</ul>
+    {% if cand.reasons %}<div class="banner warn" role="note"><p><strong>Publish is unavailable:</strong></p><ul>{% for r in cand.reasons %}<li>{{ r }}</li>{% endfor %}</ul></div>{% endif %}
+  </div>
+  <div class="row-actions"><button class="btn" type="button" id="site-preview-btn" {% if not build or not build.pdf_path %}disabled{% endif %}>Preview the full site</button>
+    <span id="site-preview-status" aria-live="polite"></span></div>
+  <label class="approve"><input type="checkbox" id="pub-approve" {% if not cand.ready %}disabled{% endif %}> I previewed the PDF, the article page and every change listed above, and approve this exact release</label>
+  <button class="btn danger" type="button" id="publish-btn" data-fingerprint="{{ cand.fingerprint }}" data-build="{{ cand.build_id or '' }}" disabled>Publish v{{ cand.version }}</button>
+  <div id="pub-status" class="status" aria-live="polite"></div>
+</section>
+{% endblock %}

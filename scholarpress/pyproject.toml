@@ -1,0 +1,29 @@
+[project]
+name = "scholarpress"
+version = "0.1.0"
+description = "Local, browser-based preprint workspace for majidbabaei.com: upload .tex/.bib, build, review, and publish versioned preprints."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+  "jinja2>=3.1",
+  "python-multipart>=0.0.18",
+  "pypdf>=5.1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "httpx>=0.28"]
+
+[project.scripts]
+scholarpress = "scholarpress.__main__:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["scholarpress"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["tex: needs a working latexmk toolchain"]

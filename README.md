@@ -13,7 +13,7 @@ Three things stay consistent:
 This repository is cloned as `majidbabaei.com/` inside the lab-site working copy, which ignores it. Run these from the lab-site root:
 
 ```sh
-node scripts/sync-personal-site.mjs           # regenerate CV data and PDF, then rebuild project pages, the calendar, and the newsroom
+node scripts/sync-personal-site.mjs           # regenerate CV data and PDF, then rebuild preprint pages, project pages, the calendar, and the newsroom
 node scripts/sync-personal-site.mjs --check   # fail if anything here has drifted
 node scripts/push-all.mjs                     # push both repositories after committing in each
 ```
@@ -78,6 +78,10 @@ Each project page `projects/<slug>/` is built from `projects/<slug>/project.json
 
 Then run `node tools/build-projects.mjs` (or the lab sync).
 
+## Publish preprints (ScholarPress)
+
+Preprints are released from the local ScholarPress workspace in `scholarpress/` (see [its README](scholarpress/README.md)). It runs at `http://127.0.0.1:8765` and is never deployed. ScholarPress writes `preprints/<slug>/preprint.json` and immutable `preprints/<slug>/v<N>/paper.pdf` files, plus any approved news post. `node tools/build-preprints.mjs` then generates `/preprints/`, each stable article page, numbered release pages, `citation.bib` files, the latest-PDF alias, and `assets/preprints-data.js`. The homepage Publications list, project release histories and the sitemap all read that data file. Do not edit these files by hand. `--check` fails when a numbered PDF no longer matches its recorded SHA-256.
+
 ## Keep the calendar (commitments by week, month, and year)
 
 The **Calendar** tab shows teaching, research blocks, events and talks, service, deadlines, travel, and blocked time on a week grid, a month grid, and a year overview, with an "Up next" rail, type filters, search, keyboard shortcuts (arrows, T, W, M, Y), and an iCalendar feed (`calendar/feed.ics`) that any calendar app can subscribe to. Every entry has its own page at `calendar/<slug>/` with a Markdown body, a details rail, and an `event.ics` download. Nothing is edited in the browser: entries are files.
@@ -119,6 +123,8 @@ The floating glass header groups navigation into four menus: Research (Agenda, P
 | Project releases, gallery, team | `projects/<slug>/project.json`, edited by hand |
 | News posts | `news/posts/*.md`, edited by hand |
 | Calendar entries | `calendar/events/*.md`, edited by hand (see `_template.md`) |
+| Preprint release records and numbered PDFs | `preprints/<slug>/preprint.json`, `preprints/<slug>/v<N>/paper.pdf`, **written by ScholarPress**; do not edit |
+| Preprint pages, `assets/preprints-data.js`, latest-PDF aliases, `citation.bib` | **generated** by `tools/build-preprints.mjs` |
 | Project pages, newsroom pages, calendar pages, RSS, iCalendar feeds, sitemap, `assets/projects-data.js`, `assets/news-data.js`, `assets/calendar-data.js` | **generated** by `tools/` |
 | Bio, research agenda, teaching, students, service, background, contact | `index.html`, edited by hand from the CV |
 | Styles / behavior | `assets/style.css`, `news.css`, `projects.css`, `calendar.css` / `site.js`, `news.js`, `projects.js`, `calendar.js` (+ `calendar-core.js`, shared with the build and tests) |

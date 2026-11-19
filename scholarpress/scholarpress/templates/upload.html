@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{% if article %}New revision{% else %}New article{% endif %}{% endblock %}
+{% block page %}upload{% endblock %}
+{% block content %}
+<h1>{% if article %}New revision of “{{ article.title }}”{% else %}New article{% endif %}</h1>
+{% if article %}<p>Starting from {{ basis.label }}. Its files are copied into the new draft; upload a revised .tex and .bib to replace them, and remove inherited assets you no longer need.</p>{% endif %}
+<form id="upload-form" class="panel" data-endpoint="{% if article %}/api/articles/{{ article.id }}/drafts{% else %}/api/articles{% endif %}" novalidate>
+  {% if article %}<input type="hidden" name="basis_release_id" value="{{ basis.release }}"><input type="hidden" name="basis_draft_id" value="{{ basis.draft }}">{% endif %}
+  <div class="field" data-field="tex">
+    <label for="tex">Main manuscript (.tex){% if not article %} <span class="req">required</span>{% endif %}</label>
+    <input id="tex" name="tex" type="file" accept=".tex" {% if not article %}required{% endif %} aria-describedby="tex-help tex-err">
+    <p id="tex-help" class="help">The file passed to latexmk. Keep its name if the bibliography or figures refer to it.</p>
+    <p class="err" id="tex-err"></p>
+  </div>
+  <div class="field" data-field="bib">
+    <label for="bib">Bibliography (.bib){% if not article %} <span class="req">required</span>{% endif %}</label>
+    <input id="bib" name="bib" type="file" accept=".bib" {% if not article %}required{% endif %} aria-describedby="bib-help bib-err">
+    <p id="bib-help" class="help">Its file name must match \bibliography{…} or \addbibresource{…}; a mismatch is reported before compiling.</p>
+    <p class="err" id="bib-err"></p>
+  </div>
+  <fieldset class="field" data-field="support">
+    <legend>Supporting files (optional)</legend>
+    <p class="help">PNG, JPEG or PDF figures and needed .tex, .sty, .cls or .bst files. Set each file's path relative to the main .tex (for example <code>figures/overview.png</code>).</p>
+    <label for="support">Add files</label> <input id="support" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.tex,.sty,.cls,.bst,.bib">
+    <label for="support-dir">or a folder</label> <input id="support-dir" type="file" webkitdirectory multiple>
+    <table class="files" id="support-list" hidden><caption class="visually-hidden">Supporting files to upload</caption>
+      <thead><tr><th scope="col">Relative path</th><th scope="col">Size</th><th scope="col"><span class="visually-hidden">Remove</span></th></tr></thead><tbody></tbody></table>
+    <p class="err" id="support-err"></p>
+  </fieldset>
+  {% if article and files %}
+  <fieldset class="field">
+    <legend>Inherited from {{ basis.label }}</legend>
+    <p class="help">Uploading a new .tex or .bib replaces the inherited one. Tick assets to remove them.</p>
+    <table class="files"><thead><tr><th scope="col">Remove</th><th scope="col">Path</th><th scope="col">Role</th><th scope="col">Size</th></tr></thead><tbody>
+    {% for f in files %}<tr><td>{% if f.role == 'support' %}<input type="checkbox" name="remove" value="{{ f.path }}" aria-label="Remove {{ f.path }}">{% else %}—{% endif %}</td>
+      <td class="mono">{{ f.path }}</td><td>{{ f.role }}</td><td>{{ f.size }} B</td></tr>{% endfor %}
+    </tbody></table>
+  </fieldset>
+  {% endif %}
+  {% if not article %}
+  <div class="field" data-field="slug"><label for="slug">URL slug (optional)</label>
+    <input id="slug" name="slug" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="derived from the title" aria-describedby="slug-help slug-err">
+    <p id="slug-help" class="help">Becomes /preprints/&lt;slug&gt;/. You can change it until the first publication; then it is locked.</p><p class="err" id="slug-err"></p></div>
+  {% endif %}
+  <p class="err" id="form-err" role="alert"></p>
+  <button class="btn primary" type="submit">Upload and create draft</button>
+</form>
+{% endblock %}

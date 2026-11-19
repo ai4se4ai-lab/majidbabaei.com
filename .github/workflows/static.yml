@@ -37,6 +37,7 @@ jobs:
       # Fails when someone edited a post or project.json (or the CV data) without regenerating its pages.
       - name: Verify generated pages are current
         run: |
+          node tools/build-preprints.mjs --check
           node tools/build-projects.mjs --check
           node tools/build-calendar.mjs --check
           node tools/build-news.mjs --check

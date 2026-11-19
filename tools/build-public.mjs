@@ -14,10 +14,12 @@ let count = 0;
 async function copy(rel) {
   for (const item of await readdir(resolve(root, rel), { withFileTypes: true })) {
     const path = rel ? `${rel}/${item.name}` : item.name;
-    if (hidden.test(path) || cv.test(path) || item.name === 'project.json') continue;
+    if (hidden.test(path) || cv.test(path) || item.name === 'project.json' || item.name === 'preprint.json') continue;
     if (item.isDirectory()) { await copy(path); continue; }
-    if (!item.isFile() || !extensions.has(extname(path)) && !/^(?:news\/posts|calendar\/events)\/[^_][^/]*\.md$/.test(path)) continue;
-    if (/\.(html|js|json|xml|txt|md|svg)$/i.test(path)) {
+    // Generated preprint citations (preprints/<slug>/v<N>/citation.bib) are the only public .bib files.
+    const preprintBib = /^preprints\/[a-z0-9-]+\/v\d+\/citation\.bib$/.test(path);
+    if (!item.isFile() || !extensions.has(extname(path)) && !preprintBib && !/^(?:news\/posts|calendar\/events)\/[^_][^/]*\.md$/.test(path)) continue;
+    if (/\.(html|js|json|xml|txt|md|svg|bib)$/i.test(path)) {
       const text = await readFile(resolve(root, path), 'utf8');
       if (hidden.test(text)) throw new Error(`Identifying review details in public output: ${path}`);
       if (/(?:02_Curriculum_Vitae|Majid_Babaei_CV)\.pdf/i.test(text)) throw new Error(`Direct CV reference in public output: ${path}`);
@@ -30,7 +32,7 @@ async function copy(rel) {
 }
 for (const item of await readdir(root, { withFileTypes: true })) {
   if (item.isDirectory()) {
-    if (['assets', 'news', 'projects', 'calendar', 'pages', 'data', 'images'].includes(item.name)) await copy(item.name);
+    if (['assets', 'news', 'projects', 'calendar', 'preprints', 'pages', 'data', 'images'].includes(item.name)) await copy(item.name);
   } else if (['index.html', '404.html', 'favicon.ico', 'robots.txt', 'sitemap.xml', '.nojekyll'].includes(item.name)) {
     const text = await readFile(resolve(root, item.name), 'utf8');
     if (hidden.test(text) || /(?:02_Curriculum_Vitae|Majid_Babaei_CV)\.pdf/i.test(text)) throw new Error(`Private reference in ${item.name}`);
