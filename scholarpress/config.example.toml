@@ -12,6 +12,7 @@ host = "127.0.0.1"   # loopback only; other values are refused
 port = 8765
 
 # Compiler: "docker" (isolated; recommended for manuscripts you did not write), "local", or "auto".
+extra_path = []   # for example ["C:/Program Files/Git/usr/bin"] when latexmk reports that perl is missing
 compiler = "auto"
 # Pin the TeX Live image by digest. Find it with:  docker pull texlive/texlive:latest && docker inspect --format '{{index .RepoDigests 0}}' texlive/texlive:latest
 # docker_image = "texlive/texlive@sha256:<64 hex characters>"

@@ -45,6 +45,7 @@ class Config:
     latexmk: str = "latexmk"
     docker: str = "docker"
     node: str = "node"
+    extra_path: list = field(default_factory=list)  # extra PATH entries for TeX tools (for example a Perl bin directory)
     git: str = "git"
     # Publishing adapter: "staging" (local site release served on staging_port) or "production" (git push to the Pages repo).
     adapter: str = "staging"

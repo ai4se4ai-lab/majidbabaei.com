@@ -142,3 +142,14 @@ def test_catalog_reads_site_collections(site_template):
     errs = cat.validate_links({"publicationId": "anonymous-review-1", "projectIds": ["nope"], "newsPostIds": ["missing"], "agendaIds": ["research"]})
     assert {e["field"] for e in errs} == {"publicationId", "projectIds", "newsPostIds"}
     assert cat.suggest_publication("A synthetic manuscript for integration tests")[0]["key"] == "test-pub"
+
+
+def test_missing_perl_is_reported_clearly_and_tool_env_can_find_it(tmp_path, monkeypatch):
+    from scholarpress.compiler import Compiler
+    from scholarpress.config import Config
+    perl_dir = tmp_path / "perlbin"
+    perl_dir.mkdir()
+    (perl_dir / "perl.exe").write_bytes(b"")
+    monkeypatch.setenv("PATH", str(tmp_path / "empty"))
+    cfg = Config(extra_path=[perl_dir])
+    assert str(perl_dir) in Compiler(cfg).tool_env()["PATH"]

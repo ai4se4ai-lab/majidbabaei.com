@@ -14,6 +14,7 @@ TeX tree instead of the uploaded one.
 from __future__ import annotations
 
 import hashlib
+import shutil
 import json
 import os
 import shutil
@@ -150,6 +151,32 @@ class Compiler:
             return "local"
         return "docker" if self.docker_available() else "local"
 
+    def tool_env(self) -> dict:
+        """Environment for TeX tools. latexmk is a Perl script; a server started outside Git Bash may lack perl on PATH,
+        so look for the Perl bundled with Git for Windows (or any directory listed in `extra_path`)."""
+        env = {k: v for k, v in os.environ.items() if not k.upper().startswith(("GIT_", "GH_", "GITHUB_", "SSH_", "AWS_", "AZURE_", "GOOGLE_"))}
+        extra = [str(p) for p in self.cfg.extra_path]
+        if not shutil.which("perl", path=os.pathsep.join([*extra, env.get("PATH", "")])):
+            roots = []
+            git = shutil.which(self.cfg.git)
+            if git:
+                roots += [Path(git).resolve().parent.parent, Path(git).resolve().parent.parent.parent]
+            for var in ("LOCALAPPDATA", "ProgramFiles", "ProgramFiles(x86)"):
+                base = os.environ.get(var)
+                if base:
+                    roots += [Path(base) / "Programs" / "Git", Path(base) / "Git"]
+            roots += [Path("C:/Strawberry/perl"), Path("C:/Strawberry")]
+            for root in roots:
+                for sub in ("usr/bin", "mingw64/bin", "bin"):
+                    if (root / sub / "perl.exe").exists() or (root / sub / "perl").exists():
+                        extra.append(str(root / sub))
+                        break
+                if extra and extra[-1].startswith(str(root)):
+                    break
+        if extra:
+            env["PATH"] = os.pathsep.join([env.get("PATH", ""), *extra])
+        return env
+
     def toolchain(self, runner: str) -> str:
         if runner in self._toolchain_cache:
             return self._toolchain_cache[runner]
@@ -159,7 +186,7 @@ class Compiler:
             parts = []
             for cmd in ([self.cfg.latexmk, "-v"], ["pdflatex", "--version"], ["bibtex", "--version"], ["biber", "--version"]):
                 try:
-                    out = subprocess.run(cmd, capture_output=True, text=True, timeout=30).stdout.strip().splitlines()
+                    out = subprocess.run(cmd, capture_output=True, text=True, timeout=30, env=self.tool_env()).stdout.strip().splitlines()
                     parts.append(next((l for l in out if l.strip()), "?"))
                 except (OSError, subprocess.TimeoutExpired):
                     parts.append(f"{cmd[0]}: unavailable")
@@ -233,7 +260,7 @@ class Compiler:
         if runner == "docker":
             cmd[cmd.index("--name") + 1] = name
             cmd[cmd.index("--mount") + 1] = f"type=bind,src={workdir.resolve()},dst=/work"
-        env = {k: v for k, v in os.environ.items() if not k.upper().startswith(("GIT_", "GH_", "GITHUB_", "SSH_", "AWS_", "AZURE_", "GOOGLE_"))}
+        env = self.tool_env()
         env.update({"max_print_line": "1000", "openout_any": "p", "openin_any": "p", "shell_escape": "f"})
         timed_out = False
         # Console output goes to a file, not a pipe: an orphaned engine holding a pipe open could otherwise block the build.
@@ -272,6 +299,10 @@ class Compiler:
         blg_path = workdir / f"{stem}.blg"
         blg = blg_path.read_text(encoding="utf-8", errors="replace") if blg_path.exists() else ""
         diagnostics = list(pre)
+        if "could not find the script engine" in console.lower() or "perl" in console.lower() and not tex_log:
+            diagnostics.append(diag("error", "toolchain-missing", "latexmk could not start: Perl was not found on the server's PATH",
+                                    "Install Perl (Git for Windows or Strawberry Perl) or set extra_path = [\"C:/path/to/perl/bin\"] in the "
+                                    "ScholarPress config, restart the workspace, then rebuild.", excerpt=console[:600]))
         diagnostics += parse_tex_log(tex_log, entry, sources)
         if blg:
             diagnostics += parse_biber_blg(blg) if "biber" in blg[:200].lower() else parse_bibtex_blg(blg, {p for p in sources if p.endswith('.bib')})
