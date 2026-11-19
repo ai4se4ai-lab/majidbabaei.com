@@ -155,6 +155,13 @@ def test_create_article_downloads_originals_and_escapes_user_data(app_ws):
         assert hashlib.sha256(got.content).hexdigest() == hashlib.sha256(files[row["path"]]).hexdigest()
     confirm_metadata(client, ws, did, title="<script>alert(1)</script> Title")
     page = client.get(f"/drafts/{did}").text
+    # The embedded page data must be valid JSON that app.js can parse, and must not contain raw markup.
+    import json as _json
+    blob = re.search(r'<script type="application/json" id="page-data">(.*?)</script>', page, re.S).group(1)
+    assert _json.loads(blob)["draft"] == did and "<" not in blob
+    for url in (f"/articles/{ws.draft(did)['article_id']}",):
+        art = client.get(url).text
+        assert _json.loads(re.search(r'id="page-data">(.*?)</script>', art, re.S).group(1))["article"]
     assert "<script>alert(1)</script>" not in page and "&lt;script&gt;alert(1)&lt;/script&gt;" in page
     bad = client.post("/api/articles", files=[("tex", ("main.tex", b"x", "text/x-tex"))])
     assert bad.status_code == 422 and any(e["field"] == "bib" for e in bad.json()["errors"])

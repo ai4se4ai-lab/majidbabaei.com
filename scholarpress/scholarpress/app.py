@@ -30,7 +30,11 @@ def create_app(cfg: Config, *, workspace: Workspace | None = None, start_servers
     app = FastAPI(title="ScholarPress", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.ws = ws
     templates = Jinja2Templates(directory=str(PACKAGE_DIR / "templates"))  # autoescape on for .html
-    templates.env.filters["json"] = lambda v: dumps(v)
+    from markupsafe import Markup
+
+    # JSON for <script type="application/json">: autoescaping would turn quotes into &#34;, so escape only the
+    # characters that could end the script element or start markup, and mark the result safe.
+    templates.env.filters["json"] = lambda v: Markup(dumps(v).replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e"))
     app.mount("/static", StaticFiles(directory=str(PACKAGE_DIR / "static")), name="static")
     secret = ws.db.meta("csrf_secret")
     if not secret:
