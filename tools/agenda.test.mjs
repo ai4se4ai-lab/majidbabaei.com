@@ -3,7 +3,50 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+import { mkdtemp, cp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { root, loadModel, loadContext, checkModel, checkWellFormed, checkProperties, replay, umlLabel, heroProps } from './agenda-model.mjs';
+import { build, MODEL } from './build-agenda.mjs';
+
+/* ---------- the generator (tools/build-agenda.mjs) ---------- */
+
+const quiet = () => {};
+async function sandbox() {
+  const dir = await mkdtemp(join(tmpdir(), 'agenda-'));
+  for (const p of ['tools', 'data', 'news/posts']) await cp(join(root, p), join(dir, p), { recursive: true });
+  await mkdir(join(dir, 'assets'), { recursive: true });
+  for (const f of ['research-data.js', 'agenda-data.js']) await cp(join(root, 'assets', f), join(dir, 'assets', f));
+  await cp(join(root, 'index.html'), join(dir, 'index.html'));
+  return dir;
+}
+
+test('the page is up to date with the agenda model (build-agenda --check)', async () => {
+  const r = await build({ check: true, log: quiet });
+  assert.deepEqual(r.stale, []);
+});
+
+test('a hand edit inside the generated block is reported as stale, and a rebuild restores it', async () => {
+  const dir = await sandbox(), path = join(dir, 'index.html'), original = await readFile(path, 'utf8');
+  await writeFile(path, original.replace('the missing loop</text>', 'a hand-edited loop</text>'));
+  await assert.rejects(build({ dir, check: true, log: quiet }), /Stale agenda output: index\.html/);
+  await build({ dir, log: quiet });
+  assert.deepEqual((await build({ dir, check: true, log: quiet })).stale, []);
+  assert.equal((await readFile(path, 'utf8')).replace(/\r\n/g, '\n'), original.replace(/\r\n/g, '\n'));
+});
+
+test('the generator refuses a page without the markers', async () => {
+  const dir = await sandbox(), path = join(dir, 'index.html');
+  await writeFile(path, (await readFile(path, 'utf8')).replace('<!-- BEGIN GENERATED AGENDA -->', ''));
+  await assert.rejects(build({ dir, check: true, log: quiet }), /needs the <!-- BEGIN GENERATED AGENDA -->/);
+});
+
+test('W8 on the outputs: a withheld term in generated text fails even the legacy build', async () => {
+  const dir = await sandbox(), path = join(dir, MODEL), m = JSON.parse(await readFile(path, 'utf8'));
+  const c = await loadContext();
+  m.cards[0].body += ' ' + c.hidden.source.replace(/^\(\?:/, '').split('|')[0];
+  await writeFile(path, JSON.stringify(m));
+  await assert.rejects(build({ dir, check: true, log: quiet }), /W8: index\.html agenda block contains a withheld term/);
+});
 
 const ctx = await loadContext();
 const model = await loadModel(join(root, 'data', 'agenda.statechart.json'));

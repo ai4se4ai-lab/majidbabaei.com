@@ -268,10 +268,10 @@ export function replay(model, path, roles = { ...DEFAULT_ROLES, ...(model.roles 
 
 /* ---------- well-formedness W1–W9 and the readability budget ---------- */
 
-export function umlLabel(t, model) {
+export function umlLabel(t, model, sep = model.notation?.sep ?? '; ') {
   const g = guardList(t.guard);
   const guard = g === 'else' ? '[else]' : g.length ? `[${g.map(id => model.guards[id]?.text ?? id).join(' ∧ ')}]` : '';
-  return [t.trigger, guard].filter(Boolean).join(' ') + ((t.effect || []).length ? ` / ${t.effect.join('; ')}` : '');
+  return [t.trigger, guard].filter(Boolean).join(' ') + ((t.effect || []).length ? ` / ${t.effect.join(sep)}` : '');
 }
 const plain = s => String(s ?? '').replace(/<[^>]+>/g, '');
 

@@ -5,6 +5,32 @@
   "lead": "Agentic AI systems plan, delegate, and collaborate, yet they rarely see the higher-level concerns people care about, and people rarely see how agent teams reach their objectives. My research builds abstractions in both directions. Building this loop <b>efficiently</b> and <b>effectively</b> is, I believe, what is missing.",
   "roles": { "person": "human", "agent": "ai", "contained": "quarantine", "violation": "withdraw" },
   "middle": { "name": "the missing loop", "line": "EFFICIENT · EFFECTIVE", "sub": "incremental · checkable · repeatable" },
+  "signature": "2 states · 2 transitions · 1 loop",
+  "caption": "Two states, Human and Agentic AI. MDE abstractions carry human concerns to agents; abstractions of agent collaboration carry behavior back to people. Building this loop efficiently and effectively is the missing piece.",
+  "notation": { "sep": " · " },
+  "layout": {
+    "h": {
+      "viewBox": [1000, 520], "stateText": [67, 95, 121],
+      "transitions": {
+        "down": { "label": [342, 6, 316, 62], "side": "below" },
+        "up": { "label": [322, 452, 356, 62], "side": "above" }
+      },
+      "middle": [[500, 254], [500, 282], [500, 304]]
+    },
+    "v": {
+      "viewBox": [580, 600], "stateText": [46, 70, 90],
+      "states": {
+        "human": { "box": [185, 16, 210, 104], "meta": "intent · concerns" },
+        "ai": { "box": [185, 480, 210, 104], "meta": "agents · teams", "entry": "plan · act" }
+      },
+      "transitions": {
+        "down": { "path": [[390, 118], [482, 220], [482, 380], [390, 482]], "side": "right", "label": [290, 196], "line": "for agents ↓" },
+        "up": { "path": [[190, 482], [98, 380], [98, 220], [190, 118]], "side": "left", "label": [290, 396], "line": "↑ for people" }
+      },
+      "middle": [[290, 300], [290, 326]],
+      "overlay": ["label:down", "middle", "label:up"]
+    }
+  },
   "guards": {
     "modeled": { "text": "modeled", "env": true },
     "abstracted": { "text": "abstracted", "env": true }
