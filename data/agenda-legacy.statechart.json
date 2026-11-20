@@ -6,6 +6,7 @@
   "roles": { "person": "human", "agent": "ai", "contained": "quarantine", "violation": "withdraw" },
   "middle": { "name": "the missing loop", "line": "EFFICIENT · EFFECTIVE", "sub": "incremental · checkable · repeatable" },
   "signature": "2 states · 2 transitions · 1 loop",
+  "liveSignature": "2 states · 2 transitions · 1 loop · {steps} concepts",
   "caption": "Two states, Human and Agentic AI. MDE abstractions carry human concerns to agents; abstractions of agent collaboration carry behavior back to people. Building this loop efficiently and effectively is the missing piece.",
   "notation": { "sep": " · " },
   "layout": {

@@ -8,6 +8,7 @@ window.AGENDA = {
   "contained": "quarantine",
   "violation": "withdraw"
  },
+ "signature": "2 states · 2 transitions · 1 loop · 9 concepts",
  "states": [
   {
    "id": "human",

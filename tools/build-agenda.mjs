@@ -117,8 +117,11 @@ export function renderSection(model, R) {
 
 export function renderData(model, R, source) {
   const tip = (d, refs) => d + (refs?.length ? ` · ${refs.map(r => refLabel(r, R)).join(', ')}` : '');
+  const steps = model.transitions.reduce((s, t) => s + (t.steps?.length || 0), 0);
   const data = {
     label: model.label, initial: model.initial ?? null, roles: model.roles,
+    // The header counter once the runtime has placed the steps ({steps} is their number).
+    signature: (model.liveSignature ?? `${model.states.length} states · ${model.transitions.length} transitions · {steps} steps`).replace('{steps}', steps),
     states: model.states.map(s => ({ id: s.id, name: s.name })),
     transitions: model.transitions.map(t => ({
       id: t.id, n: t.n, from: t.from, to: t.to, tone: tone(t).k, title: t.title, secondary: t.style === 'secondary',
