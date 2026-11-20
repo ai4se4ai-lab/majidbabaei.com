@@ -22,8 +22,42 @@
     { "id": "human", "name": "Human", "meta": "accountable · intent · concerns", "entry": ["decide", "tries := 0"], "box": [30, 224, 232, 150] },
     { "id": "ai", "name": "Agentic AI", "meta": "agents · teams · harness", "entry": ["plan", "hand off", "act"], "box": [738, 224, 232, 150] },
     { "id": "quarantine", "name": "Quarantine", "meta": "contained · kept in history", "entry": ["suspend everywhere"],
-      "invariant": "nothing exposed in use", "box": [384, 566, 232, 162], "style": "dashed" }
+      "invariant": "nothing exposed in use", "box": [370, 600, 260, 162], "style": "dashed" }
   ],
+  "layout": {
+    "h": {
+      "viewBox": [1000, 790], "stateText": [67, 95, 121],
+      "initial": { "dot": [146, 172], "r": 8, "path": [[146, 181], [146, 221]] },
+      "note": { "box": [292, 248, 416, 108], "fold": 20, "lines": [272, 301, 325, 345], "propsPerLine": 4 },
+      "states": { "quarantine": { "text": [56, 82, 104, 124] } },
+      "transitions": {
+        "bind": { "label": [265, 40, 470, 62], "side": "below" },
+        "account": { "label": [285, 472, 430, 62], "side": "above" },
+        "withdraw": { "text": [992, 742], "anchor": "end" },
+        "revalidate": { "text": [688, 562], "anchor": "end" },
+        "escalate": { "text": [8, 742], "anchor": "start" }
+      },
+      "order": ["initial", "transitions", "states", "note"]
+    },
+    "v": {
+      "viewBox": [340, 716], "stateText": [42, 64, 82], "labels": "off",
+      "initial": { "dot": [170, 12], "r": 6, "path": [[170, 19], [170, 38]] },
+      "note": { "box": [72, 194, 196, 102], "fold": 12, "lines": [211, 236, 255, 271, 288], "propsPerLine": 2, "head": "«contract» every transition" },
+      "states": {
+        "human": { "box": [70, 40, 200, 96], "meta": "accountable · intent" },
+        "ai": { "box": [70, 390, 200, 96], "meta": "agents · teams" },
+        "quarantine": { "box": [60, 586, 220, 118], "meta": "contained · in history", "text": [42, 63, 81, 99] }
+      },
+      "transitions": {
+        "bind": { "path": [[232, 136], [318, 200], [318, 330], [234, 388]], "side": "right", "label": [170, 172] },
+        "account": { "path": [[106, 390], [22, 330], [22, 200], [108, 138]], "side": "left", "label": [170, 330] },
+        "withdraw": { "path": [[268, 452], [352, 480], [352, 610], [282, 645]], "label": [281, 548] },
+        "revalidate": { "path": [[236, 586], [252, 562], [252, 512], [236, 487]], "label": [226, 532], "anchor": "end" },
+        "escalate": { "path": [[60, 645], [-16, 640], [-14, 110], [68, 90]], "label": [48, 556], "anchor": "start" }
+      },
+      "order": ["initial", "arcs", "nodes", "states", "note", "labels"]
+    }
+  },
   "transitions": [
     { "n": 1, "id": "bind", "title": "Delegate", "stereotype": "bounded", "from": "human", "to": "ai",
       "trigger": "delegate", "guard": ["concernsModeled"], "effect": ["model", "specify", "compose", "verify"],
@@ -45,15 +79,15 @@
       ] },
     { "n": 3, "id": "withdraw", "title": "Contain", "stereotype": "correctable", "from": "ai", "to": "quarantine",
       "trigger": "report", "guard": ["contractViolated"], "effect": ["withdraw closure", "tries++"],
-      "tone": "rose", "path": [[905, 364], [930, 514], [780, 641], [618, 641]],
+      "tone": "rose", "path": [[905, 364], [930, 548], [790, 675], [632, 675]],
       "tip": { "d": "When a lesson, skill or hand-off turns out to be wrong, everything recorded as exposed to it is suspended in every deployment", "refs": ["Heartness", "SSEVOH-DSL"] } },
     { "n": 4, "id": "revalidate", "title": "Re-admit", "from": "quarantine", "to": "ai",
       "trigger": null, "guard": ["screenClean", "canRetry"], "effect": ["re-admit"],
-      "tone": "rose", "style": "secondary", "path": [[600, 579], [700, 579], [800, 484], [812, 374]],
+      "tone": "rose", "style": "secondary", "path": [[604, 611], [704, 611], [800, 518], [812, 377]],
       "tip": { "d": "Suspended items return only after a fresh check, as new versions, and only a bounded number of times", "refs": ["Heartness"] } },
     { "n": 5, "id": "escalate", "title": "Escalate", "from": "quarantine", "to": "human",
       "trigger": null, "guard": "else", "effect": ["explain affected set"],
-      "tone": "navy", "style": "secondary", "path": [[384, 641], [230, 634], [80, 514], [110, 366]],
+      "tone": "navy", "style": "secondary", "path": [[370, 675], [222, 668], [80, 548], [110, 377]],
       "tip": { "d": "The responsible person sees exactly what was affected and why, and decides what changes in the contract", "refs": ["Heartness", "Agent Slicing"] } }
   ],
   "runs": [

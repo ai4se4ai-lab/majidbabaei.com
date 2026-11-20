@@ -53,6 +53,7 @@
   const loop = $('#loop'), A = window.AGENDA;
   const byId = Object.fromEntries(A.transitions.map(t => [t.id, t]));
   const highlight = t => { A.transitions.forEach(x => loop.classList.toggle(`hl-${x.id}`, x.id === t));
+    loop.classList.toggle('hl', !!byId[t]); $$('.loop .tr-g').forEach(g => g.classList.toggle('is-hl', g.dataset.t === t));
     $$('.tr').forEach(c => c.classList.toggle('on', c.dataset.t === t)); };
   $$('.loop .tr-g').forEach(g => {
     g.addEventListener('mouseenter', () => highlight(g.dataset.t));
@@ -71,13 +72,14 @@
   const diagrams = $$('.loop svg').map(svg => {
     const arcs = {}; $$('path[data-arc]', svg).forEach(p => { arcs[p.dataset.arc] = { path: p, len: 0, nodes: [] }; });
     $$('.nodes', svg).forEach(group => {
-      const t = group.dataset.t, side = group.dataset.side, arc = arcs[t], steps = byId[t].steps, vertical = side === 'right' || side === 'left';
+      const t = group.dataset.t, side = group.dataset.side, arc = arcs[t], steps = byId[t].steps, vertical = side === 'right' || side === 'left', bare = group.dataset.labels === 'off';
       steps.forEach((step, i) => {
         const node = mk('g', { class: 'node', tabindex: '0' });
         node.append(mk('title', {}, `${step.c} — ${step.d}`));
         node.append(mk('circle', { class: 'nd', r: 4.8 }));
-        const label = mk('text', { class: 'nd-l', 'text-anchor': side === 'right' ? 'start' : side === 'left' ? 'end' : 'middle' }, vertical && step.s ? step.s : step.c);
-        node.append(label);
+        // Where the variant is too narrow for readable step labels, the dot keeps its tooltip only.
+        const label = bare ? null : mk('text', { class: 'nd-l', 'text-anchor': side === 'right' ? 'start' : side === 'left' ? 'end' : 'middle' }, vertical && step.s ? step.s : step.c);
+        if (label) node.append(label);
         group.append(node); arc.nodes.push({ i, n: steps.length, at: 0, el: node, label, side });
       });
     });
@@ -102,6 +104,7 @@
           const inward = n.side === 'below' ? ny > 0 : n.side === 'above' ? ny < 0 : n.side === 'right' ? nx > 0 : nx < 0;
           if (!inward) { nx = -nx; ny = -ny; }
           const dist = (n.side === 'right' || n.side === 'left') ? 16 : 22 + (n.i % 2 ? 15 : 0);
+          if (!n.label) return;
           n.label.setAttribute('x', (nx * dist).toFixed(1)); n.label.setAttribute('y', (ny * dist + 4).toFixed(1));
           // On the horizontal arcs, labels near either end run toward the loop's interior, away from the steep line.
           if (n.side === 'below' || n.side === 'above') n.label.setAttribute('text-anchor', p.x < 440 ? 'start' : p.x > 560 ? 'end' : 'middle');
@@ -115,11 +118,14 @@
   });
   $('#loop-sig').textContent = A.signature;
 
-  if (!(window.Motion?.reduced)) {
+  // Reduced motion: no token; every step is shown.
+  if (window.Motion?.reduced) diagrams.forEach(d => Object.values(d.arcs).forEach(a => a.nodes.forEach(n => n.el.classList.add('on'))));
+  else {
     // Each pass replays one run of the model: travel a transition (ms), then dwell in the state it enters.
     // Pass p (0-based) takes a run with `every` when p % every === every - 1, alternating its path and alt;
     // every other pass takes the default run. Every run is checked as a valid trace (V6) at build time.
-    const TRAVEL = 3600, DWELL = 1000;
+    const TRAVEL = 3600, DWELL = 1000, INIT = 300;
+    const toneOf = id => byId[id]?.tone ?? 'n';
     const base = A.runs.find(r => !r.every) || A.runs[0];
     const runFor = p => {
       const r = A.runs.find(x => x.every && p % x.every === x.every - 1);
@@ -130,6 +136,8 @@
     const begin = (p, at) => {
       const { run, path } = runFor(p);
       const phases = path.flatMap(id => [{ arc: id, enters: byId[id].to, dur: TRAVEL }, { dwell: byId[id].to, from: id, dur: DWELL }]);
+      // Every run starts at the initial pseudostate: the token moves from its dot into the first state.
+      if (A.initial && diagrams.some(d => d.arcs.initial)) phases.unshift({ arc: 'initial', enters: A.initial, dur: INIT });
       cur = { run, phases, total: phases.reduce((s, x) => s + x.dur, 0) }; pass = p; passStart = at; lastPhase = -1;
     };
     const place = (d, arc, len) => {
@@ -138,7 +146,7 @@
       d.ghosts.forEach((g, i) => { const q = arc.path.getPointAtLength(Math.max(0, len - (3 - i) * 13)); g.setAttribute('cx', (q.x - p.x).toFixed(1)); g.setAttribute('cy', (q.y - p.y).toFixed(1)); });
     };
     // Steady marks, no flashes: the entry action stays lit while the token is in the state.
-    const enter = (d, which, from) => { const st = d.states[which]; if (!st) return; st.style.setProperty('--c', TONE[byId[from].tone]); st.classList.add('state-active'); };
+    const enter = (d, which, from) => { const st = d.states[which]; if (!st) return; st.style.setProperty('--c', TONE[toneOf(from)]); st.classList.add('state-active'); };
     const leave = d => Object.values(d.states).forEach(st => st.classList.remove('state-active'));
     const frame = now => {
       while (now - passStart >= cur.total) {
@@ -149,7 +157,7 @@
       while (elapsed >= acc + cur.phases[i].dur) { acc += cur.phases[i].dur; i++; }
       const ph = cur.phases[i], k = (elapsed - acc) / ph.dur;
       if (i !== lastPhase) {
-        if (ph.arc) diagrams.forEach(d => { leave(d); d.arcs[ph.arc]?.nodes.forEach(n => n.el.classList.remove('on')); d.tok.setAttribute('class', `tok tok-${byId[ph.arc].tone}`); d.tok.setAttribute('opacity', d.arcs[ph.arc] ? 1 : 0); });
+        if (ph.arc) diagrams.forEach(d => { leave(d); d.arcs[ph.arc]?.nodes.forEach(n => n.el.classList.remove('on')); d.tok.setAttribute('class', `tok tok-${toneOf(ph.arc)}`); d.tok.setAttribute('opacity', d.arcs[ph.arc] ? 1 : 0); });
         else diagrams.forEach(d => { d.tok.setAttribute('opacity', 0); enter(d, ph.dwell, ph.from); });
         lastPhase = i;
       }

@@ -166,87 +166,134 @@
   <div class="wrap">
     <!-- BEGIN GENERATED AGENDA -->
     <div class="section-head">
-      <div><span class="num">§ 01 — Research agenda</span><h2>Closing the loop between <em>humans</em> and <em>agentic AI</em></h2></div>
-      <p>Agentic AI systems plan, delegate, and collaborate, yet they rarely see the higher-level concerns people care about, and people rarely see how agent teams reach their objectives. My research builds abstractions in both directions. Building this loop <b>efficiently</b> and <b>effectively</b> is, I believe, what is missing.</p>
+      <div><span class="num">§ 01 — Research agenda</span><h2>Accountability by <em>contract</em> for <em>agentic AI</em></h2></div>
+      <p>A computer cannot be punished, and it does not need to be. What makes a system accountable in practice is a set of mechanisms: we know what it was allowed to do, which component did what and from which evidence, and how to contain and repair a mistake. My research engineers these mechanisms for AI agents with model-driven engineering, so that the people responsible for agentic systems can actually exercise that responsibility.</p>
     </div>
 
     <figure class="loop" id="loop" aria-labelledby="loop-cap">
-      <div class="loop-top"><span>agenda.statechart</span><span><span id="loop-sig">2 states · 2 transitions · 1 loop</span><span class="loop-pass" id="loop-pass" aria-hidden="true"></span></span></div>
-      <!-- Concept nodes along each arc and the travelling token are added by site.js; the diagram is complete at rest without them. -->
-      <svg class="loop-h" viewBox="0 0 1000 520" role="img" aria-labelledby="loop-cap">
+      <div class="loop-top"><span>agenda.statechart · <a class="loop-model" href="assets/agenda.scxml">model (SCXML)</a></span><span><span id="loop-sig">3 states · 5 transitions · 8 steps</span><span class="loop-pass" id="loop-pass" aria-hidden="true"></span></span></div>
+      <!-- Step dots along each arc and the travelling token are added by site.js; the diagram is complete at rest without them. -->
+      <svg class="loop-h" viewBox="0 0 1000 790" role="img" aria-labelledby="loop-cap">
         <defs>
+          <marker id="ar-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-n"/></marker>
           <marker id="ar-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-o"/></marker>
           <marker id="ar-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-t"/></marker>
+          <marker id="ar-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-r"/></marker>
         </defs>
-        <g class="tr-g" data-t="down">
-          <path class="arc arc-o" data-arc="down" d="M262 212 C 390 60, 610 60, 738 212" marker-end="url(#ar-o)"/>
-          <rect class="lbl" x="342" y="6" width="316" height="62" rx="12"/>
-          <text class="lbl-t lbl-o" x="500" y="32" text-anchor="middle">① MDE abstractions <tspan class="lbl-p">for agents</tspan></text>
-          <text class="lbl-m" x="500" y="54" text-anchor="middle">concerns [modeled] / specify · verify</text>
-          <g class="nodes" data-t="down" data-side="below"></g>
+        <g class="init" aria-hidden="true"><circle class="init-dot" cx="146" cy="172" r="8"/><path class="arc-init" data-arc="initial" d="M146 181 L146 221" marker-end="url(#ar-n)"/></g>
+        <g class="tr-g" data-t="bind">
+          <path class="arc arc-o" data-arc="bind" d="M262 251 C 390 99, 610 99, 738 251" marker-end="url(#ar-o)"/>
+          <rect class="lbl" x="265" y="40" width="470" height="62" rx="12"/>
+          <text class="lbl-t lbl-o" x="500" y="66" text-anchor="middle">① Delegate <tspan class="lbl-p">«bounded»</tspan></text>
+          <text class="lbl-m" x="500" y="88" text-anchor="middle">delegate [concerns modeled] / model; specify; compose; verify</text>
+          <g class="nodes" data-t="bind" data-side="below" data-tone="o"></g>
         </g>
-        <g class="tr-g" data-t="up">
-          <path class="arc arc-t" data-arc="up" d="M738 308 C 610 460, 390 460, 262 308" marker-end="url(#ar-t)"/>
-          <rect class="lbl" x="322" y="452" width="356" height="62" rx="12"/>
-          <text class="lbl-t lbl-tl" x="500" y="478" text-anchor="middle">② Abstractions of collaboration <tspan class="lbl-p">for people</tspan></text>
-          <text class="lbl-m" x="500" y="500" text-anchor="middle">behavior [abstracted] / trace · explain</text>
-          <g class="nodes" data-t="up" data-side="above"></g>
+        <g class="tr-g" data-t="account">
+          <path class="arc arc-t" data-arc="account" d="M738 347 C 610 499, 390 499, 262 347" marker-end="url(#ar-t)"/>
+          <rect class="lbl" x="285" y="472" width="430" height="62" rx="12"/>
+          <text class="lbl-t lbl-tl" x="500" y="498" text-anchor="middle">② Report <tspan class="lbl-p">«attributable, traceable»</tspan></text>
+          <text class="lbl-m" x="500" y="520" text-anchor="middle">report [contract holds] / trace; record; slice; explain</text>
+          <g class="nodes" data-t="account" data-side="above" data-tone="t"></g>
+        </g>
+        <g class="tr-g" data-t="withdraw">
+          <path class="arc arc-r" data-arc="withdraw" d="M905 364 C 930 548, 790 675, 632 675" marker-end="url(#ar-r)"/>
+          <g class="tr-l" tabindex="0"><title>When a lesson, skill or hand-off turns out to be wrong, everything recorded as exposed to it is suspended in every deployment · Heartness, SSEVOH-DSL</title><text class="lbl-t lbl-r" x="992" y="742" text-anchor="end">③ Contain <tspan class="lbl-p">«correctable»</tspan></text><text class="lbl-m" x="992" y="762" text-anchor="end">report [contract violated] / withdraw closure; tries++</text></g>
+        </g>
+        <g class="tr-g" data-t="revalidate">
+          <path class="arc arc-r arc-2" data-arc="revalidate" d="M604 611 C 704 611, 800 518, 812 377" marker-end="url(#ar-r)"/>
+          <g class="tr-l" tabindex="0"><title>Suspended items return only after a fresh check, as new versions, and only a bounded number of times · Heartness</title><text class="lbl-t lbl-r" x="688" y="562" text-anchor="end">④ Re-admit</text><text class="lbl-m" x="688" y="582" text-anchor="end">[screen clean ∧ tries &lt; k] / re-admit</text></g>
+        </g>
+        <g class="tr-g" data-t="escalate">
+          <path class="arc arc-n arc-2" data-arc="escalate" d="M370 675 C 222 668, 80 548, 110 377" marker-end="url(#ar-n)"/>
+          <g class="tr-l" tabindex="0"><title>The responsible person sees exactly what was affected and why, and decides what changes in the contract · Heartness, Agent Slicing</title><text class="lbl-t lbl-n" x="8" y="742" text-anchor="start">⑤ Escalate</text><text class="lbl-m" x="8" y="762" text-anchor="start">[else] / explain affected set</text></g>
         </g>
         <g class="st" data-st="human">
-          <rect x="30" y="185" width="232" height="150" rx="75"/>
-          <text class="st-n" x="146" y="252" text-anchor="middle">Human</text>
-          <text class="st-m" x="146" y="280" text-anchor="middle">intent · concerns · oversight</text>
-          <text class="st-e" x="146" y="306" text-anchor="middle">entry / inspect · decide</text>
+          <rect x="30" y="224" width="232" height="150" rx="75"/>
+          <text class="st-n" x="146" y="291" text-anchor="middle">Human</text>
+          <text class="st-m" x="146" y="319" text-anchor="middle">accountable · intent · concerns</text>
+          <text class="st-e" x="146" y="345" text-anchor="middle">entry / decide; tries := 0</text>
         </g>
         <g class="st" data-st="ai">
-          <rect x="738" y="185" width="232" height="150" rx="75"/>
-          <text class="st-n" x="854" y="252" text-anchor="middle">Agentic AI</text>
-          <text class="st-m" x="854" y="280" text-anchor="middle">agents · teams · tools</text>
-          <text class="st-e" x="854" y="306" text-anchor="middle">entry / plan · delegate · act</text>
+          <rect x="738" y="224" width="232" height="150" rx="75"/>
+          <text class="st-n" x="854" y="291" text-anchor="middle">Agentic AI</text>
+          <text class="st-m" x="854" y="319" text-anchor="middle">agents · teams · harness</text>
+          <text class="st-e" x="854" y="345" text-anchor="middle">entry / plan; hand off; act</text>
         </g>
-        <text class="mid-n" x="500" y="254" text-anchor="middle">the missing loop</text>
-        <text class="mid-m" x="500" y="282" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
-        <text class="mid-s" x="500" y="304" text-anchor="middle">incremental · checkable · repeatable</text>
+        <g class="st st-dashed" data-st="quarantine">
+          <rect x="370" y="600" width="260" height="162" rx="81"/>
+          <text class="st-n" x="500" y="656" text-anchor="middle">Quarantine</text>
+          <text class="st-m" x="500" y="682" text-anchor="middle">contained · kept in history</text>
+          <text class="st-e" x="500" y="704" text-anchor="middle">entry / suspend everywhere</text>
+          <text class="st-i" x="500" y="724" text-anchor="middle">{inv: nothing exposed in use}</text>
+        </g>
+        <g class="note">
+          <path class="note-b" d="M292 248 H688 L708 268 V356 H292 Z"/><path class="note-f" d="M688 248 V268 H708"/>
+          <text class="note-s" x="500" y="272" text-anchor="middle">«contract» context: every transition</text>
+          <text class="note-n" x="500" y="301" text-anchor="middle">foundational contract</text>
+          <text class="note-p" x="500" y="325" text-anchor="middle">BOUNDED · ATTRIBUTABLE · TRACEABLE · CORRECTABLE</text>
+          <text class="note-l" x="500" y="345" text-anchor="middle">assume · guarantee · evidence</text>
+        </g>
       </svg>
-      <svg class="loop-v" viewBox="0 0 580 600" aria-hidden="true">
+      <svg class="loop-v" viewBox="0 0 340 716" aria-hidden="true">
         <defs>
+          <marker id="vr-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-n"/></marker>
           <marker id="vr-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-o"/></marker>
           <marker id="vr-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-t"/></marker>
+          <marker id="vr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 10 5 0 10z" class="fill-r"/></marker>
         </defs>
-        <path class="arc arc-o" data-arc="down" d="M390 118 C 482 220, 482 380, 390 482" marker-end="url(#vr-o)"/>
-        <path class="arc arc-t" data-arc="up" d="M190 482 C 98 380, 98 220, 190 118" marker-end="url(#vr-t)"/>
-        <g class="nodes" data-t="down" data-side="right"></g>
-        <g class="nodes" data-t="up" data-side="left"></g>
-        <g class="st" data-st="human"><rect x="185" y="16" width="210" height="104" rx="52"/><text class="st-n" x="290" y="62" text-anchor="middle">Human</text><text class="st-m" x="290" y="86" text-anchor="middle">intent · concerns</text><text class="st-e" x="290" y="106" text-anchor="middle">entry / inspect · decide</text></g>
-        <g class="st" data-st="ai"><rect x="185" y="480" width="210" height="104" rx="52"/><text class="st-n" x="290" y="526" text-anchor="middle">Agentic AI</text><text class="st-m" x="290" y="550" text-anchor="middle">agents · teams</text><text class="st-e" x="290" y="570" text-anchor="middle">entry / plan · act</text></g>
-        <text class="lbl-t lbl-o" x="290" y="196" text-anchor="middle">① MDE abstractions</text>
-        <text class="lbl-m" x="290" y="218" text-anchor="middle">for agents ↓</text>
-        <text class="mid-n" x="290" y="300" text-anchor="middle">the missing loop</text>
-        <text class="mid-m" x="290" y="326" text-anchor="middle">EFFICIENT · EFFECTIVE</text>
-        <text class="lbl-t lbl-tl" x="290" y="396" text-anchor="middle">② Abstractions of collaboration</text>
-        <text class="lbl-m" x="290" y="418" text-anchor="middle">↑ for people</text>
+        <g class="init" aria-hidden="true"><circle class="init-dot" cx="170" cy="12" r="6"/><path class="arc-init" data-arc="initial" d="M170 19 L170 38" marker-end="url(#vr-n)"/></g>
+        <path class="arc arc-o" data-arc="bind" d="M232 136 C 318 200, 318 330, 234 388" marker-end="url(#vr-o)"/>
+        <path class="arc arc-t" data-arc="account" d="M106 390 C 22 330, 22 200, 108 138" marker-end="url(#vr-t)"/>
+        <path class="arc arc-r" data-arc="withdraw" d="M268 452 C 352 480, 352 610, 282 645" marker-end="url(#vr-r)"/>
+        <path class="arc arc-r arc-2" data-arc="revalidate" d="M236 586 C 252 562, 252 512, 236 487" marker-end="url(#vr-r)"/>
+        <path class="arc arc-n arc-2" data-arc="escalate" d="M60 645 C -16 640, -14 110, 68 90" marker-end="url(#vr-n)"/>
+        <g class="nodes" data-t="bind" data-side="right" data-tone="o" data-labels="off"></g>
+        <g class="nodes" data-t="account" data-side="left" data-tone="t" data-labels="off"></g>
+        <g class="st" data-st="human"><rect x="70" y="40" width="200" height="96" rx="48"/><text class="st-n" x="170" y="82" text-anchor="middle">Human</text><text class="st-m" x="170" y="104" text-anchor="middle">accountable · intent</text><text class="st-e" x="170" y="122" text-anchor="middle">entry / decide; tries := 0</text></g>
+        <g class="st" data-st="ai"><rect x="70" y="390" width="200" height="96" rx="48"/><text class="st-n" x="170" y="432" text-anchor="middle">Agentic AI</text><text class="st-m" x="170" y="454" text-anchor="middle">agents · teams</text><text class="st-e" x="170" y="472" text-anchor="middle">entry / plan; hand off; act</text></g>
+        <g class="st st-dashed" data-st="quarantine"><rect x="60" y="586" width="220" height="118" rx="59"/><text class="st-n" x="170" y="628" text-anchor="middle">Quarantine</text><text class="st-m" x="170" y="649" text-anchor="middle">contained · in history</text><text class="st-e" x="170" y="667" text-anchor="middle">entry / suspend everywhere</text><text class="st-i" x="170" y="685" text-anchor="middle">{inv: nothing exposed in use}</text></g>
+        <g class="note">
+          <path class="note-b" d="M72 194 H256 L268 206 V296 H72 Z"/><path class="note-f" d="M256 194 V206 H268"/>
+          <text class="note-s" x="170" y="211" text-anchor="middle">«contract» every transition</text>
+          <text class="note-n" x="170" y="236" text-anchor="middle">foundational contract</text>
+          <text class="note-p" x="170" y="255" text-anchor="middle">BOUNDED · ATTRIBUTABLE</text>
+          <text class="note-p" x="170" y="271" text-anchor="middle">TRACEABLE · CORRECTABLE</text>
+          <text class="note-l" x="170" y="288" text-anchor="middle">assume · guarantee · evidence</text>
+        </g>
+        <text class="lbl-t lbl-o" x="170" y="172" text-anchor="middle">① Delegate</text>
+        <text class="lbl-t lbl-tl" x="170" y="330" text-anchor="middle">② Report</text>
+        <text class="lbl-t lbl-r" x="281" y="548" text-anchor="middle">③ Contain</text>
+        <text class="lbl-t lbl-r" x="226" y="532" text-anchor="end">④ Re-admit</text>
+        <text class="lbl-t lbl-n" x="48" y="556" text-anchor="start">⑤ Escalate</text>
       </svg>
-      <figcaption id="loop-cap" class="visually-hidden">Two states, Human and Agentic AI. MDE abstractions carry human concerns to agents; abstractions of agent collaboration carry behavior back to people. Building this loop efficiently and effectively is the missing piece.</figcaption>
+      <p class="loop-read">Read it clockwise: a person delegates work under a contract (①); agents report back with evidence (②); if the evidence shows the contract was violated, the affected work is quarantined (③) and either re-checked and re-admitted (④) or explained to the person, who decides what happens next (⑤).</p>
+      <figcaption id="loop-cap" class="visually-hidden">UML state machine with 3 states: Human (accountable · intent · concerns), Agentic AI (agents · teams · harness) and Quarantine (contained · kept in history; invariant: nothing exposed in use). Every run starts in Human. ① Delegate, from Human to Agentic AI: delegate [concerns modeled] / model; specify; compose; verify. ② Report, from Agentic AI to Human: report [contract holds] / trace; record; slice; explain. ③ Contain, from Agentic AI to Quarantine: report [contract violated] / withdraw closure; tries++. ④ Re-admit, from Quarantine to Agentic AI: [screen clean ∧ tries &lt; k] / re-admit. ⑤ Escalate, from Quarantine to Human: [else] / explain affected set. A note, the foundational contract, applies to every transition: bounded, attributable, traceable, correctable; assume, guarantee, evidence.</figcaption>
     </figure>
 
     <div class="transitions">
-      <article class="tr" data-t="down" style="--c:var(--orange)">
-        <div class="tr-top"><span>01 · Human → AI</span><span>abstractions for agents</span></div>
-        <h3>Connecting agents to higher-level concerns</h3>
-        <p class="body">Safety, correctness, intent, and organizational constraints usually reach an agent as informal prose. I use model-driven engineering (models, contracts, and model transformations) so that agentic systems can be specified against these concerns and checked for them.</p>
-        <div class="milestones"><span class="chip">[anonymous for review]</span><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · submitted to TSE</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a></div>
+      <article class="tr" data-t="bind" style="--c:var(--orange)">
+        <div class="tr-top"><span>01 · Delegate</span><span>bounded</span></div>
+        <h3>Delegating with a contract</h3>
+        <p class="body">Concerns such as safety, intent and organizational rules usually reach an agent as prose. I turn them into foundational contracts: models of what each agent, guardrail and hand-off may assume and must guarantee, composed and checked before the team runs.</p>
+        <div class="milestones"><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · submitted to TSE</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a><span class="chip">[anonymous for review]</span></div>
       </article>
-      <article class="tr" data-t="up" style="--c:var(--teal)">
-        <div class="tr-top"><span>02 · AI → Human</span><span>abstractions for people</span></div>
-        <h3>Showing people how agents collaborate</h3>
-        <p class="body">Transcripts, tool logs, and traces are abundant but unreadable at scale. I build abstractions (slices, typed hand-offs, provenance, and knowledge graphs) that explain how agent teams collaborate, where they break, and why an objective was or was not achieved.</p>
-        <div class="milestones"><a class="chip" data-find="Agent Slicing">Agent Slicing</a><span class="chip">[anonymous for review]</span><a class="chip" data-find="Bad Habits Die Hard">Heartness</a><a class="chip" data-find="TAAF">TAAF · ICSE 2026</a></div>
+      <article class="tr" data-t="account" style="--c:var(--teal)">
+        <div class="tr-top"><span>02 · Report</span><span>attributable · traceable</span></div>
+        <h3>Accounting for what agents did</h3>
+        <p class="body">Transcripts and tool logs are abundant but unreadable at scale. I record hand-offs and provenance while agents work, and abstract them into slices and explanations, so a person can see which agent produced what, from which evidence, and why an objective was or was not met.</p>
+        <div class="milestones"><a class="chip" data-find="Agent Slicing">Agent Slicing</a><span class="chip">[anonymous for review]</span><a class="chip" data-find="TAAF">TAAF · ICSE 2026</a></div>
       </article>
-      <article class="tr tr-loop" data-t="loop" style="--c:var(--navy)">
-        <div class="tr-top"><span>03 · The loop</span><span>what is missing</span></div>
-        <h3>Effective and efficient, together</h3>
-        <p class="body">Specifications without visibility cannot tell us whether they were honored; visibility without specifications gives us nothing to check against. The loop must be <b>effective</b>, with abstractions at the level people reason about yet precise enough to check. It must also be <b>efficient</b> enough to repeat whenever a team, prompt, or model changes.</p>
-        <a class="tr-read" href="news/closing-the-loop/">Read the full agenda <span class="m-arrow" aria-hidden="true">→</span></a>
+      <article class="tr" data-t="withdraw" style="--c:var(--rose)">
+        <div class="tr-top"><span>03 · Contain</span><span>correctable</span></div>
+        <h3>Containing what went wrong</h3>
+        <p class="body">When a learned lesson, a skill or a hand-off turns out to be wrong, deleting it is not enough: its effects have already spread into other artifacts and deployments. Recorded lineage finds everything it touched and suspends it everywhere. It is re-admitted only after a fresh check, a bounded number of times, and otherwise explained to the person responsible.</p>
+        <div class="milestones"><a class="chip" data-find="Bad Habits Die Hard">Heartness</a><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL</a></div>
+      </article>
+      <article class="tr tr-loop" data-t="contract" style="--c:var(--navy)">
+        <div class="tr-top"><span>04 · The contract</span><span>checked, not just drawn</span></div>
+        <h3>One object, checked in both directions</h3>
+        <p class="body">Specifications without evidence cannot tell us whether they were honored; evidence without specifications gives us nothing to check against. A foundational contract holds both. This figure follows its own rule: it is generated from a state-machine model, and on every build a model checker verifies that a person can always be reached and that every violation is contained and ends with a person.</p>
+        <div class="tr-links"><a class="tr-read" href="news/closing-the-loop/">Read the full agenda <span class="m-arrow" aria-hidden="true">→</span></a><a class="tr-read" href="assets/agenda.scxml">Model (SCXML)</a></div>
       </article>
     </div>
     <!-- END GENERATED AGENDA -->

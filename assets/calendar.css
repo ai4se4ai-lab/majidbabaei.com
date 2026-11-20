@@ -1,8 +1,8 @@
 /* Calendar of commitments: week / month / year grids, the "up next" rail, the entry popover, and entry pages.
    Loaded after style.css, motion.css and news.css (masthead, feed-bar, statement, article and prose come from there). */
-:root{--cal-plum:#6b4c9a;--cal-rose:#b3263c;--cal-hour:56px;--cal-gutter:56px}
-:root[data-theme="dark"]{--cal-plum:#b9a3e3;--cal-rose:#ff7e8d}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cal-plum:#b9a3e3;--cal-rose:#ff7e8d}}
+:root{--cal-plum:#6b4c9a;--cal-rose:var(--rose);--cal-hour:56px;--cal-gutter:56px}
+:root[data-theme="dark"]{--cal-plum:#b9a3e3}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cal-plum:#b9a3e3}}
 /* One colour per type; every entry element sets --c from its type. */
 [data-type="teaching"]{--c:var(--teal)}[data-type="research"]{--c:var(--navy)}[data-type="event"]{--c:var(--orange)}
 [data-type="service"]{--c:var(--cal-plum)}[data-type="deadline"]{--c:var(--cal-rose)}[data-type="travel"]{--c:var(--muted)}[data-type="block"]{--c:var(--ink)}

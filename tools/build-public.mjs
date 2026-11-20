@@ -9,7 +9,7 @@ await rm(output, { recursive: true, force: true });
 await mkdir(output);
 const hidden = /(?:agentm2m|skillspec|swe-multiskillsbench)/i;
 const cv = /(?:02_Curriculum_Vitae|Majid_Babaei_CV)\.pdf$/i;
-const extensions = new Set(['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.png', '.jpg', '.jpeg', '.webp', '.ico', '.pdf', '.woff', '.woff2', '.ttf', '.otf', '.eot', '.ics']);
+const extensions = new Set(['.html', '.css', '.js', '.json', '.xml', '.txt', '.svg', '.png', '.jpg', '.jpeg', '.webp', '.ico', '.pdf', '.woff', '.woff2', '.ttf', '.otf', '.eot', '.ics', '.scxml']);
 let count = 0;
 async function copy(rel) {
   for (const item of await readdir(resolve(root, rel), { withFileTypes: true })) {
@@ -19,7 +19,7 @@ async function copy(rel) {
     // Generated preprint citations (preprints/<slug>/v<N>/citation.bib) are the only public .bib files.
     const preprintBib = /^preprints\/[a-z0-9-]+\/v\d+\/citation\.bib$/.test(path);
     if (!item.isFile() || !extensions.has(extname(path)) && !preprintBib && !/^(?:news\/posts|calendar\/events)\/[^_][^/]*\.md$/.test(path)) continue;
-    if (/\.(html|js|json|xml|txt|md|svg|bib)$/i.test(path)) {
+    if (/\.(html|js|json|xml|txt|md|svg|bib|scxml)$/i.test(path)) {
       const text = await readFile(resolve(root, path), 'utf8');
       if (hidden.test(text)) throw new Error(`Identifying review details in public output: ${path}`);
       if (/(?:02_Curriculum_Vitae|Majid_Babaei_CV)\.pdf/i.test(text)) throw new Error(`Direct CV reference in public output: ${path}`);

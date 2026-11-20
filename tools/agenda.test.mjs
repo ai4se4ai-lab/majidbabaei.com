@@ -15,7 +15,7 @@ async function sandbox() {
   const dir = await mkdtemp(join(tmpdir(), 'agenda-'));
   for (const p of ['tools', 'data', 'news/posts']) await cp(join(root, p), join(dir, p), { recursive: true });
   await mkdir(join(dir, 'assets'), { recursive: true });
-  for (const f of ['research-data.js', 'agenda-data.js']) await cp(join(root, 'assets', f), join(dir, 'assets', f));
+  for (const f of ['research-data.js', 'agenda-data.js', 'agenda.scxml', 'img/agenda-statechart.svg']) { await mkdir(join(dir, 'assets', 'img'), { recursive: true }); await cp(join(root, 'assets', f), join(dir, 'assets', f)); }
   await cp(join(root, 'index.html'), join(dir, 'index.html'));
   return dir;
 }
@@ -27,7 +27,7 @@ test('the page is up to date with the agenda model (build-agenda --check)', asyn
 
 test('a hand edit inside the generated block is reported as stale, and a rebuild restores it', async () => {
   const dir = await sandbox(), path = join(dir, 'index.html'), original = await readFile(path, 'utf8');
-  await writeFile(path, original.replace('the missing loop</text>', 'a hand-edited loop</text>'));
+  await writeFile(path, original.replace('foundational contract</text>', 'a hand-edited contract</text>'));
   await assert.rejects(build({ dir, check: true, log: quiet }), /Stale agenda output: index\.html/);
   await build({ dir, log: quiet });
   assert.deepEqual((await build({ dir, check: true, log: quiet })).stale, []);
@@ -40,7 +40,7 @@ test('the generator refuses a page without the markers', async () => {
   await assert.rejects(build({ dir, check: true, log: quiet }), /needs the <!-- BEGIN GENERATED AGENDA -->/);
 });
 
-test('W8 on the outputs: a withheld term in generated text fails even the legacy build', async () => {
+test('W8 on the outputs: a withheld term in generated text fails the build', async () => {
   const dir = await sandbox(), path = join(dir, MODEL), m = JSON.parse(await readFile(path, 'utf8'));
   const c = await loadContext();
   m.cards[0].body += ' ' + c.hidden.source.replace(/^\(\?:/, '').split('|')[0];
@@ -48,9 +48,31 @@ test('W8 on the outputs: a withheld term in generated text fails even the legacy
   await assert.rejects(build({ dir, check: true, log: quiet }), /W8: index\.html agenda block contains a withheld term/);
 });
 
+test('the SCXML export has the initial state, every state and transition, and the retry bound', async () => {
+  const x = await readFile(join(root, 'assets', 'agenda.scxml'), 'utf8');
+  assert.match(x, /<scxml xmlns="http:\/\/www\.w3\.org\/2005\/07\/scxml" version="1\.0"[^>]* initial="human">/);
+  assert.equal((x.match(/<state id=/g) || []).length, model.states.length);
+  assert.equal((x.match(/<transition /g) || []).length, model.transitions.length);
+  // ② and ③ share the event and split on complementary conditions; ④ is guarded by the bound, ⑤ is its else.
+  assert.match(x, /event="report" cond="_event\.data\.contractHolds" target="human"/);
+  assert.match(x, /event="report" cond="!_event\.data\.contractHolds" target="quarantine">.*<assign location="tries" expr="tries \+ 1"\/>/);
+  assert.match(x, /<transition cond="screenClean &amp;&amp; tries &lt; k" target="ai">[\s\S]*?<transition target="human">/);
+  assert.match(x, /<!-- state invariant: nothing exposed in use -->/);
+});
+
+test('the static figure shows every step and no token', async () => {
+  const svg = await readFile(join(root, 'assets', 'img', 'agenda-statechart.svg'), 'utf8');
+  assert.match(svg, /^<\?xml/);
+  const steps = model.transitions.flatMap(t => (t.steps || []).map(s => s.c));
+  assert.equal((svg.match(/<g class="node on"/g) || []).length, steps.length);
+  for (const s of steps) assert.match(svg, new RegExp(`>${s}</text>`));
+  assert.doesNotMatch(svg, /class="tok/);
+  assert.match(svg, /<desc id="agenda-desc">UML state machine with 3 states/);
+});
+
 const ctx = await loadContext();
 const model = await loadModel(join(root, 'data', 'agenda.statechart.json'));
-const legacy = await loadModel(join(root, 'data', 'agenda-legacy.statechart.json'));
+const legacy = await loadModel(join(root, 'tools', 'fixtures', 'agenda-legacy.statechart.json'));
 // Mutants are checked against a context whose hero lists the note's properties, so a mutant fails only
 // the rule it targets; the live hero sentence is checked against the note by the W9 test.
 const ctxAgreed = { ...ctx, hero: model.comment.props };
