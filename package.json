@@ -5,7 +5,7 @@
   "scripts": {
     "build:news": "node tools/build-news.mjs",
     "check:news": "node tools/build-news.mjs --check",
-    "test": "node --test tools/news.test.mjs tools/calendar.test.mjs tools/preprints.test.mjs",
+    "test": "node --test tools/news.test.mjs tools/calendar.test.mjs tools/preprints.test.mjs tools/agenda.test.mjs",
     "check:calendar": "node tools/build-calendar.mjs --check",
     "build:calendar": "node tools/build-calendar.mjs",
     "check:projects": "node tools/build-projects.mjs --check",

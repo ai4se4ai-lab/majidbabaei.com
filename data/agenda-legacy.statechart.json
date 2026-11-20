@@ -1,0 +1,65 @@
+{
+  "label": "agenda.statechart",
+  "legacy": true,
+  "heading": { "num": "§ 01 — Research agenda", "h2": "Closing the loop between <em>humans</em> and <em>agentic AI</em>" },
+  "lead": "Agentic AI systems plan, delegate, and collaborate, yet they rarely see the higher-level concerns people care about, and people rarely see how agent teams reach their objectives. My research builds abstractions in both directions. Building this loop <b>efficiently</b> and <b>effectively</b> is, I believe, what is missing.",
+  "roles": { "person": "human", "agent": "ai", "contained": "quarantine", "violation": "withdraw" },
+  "middle": { "name": "the missing loop", "line": "EFFICIENT · EFFECTIVE", "sub": "incremental · checkable · repeatable" },
+  "guards": {
+    "modeled": { "text": "modeled", "env": true },
+    "abstracted": { "text": "abstracted", "env": true }
+  },
+  "states": [
+    { "id": "human", "name": "Human", "meta": "intent · concerns · oversight", "entry": ["inspect", "decide"], "box": [30, 185, 232, 150] },
+    { "id": "ai", "name": "Agentic AI", "meta": "agents · teams · tools", "entry": ["plan", "delegate", "act"], "box": [738, 185, 232, 150] }
+  ],
+  "transitions": [
+    { "n": 1, "id": "down", "title": "MDE abstractions", "subtitle": "for agents", "from": "human", "to": "ai",
+      "trigger": "concerns", "guard": ["modeled"], "effect": ["specify", "verify"],
+      "tone": "orange", "path": [[262, 212], [390, 60], [610, 60], [738, 212]],
+      "steps": [
+        { "c": "concerns", "d": "safety, intent, correctness, and organizational constraints, as people state them", "refs": [] },
+        { "c": "models", "d": "the same concerns at the level people reason about, precise enough to check", "refs": ["SSEVOH-DSL"] },
+        { "c": "contracts", "d": "checkable obligations between people, guardrails, and agents", "refs": ["TINT", "SSEVOH-DSL"] },
+        { "c": "transformations", "s": "transforms", "d": "checked composition of agent teams and the state they share", "refs": ["AutoM2M", "Safe Coordination"] },
+        { "c": "verification", "d": "does the composed team still meet its concerns?", "refs": ["TINT", "Safe Coordination"] }
+      ] },
+    { "n": 2, "id": "up", "title": "Abstractions of collaboration", "subtitle": "for people", "from": "ai", "to": "human",
+      "trigger": "behavior", "guard": ["abstracted"], "effect": ["trace", "explain"],
+      "tone": "teal", "path": [[738, 308], [610, 460], [390, 460], [262, 308]],
+      "steps": [
+        { "c": "traces", "d": "transcripts, tool calls, and executions, abundant but unreadable at scale", "refs": ["TAAF"] },
+        { "c": "slices", "d": "the few components whose interaction explains a symptom", "refs": ["Agent Slicing"] },
+        { "c": "provenance", "d": "which version, approval, and context produced a behavior", "refs": ["Heartness"] },
+        { "c": "explanations", "d": "why an objective was or was not achieved, in terms people can check", "refs": ["TAAF"] }
+      ] }
+  ],
+  "runs": [
+    { "id": "loop", "path": ["down", "up"] }
+  ],
+  "cards": [
+    { "t": "down", "kicker": "01 · Human → AI", "tag": "abstractions for agents", "tone": "orange",
+      "h3": "Connecting agents to higher-level concerns",
+      "body": "Safety, correctness, intent, and organizational constraints usually reach an agent as informal prose. I use model-driven engineering (models, contracts, and model transformations) so that agentic systems can be specified against these concerns and checked for them.",
+      "chips": [
+        { "anon": "anonymous-review-1" },
+        { "label": "SSEVOH-DSL · submitted to TSE", "find": "Governing Changes in Self-Evolving Agents" },
+        { "label": "TINT", "find": "Trust Is Not Transitive" },
+        { "label": "Safe Coordination", "find": "Safe Coordination" },
+        { "label": "AutoM2M", "find": "When the team writes itself" }
+      ] },
+    { "t": "up", "kicker": "02 · AI → Human", "tag": "abstractions for people", "tone": "teal",
+      "h3": "Showing people how agents collaborate",
+      "body": "Transcripts, tool logs, and traces are abundant but unreadable at scale. I build abstractions (slices, typed hand-offs, provenance, and knowledge graphs) that explain how agent teams collaborate, where they break, and why an objective was or was not achieved.",
+      "chips": [
+        { "label": "Agent Slicing", "find": "Agent Slicing" },
+        { "anon": "anonymous-review-2" },
+        { "label": "Heartness", "find": "Bad Habits Die Hard" },
+        { "label": "TAAF · ICSE 2026", "find": "TAAF" }
+      ] },
+    { "t": "loop", "kicker": "03 · The loop", "tag": "what is missing", "tone": "navy", "dark": true,
+      "h3": "Effective and efficient, together",
+      "body": "Specifications without visibility cannot tell us whether they were honored; visibility without specifications gives us nothing to check against. The loop must be <b>effective</b>, with abstractions at the level people reason about yet precise enough to check. It must also be <b>efficient</b> enough to repeat whenever a team, prompt, or model changes.",
+      "links": [ { "label": "Read the full agenda", "href": "news/closing-the-loop/", "arrow": true } ] }
+  ]
+}

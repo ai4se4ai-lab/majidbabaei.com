@@ -1,0 +1,97 @@
+{
+  "label": "agenda.statechart",
+  "heading": { "num": "§ 01 — Research agenda", "h2": "Accountability by <em>contract</em> for <em>agentic AI</em>" },
+  "lead": "A computer cannot be punished, and it does not need to be. What makes a system accountable in practice is a set of mechanisms: we know what it was allowed to do, which component did what and from which evidence, and how to contain and repair a mistake. My research engineers these mechanisms for AI agents with model-driven engineering, so that the people responsible for agentic systems can actually exercise that responsibility.",
+  "reading": "Read it clockwise: a person delegates work under a contract (①); agents report back with evidence (②); if the evidence shows the contract was violated, the affected work is quarantined (③) and either re-checked and re-admitted (④) or explained to the person, who decides what happens next (⑤).",
+  "initial": "human",
+  "roles": { "person": "human", "agent": "ai", "contained": "quarantine", "violation": "withdraw" },
+  "variables": { "tries": { "min": 0, "max": 2, "init": 0 } },
+  "constants": { "k": 2 },
+  "comment": {
+    "stereotype": "contract", "context": "every transition", "name": "foundational contract",
+    "props": ["bounded", "attributable", "traceable", "correctable"], "line": "assume · guarantee · evidence"
+  },
+  "guards": {
+    "concernsModeled": { "text": "concerns modeled", "env": true },
+    "contractHolds": { "text": "contract holds", "env": true, "complement": "contractViolated" },
+    "contractViolated": { "text": "contract violated", "env": true, "complement": "contractHolds" },
+    "screenClean": { "text": "screen clean", "env": true },
+    "canRetry": { "text": "tries < k", "expr": "tries < k" }
+  },
+  "states": [
+    { "id": "human", "name": "Human", "meta": "accountable · intent · concerns", "entry": ["decide", "tries := 0"], "box": [30, 224, 232, 150] },
+    { "id": "ai", "name": "Agentic AI", "meta": "agents · teams · harness", "entry": ["plan", "hand off", "act"], "box": [738, 224, 232, 150] },
+    { "id": "quarantine", "name": "Quarantine", "meta": "contained · kept in history", "entry": ["suspend everywhere"],
+      "invariant": "nothing exposed in use", "box": [384, 566, 232, 162], "style": "dashed" }
+  ],
+  "transitions": [
+    { "n": 1, "id": "bind", "title": "Delegate", "stereotype": "bounded", "from": "human", "to": "ai",
+      "trigger": "delegate", "guard": ["concernsModeled"], "effect": ["model", "specify", "compose", "verify"],
+      "tone": "orange", "path": [[262, 251], [390, 99], [610, 99], [738, 251]],
+      "steps": [
+        { "c": "model", "d": "safety, intent, correctness and organizational rules, stated at the level people reason about", "refs": ["SSEVOH-DSL"] },
+        { "c": "specify", "d": "what each agent, guardrail and hand-off may assume and must guarantee", "refs": ["TINT", "SSEVOH-DSL"] },
+        { "c": "compose", "d": "checked assembly of agent teams and the state they share", "refs": ["AutoM2M", "Safe Coordination"] },
+        { "c": "verify", "d": "does the composed team still meet its concerns?", "refs": ["TINT", "Safe Coordination"] }
+      ] },
+    { "n": 2, "id": "account", "title": "Report", "stereotype": "attributable, traceable", "from": "ai", "to": "human",
+      "trigger": "report", "guard": ["contractHolds"], "effect": ["trace", "record", "slice", "explain"],
+      "tone": "teal", "path": [[738, 347], [610, 499], [390, 499], [262, 347]],
+      "steps": [
+        { "c": "trace", "d": "transcripts, tool calls and executions, abundant but unreadable at scale", "refs": ["TAAF"] },
+        { "c": "record", "d": "which agent handed what to whom, and which version, approval and context produced a behaviour", "refs": ["Heartness", "anonymous-review-2"] },
+        { "c": "slice", "d": "the few components whose interaction explains a symptom", "refs": ["Agent Slicing"] },
+        { "c": "explain", "d": "why an objective was or was not achieved, in terms people can check", "refs": ["TAAF", "Agent Slicing"] }
+      ] },
+    { "n": 3, "id": "withdraw", "title": "Contain", "stereotype": "correctable", "from": "ai", "to": "quarantine",
+      "trigger": "report", "guard": ["contractViolated"], "effect": ["withdraw closure", "tries++"],
+      "tone": "rose", "path": [[905, 364], [930, 514], [780, 641], [618, 641]],
+      "tip": { "d": "When a lesson, skill or hand-off turns out to be wrong, everything recorded as exposed to it is suspended in every deployment", "refs": ["Heartness", "SSEVOH-DSL"] } },
+    { "n": 4, "id": "revalidate", "title": "Re-admit", "from": "quarantine", "to": "ai",
+      "trigger": null, "guard": ["screenClean", "canRetry"], "effect": ["re-admit"],
+      "tone": "rose", "style": "secondary", "path": [[600, 579], [700, 579], [800, 484], [812, 374]],
+      "tip": { "d": "Suspended items return only after a fresh check, as new versions, and only a bounded number of times", "refs": ["Heartness"] } },
+    { "n": 5, "id": "escalate", "title": "Escalate", "from": "quarantine", "to": "human",
+      "trigger": null, "guard": "else", "effect": ["explain affected set"],
+      "tone": "navy", "style": "secondary", "path": [[384, 641], [230, 634], [80, 514], [110, 366]],
+      "tip": { "d": "The responsible person sees exactly what was affected and why, and decides what changes in the contract", "refs": ["Heartness", "Agent Slicing"] } }
+  ],
+  "runs": [
+    { "id": "accountable", "path": ["bind", "account"] },
+    { "id": "contained", "every": 3, "path": ["bind", "withdraw", "escalate"], "alt": ["bind", "withdraw", "revalidate", "account"] }
+  ],
+  "cards": [
+    { "t": "bind", "kicker": "01 · Delegate", "tag": "bounded", "tone": "orange",
+      "h3": "Delegating with a contract",
+      "body": "Concerns such as safety, intent and organizational rules usually reach an agent as prose. I turn them into foundational contracts: models of what each agent, guardrail and hand-off may assume and must guarantee, composed and checked before the team runs.",
+      "chips": [
+        { "label": "SSEVOH-DSL · submitted to TSE", "find": "Governing Changes in Self-Evolving Agents" },
+        { "label": "TINT", "find": "Trust Is Not Transitive" },
+        { "label": "Safe Coordination", "find": "Safe Coordination" },
+        { "label": "AutoM2M", "find": "When the team writes itself" },
+        { "anon": "anonymous-review-1" }
+      ] },
+    { "t": "account", "kicker": "02 · Report", "tag": "attributable · traceable", "tone": "teal",
+      "h3": "Accounting for what agents did",
+      "body": "Transcripts and tool logs are abundant but unreadable at scale. I record hand-offs and provenance while agents work, and abstract them into slices and explanations, so a person can see which agent produced what, from which evidence, and why an objective was or was not met.",
+      "chips": [
+        { "label": "Agent Slicing", "find": "Agent Slicing" },
+        { "anon": "anonymous-review-2" },
+        { "label": "TAAF · ICSE 2026", "find": "TAAF" }
+      ] },
+    { "t": "withdraw", "kicker": "03 · Contain", "tag": "correctable", "tone": "rose",
+      "h3": "Containing what went wrong",
+      "body": "When a learned lesson, a skill or a hand-off turns out to be wrong, deleting it is not enough: its effects have already spread into other artifacts and deployments. Recorded lineage finds everything it touched and suspends it everywhere. It is re-admitted only after a fresh check, a bounded number of times, and otherwise explained to the person responsible.",
+      "chips": [
+        { "label": "Heartness", "find": "Bad Habits Die Hard" },
+        { "label": "SSEVOH-DSL", "find": "Governing Changes in Self-Evolving Agents" }
+      ] },
+    { "t": "contract", "kicker": "04 · The contract", "tag": "checked, not just drawn", "tone": "navy", "dark": true,
+      "h3": "One object, checked in both directions",
+      "body": "Specifications without evidence cannot tell us whether they were honored; evidence without specifications gives us nothing to check against. A foundational contract holds both. This figure follows its own rule: it is generated from a state-machine model, and on every build a model checker verifies that a person can always be reached and that every violation is contained and ends with a person.",
+      "links": [
+        { "label": "Read the full agenda", "href": "news/closing-the-loop/", "arrow": true },
+        { "label": "Model (SCXML)", "href": "assets/agenda.scxml" }
+      ] }
+  ]
+}
