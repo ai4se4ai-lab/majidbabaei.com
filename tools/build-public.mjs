@@ -1,5 +1,7 @@
 // Build a fresh Pages artifact; private CVs, drafts and editing sources stay out.
-import { readdir, readFile, mkdir, copyFile, rm } from 'node:fs/promises';
+import { readdir, readFile, writeFile, mkdir, copyFile, rm } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve, dirname, sep, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -40,4 +42,31 @@ for (const item of await readdir(root, { withFileTypes: true })) {
     count++;
   }
 }
-console.log(`Public artifact: ${count} files in ${output}; CVs and identifying review material excluded.`);
+// Cache-bust local stylesheets and scripts: browsers otherwise pair fresh HTML with a stale cached
+// style.css/site.js (Pages sends max-age=600), and new markup renders without its rules.
+const hashes = new Map();
+async function version(file) {
+  if (!hashes.has(file)) hashes.set(file, createHash('sha256').update(await readFile(file)).digest('hex').slice(0, 10));
+  return hashes.get(file);
+}
+let busted = 0;
+async function bust(dir) {
+  for (const item of await readdir(dir, { withFileTypes: true })) {
+    const path = resolve(dir, item.name);
+    if (item.isDirectory()) { await bust(path); continue; }
+    if (!item.name.endsWith('.html')) continue;
+    const html = await readFile(path, 'utf8');
+    const refs = new Map([...html.matchAll(/\b(href|src)="([^"?#:]+\.(?:css|js))"/g)].map(m => [m[0], m]));
+    if (!refs.size) continue;
+    let out = html;
+    for (const [whole, attr, ref] of refs.values()) {
+      const file = ref.startsWith('/') ? resolve(output, '.' + ref) : resolve(dirname(path), ref);
+      if (!file.startsWith(output + sep) || !existsSync(file)) continue;
+      out = out.replaceAll(whole, `${attr}="${ref}?v=${await version(file)}"`);
+      busted++;
+    }
+    if (out !== html) await writeFile(path, out);
+  }
+}
+await bust(output);
+console.log(`Public artifact: ${count} files in ${output}; CVs and identifying review material excluded; ${busted} asset references versioned.`);
