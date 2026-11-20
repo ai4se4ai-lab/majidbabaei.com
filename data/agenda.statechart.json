@@ -2,7 +2,6 @@
   "label": "agenda.statechart",
   "heading": { "num": "§ 01 — Research agenda", "h2": "Accountability by <em>contract</em> for <em>agentic AI</em>" },
   "lead": "A computer cannot be punished, and it does not need to be. What makes a system accountable in practice is a set of mechanisms: we know what it was allowed to do, which component did what and from which evidence, and how to contain and repair a mistake. My research engineers these mechanisms for AI agents with model-driven engineering, so that the people responsible for agentic systems can actually exercise that responsibility.",
-  "reading": "Read it clockwise: a person delegates work under a contract (①); agents report back with evidence (②); if the evidence shows the contract was violated, the affected work is quarantined (③) and either re-checked and re-admitted (④) or explained to the person, who decides what happens next (⑤).",
   "initial": "human",
   "roles": { "person": "human", "agent": "ai", "contained": "quarantine", "violation": "withdraw" },
   "variables": { "tries": { "min": 0, "max": 2, "init": 0 } },

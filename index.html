@@ -266,7 +266,6 @@
         <text class="lbl-t lbl-r" x="226" y="532" text-anchor="end">④ Re-admit</text>
         <text class="lbl-t lbl-n" x="48" y="556" text-anchor="start">⑤ Escalate</text>
       </svg>
-      <p class="loop-read">Read it clockwise: a person delegates work under a contract (①); agents report back with evidence (②); if the evidence shows the contract was violated, the affected work is quarantined (③) and either re-checked and re-admitted (④) or explained to the person, who decides what happens next (⑤).</p>
       <figcaption id="loop-cap" class="visually-hidden">UML state machine with 3 states: Human (accountable · intent · concerns), Agentic AI (agents · teams · harness) and Quarantine (contained · kept in history; invariant: nothing exposed in use). Every run starts in Human. ① Delegate, from Human to Agentic AI: delegate [concerns modeled] / model; specify; compose; verify. ② Report, from Agentic AI to Human: report [contract holds] / trace; record; slice; explain. ③ Contain, from Agentic AI to Quarantine: report [contract violated] / withdraw closure; tries++. ④ Re-admit, from Quarantine to Agentic AI: [screen clean ∧ tries &lt; k] / re-admit. ⑤ Escalate, from Quarantine to Human: [else] / explain affected set. A note, the foundational contract, applies to every transition: bounded, attributable, traceable, correctable; assume, guarantee, evidence.</figcaption>
     </figure>
 
