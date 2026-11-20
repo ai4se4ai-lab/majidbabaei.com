@@ -139,7 +139,7 @@ export function renderSection(model, R) {
   return [
     '<div class="section-head">',
     `  <div><span class="num">${model.heading.num}</span><h2>${model.heading.h2}</h2></div>`,
-    `  <p>${model.lead}</p>`,
+    ...(model.lead ? [`  <p>${model.lead}</p>`] : []),
     '</div>',
     '',
     '<figure class="loop" id="loop" aria-labelledby="loop-cap">',
