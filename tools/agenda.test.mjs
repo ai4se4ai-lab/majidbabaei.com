@@ -51,8 +51,8 @@ test('W8 on the outputs: a withheld term in generated text fails even the legacy
 const ctx = await loadContext();
 const model = await loadModel(join(root, 'data', 'agenda.statechart.json'));
 const legacy = await loadModel(join(root, 'data', 'agenda-legacy.statechart.json'));
-// Until the hero sentence and the contract note agree (an author decision), rules other than W9 are
-// checked against a context whose hero lists the note's properties; W9 itself is checked separately.
+// Mutants are checked against a context whose hero lists the note's properties, so a mutant fails only
+// the rule it targets; the live hero sentence is checked against the note by the W9 test.
 const ctxAgreed = { ...ctx, hero: model.comment.props };
 
 const mutate = fn => { const m = structuredClone(model); fn(m); return m; };
@@ -75,9 +75,7 @@ test('the agenda model passes W1–W8, the budget, and V1–V6, over 7 reachable
   assert.deepEqual(r.overflow, []);
 });
 
-test('W9: the contract note and the hero sentence list the same properties', {
-  todo: 'author decides: add "bounded" to the hero sentence, or remove it from the note'
-}, () => {
+test('W9: the contract note and the hero sentence list the same properties', () => {
   assert.deepEqual(errorsFor(model, 'W9', ctx), []);
 });
 

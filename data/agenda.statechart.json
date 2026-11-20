@@ -39,7 +39,7 @@
       "tone": "teal", "path": [[738, 347], [610, 499], [390, 499], [262, 347]],
       "steps": [
         { "c": "trace", "d": "transcripts, tool calls and executions, abundant but unreadable at scale", "refs": ["TAAF"] },
-        { "c": "record", "d": "which agent handed what to whom, and which version, approval and context produced a behaviour", "refs": ["Heartness", "anonymous-review-2"] },
+        { "c": "record", "d": "which agent handed what to whom, and which version, approval and context produced a behaviour", "refs": ["Heartness"] },
         { "c": "slice", "d": "the few components whose interaction explains a symptom", "refs": ["Agent Slicing"] },
         { "c": "explain", "d": "why an objective was or was not achieved, in terms people can check", "refs": ["TAAF", "Agent Slicing"] }
       ] },
