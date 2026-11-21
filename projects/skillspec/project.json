@@ -3,11 +3,19 @@
   "links": [],
   "releases": [
     {
+      "tag": "revision-requested-2026-11-21",
+      "date": "2026-11-21",
+      "type": "paper",
+      "title": "Revision requested",
+      "notes": "Revision requested, as recorded in the author-updated CV. Identifying details remain withheld from the public website.",
+      "links": []
+    },
+    {
       "tag": "under-review-icse-2027",
       "date": "2026-11-11",
       "type": "paper",
       "title": "Under review - ICSE 2027 Research Track",
-      "notes": "**SkillSpec: A formally verifiable specification format for composing agent skills.**\n\nM. Babaei and A. Heydarnoori. Research Track; to appear.\n\nStatus corrected to under review by the author on November 11, 2026. Identifying details are withheld from the public website.",
+      "notes": "**SkillSpec: A formally verifiable specification format for composing agent skills.**\n\nM. Babaei and A. Heydarnoori. Research Track; under review.\n\nStatus corrected to under review by the author on November 11, 2026. Identifying details are withheld from the public website.",
       "links": []
     },
     {

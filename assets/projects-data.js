@@ -226,36 +226,6 @@ window.PROJECTS = [
   ]
  },
  {
-  "slug": "safe-coordination-of-untrusted-ai-agents",
-  "name": "Safe Coordination of Untrusted AI Agents",
-  "theme": "Agents",
-  "description": "A deterministic controller coordinates untrusted agent proposals, tracks dependencies, and publishes consistent snapshots, with TLA+ specifications and reproducible case studies.",
-  "status": "Submitted · IEEE TSE",
-  "url": "https://github.com/ai4se4ai-lab/safe-coordination-of-untrusted-ai-agents",
-  "tags": "AI × MDE · Coordination",
-  "research": true,
-  "stage": "Submitted",
-  "stages": null,
-  "team": [
-   "M. Babaei"
-  ],
-  "links": [],
-  "updated": "Oct 27, 2026",
-  "releaseCount": 2,
-  "latest": {
-   "tag": "submitted-ieee-tse",
-   "title": "Submitted · IEEE TSE",
-   "label": "Oct 27, 2026",
-   "iso": "2026-10-27"
-  },
-  "galleryCount": 0,
-  "cover": null,
-  "types": [
-   "paper",
-   "code"
-  ]
- },
- {
   "slug": "morph-fl",
   "name": "MORPH-FL",
   "theme": "Analysis",
@@ -379,6 +349,37 @@ window.PROJECTS = [
   "types": [
    "code",
    "paper"
+  ]
+ },
+ {
+  "slug": "safe-coordination-of-untrusted-ai-agents",
+  "name": "Safe Coordination of Untrusted AI Agents",
+  "theme": "Agents",
+  "description": "A deterministic controller coordinates untrusted agent proposals, tracks dependencies, and publishes consistent snapshots, with TLA+ specifications and reproducible case studies.",
+  "status": "On-going",
+  "url": "https://github.com/ai4se4ai-lab/safe-coordination-of-untrusted-ai-agents",
+  "tags": "AI × MDE · Coordination",
+  "research": true,
+  "stage": "Prototype",
+  "stages": null,
+  "team": [
+   "M. Babaei"
+  ],
+  "links": [],
+  "updated": "Nov 21, 2026",
+  "releaseCount": 3,
+  "latest": {
+   "tag": "research-ongoing-2026-11-21",
+   "title": "Research in progress",
+   "label": "Nov 21, 2026",
+   "iso": "2026-11-21"
+  },
+  "galleryCount": 0,
+  "cover": null,
+  "types": [
+   "milestone",
+   "paper",
+   "code"
   ]
  },
  {
