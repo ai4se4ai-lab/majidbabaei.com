@@ -3,10 +3,18 @@
   "links": [],
   "releases": [
     {
+      "tag": "ongoing-team-update-2026-11-21",
+      "date": "2026-11-21",
+      "type": "milestone",
+      "title": "On-going research and team building",
+      "notes": "Current status: on-going. [building team is in progress ...]",
+      "links": []
+    },
+    {
       "tag": "submitted-acm-tosem",
       "date": "2026-11-06",
       "type": "paper",
-      "title": "Submitted · ACM TOSEM",
+      "title": "Submitted \u00b7 ACM TOSEM",
       "notes": "**Agent Slicing: Localizing Blind Spots in Multi-Agent AI Teams.**\n\nM. Babaei.",
       "links": []
     },

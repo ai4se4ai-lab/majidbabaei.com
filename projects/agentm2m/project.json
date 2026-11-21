@@ -3,10 +3,18 @@
   "links": [],
   "releases": [
     {
+      "tag": "ongoing-team-update-2026-11-21",
+      "date": "2026-11-21",
+      "type": "milestone",
+      "title": "On-going research",
+      "notes": "Current status: on-going. Identifying details remain withheld from public output.",
+      "links": []
+    },
+    {
       "tag": "submitted-icse-2027-nier",
       "date": "2026-10",
       "type": "paper",
-      "title": "Submitted · ICSE 2027 NIER",
+      "title": "Submitted \u00b7 ICSE 2027 NIER",
       "notes": "**AgentM2M: M2M transformations for agentic collaborations in software engineering.**\n\nM. Babaei, S. Farshidi, O. Adesina, N. Ezzati-Jivan, and L. Wei.",
       "links": []
     },

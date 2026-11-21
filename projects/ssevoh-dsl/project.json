@@ -11,6 +11,14 @@
   ],
   "releases": [
     {
+      "tag": "ongoing-team-update-2026-11-21",
+      "date": "2026-11-21",
+      "type": "milestone",
+      "title": "On-going research and team building",
+      "notes": "Current status: on-going. [building team is in progress ...]",
+      "links": []
+    },
+    {
       "tag": "repository-linked-2026-11-13",
       "date": "2026-11-13",
       "type": "code",

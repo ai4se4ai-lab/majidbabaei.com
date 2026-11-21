@@ -20,6 +20,25 @@ window.NEWS = [
   "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
+  "slug": "ongoing-research-team-building",
+  "title": "Ongoing research and team building",
+  "subtitle": "",
+  "summary": "Previously submitted work is now listed as ongoing research, with team building in progress for sole-authored projects.",
+  "tags": [
+   "Research"
+  ],
+  "featured": false,
+  "cover": null,
+  "coverAlt": "Ongoing research and team building cover",
+  "coverCaption": "",
+  "socialImage": null,
+  "date": "2026-11-21",
+  "dateLabel": "Nov 21, 2026",
+  "iso": "2026-11-21",
+  "minutes": 1,
+  "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
+ },
+ {
   "slug": "safe-coordination-ongoing",
   "title": "Safe Coordination continues as an ongoing project",
   "subtitle": "",

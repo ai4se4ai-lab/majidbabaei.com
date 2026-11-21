@@ -3,10 +3,18 @@
   "links": [],
   "releases": [
     {
+      "tag": "ongoing-team-update-2026-11-21",
+      "date": "2026-11-21",
+      "type": "milestone",
+      "title": "On-going research and team building",
+      "notes": "Current status: on-going. [building team is in progress ...]",
+      "links": []
+    },
+    {
       "tag": "submitted-ieee-tse",
       "date": "2026-11-03",
       "type": "paper",
-      "title": "Submitted · IEEE TSE",
+      "title": "Submitted \u00b7 IEEE TSE",
       "notes": "**Trust Is Not Transitive: Verifying the Composition of LLM Guardrail Hierarchies.**\n\nM. Babaei.",
       "links": []
     },
