@@ -200,29 +200,29 @@ window.PROJECTS = [
   "name": "use-hpc",
   "theme": "Infrastructure",
   "description": "Agent-configured, statically checked Slurm experiment graphs, runtime guards, and audits for large-scale GPU experiments.",
-  "status": "On-going",
+  "status": "Submitted · Automated Software Engineering",
   "url": "https://github.com/ai4se4ai-lab/use-hpc",
   "tags": "Slurm · Static checks",
   "research": true,
-  "stage": "Prototype",
+  "stage": "Submitted",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
-  "updated": "Nov 21, 2026",
-  "releaseCount": 3,
+  "updated": "Nov 26, 2026",
+  "releaseCount": 4,
   "latest": {
-   "tag": "ongoing-team-update-2026-11-21",
-   "title": "On-going research and team building",
-   "label": "Nov 21, 2026",
-   "iso": "2026-11-21"
+   "tag": "cv-submission-update-2026-11-26",
+   "title": "Submitted · Automated Software Engineering",
+   "label": "Nov 26, 2026",
+   "iso": "2026-11-26"
   },
   "galleryCount": 0,
   "cover": null,
   "types": [
-   "milestone",
    "paper",
+   "milestone",
    "code"
   ]
  },
@@ -231,29 +231,29 @@ window.PROJECTS = [
   "name": "MORPH-FL",
   "theme": "Analysis",
   "description": "LLM-based fault localization for Python with separate observation, hypothesis, and dialogue models, enabling selective context resets that preserve recorded observations.",
-  "status": "On-going",
+  "status": "Submitted · JSS",
   "url": "https://github.com/ai4se4ai-lab/MORPH-FL",
   "tags": "Fault localization · Context management",
   "research": true,
-  "stage": "Prototype",
+  "stage": "Submitted",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
-  "updated": "Nov 21, 2026",
-  "releaseCount": 3,
+  "updated": "Nov 26, 2026",
+  "releaseCount": 4,
   "latest": {
-   "tag": "ongoing-team-update-2026-11-21",
-   "title": "On-going research and team building",
-   "label": "Nov 21, 2026",
-   "iso": "2026-11-21"
+   "tag": "cv-submission-update-2026-11-26",
+   "title": "Submitted · The Journal of Systems and Software",
+   "label": "Nov 26, 2026",
+   "iso": "2026-11-26"
   },
   "galleryCount": 0,
   "cover": null,
   "types": [
-   "milestone",
    "paper",
+   "milestone",
    "code"
   ]
  },
@@ -262,29 +262,29 @@ window.PROJECTS = [
   "name": "TINT",
   "theme": "Agents",
   "description": "Contract-based specification and compositional verification of LLM guardrail hierarchies, with explicit evidence gates and checks for unsupported assumptions.",
-  "status": "On-going",
+  "status": "Submitted · IEEE TSE",
   "url": "https://github.com/ai4se4ai-lab/trust-is-not-transitive",
   "tags": "AI × MDE · Guardrail composition",
   "research": true,
-  "stage": "Prototype",
+  "stage": "Submitted",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
-  "updated": "Nov 21, 2026",
-  "releaseCount": 3,
+  "updated": "Nov 26, 2026",
+  "releaseCount": 4,
   "latest": {
-   "tag": "ongoing-team-update-2026-11-21",
-   "title": "On-going research and team building",
-   "label": "Nov 21, 2026",
-   "iso": "2026-11-21"
+   "tag": "cv-submission-update-2026-11-26",
+   "title": "Submitted · IEEE Transactions on Software Engineering",
+   "label": "Nov 26, 2026",
+   "iso": "2026-11-26"
   },
   "galleryCount": 0,
   "cover": null,
   "types": [
-   "milestone",
    "paper",
+   "milestone",
    "code"
   ]
  },
@@ -293,29 +293,29 @@ window.PROJECTS = [
   "name": "Agent Slicing",
   "theme": "Agents",
   "description": "Detecting and localizing composition defects in declared multi-agent team models through slice analysis, full-team confirmation, and shrinking.",
-  "status": "On-going",
+  "status": "Submitted · ACM TOSEM",
   "url": "https://github.com/ai4se4ai-lab/AgentSlicing",
   "tags": "AI × MDE · Defect localization",
   "research": true,
-  "stage": "Prototype",
+  "stage": "Submitted",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
-  "updated": "Nov 21, 2026",
-  "releaseCount": 3,
+  "updated": "Nov 26, 2026",
+  "releaseCount": 4,
   "latest": {
-   "tag": "ongoing-team-update-2026-11-21",
-   "title": "On-going research and team building",
-   "label": "Nov 21, 2026",
-   "iso": "2026-11-21"
+   "tag": "cv-submission-update-2026-11-26",
+   "title": "Submitted · ACM Transactions on Software Engineering and Methodology",
+   "label": "Nov 26, 2026",
+   "iso": "2026-11-26"
   },
   "galleryCount": 0,
   "cover": null,
   "types": [
-   "milestone",
    "paper",
+   "milestone",
    "code"
   ]
  },
@@ -324,11 +324,11 @@ window.PROJECTS = [
   "name": "SSEVOH-DSL",
   "theme": "Agents",
   "description": "Operator-controlled contracts govern self-modification, bind approvals to their checked context, and block reuse of artifacts derived from withdrawn versions.",
-  "status": "On-going",
+  "status": "Submitted · IEEE TSE",
   "url": "https://github.com/ai4se4ai-lab/SSEVOH-DSL",
   "tags": "Foundational Contracts · Harness evolution",
   "research": true,
-  "stage": "Prototype",
+  "stage": "Submitted",
   "stages": null,
   "team": [
    "M. Babaei"
@@ -340,20 +340,20 @@ window.PROJECTS = [
     "type": "paper"
    }
   ],
-  "updated": "Nov 21, 2026",
-  "releaseCount": 3,
+  "updated": "Nov 26, 2026",
+  "releaseCount": 4,
   "latest": {
-   "tag": "ongoing-team-update-2026-11-21",
-   "title": "On-going research and team building",
-   "label": "Nov 21, 2026",
-   "iso": "2026-11-21"
+   "tag": "cv-submission-update-2026-11-26",
+   "title": "Submitted · IEEE Transactions on Software Engineering",
+   "label": "Nov 26, 2026",
+   "iso": "2026-11-26"
   },
   "galleryCount": 0,
   "cover": null,
   "types": [
+   "paper",
    "milestone",
-   "code",
-   "paper"
+   "code"
   ]
  },
  {
@@ -361,29 +361,29 @@ window.PROJECTS = [
   "name": "Safe Coordination of Untrusted AI Agents",
   "theme": "Agents",
   "description": "A deterministic controller coordinates untrusted agent proposals, tracks dependencies, and publishes consistent snapshots, with TLA+ specifications and reproducible case studies.",
-  "status": "On-going",
+  "status": "Submitted · JSS",
   "url": "https://github.com/ai4se4ai-lab/safe-coordination-of-untrusted-ai-agents",
   "tags": "AI × MDE · Coordination",
   "research": true,
-  "stage": "Prototype",
+  "stage": "Submitted",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
-  "updated": "Nov 21, 2026",
-  "releaseCount": 4,
+  "updated": "Nov 26, 2026",
+  "releaseCount": 5,
   "latest": {
-   "tag": "ongoing-team-update-2026-11-21",
-   "title": "On-going research and team building",
-   "label": "Nov 21, 2026",
-   "iso": "2026-11-21"
+   "tag": "cv-submission-update-2026-11-26",
+   "title": "Submitted · The Journal of Systems and Software",
+   "label": "Nov 26, 2026",
+   "iso": "2026-11-26"
   },
   "galleryCount": 0,
   "cover": null,
   "types": [
-   "milestone",
    "paper",
+   "milestone",
    "code"
   ]
  },
@@ -433,7 +433,7 @@ window.PROJECTS = [
   "stage": "Prototype",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
   "updated": "Nov 21, 2026",
@@ -463,7 +463,7 @@ window.PROJECTS = [
   "stage": "Prototype",
   "stages": null,
   "team": [
-   "M. Babaei [building team is in progress ...]"
+   "M. Babaei"
   ],
   "links": [],
   "updated": "Nov 21, 2026",

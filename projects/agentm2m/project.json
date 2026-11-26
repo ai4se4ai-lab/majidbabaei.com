@@ -3,6 +3,14 @@
   "links": [],
   "releases": [
     {
+      "tag": "cv-submission-update-2026-11-26",
+      "date": "2026-11-26",
+      "type": "paper",
+      "title": "Submission recorded in updated CV",
+      "notes": "Submitted to ICSE 2027 NIER. November 26 records the CV synchronization, not an inferred submission date. This project remains excluded from public output during anonymous review.",
+      "links": []
+    },
+    {
       "tag": "ongoing-team-update-2026-11-21",
       "date": "2026-11-21",
       "type": "milestone",
@@ -14,7 +22,7 @@
       "tag": "submitted-icse-2027-nier",
       "date": "2026-10",
       "type": "paper",
-      "title": "Submitted \u00b7 ICSE 2027 NIER",
+      "title": "Submitted · ICSE 2027 NIER",
       "notes": "**AgentM2M: M2M transformations for agentic collaborations in software engineering.**\n\nM. Babaei, S. Farshidi, O. Adesina, N. Ezzati-Jivan, and L. Wei.",
       "links": []
     },

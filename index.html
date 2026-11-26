@@ -106,7 +106,7 @@
     </div>
     <div class="hero-text">
       <p class="thesis rise"><mark>Accountability by contract</mark> for AI agents</p>
-      <p class="hero-lede rise">I am a tenure-track Assistant Professor in the School of Computing at the University of the Fraser Valley. My research combines software engineering and model-driven engineering (MDE) to make the behaviour of AI agents accountable: bounded, attributable, traceable, and correctable, so that the people responsible for agentic systems can actually exercise that responsibility. I approach this through Foundational Contracts<sup class="bio-noteref"><a href="#foundational-contracts-note" id="foundational-contracts-ref" role="doc-noteref" aria-label="Footnote 1: meaning of foundational contracts">1</a></sup>, explicit models that capture human goals, assumptions, and constraints and link them to evidence of what agents actually did. With them, people can check whether those expectations were met and, when they were not, find and undo what went wrong. I hold a Ph.D. in Software Engineering from Queen&rsquo;s University, and my work has received an ACM SIGSOFT Distinguished Paper Award. I advocate for open research software and bring experience from both academia and industry.</p>
+      <p class="hero-lede rise">I am a tenure-track Assistant Professor in the School of Computing at the University of the Fraser Valley. I study what evidence a computing system should require before it acts on an AI-generated result. My approach draws on model-driven engineering (MDE), software testing, and distributed systems to make that evidence available for inspection, from the events behind a service diagnosis to the requirement behind an agent’s implementation. I approach this through Foundational Contracts<sup class="bio-noteref"><a href="#foundational-contracts-note" id="foundational-contracts-ref" role="doc-noteref" aria-label="Footnote 1: meaning of foundational contracts">1</a></sup>, explicit models that capture human goals, assumptions, and constraints and link them to evidence of what agents actually did. With them, people can check whether those expectations were met and, when they were not, find and undo what went wrong. I hold a Ph.D. in Software Engineering from Queen&rsquo;s University, and my work has received an ACM SIGSOFT Distinguished Paper Award. I advocate for open research software and bring experience from both academia and industry.</p>
       <p class="bio-footnote rise" id="foundational-contracts-note" role="doc-footnote"><sup>1</sup> By Foundational Contracts I mean explicit, checkable statements, at every boundary in an agentic system, of what each component may assume, what it must guarantee, and how its outputs connect to everything downstream. Accountability here is meant in an engineering sense, not a moral one: responsibility for decisions stays with people, and contracts give them the records and controls to exercise it. Related work: [anonymous for review] (under review); identifying details are withheld. <a class="bio-backref" href="#foundational-contracts-ref" role="doc-backlink" aria-label="Return to footnote reference">&#8617;</a></p>
       <div class="hero-actions rise">
         <a class="btn btn-solid" href="#research">Explore the research agenda
@@ -273,7 +273,7 @@
         <div class="tr-top"><span>01 · Delegate</span><span>bounded</span></div>
         <h3>Delegating with a contract</h3>
         <p class="body">Concerns such as safety, intent and organizational rules usually reach an agent as prose. I turn them into foundational contracts: models of what each agent, guardrail and hand-off may assume and must guarantee, composed and checked before the team runs.</p>
-        <div class="milestones"><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · on-going</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a><span class="chip">[anonymous for review]</span></div>
+        <div class="milestones"><a class="chip" data-find="Governing Changes in Self-Evolving Agents">SSEVOH-DSL · submitted</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a><a class="chip" data-find="Trustworthy Coordination">Safe Coordination</a><a class="chip" data-find="When the team writes itself">AutoM2M</a><span class="chip">[anonymous for review]</span></div>
       </article>
       <article class="tr" data-t="account" style="--c:var(--teal)">
         <div class="tr-top"><span>02 · Report</span><span>attributable · traceable</span></div>
@@ -299,14 +299,15 @@
     <div class="foundations">
       <h3 class="sub-h"><span>Foundations · how the agenda grew</span><span>MDE → SE × AI → AI × MDE</span></h3>
       <div class="found-grid">
-        <div class="found" style="--c:var(--navy)"><span class="f-k">01 · Model behavior</span><p>Behavioral models to isolate interactions, replay executions, and regression-test distributed real-time systems.</p>
+        <div class="found" style="--c:var(--navy)"><span class="f-k">01 · Model behavior</span><p>Why does a failure disappear on the second run? I replay failing executions of distributed software models, vary message order to investigate interactions, and select regression tests after a model changes. RATEN studies how far conditions can change before a state machine stops behaving as intended.</p>
           <div class="milestones"><a class="chip" data-find="MReplayer">MReplayer · 2020</a><a class="chip" data-find="MRegTest">MRegTest · 2021</a><a class="chip" data-find="RATEN">RATEN · 2026</a></div></div>
-        <div class="found" style="--c:var(--teal)"><span class="f-k">02 · Software evidence</span><p>Knowledge graphs, semantic analysis, and LLMs that turn traces, changes, and repositories into decisions developers can check.</p>
+        <div class="found" style="--c:var(--teal)"><span class="f-k">02 · Software evidence</span><p>What can a service trace explain or predict? In TAAF, we organize execution events into a graph a language model can query. Predictive monitoring forecasts how service dependencies evolve; recorded events help engineers check explanations and decide where to measure next.</p>
           <div class="milestones"><a class="chip" data-find="TAAF">TAAF · 2026</a><a class="chip" data-find="SIKG">SIKG · 2026</a><a class="chip" data-find="RapidPay">RapidPay · to appear</a></div></div>
-        <div class="found" style="--c:var(--orange)"><span class="f-k">03 · Agentic systems</span><p>Formalization and model checking for safe coordination, composition defects, and guardrail guarantees in agent teams.</p>
-          <div class="milestones"><a class="chip" data-find="Safe Coordination">Safe Coordination</a><a class="chip" data-find="Agent Slicing">Agent Slicing</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a></div></div>
+        <div class="found" style="--c:var(--orange)"><span class="f-k">03 · Agentic systems</span><p>Can an agent build on a teammate’s result after a change? I make dependencies explicit and trace results to their inputs and requirement versions, so teams can identify which work to revisit. Two related manuscripts remain [anonymous for review].</p>
+          <div class="milestones"><a class="chip" data-find="Trustworthy Coordination">Safe Coordination</a><a class="chip" data-find="Agent Slicing">Agent Slicing</a><a class="chip" data-find="Trust Is Not Transitive">TINT</a></div></div>
       </div>
     </div>
+    <p>When a system changes, which earlier conclusions can engineers still rely on, and what is the least additional evidence they need to collect before acting?</p>
     <p class="principles" data-lit><span>Explicit assumptions.</span> <span>Traceable evidence.</span> <span>Checkable guarantees.</span></p>
 
     <div class="artifacts" id="software">
@@ -496,6 +497,11 @@
         <li><b>External Program Advisory Committee</b> — chaired the Nov 27, 2025 meeting on Terms of Reference, systematic industry feedback, alumni engagement, and research–industry bridges.</li>
         <li><b>Earlier research connections</b> — Aggregate Intelligence (explainable information retrieval, 2022) and Humanitas (robustness analysis, 2022–2023); organizer of the McGill SCS Tech Trends Speaker Series, Winter 2025.</li>
       </ul>
+    </div>
+
+    <div class="talks">
+      <h3 class="sub-h"><span>Research proposals</span></h3>
+      <p>My NSERC Discovery Grant proposal, <em>Model-Driven Verification for Trustworthy Intelligent Systems</em>, is under review. The Mitacs Accelerate proposal with Enya-Learning is in progress and concerns proposed research internships in applied AI and educational technology. I am a contributor to the community-based experiential-learning proposal with UFV CECE and Ken Ryu Jujutsu Society, which remains under review. These are proposal statuses, not funding awards.</p>
     </div>
 
     <div class="talks">

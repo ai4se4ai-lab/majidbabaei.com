@@ -3,6 +3,14 @@
   "links": [],
   "releases": [
     {
+      "tag": "cv-submission-update-2026-11-26",
+      "date": "2026-11-26",
+      "type": "paper",
+      "title": "Submitted · ACM Transactions on Software Engineering and Methodology",
+      "notes": "**Agent Slicing: Localizing Blind Spots in Multi-Agent AI Teams.**\n\nThe updated CV records this manuscript as submitted to ACM Transactions on Software Engineering and Methodology. November 26 records the CV synchronization, not an inferred submission date.",
+      "links": []
+    },
+    {
       "tag": "ongoing-team-update-2026-11-21",
       "date": "2026-11-21",
       "type": "milestone",
@@ -14,7 +22,7 @@
       "tag": "submitted-acm-tosem",
       "date": "2026-11-06",
       "type": "paper",
-      "title": "Submitted \u00b7 ACM TOSEM",
+      "title": "Submitted · ACM TOSEM",
       "notes": "**Agent Slicing: Localizing Blind Spots in Multi-Agent AI Teams.**\n\nM. Babaei.",
       "links": []
     },

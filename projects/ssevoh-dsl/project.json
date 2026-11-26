@@ -11,6 +11,14 @@
   ],
   "releases": [
     {
+      "tag": "cv-submission-update-2026-11-26",
+      "date": "2026-11-26",
+      "type": "paper",
+      "title": "Submitted · IEEE Transactions on Software Engineering",
+      "notes": "**Governing Changes in Self-Evolving Agents.**\n\nThe updated CV records this manuscript as submitted to IEEE Transactions on Software Engineering. November 26 records the CV synchronization, not an inferred submission date.",
+      "links": []
+    },
+    {
       "tag": "ongoing-team-update-2026-11-21",
       "date": "2026-11-21",
       "type": "milestone",

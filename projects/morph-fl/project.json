@@ -3,6 +3,14 @@
   "links": [],
   "releases": [
     {
+      "tag": "cv-submission-update-2026-11-26",
+      "date": "2026-11-26",
+      "type": "paper",
+      "title": "Submitted · The Journal of Systems and Software",
+      "notes": "**Does Forgetting Help? Studying Context Reset Policies in LLM Fault Localization.**\n\nThe updated CV records this manuscript as submitted to The Journal of Systems and Software. November 26 records the CV synchronization, not an inferred submission date.",
+      "links": []
+    },
+    {
       "tag": "ongoing-team-update-2026-11-21",
       "date": "2026-11-21",
       "type": "milestone",
@@ -14,7 +22,7 @@
       "tag": "submitted-jss",
       "date": "2026-10-29",
       "type": "paper",
-      "title": "Submitted \u00b7 JSS",
+      "title": "Submitted · JSS",
       "notes": "**Does Forgetting Help? Studying Context Reset Policies in LLM Fault Localization.**\n\nM. Babaei. MORPH-FL.",
       "links": []
     },

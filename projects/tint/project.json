@@ -3,6 +3,14 @@
   "links": [],
   "releases": [
     {
+      "tag": "cv-submission-update-2026-11-26",
+      "date": "2026-11-26",
+      "type": "paper",
+      "title": "Submitted · IEEE Transactions on Software Engineering",
+      "notes": "**Trust Is Not Transitive: Verifying the Composition of LLM Guardrail Hierarchies.**\n\nThe updated CV records this manuscript as submitted to IEEE Transactions on Software Engineering. November 26 records the CV synchronization, not an inferred submission date.",
+      "links": []
+    },
+    {
       "tag": "ongoing-team-update-2026-11-21",
       "date": "2026-11-21",
       "type": "milestone",
@@ -14,7 +22,7 @@
       "tag": "submitted-ieee-tse",
       "date": "2026-11-03",
       "type": "paper",
-      "title": "Submitted \u00b7 IEEE TSE",
+      "title": "Submitted · IEEE TSE",
       "notes": "**Trust Is Not Transitive: Verifying the Composition of LLM Guardrail Hierarchies.**\n\nM. Babaei.",
       "links": []
     },
