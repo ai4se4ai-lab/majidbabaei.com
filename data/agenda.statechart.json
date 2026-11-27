@@ -97,9 +97,9 @@
       "h3": "Delegating with a contract",
       "body": "Concerns such as safety, intent and organizational rules usually reach an agent as prose. I turn them into foundational contracts: models of what each agent, guardrail and hand-off may assume and must guarantee, composed and checked before the team runs.",
       "chips": [
-        { "label": "SSEVOH-DSL · submitted to TSE", "find": "Governing Changes in Self-Evolving Agents" },
+        { "label": "SSEVOH-DSL · submitted", "find": "Governing Changes in Self-Evolving Agents" },
         { "label": "TINT", "find": "Trust Is Not Transitive" },
-        { "label": "Safe Coordination", "find": "Safe Coordination" },
+        { "label": "Safe Coordination", "find": "Trustworthy Coordination" },
         { "label": "AutoM2M", "find": "When the team writes itself" },
         { "anon": "anonymous-review-1" }
       ] },

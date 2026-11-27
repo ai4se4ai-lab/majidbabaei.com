@@ -21,6 +21,27 @@ window.NEWS = [
   "imageURL": "https://majidbabaei.com/assets/img/portrait.jpg"
  },
  {
+  "slug": "paper-orchestra-hpc",
+  "title": "Your AI can write a paper. Can you trace its claims back to evidence?",
+  "subtitle": "How PaperOrchestra-HPC connects code, literature, experiments, and an evidence-grounded manuscript.",
+  "summary": "Explore PaperOrchestra-HPC, a research workflow connecting literature review, approved experiment plans, Slurm campaigns, evidence audits, and manuscript development, with human scientific decisions throughout.",
+  "tags": [
+   "Software evidence",
+   "Agentic AI",
+   "HPC"
+  ],
+  "featured": true,
+  "cover": "/assets/img/news/paper-orchestra-hpc/01-evidence-chain.png",
+  "coverAlt": "A continuous evidence thread connects code, literature, experiment plans, compute, results, and a manuscript.",
+  "coverCaption": "The goal is to preserve the connections that make a research claim inspectable. AI-generated conceptual illustration; chart marks are not measured results.",
+  "socialImage": null,
+  "date": "2026-11-26",
+  "dateLabel": "Nov 26, 2026",
+  "iso": "2026-11-26",
+  "minutes": 7,
+  "imageURL": "https://majidbabaei.com/assets/img/news/paper-orchestra-hpc/01-evidence-chain.png"
+ },
+ {
   "slug": "anonymous-revision-request",
   "title": "Revision requested for an anonymous manuscript",
   "subtitle": "",

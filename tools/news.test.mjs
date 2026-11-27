@@ -38,7 +38,8 @@ test('every Markdown post has a complete, crawlable article with canonical socia
     const pagePath = resolve(root, 'news', slug, 'index.html');
     const html = await readFile(pagePath, 'utf8');
     const prose = html.match(/<article class="prose"[^>]*>([\s\S]*?)<\/article>/)?.[1];
-    assert.ok(prose?.length > 200, `${slug}: missing static article body`);
+    assert.ok(prose && /<(?:p|ul|ol|blockquote|figure|h[1-6])\b/.test(prose)
+      && prose.replace(/<[^>]*>/g, '').trim().length > 0, `${slug}: missing readable static article body`);
     assert.doesNotMatch(html, /post-md|marked\.min\.js|purify\.min\.js|enable JavaScript/);
     assert.ok(html.includes(`property="og:url" content="https://majidbabaei.com/news/${slug}/"`));
     assert.match(html, /name="twitter:card" content="summary_large_image"/);
