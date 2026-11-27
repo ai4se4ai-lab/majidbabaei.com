@@ -122,7 +122,6 @@
       "h3": "One object, checked in both directions",
       "body": "Specifications without evidence cannot tell us whether they were honored; evidence without specifications gives us nothing to check against. A foundational contract holds both. This figure follows its own rule: it is generated from a state-machine model, and on every build a model checker verifies that a person can always be reached and that every violation is contained and ends with a person.",
       "links": [
-        { "label": "Read the full agenda", "href": "news/closing-the-loop/", "arrow": true },
         { "label": "Model (SCXML)", "href": "assets/agenda.scxml" }
       ] }
   ]
